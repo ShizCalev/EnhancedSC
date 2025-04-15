@@ -2,7 +2,7 @@
 
 ### Gameplay
 - Frag Grenades have been increased from 100 to 150 damage, making them lethal to enemies on Hard difficulty.
-- The explosion delay for Wall Mines has been reduced from 1.75 seconds to 0.50 seconds to prevent running past the wall mine before it explodes.
+- The explosion delay for Wall Mines has been reduced from 1.75 seconds to 0.50 seconds to prevent running past the mine before it explodes.
 - Improved the Optic Cable's enter and exit sounds, as the exit sound was previously missing from the PC version.
 - Added an option to use the crouch key to drop similar to Pandora Tomorrow.
 - Added an option to use any vision mode in Optic Cables similar to Pandora Tomorrow.
@@ -16,7 +16,6 @@
 - Improved controller support, now more closely aligned with the Xbox version.  
   - Vibration is not supported due to the game using DirectInput.
   - There is some visual errors on the Xbox inventory and pause screen when using ThirteenAG's Widescreen Fix.
-
 
 ### Maps
 - Police Station now uses the Xbox version of the level which has lighting improvements.
@@ -35,5 +34,8 @@
   - The second part of Severonickel now starts the player with the same equipment as the first part.
 
 ### Miscellaneous
+- [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2) is included to restore Shadow Buffer rendering and set a 60 FPS cap.
+- [ThirteenAG](https://github.com/ThirteenAG/WidescreenFixesPack) Widescreen Fix is included for widescreen support.
+- [Xidi](https://github.com/samuelgr/Xidi) is included to improve compatibility for XInput-based controllers.
 - Includes newly recreated loading screens by [cazzhmir](https://www.youtube.com/@cazzhmir) to improve the accuracy of the story.
 - Localization fixes, including typo corrections and consistency improvements.
