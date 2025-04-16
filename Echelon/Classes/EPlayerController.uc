@@ -9534,7 +9534,7 @@ Begin:
 defaultproperties
 {
     bDebugNavPoints=true
-	bUnlockAllLevels=false // Joshua - Unlocks all levels, bypassing profile progression
+    bUnlockAllLevels=false // Joshua - Unlocks all levels, bypassing profile progression
     m_ThrowMinSpeed=(X=800.0000000,Y=0.0000000,Z=100.0000000)
     m_ThrowMaxSpeed=(X=1500.0000000,Y=0.0000000,Z=250.0000000)
     m_ThrowVarSpeed=1000.0000000
