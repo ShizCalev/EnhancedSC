@@ -4,6 +4,7 @@
 // PlayerController specific for EchelonGameType
 //=============================================================================
 class EPlayerController extends PlayerController
+	config(Enhanced)
 	native;
 
 #exec OBJ LOAD FILE=..\Sounds\FisherFoley.uax
@@ -90,6 +91,8 @@ var bool				bDebugStealth;					// turned on by exec statement:  STEALTH
 var bool				bInvincible;					// turned on by exec statement:  INVINCIBLE
 var bool				bFullAmmo;					
 var bool				bVideoMode;
+var(Enhanced) config bool bUnlockAllLevels; // Joshua - Unlocks all levels, bypassing profile progression
+// Engine.EPlayerInfo.bUnlockAllLevels would be ideal but Engine package currently has issues compiling
 
 // Timer tracking var
 var float				m_LPStartTime;					// Timer stamp for pushing against ladders and pipes
@@ -9531,6 +9534,7 @@ Begin:
 defaultproperties
 {
     bDebugNavPoints=true
+	bUnlockAllLevels=false // Joshua - Unlocks all levels, bypassing profile progression
     m_ThrowMinSpeed=(X=800.0000000,Y=0.0000000,Z=100.0000000)
     m_ThrowMaxSpeed=(X=1500.0000000,Y=0.0000000,Z=250.0000000)
     m_ThrowVarSpeed=1000.0000000

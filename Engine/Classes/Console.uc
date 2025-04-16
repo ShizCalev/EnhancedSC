@@ -10,7 +10,7 @@ class Console extends Interaction;
 // END UBI MODIF 
 	
 // Constants.
-const MaxHistory=16;		// # of command histroy to remember.
+const MaxHistory=16;		// # of command history to remember.
 
 // Variables
 

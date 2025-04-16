@@ -211,8 +211,8 @@ public:
     FStringNoInit TrainingMap;
     BITFIELD bStartGame:1 GCC_PACK(4);
     BITFIELD bUsingController:1;
-    BITFIELD bPandoraOpticCable:1;
     BITFIELD bPandoraCrouch:1;
+    BITFIELD bPandoraOpticCable:1;
     BITFIELD bAltDoorStealth:1;
     FLOAT m_minInterpolSpeed GCC_PACK(4);
     FLOAT m_grabbingDelay;
@@ -1482,6 +1482,7 @@ public:
     BITFIELD bInvincible:1;
     BITFIELD bFullAmmo:1;
     BITFIELD bVideoMode:1;
+    BITFIELD bUnlockAllLevels:1;
     FLOAT m_LPStartTime GCC_PACK(4);
     FLOAT m_LastLedgeFenceTime;
     FLOAT m_LastHOHTime;

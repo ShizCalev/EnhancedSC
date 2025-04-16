@@ -102,12 +102,12 @@ function FillListBox()
     local EPCListBoxItem L;
     local EPCFileManager FileManager;
     local EPlayerInfo    PlayerInfo;
+    local EPlayerController EPC; // Joshua - Added to keep track of bUnlockAllLevels
     local String         Path;    //Do something
 	local String		 Name;
-    
-    
+        
     PlayerInfo = GetPlayerOwner().playerInfo;
-    
+    EPC = EPlayerController(GetPlayerOwner());
 
     m_FileListBox.Clear();
     //Filling Save Games
@@ -142,10 +142,10 @@ function FillListBox()
 		// Original Maps
 		if (i<10)
 		{
-            // Joshua - Enable once Engine package gets fixed
-            /*if (PlayerInfo.bUnlockAllMaps)
-                L.m_bLocked = false; // Joshua - Unlock all maps
-			else*/
+            if (EPC.bUnlockAllLevels) // Joshua - Unlocks all levels, bypassing profile progression
+            
+                L.m_bLocked = false;
+            else
                 L.m_bLocked = (i > PlayerInfo.MapCompleted);
 		}
 		// All downloadable maps are unlocked
