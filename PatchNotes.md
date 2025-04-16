@@ -34,8 +34,9 @@
   - The second part of Severonickel now starts the player with the same equipment as the first part.
 
 ### Miscellaneous
+- Save games now use a new file extension for Enhanced to prevent incompatible saves from the original game from being displayed.
+- Localization fixes, including typo corrections and consistency improvements.
+- Includes newly recreated loading screens by [cazzhmir](https://www.youtube.com/@cazzhmir) to improve the accuracy of the story.
 - [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2) is included to restore Shadow Buffer rendering and set a 60 FPS cap.
 - [ThirteenAG](https://github.com/ThirteenAG/WidescreenFixesPack) Widescreen Fix is included for widescreen support.
 - [Xidi](https://github.com/samuelgr/Xidi) is included to improve compatibility for XInput-based controllers.
-- Includes newly recreated loading screens by [cazzhmir](https://www.youtube.com/@cazzhmir) to improve the accuracy of the story.
-- Localization fixes, including typo corrections and consistency improvements.
