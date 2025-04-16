@@ -322,7 +322,7 @@ if (Epc.eGame.bPandoraOpticCable)
 		Epc.SetRotation(noised_rotation);
 	}
 
-// Joshua - This is the Pandora Tomorrow behavior of the optic cable sounds. 
+// Joshua - This is the Pandora Tomorrow behavior of the optic cable sounds
 Begin:
 	PlaySound(Sound'Interface.Play_FisherEquipEspionCam', SLOT_Interface);
 	Sleep(GetSoundDuration(Sound'Interface.Play_FisherEquipEspionCam'));

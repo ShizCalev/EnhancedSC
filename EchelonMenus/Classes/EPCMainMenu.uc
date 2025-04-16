@@ -79,7 +79,7 @@ function Notify(UWindowDialogControl C, byte E)
             Root.ChangeCurrentWidget(WidgetID_Credits);
             break;
         case m_GoOnline:            
-            GetLevel().ConsoleCommand("startminimized "@"http://www.splintercell.com");
+            GetLevel().ConsoleCommand("startminimized "@"https://github.com/Joshhhuaaa/EnhancedSC");
             break;
         case m_ExitGame:            
             m_MessageBox = EPCMainMenuRootWindow(Root).m_MessageBoxCW.CreateMessageBox(Self, Localize("OPTIONS","QUITSPLINTER","Localization\\HUD"), Localize("OPTIONS","QUITSPLINTERMESSAGE","Localization\\HUD"), MB_YesNo, MR_No, MR_No);

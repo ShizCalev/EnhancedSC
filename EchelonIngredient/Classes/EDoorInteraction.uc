@@ -26,7 +26,7 @@ function string	GetDescription()
 {
 	local EPlayerController Epc;
 	Epc = EPlayerController(InteractionPlayerController);
-	if (Epc.eGame.bAltDoorStealth)
+	if (Epc.eGame.bAltDoorStealth && !Epc.eGame.bUsingController) // Joshua - Adding new control option for Open Door Stealth for keyboard
 	{
 		if (Epc.egi.bInteracting && Epc.aStrafe != 0)
 			return Localize("Interaction", "Door1", "Localization\\HUD");
@@ -84,8 +84,8 @@ function InitInteract( Controller Instigator )
 	else
 	{
 		// Check if player wouldn't want to stealth
-		if ((Instigator.bIsPlayer && !EPlayerController(Instigator).eGame.bAltDoorStealth && EPlayerController(Instigator).aForward < 0) // Joshua - Adding new control option for Open Door Stealth
-    		|| Instigator.bIsPlayer &&  (EPlayerController(Instigator).eGame.bAltDoorStealth && EPlayerController(Instigator).aStrafe != 0))
+		if ((Instigator.bIsPlayer && !EPlayerController(Instigator).eGame.bAltDoorStealth && EPlayerController(Instigator).aForward < 0) // Joshua - Adding new control option for Open Door Stealth for keyboard
+    		|| Instigator.bIsPlayer &&  (EPlayerController(Instigator).eGame.bAltDoorStealth && !EPlayerController(Instigator).eGame.bUsingController && EPlayerController(Instigator).aStrafe != 0))
 		{
 			//Log("		Wanna stealth");
 			bStealth = true;

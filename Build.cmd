@@ -10,6 +10,7 @@ del "%sysDir%\EchelonIngredient.u"
 del "%sysDir%\EchelonCharacter.u"
 del "%sysDir%\EchelonHUD.u"
 del "%sysDir%\EchelonPattern.u"
+del "%sysDir%\EchelonMenus.u"
 
 :: Not working yet, currently using v1.3
 :: del "%sysDir%\Engine.u"
@@ -19,7 +20,6 @@ del "%sysDir%\EchelonPattern.u"
 :: del "%sysDi%\Core.u"
 :: del "%sysDir%\EchelonEffect.u"
 :: del "%sysDir%\EchelonGameObject.u"
-:: del "%sysDir%\EchelonMenus.u"
 :: del "%sysDir%\Editor.u"
 :: del "%sysDir%\UDebugMenu.u"
 

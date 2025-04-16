@@ -26,8 +26,8 @@ var()  string TrainingMap;    // Map loaded for Training
 var			 bool bStartGame;       // true only the first time you go in main menu
 
 var(Enhanced) config bool bUsingController; // Joshua - Adjusts HUD, inventory, lockpicking, keypad, turrets for controller
-var(Enhanced) config bool bPandoraOpticCable; // Joshua - Allows the Optic Cable use all vision modes like Pandora Tomorrow
 var(Enhanced) config bool bPandoraCrouch; // Joshua - When hanging or using a zipline, crouch drops and jump raises legs
+var(Enhanced) config bool bPandoraOpticCable; // Joshua - Allows the Optic Cable use all vision modes like Pandora Tomorrow
 var(Enhanced) config bool bAltDoorStealth; // Joshua - Use left/right to toggle Open Door Stealth instead of back direction
 
 //=============================================================================
@@ -226,6 +226,7 @@ defaultproperties
     TrainingMap="0_0_2_Training"
     bStartGame=true
     bUsingController=false // Joshua - Adjusts HUD, inventory, lockpicking, keypad, turrets for controller
+    bPandoraCrouch=false // Joshua - When hanging or using a zipline, crouch drops and jump raises legs
     bPandoraOpticCable=false // Joshua - Allows the Optic Cable use all vision modes like Pandora Tomorrow
     bAltDoorStealth=false // Joshua - Use left/right to toggle Open Door Stealth instead of back direction
     m_minInterpolSpeed=200.0000000
