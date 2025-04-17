@@ -824,7 +824,8 @@ state MainHUD
 		Epc.bStopRenderWorld = false;
 	}
 
-	// Joshua - Controller restore
+	// Joshua - Part of Xbox version, but pointless for PC release
+	/*
 	function EndState()
 	{
 		// Dismiss the controller splash if changing state
@@ -836,6 +837,7 @@ state MainHUD
 			StopRender(false);
 		}
 	}
+	 */
 
 	function bool KeyEvent( string Key, EInputAction Action, FLOAT Delta )
 	{		

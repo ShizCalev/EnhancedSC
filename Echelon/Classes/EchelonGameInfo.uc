@@ -23,7 +23,7 @@ var()  bool bNoGore;
 var()  bool bNoSamLookAt;
 var()  string DemoMap;        // Map loaded for Demo
 var()  string TrainingMap;    // Map loaded for Training
-var			 bool bStartGame;       // true only the first time you go in main menu
+var    bool bStartGame;       // true only the first time you go in main menu
 
 var(Enhanced) config bool bUsingController; // Joshua - Adjusts HUD, inventory, lockpicking, keypad, turrets for controller
 var(Enhanced) config bool bPandoraCrouch; // Joshua - When hanging or using a zipline, crouch drops and jump raises legs

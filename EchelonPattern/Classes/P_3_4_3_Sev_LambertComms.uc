@@ -4,7 +4,7 @@
 class P_3_4_3_Sev_LambertComms extends EPattern;
 
 #exec OBJ LOAD FILE=..\Sounds\S3_4_3Voice.uax
-#exec OBJ LOAD FILE=..\Textures\3_4_Severo_tex.utx
+#exec OBJ LOAD FILE=..\Animations\EOSP.ukx PACKAGE=EOSP
 
 // FLAGS ///////////////////////////////////////////////////////////////////////
 
@@ -31,12 +31,14 @@ function InitPattern()
 {
     local Pawn P;
     local Actor A;
+    local EAnimatedObject Osprey;
     local ETurret Turret;
     local ETurretController TurretController;
-
-    // Joshua - Adding turret controllers for the turrets
+    local name OspreyAnimation;
+    
     if (!bInit)
     {
+        // Joshua - Adding turret controllers for the turrets
         // ETurret0 - Server room
         // ETurret1 - Server room
         // ETurret2
@@ -70,6 +72,30 @@ function InitPattern()
             if(A.name == 'ETurret5')
                 TurretController.LinkedTurret = ETurret(A);
         }
+
+        // Joshua - Adding the Osprey mesh used in the final game
+        Osprey = Spawn(class'EAnimatedObject', , , vect(-6111, 590, 266), rot(0, -0, 0));
+        Osprey.SetDrawType(DT_Mesh);
+        Osprey.Mesh = SkeletalMesh'EOSP.Osprey';
+        Osprey.bLoopNeutral = True;
+    
+        OspreyAnimation = '2260osp3';
+        Osprey.NeutralPoseAnim =  OspreyAnimation;
+
+        OspreyAnimation = '2260osp2';
+        Osprey.TriggeredAnimations[0] = OspreyAnimation;
+
+        OspreyAnimation = '2260osp4';
+        Osprey.TriggeredAnimations[1] = OspreyAnimation;
+
+        Osprey.AmbientPlaySound = Sound'Vehicules.Play_OspreyIdle';
+        Osprey.AmbientStopSound = Sound'Vehicules.Play_OspreyIdle';
+
+        Osprey.HeatIntensity = 1.0;
+        Osprey.SurfaceType = SURFACE_MetalHard;        
+        Osprey.InitialHitPoints = 100;
+        
+        Osprey.Tag = 'Osprey';
     }
     
     Super.InitPattern();
@@ -90,6 +116,8 @@ function InitPattern()
             A.Skins[0] = Texture(DynamicLoadObject("3_4_Severo_tex.Door07_SEV", class'Texture'));
         if(A.name == 'StaticMeshActor946')
             A.Skins[0] = Texture(DynamicLoadObject("3_4_Severo_tex.Door07_SEV", class'Texture'));
+        if(A.name == 'StaticMeshActor237') // Joshua - Hiding the placeholder Osprey
+            A.bHidden = True;
         if(A.name == 'ESBPatchActor2')
             A.Texture = Shader(DynamicLoadObject("3_4_Severo_tex.Objects.plasticshd", class'Shader'));
     }

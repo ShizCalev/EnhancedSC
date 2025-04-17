@@ -1251,6 +1251,13 @@ public:
     NO_DEFAULT_CONSTRUCTOR(AEVolume)
 };
 
+enum EControllerScheme
+{
+    CS_Default              =0,
+    CS_Pandora              =1,
+    CS_PlayStation          =2,
+    CS_MAX                  =3,
+};
 struct ECHELON_API FCameraInfo
 {
     class AActor* Owner;
@@ -1564,6 +1571,8 @@ public:
     INT iCheatMask;
     BITFIELD bQuickLoad:1 GCC_PACK(4);
     BITFIELD bCheckpoint:1;
+    FStringNoInit CheckpointLevel GCC_PACK(4);
+    BYTE ControllerScheme;
     DECLARE_FUNCTION(execCalculatePipeDestination);
     DECLARE_FUNCTION(execCanGetOutTopPipe);
     DECLARE_FUNCTION(execCalculateLadderDestination);

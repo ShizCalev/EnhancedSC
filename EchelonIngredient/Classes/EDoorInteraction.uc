@@ -86,7 +86,7 @@ function InitInteract( Controller Instigator )
 		// Check if player wouldn't want to stealth
 		if ((Instigator.bIsPlayer && !EPlayerController(Instigator).eGame.bAltDoorStealth && EPlayerController(Instigator).aForward < 0) // Joshua - Adding new control option for Open Door Stealth for keyboard
     		|| Instigator.bIsPlayer && EPlayerController(Instigator).eGame.bAltDoorStealth && !EPlayerController(Instigator).eGame.bUsingController && EPlayerController(Instigator).aStrafe != 0
-			|| Instigator.bIsPlayer && EPlayerController(Instigator).eGame.bAltDoorStealth && EPlayerController(Instigator).eGame.bUsingController && EPlayerController(Instigator).aForward < 0)
+		|| Instigator.bIsPlayer && EPlayerController(Instigator).eGame.bAltDoorStealth && EPlayerController(Instigator).eGame.bUsingController && EPlayerController(Instigator).aForward < 0)
 		{
 			//Log("		Wanna stealth");
 			bStealth = true;

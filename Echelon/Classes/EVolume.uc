@@ -145,6 +145,7 @@ function Touch(actor Other)
 		EPlayerController(EPawn(Other).Controller).bAutoSaveLoad=True;
 		EPlayerController(EPawn(Other).Controller).bSavingTraining=True;
 		EPlayerController(EPawn(Other).Controller).bCheckpoint=True;
+		EPlayerController(EPawn(Other).Controller).CheckpointLevel=GetCurrentMapName();
 		ConsoleCommand("SAVEGAME FILENAME=CHECKPOINT OVERWRITE=TRUE");
 		bSavegame = False;
 	}

@@ -46,7 +46,6 @@ var bool				bDrawWeapon;					// Since draw and sheath animation is the same.
 var bool				bNoThermalAvailable; 			// Joshua - Copied from EchelonPlayerStart so we can use it globally
 var transient			EGameInteraction	egi;
 
-
 // OUR INPUTS
 var input byte			bResetCamera, bJump, bDPadUp, bDPadDown, bDPadLeft, bDPadRight;
 var bool				bIncSpeedPressed;
@@ -221,7 +220,16 @@ var bool bIsPlaying;
 var int iGameOverMsg;
 var int iCheatMask;
 var bool bQuickLoad;
+
 var bool bCheckpoint; // Joshua - New variable for Checkpoints
+var string CheckpointLevel; // Joshua - New variable to keep track which level the Checkpoint was on
+enum EControllerScheme // Joshua - Controller scheme
+{
+    CS_Default,
+    CS_Pandora,
+    CS_PlayStation
+};
+var(Enhanced) EControllerScheme ControllerScheme;
 
 const MAX_REGULAR_MAP = 13;
 
@@ -9529,12 +9537,19 @@ Begin:
 		EMainHUD(myHUD).SaveState();
 		myHUD.GotoState('s_QuickLoadMenu');
 	}
+	Sleep(9.5);
+	if (eGame.bUsingController && CheckpointLevel == GetCurrentMapName())
+		ConsoleCommand("LOADGAME FILENAME=CHECKPOINT.en0");
+	else
+		ConsoleCommand("LOADGAME FILENAME=AUTOSAVE.en0");
 }
 
 defaultproperties
 {
     bDebugNavPoints=true
+	ControllerScheme=CS_Default // Joshua - Default, Pandora, PlayStation
     bUnlockAllLevels=false // Joshua - Unlocks all levels, bypassing profile progression
+	CheckpointLevel="None" // Joshua - New variable to keep track which level the Checkpoint was on
     m_ThrowMinSpeed=(X=800.0000000,Y=0.0000000,Z=100.0000000)
     m_ThrowMaxSpeed=(X=1500.0000000,Y=0.0000000,Z=250.0000000)
     m_ThrowVarSpeed=1000.0000000

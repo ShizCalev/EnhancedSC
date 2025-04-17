@@ -27,6 +27,7 @@ function EventCallBack(EAIEvent Event,Actor TriggerActor)
 function InitPattern()
 {
     local Pawn P;
+    local Actor A;
 
     Super.InitPattern();
 
@@ -36,6 +37,12 @@ function InitPattern()
             Characters[1] = P.controller;
         if(P.name == 'EAnna0')
             Characters[2] = P.controller;
+    }
+
+    ForEach AllActors(class'Actor', A)
+    {
+        if(A.name == 'StaticMeshActor69')
+            A.Skins[0] = Texture(DynamicLoadObject("EGO_Tex.GO_doorexplode", class'Texture'));
     }
 
     if( !bInit )
