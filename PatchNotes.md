@@ -16,6 +16,7 @@
 - Improved controller support, now more closely aligned with the Xbox version.  
   - Vibration is not supported due to the game using DirectInput.
   - There is some visual errors on the Xbox inventory and pause screen when using ThirteenAG's Widescreen Fix.
+- Added an option to change the default controller layout with alternate control schemes.
 
 ### Maps
 - Police Station now uses the Xbox version of the level which has lighting improvements.
