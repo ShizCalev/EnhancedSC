@@ -76,6 +76,7 @@ function InitOptionControls()
     AddKeyItem( Localize("Keys","K_NightVision","Localization\\HUD"), "DPadLeft");
     AddKeyItem( Localize("Keys","K_HeatVision","Localization\\HUD"), "DPadRight");
     AddKeyItem( Localize("Keys","K_Pause","Localization\\HUD"), "Pause");
+    AddKeyItem( Localize("Keys","K_ToggleHUD","Localization\\HUD"), "ToggleHUD");
     AddLineItem();
 	AddFireEquipControls();
     

@@ -48,7 +48,6 @@ function InitPattern()
 
 state Pattern
 {
-
 Begin:
 Evacuate:
     Log("Beam out pattern 4.");
@@ -61,7 +60,6 @@ Damage:
     Log("Power plant employee killed or messed with.");
     SendPatternEvent('LambertAI','EmployeeHurt');
     End();
-
 }
 
 defaultproperties

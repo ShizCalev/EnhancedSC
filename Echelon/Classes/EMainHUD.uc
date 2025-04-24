@@ -78,10 +78,23 @@ function FullInventory()
 	// Don't process the START button if we are displaying controller help splash
 	if ( (!bShowCtrl) && (EPlayerController(Owner).EPawn.Health > 0) && (!IsGameOver()) )
 	{
-	EPlayerController(Owner).bStopRenderWorld = true;
-	PauseSound();
-	SaveState();
-	GotoState('s_GameMenu');
+		// Joshua - Blocking Xbox pause menu if on keyboard while in keypad, elevator, or turret
+		if ((EPlayerController(Owner).GetStateName() == 's_KeyPadInteract' || EPlayerController(Owner).GetStateName() == 's_Turret') 
+			&& !EPlayerController(Owner).eGame.bUseController)
+		{
+			return;
+		}
+
+		// Joshua - Ignore if the level hasn't started yet (still loading or in menu) to avoid a bug
+		if (EPlayerController(Owner).m_RunStartTime <= 0)
+		{
+			return;
+		}
+
+		EPlayerController(Owner).bStopRenderWorld = true;
+		PauseSound();
+		SaveState();
+		GotoState('s_GameMenu');
     }
 }
 

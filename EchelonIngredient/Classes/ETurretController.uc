@@ -98,7 +98,7 @@ function Tick( float DeltaTime )
     local EPlayerController Epc;
     Epc = EPlayerController(ETurretInteraction(Interaction).User);
 
-    if(!eGame.bUsingController) // Joshua - Adding controller support for turrets
+    if(!eGame.bUseController) // Joshua - Adding controller support for turrets
     {  
         OldCurPos = CursorPos;
 

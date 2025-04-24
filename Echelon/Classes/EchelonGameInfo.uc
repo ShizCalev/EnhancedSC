@@ -25,10 +25,12 @@ var()  string DemoMap;        // Map loaded for Demo
 var()  string TrainingMap;    // Map loaded for Training
 var    bool bStartGame;       // true only the first time you go in main menu
 
-var(Enhanced) config bool bUsingController; // Joshua - Adjusts HUD, inventory, lockpicking, keypad, turrets for controller
-var(Enhanced) config bool bPandoraCrouch; // Joshua - When hanging or using a zipline, crouch drops and jump raises legs
-var(Enhanced) config bool bPandoraOpticCable; // Joshua - Allows the Optic Cable use all vision modes like Pandora Tomorrow
+var bool bUseController; // Joshua - Adjusts HUD, inventory, lockpicking, keypad, turrets for controller
+var(Enhanced) config bool bCrouchDrop; // Joshua - When hanging or using a zipline, crouch drops and jump raises legs
+var(Enhanced) config bool bOpticCableVisions; // Joshua - Allows the Optic Cable use all vision modes like Pandora Tomorrow
 var(Enhanced) config bool bAltDoorStealth; // Joshua - Use left/right to toggle Open Door Stealth instead of back direction
+var config bool bXboxDifficulty; // Joshua - Xbox difficulty, Sam has more health on Xbox
+var config bool bEliteMode; // Joshua - Elite mode, no starting ammo, lower health, no saving, 3 alarms
 
 //=============================================================================
 // Variables used as constants
@@ -205,15 +207,35 @@ event PlayerController Login(string Portal,
 	if (pPlayer == none)
 		Log("WARNING!!!!!!   EchelonGameInfo.pPlayer is NOT an EPlayerController.  This is bad.");
 
-    // Joshua - Force walking speed if using a controller
-    if (bUsingController)
-        pPlayer.m_curWalkSpeed = 5;
-    else
-	    pPlayer.m_curWalkSpeed = m_defautSpeed;
+    pPlayer.m_curWalkSpeed = m_defautSpeed;
+
+    // Joshua - Elite mode, no starting ammo, Normal=100/Hard=*0.66=66)
+    if (bEliteMode)
+    {
+        pPlayer.CheatManager = None;
+        pPlayer.ePawn.InitialHealth = 100; // Should we do this in ESam/EPawn?
+        pPlayer.ePawn.Health = pPlayer.ePawn.InitialHealth;
+
+        if (pPlayer.MainGun != None)
+        {
+            pPlayer.MainGun.Ammo = 0;
+            pPlayer.MainGun.ClipAmmo = 0;
+        }
+
+        if (pPlayer.HandGun != None)
+        {
+            pPlayer.HandGun.Ammo = 0;
+            pPlayer.HandGun.ClipAmmo = 0;
+        }
+    }
+    else if (bXboxDifficulty) // Joshua - (Xbox: Normal=300/Hard=*0.66=198, PC: Normal=200/Hard=*0.66=132)
+    {
+        pPlayer.ePawn.InitialHealth = 300;
+        pPlayer.ePawn.Health = pPlayer.ePawn.InitialHealth;
+    }
 
 	return NewPlayer;
 }
-
 
 native(2345) final function string GetStringBinding(EchelonEnums.eKEY_BIND Key);
 native(2346) final function EchelonEnums.eKEY_BIND GetKeyBinding(string Key);
@@ -225,10 +247,6 @@ defaultproperties
     DemoMap="3_4_3Severonickel"
     TrainingMap="0_0_2_Training"
     bStartGame=true
-    bUsingController=false // Joshua - Adjusts HUD, inventory, lockpicking, keypad, turrets for controller
-    bPandoraCrouch=false // Joshua - When hanging or using a zipline, crouch drops and jump raises legs
-    bPandoraOpticCable=false // Joshua - Allows the Optic Cable use all vision modes like Pandora Tomorrow
-    bAltDoorStealth=false // Joshua - Use left/right to toggle Open Door Stealth instead of back direction
     m_minInterpolSpeed=200.0000000
     m_grabbingDelay=0.2000000
     m_blinkDelay=3.0000000

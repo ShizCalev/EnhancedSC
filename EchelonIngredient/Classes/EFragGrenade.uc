@@ -12,6 +12,13 @@ function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 
+		// Joshua - Elite Mode will override this setting if greater than 150.0
+	if (EchelonGameInfo(Level.Game).bEliteMode)
+	{
+		if (ExplosionDamage > 150.0)	
+			ExplosionDamage = 150.0;
+	}
+
 	// manage quantity
 	if( Quantity == 1 )
 		SetStaticMesh(default.StaticMesh);

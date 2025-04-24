@@ -36,7 +36,7 @@ state s_Camera
 		Super.Tick(DeltaTime);
        
         // Diversion Cam specific stuff
-		if( Epc.eGame.bUsingController) // Joshua - Adding controller support for Diversion Cameras
+		if( Epc.eGame.bUseController) // Joshua - Adding controller support for Diversion Cameras
 		{
 			if( Epc.bJump != 0 && !bUsedUp )
 			{

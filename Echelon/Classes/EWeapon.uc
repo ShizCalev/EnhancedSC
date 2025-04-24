@@ -33,6 +33,7 @@ enum ERateOfFireMode
 	ROF_Burst,
 	ROF_Auto,
 };
+
 var	ERateOfFireMode			eROFMode;
 var	int						BulletsToFire;			// When firing, this number of bullets will be shot depending on the ROF
 
@@ -652,6 +653,7 @@ state s_Firing
 			PlaySound(FireSingleShotSound, SLOT_SFX);
 			break;
 		case ROF_Burst : 
+			PlaySound(FireAutomaticSound, SLOT_SFX); // Joshua - Originally played no sound, restored for burst fire
 			break;
 		case ROF_Auto :	
 			PlaySound(FireAutomaticSound, SLOT_SFX);

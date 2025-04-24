@@ -84,7 +84,7 @@ var bool bStockInMemory;
 //var bool bDisplaySplash;
 
 // Joshua - New HUD toggle
-var config bool bShowHUD;
+var(Enhanced) config bool bShowHUD;
 exec function ToggleHUD()
 {
 	bShowHUD = !bShowHUD;
@@ -585,7 +585,7 @@ function DisplayInteractIcons(ECanvas Canvas, bool bSetPos)
 
 			// Draw the X button 						
 			// Color given by the interface artist (Veronique)
-			if (eGame.bUsingController)
+			if (eGame.bUseController)
 			{
 				Canvas.SetDrawColor(92,109,76);
 				Canvas.SetPos( 640 - eGame.HUD_OFFSET_X - LIFEBAR_WIDTH - 30 ,eGame.HUD_OFFSET_Y + (INTER_BOX_HEIGHT/2) - 11 );
@@ -670,7 +670,7 @@ function DrawMainHUD(ECanvas Canvas)
 	// Quick Inventory
 	if (bShowHUD || GetStateName() == 'QuickInventory')
 	{
-		if (!eGame.bUsingController) // Joshua - Check if they're using a controller
+		if (!eGame.bUseController) // Joshua - Check if they're using a controller
 			QuickInvAndCurrentItems.PostRender(Canvas);
 		else
 			QuickInvAndCurrentItemsXbox.PostRender(Canvas); // Joshua - Xbox quick inventory
@@ -716,7 +716,7 @@ function DrawConfigMainHUD(ECanvas Canvas)
 	DrawLifeBar(Canvas);
 
     // Quick Inventory
-	if (!eGame.bUsingController)
+	if (!eGame.bUseController)
 		QuickInvAndCurrentItems.PostRender(Canvas); // Joshua - Check if they're using a controller
 	else
 		QuickInvAndCurrentItemsXbox.PostRender(Canvas); // Joshua - Xbox quick inventory
@@ -936,7 +936,7 @@ state s_Slavery
 				if( Epc.GetStateName() != 's_PlayerSniping' && ( bShowHUD || GetStateName() == 'QuickInventory' ) )
 				{
 					// Quick Inventory
-					if (!eGame.bUsingController) // Joshua - Check if they're using a controller
+					if (!eGame.bUseController) // Joshua - Check if they're using a controller
 						QuickInvAndCurrentItems.PostRender(Canvas);
 					else
 						QuickInvAndCurrentItemsXbox.PostRender(Canvas); // Joshua - Xbox quick inventory			
@@ -1276,7 +1276,7 @@ state QuickInventory
 
 	function BeginState()
 	{
-		if (!eGame.bUsingController) // Joshua - Check if they're using a controller
+		if (!eGame.bUseController) // Joshua - Check if they're using a controller
 			QuickInvAndCurrentItems.GotoState('s_QDisplay');
 		else
 			QuickInvAndCurrentItemsXbox.GotoState('s_QDisplayXbox'); // Joshua - Xbox quick inventory
@@ -1284,7 +1284,7 @@ state QuickInventory
 
 	function EndState()
 	{
-		if (!eGame.bUsingController) // Joshua - Check if they're using a controller
+		if (!eGame.bUseController) // Joshua - Check if they're using a controller
 		{
 			if( QuickInvAndCurrentItems.GetStateName() == 's_QDisplay' )
 				QuickInvAndCurrentItems.GotoState('');
@@ -1298,7 +1298,7 @@ state QuickInventory
 
 	function bool KeyEvent( string Key, EInputAction Action, FLOAT Delta )
 	{
-		if (!eGame.bUsingController) // Joshua - Check if they're using a controller
+		if (!eGame.bUseController) // Joshua - Check if they're using a controller
 			return QuickInvAndCurrentItems.KeyEvent(Key, Action, Delta);
 		else
 			return QuickInvAndCurrentItemsXbox.KeyEvent(Key, Action, Delta); // Joshua - Xbox quick inventory

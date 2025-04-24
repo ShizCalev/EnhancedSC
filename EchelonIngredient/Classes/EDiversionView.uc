@@ -75,7 +75,7 @@ function DrawButtons(ECanvas Canvas)
 	yPos = SCREEN_END_Y - BOTTOM_CAM_Y - (BUTTONBAR_HEIGHT - BUTTON_BOX_HEIGHT) / 2;
 	xPos = CAM_X + SIDEBAR_WIDTH;
 
-    if (eGame.bUsingController) // Joshua - Controller prompts for Diversion Camera
+    if (eGame.bUseController) // Joshua - Controller prompts for Diversion Camera
     {
         Canvas.DrawLine(xPos + BUTTON_NOISE_BOX_X_XBOX, yPos - BUTTON_BOX_HEIGHT, BUTTON_BOX_WIDTH, BUTTON_BOX_HEIGHT, Canvas.black, -1, eLevel.TGAME);
         Canvas.DrawRectangle(xPos + BUTTON_NOISE_BOX_X_XBOX + 1, yPos - BUTTON_BOX_HEIGHT + 1, BUTTON_BOX_WIDTH - 2, BUTTON_BOX_HEIGHT - 2, 1, Green, -1, eLevel.TGAME);

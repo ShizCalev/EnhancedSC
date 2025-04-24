@@ -33,6 +33,8 @@ function EventCallBack(EAIEvent Event,Actor TriggerActor)
 function InitPattern()
 {
     local Pawn P;
+    local Actor A;
+    local Mover M;
     local EGameplayObject EGO;
 
     Super.InitPattern();
@@ -48,6 +50,13 @@ function InitPattern()
     
     ForEach DynamicActors(class'EGamePlayObject', EGO)
     {
+        if (EGO.CollisionPrimitive == StaticMesh(DynamicLoadObject("EGO_OBJ.GenObjGO.General_GlasseB00", class'StaticMesh')))
+        {
+            EGO.DamagedMeshes[0].Percent = 0.0;
+            //EGO.DamagedMeshes[0].StaticMesh
+            //EGO.DamagedMeshes[0].CollPrimMesh = None;
+        }
+
         // Joshua - Destroying the concussion grenade (canceled gadget) to prevent a crash
         if(EGO.name == 'EConcussionGrenade0')
             EGO.Destroy();
@@ -62,6 +71,29 @@ function InitPattern()
             // Location=(X=13971.016602,Y=-6315.776367,Z=984.000000)
         }
     }
+
+    ForEach AllActors(class'Actor', A)
+    {
+        if(A.name == 'ELight48' || A.name == 'ELight56')
+            A.bAffectOwnZoneOnly=True;
+
+        if(A.name == 'ELight55')
+            A.LightEffect=LE_ESpotShadow;
+
+        if(A.name == 'ELight117')
+            A.LightEffect=LE_ESpotShadowDistAtten;
+    }
+
+    ForEach AllActors(class'Mover', M)
+    {
+        if (M.name == 'ESlidingDoor3')
+            M.KeyPos[1]=(vect(0,112,0));// Joshua - Originally, 144, lowered to 128.
+
+        if (M.name == 'ESlidingDoor10')
+            M.KeyPos[1]=(vect(0,0,0)); //0,-144,0 // Joshua - Going to keep this mover static since it clips through wall
+    }
+
+
 
     if( !bInit )
     {

@@ -139,7 +139,7 @@ function HudView( bool bIn )
 		Epc.SetCameraMode(self, RenderingMode);
 
 		// Joshua - Allows the Optic Cable use all vision modes like Pandora Tomorrow
-		if (!Epc.eGame.bPandoraOpticCable)
+		if (!Epc.eGame.bOpticCableVisions)
 			Epc.SetCameraMode(self, REN_NightVision);
 		Epc.iRenderMask = 2;
 
@@ -243,7 +243,7 @@ state s_Sneaking
 		Epc = EPlayerController(Controller);
 
 // Joshua - Adding support for switching visions in optic cable
-if (Epc.eGame.bPandoraOpticCable)
+if (Epc.eGame.bOpticCableVisions)
 {
     // Night vision
     if (Epc.bDPadLeft != 0)

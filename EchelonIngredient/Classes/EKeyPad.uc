@@ -287,7 +287,7 @@ state s_Use
 		// No special display if not player
 		if( Epc != None )
 		{
-			if (!Epc.eGame.bUsingController)
+			if (!Epc.eGame.bUseController)
 				Epc.FakeMouseToggle(true);
 			bRenderAtEndOfFrame = true;
 			bSpecialLit = true;
@@ -321,7 +321,7 @@ state s_Use
 		if( Epc == None )
 			return;
 
-		if (!Epc.eGame.bUsingController)
+		if (!Epc.eGame.bUseController)
 		{
 			//
 			// Crappy button selection
@@ -370,12 +370,12 @@ state s_Use
 				GlowSelected();
 		}
 	}
+
 	function bool CoordinateWithin( EPlayerController Epc, float x, float y, int w, int h )
 	{
 		return Epc.m_FakeMouseX > x && Epc.m_FakeMouseX < x + w && 
 			   Epc.m_FakeMouseY > y && Epc.m_FakeMouseY < y + h;
 	}
-	
 }
 
 state s_Access

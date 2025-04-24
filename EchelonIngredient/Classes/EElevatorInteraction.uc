@@ -100,7 +100,7 @@ function KeyEvent( String Key, EInputAction Action, float Delta, optional bool b
 			break;
 		
 		case "Interaction" :
-			if (!EPC.eGame.bUsingController) // Joshua - Adding controller support for elevators
+			if (!EPC.eGame.bUseController) // Joshua - Adding controller support for elevators
 				if(bAuto)
 					Panel.KeyPushed();
 			else

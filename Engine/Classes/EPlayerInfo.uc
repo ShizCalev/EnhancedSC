@@ -2,8 +2,8 @@
 // EPlayerInfo.
 //=============================================================================
 class EPlayerInfo extends Actor 
-	  //config(SplinterCellUser)
-      config(Enhanced) // Joshua - Class, configurable in Enhanced config 
+	  config(SplinterCellUser)
+      //config(Enhanced) // Joshua - Class, configurable in Enhanced config
 	  native;
 
 /*-----------------------------------------------------------------------------

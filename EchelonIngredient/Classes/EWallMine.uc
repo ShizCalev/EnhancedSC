@@ -18,6 +18,13 @@ function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 
+	// Joshua - Elite Mode will override this setting if greater than 0.5
+	if (EchelonGameInfo(Level.Game).bEliteMode)
+	{
+		if (ExplosionDelay > 0.5)	
+			ExplosionDelay = 0.5;
+	}
+
 	// Destroy Interaction if placed on wall by designer
 	if( InitialState != '' )
 	{

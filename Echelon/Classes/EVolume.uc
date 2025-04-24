@@ -135,10 +135,11 @@ function Touch(actor Other)
 
 	Super.Touch(Other);
 
-	if( (bSavegame) 
+	if((bSavegame) 
      && (Other.bIsPlayerPawn) 
      && (EPawn(Other).Controller != None) 
-     && (EchelonLevelInfo(Level).AlarmStage < 4)
+     && ((!EchelonGameInfo(Level.Game).bEliteMode && EchelonLevelInfo(Level).AlarmStage < 4)
+	 	|| (EchelonGameInfo(Level.Game).bEliteMode && EchelonLevelInfo(Level).AlarmStage < 3)) // Joshua - Elite only allows for 3 alarms
 	 && !IsGameOver())   // Do not save if the player is about to be put GameOver because of the alarm stage
 	{
 		// Joshua - New method to add PC checkpoints

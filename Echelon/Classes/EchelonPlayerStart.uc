@@ -18,8 +18,21 @@ var	   int					NbTicks;
 
 function PostBeginPlay()
 {
-	if (bThermalOverride)
+	if (bThermalOverride && !EchelonGameInfo(Level.Game).bEliteMode)
 		bNoThermalAvailable = false;
+
+	// Joshua - Dirty fix to move Vselka Infiltration spawn point to Xbox version
+	if (GetCurrentMapName() == "1_7_1_1VselkaInfiltration")
+	{
+		SetLocation(vect(12801.27, 4688.78, -1214.32));
+		SetRotation(rot(0, 38088, 0));
+	}
+
+	// Joshua - Severonickel Part 2 spawn point lowered so Sam doesn't fall in air at start
+	if (GetCurrentMapName() == "3_4_3Severonickel")
+	{
+		SetLocation(vect(3528.004150, 1708.404541, 592.0));
+	}
 	
 	super.PostBeginPlay();
 }

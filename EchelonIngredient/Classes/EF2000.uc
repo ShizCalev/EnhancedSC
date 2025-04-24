@@ -3,6 +3,7 @@ class EF2000 extends EMainGun;
 var int numShellIn;
 var int numShellToEject;
 var float lastEjectTime;
+var bool bBurstFireAvailable; // Joshua - Burst fire restore from early Splinter Cell builds
 
 const MAX_SHELL_IN = 3;
 const EJECT_DELAY = 0.04;
@@ -10,8 +11,17 @@ const EJECT_DELAY = 0.04;
 #exec OBJ LOAD FILE=..\Sounds\FisherEquipement.uax
 
 function PostBeginPlay()
-{
+{	
+    local EPlayerController Epc;
+
     Super.PostBeginPlay();
+
+    // Joshua - Checking for burst fire
+    Epc = EPlayerController(Instigator.Controller);
+	if (Epc.bBurstFire)
+    {
+        bBurstFireAvailable=True;
+    }
 
     HUDTex       = EchelonLevelInfo(Level).TICON.qi_ic_maingun;
     InventoryTex = EchelonLevelInfo(Level).TICON.inv_ic_maingun;
@@ -19,6 +29,21 @@ function PostBeginPlay()
 	ItemVideoName = "gd_f2000.bik";
     Description  = "FN2000Desc";
 	HowToUseMe  = "FN2000HowToUseMe";
+}
+
+// Joshua - Required to enable burst fire mode when picking up the SC-20K at CIA HQ
+function bool NotifyPickup( Controller Instigator )
+{
+	local EPlayerController Epc;
+	
+	Super.NotifyPickup(Instigator);
+
+	Epc = EPlayerController(Controller);
+	if (Epc.bBurstFire)
+    {
+        bBurstFireAvailable=True;
+    }
+	return false;
 }
 
 function CheckShellCase()
@@ -39,16 +64,54 @@ function SpawnShellCase()
 	}
 	else
 	{
-	numShellIn++;
+		numShellIn++;
 	}
 }
 
 function bool Reload()
-	{
+{
 	numShellToEject = numShellIn;
-		numShellIn = 0;
+	numShellIn = 0;
 	return Super.Reload();
 }
+
+function bool SwitchROF()
+{
+	// switch ROF
+	if( !bSniperMode )
+	{
+		switch( eROFMode )
+		{
+			case ROF_Single : 
+				if (bBurstFireAvailable)  // Joshua - Restoring burst fire from early Splinter Cell builds
+					eROFMode = ROF_Burst;
+				else
+					eROFMode = ROF_Auto;
+				break;
+			case ROF_Burst : eROFMode = ROF_Auto; break;
+			case ROF_Auto :	eROFMode = ROF_Single; break;
+		}
+	}
+
+	return !bSniperMode;
+}
+
+
+function bool IsROFModeAvailable(ERateOfFireMode rof)
+{
+    switch( rof )
+	{
+        case ROF_Single:
+            return true;
+        case ROF_Burst:
+            return bBurstFireAvailable; // Joshua - Restoring burst fire from early Splinter Cell builds
+        case ROF_Auto:
+            return true;
+        default:
+            return false;
+    }
+}
+
 
 defaultproperties
 {

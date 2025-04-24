@@ -90,8 +90,6 @@ var bool				bDebugStealth;					// turned on by exec statement:  STEALTH
 var bool				bInvincible;					// turned on by exec statement:  INVINCIBLE
 var bool				bFullAmmo;					
 var bool				bVideoMode;
-var(Enhanced) config bool bUnlockAllLevels; // Joshua - Unlocks all levels, bypassing profile progression
-// Engine.EPlayerInfo.bUnlockAllLevels would be ideal but Engine package currently has issues compiling
 
 // Timer tracking var
 var float				m_LPStartTime;					// Timer stamp for pushing against ladders and pipes
@@ -221,15 +219,32 @@ var int iGameOverMsg;
 var int iCheatMask;
 var bool bQuickLoad;
 
+var(Enhanced) config bool bUnlockAllLevels; // Joshua - Unlocks all levels, bypassing profile progression
+// Engine.EPlayerInfo.bUnlockAllLevels would be ideal but Engine package currently has issues compiling
+
 var bool bCheckpoint; // Joshua - New variable for Checkpoints
 var string CheckpointLevel; // Joshua - New variable to keep track which level the Checkpoint was on
-enum EControllerScheme // Joshua - Controller scheme
+
+enum EInputMode 
+{
+	IM_Auto,
+	IM_Keyboard,
+	IM_Controller,
+};
+var(Enhanced) config EInputMode InputMode;
+
+enum EControllerScheme
 {
     CS_Default,
     CS_Pandora,
-    CS_PlayStation
+    CS_PlayStation,
+	CS_User
 };
-var(Enhanced) EControllerScheme ControllerScheme;
+var(Enhanced) config EControllerScheme ControllerScheme;
+
+var(Enhanced) config bool bToggleInventory;	// Joshua - Option to use toggle inventory instead of hold
+
+var(Enhanced) config bool bBurstFire; // Joshua - Restoring burst fire from early Splinter Cell builds
 
 const MAX_REGULAR_MAP = 13;
 
@@ -251,12 +266,12 @@ function bool IsInQuickInv()
 
 event bool CanSaveGame()
 {
-	return (Pawn != None && Pawn.Health > 0 && !bStopInput && !Level.bIsStartMenu && !IsInQuickInv());
+	return (Pawn != None && Pawn.Health > 0 && !bStopInput && !Level.bIsStartMenu && !IsInQuickInv() && (!eGame.bEliteMode || bAutoSaveLoad || bSavingTraining)); // Joshua - No quick saving in Elite mode
 }
 
 event bool CanLoadGame()
 {
-	return !IsInQuickInv();
+	return !IsInQuickInv() && (!eGame.bEliteMode || bLoadingTraining); // Joshua - No quick loading in Elite mode
 }
 
 event bool CanGoBackToGame()
@@ -1069,7 +1084,10 @@ function ShowDebugInput( canvas Canvas )
 exec function FreezePawns()
 {
 	local EPawn P;
-	
+
+	if (eGame.bEliteMode)
+		return;
+
 	ForEach DynamicActors(class'EPawn', P)
 	{
 		if(!P.bIsPlayerPawn)
@@ -1091,6 +1109,9 @@ exec function Reverse()
 {
 	local EGoal goal;
 	local EAIController AI;
+
+	if (eGame.bEliteMode)
+	return;
 
 	if ( ViewTarget != none && EPawn(ViewTarget) != none )
 		AI = EAIController(EPawn(ViewTarget).Controller);
@@ -1165,6 +1186,17 @@ exec function ToggleSnipe()
 	}
 }
 
+//---------------------------------------[Joshua - 17 Apr 2025]-----
+// Description
+//		 Reset the camera position.
+//------------------------------------------------------------------------
+exec function ResetCamera()
+{
+	if( Level.Pauser != None || bStopInput )
+		return;
+	bResetCamera = 1;
+}
+
 //---------------------------------------[David Kalina - 12 Mar 2001]-----
 // Description
 //      Makes noise from the player's position
@@ -1172,6 +1204,9 @@ exec function ToggleSnipe()
 //------------------------------------------------------------------------
 exec function Noise(float volume, optional NoiseType ntype, optional float zthreshold)
 {
+	if (eGame.bEliteMode)
+		return;
+
 	if (ntype == 0)			ntype = NOISE_HeavyFootstep;
 	if (zthreshold == 0.0f) zthreshold = EPawn.CollisionHeight * 2.0f;
 
@@ -1187,6 +1222,9 @@ exec function ShowNavPoints()
 	local NavigationPoint nav;
 	local EInfoPoint key;
 
+	if (eGame.bEliteMode)
+		return;
+
 	bDebugNavPoints = !bDebugNavPoints;
 
 	for ( nav = Level.NavigationPointList; nav != None; nav = nav.NextNavigationPoint )
@@ -1199,6 +1237,9 @@ exec function ShowNavPoints()
 
 exec function Invincible()
 {
+	if (eGame.bEliteMode)
+		return;
+
 	bInvincible = !bInvincible;
 	if ( bInvincible )
 		Pawn.Style = STY_Translucent;
@@ -1208,18 +1249,26 @@ exec function Invincible()
 
 exec function Health()
 {
+	if (eGame.bEliteMode)
+		return;
+
 	if( ePawn.Health > 0 )
 		ePawn.Health = ePawn.InitialHealth;
 }
 
 exec function StopTimer()
 {
+	if (eGame.bEliteMode)
+		return;
+
 	if( EMainHUD(MyHud).TimerView != None )
 		EMainHUD(MyHud).TimerView.Disable('Tick');
 }
 
 exec function Ammo()
 {
+	if (eGame.bEliteMode)
+		return;
 	if( MainGun != None )
 		MainGun.Ammo = MainGun.default.MaxAmmo;
 	if( HandGun != None )
@@ -1228,17 +1277,24 @@ exec function Ammo()
 
 exec function KillSam()
 {
+	if (eGame.bEliteMode)
+		return;
     ePawn.TakeDamage(2000, ePawn, vect(0,0,0), vect(0,0,0), vect(0,0,0), class'Crushed');
 }
 
 exec function KillTarget()
 {
+	if (eGame.bEliteMode)
+		return;
     m_AttackTarget.TakeDamage(2000, ePawn, vect(0,0,0), vect(0,0,0), vect(0,0,0), class'Crushed');
 }
 
 exec function KillAll(class<actor> aClass)
 {
 	local Actor A;
+
+	if (eGame.bEliteMode)
+		return;
 
 	if ( ClassIsChildOf(aClass, class'Pawn') )
 	{
@@ -1254,6 +1310,9 @@ exec function KillAll(class<actor> aClass)
 function KillAllPawns(class<Pawn> aClass)
 {
 	local Pawn P;
+
+	if (eGame.bEliteMode)
+		return;
 	
 	ForEach DynamicActors(class'Pawn', P)
 		if ( ClassIsChildOf(P.Class, aClass)
@@ -1269,6 +1328,8 @@ function KillAllPawns(class<Pawn> aClass)
 
 exec function KillPawns()
 {
+	if (eGame.bEliteMode)
+		return;
 	KillAllPawns(class'Pawn');
 }
 
@@ -1302,7 +1363,7 @@ exec function Mission( optional float i )
 // Joshua - Command to toggle controller mode while in-game
 exec function Controller()
 {
-	eGame.bUsingController = !eGame.bUsingController;
+	eGame.bUseController = !eGame.bUseController;
 }
 
 // Joshua - Console shortcuts to cut levels
@@ -3180,6 +3241,7 @@ state s_PlayerWalking
 		// Player must not be already crouched
 		// Must be going forward (Over a certain speed?)
 		//
+
 		if( bDuck > 0 &&  IsPushingFull() && (VSize(ePawn.Velocity) > (m_speedRunCr - 1.0)))
 		{
 			//Log("playermove walking"@bIntransition);
@@ -4914,7 +4976,7 @@ Begin:
 
 	// Pop interface
 	EMainHUD(myHud).hud_master = EGameplayObject(Interaction.Owner);
-	if (!eGame.bUsingController) // Joshua - Adding controller support for turrets
+	if (!eGame.bUseController) // Joshua - Adding controller support for turrets
 		FakeMouseToggle(true);
 	EMainHUD(myHud).hud_master.BeginEvent();
 
@@ -4928,7 +4990,7 @@ Begin:
 End:
 	// Remove interface
 	EMainHUD(myHud).hud_master.EndEvent();
-	if (!eGame.bUsingController) // Joshua - Adding controller support for turrets
+	if (!eGame.bUseController) // Joshua - Adding controller support for turrets
 		FakeMouseToggle(false);
 	EMainHUD(myHud).hud_master = None;
 
@@ -7216,9 +7278,9 @@ state s_Fence
 		ePawn.Acceleration   = NewAccel;
 		ePawn.Acceleration *= eGame.m_onGroundAccel;
 
-		if(((eGame.bPandoraCrouch && bDuck > 0) || (!eGame.bPandoraCrouch && bPressedJump)) || !ePawn.m_validFence)
+		if(((eGame.bCrouchDrop && bDuck > 0) || (!eGame.bCrouchDrop && bPressedJump)) || !ePawn.m_validFence)
 		{
-			if (eGame.bPandoraCrouch)
+			if (eGame.bCrouchDrop)
 				bDuck = 0;
 			ePawn.Velocity = X * -200.0;
 			if ( ePawn.Base.SurfaceType == SURFACE_FenceMetal )
@@ -7487,7 +7549,7 @@ state s_Ledge
 
         GetAxes(ePawn.Rotation,X,Y,Z);
 
-		if(aForward < eGame.m_backwardFull || ((!eGame.bPandoraCrouch && bPressedJump) || (eGame.bPandoraCrouch && bDuck > 0))) // Joshua - PT controls
+		if(aForward < eGame.m_backwardFull || ((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0))) // Joshua - PT controls
 		{
 			ePawn.SetPhysics(PHYS_Falling);
 			GoToState('s_PlayerJumping');
@@ -7797,13 +7859,13 @@ state s_HandOverHand
 
         GetAxes(ePawn.Rotation, X, Y, Z);
 
-		if((eGame.bPandoraCrouch && bDuck > 0) || (!eGame.bPandoraCrouch && bPressedJump)) // Joshua - PT controls
+		if((eGame.bCrouchDrop && bDuck > 0) || (!eGame.bCrouchDrop && bPressedJump)) // Joshua - PT controls
 		{
 			GoToState(,'FallDown');
 		}
-		else if((eGame.bPandoraCrouch && bPressedJump) || (!eGame.bPandoraCrouch && bDuck > 0)) // PT controls
+		else if((eGame.bCrouchDrop && bPressedJump) || (!eGame.bCrouchDrop && bDuck > 0)) // PT controls
 		{
-			if (eGame.bPandoraCrouch)
+			if (eGame.bCrouchDrop)
 				bPressedJump = False;
 			else
 				bDuck = 0;
@@ -7930,7 +7992,7 @@ state s_HandOverHandFeetUp
 			testExtent.Z = ePawn.default.CollisionHeight;
 			if(ePawn.FastPointCheck(testPos, testExtent, true, true))
 			{
-				if((!eGame.bPandoraCrouch && bPressedJump) || (eGame.bPandoraCrouch && bDuck > 0)) // Joshua - PT controls
+				if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 					JumpLabelPrivate = 'FallDown';
 				else
 					JumpLabelPrivate = '';
@@ -8038,7 +8100,7 @@ state s_HOHTargeting extends s_FirstPersonTargeting
 
 		ePawn.AimAt(AAHOH, Vector(Rotation), Vector(ePawn.Rotation), -80, 50, -80, 80);
 
-		if( (!eGame.bPandoraCrouch && bPressedJump) || (eGame.bPandoraCrouch && bDuck > 0)) // Joshua - PT controls
+		if( (!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpLabelPrivate = 'FallDown';
 			GoToState(,'PutGunBack');
@@ -8245,7 +8307,7 @@ state s_NarrowLadder
 		if(aForward > eGame.m_backwardFull)
 			m_LPSlideStartTime = Level.TimeSeconds;
 
-		if((!eGame.bPandoraCrouch && bPressedJump) || (eGame.bPandoraCrouch && bDuck > 0)) // Joshua - PT controls
+		if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -8547,7 +8609,7 @@ state s_NarrowLadderSlideDown extends s_SlideDownBase
 		{
 			return;
 		}
-		else if((!eGame.bPandoraCrouch && bPressedJump) || (eGame.bPandoraCrouch && bDuck > 0)) // Joshua - PT controls
+		else if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -8795,7 +8857,7 @@ state s_Pipe
 			ePawn.Acceleration = vect(0, 0, 0);
 		}
 
-		if((!eGame.bPandoraCrouch && bPressedJump) || (eGame.bPandoraCrouch && bDuck > 0)) // Joshua - PT controls
+		if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -8951,7 +9013,7 @@ state s_PipeSlideDown extends s_SlideDownBase
 		{
 			return;
 		}
-		else if((!eGame.bPandoraCrouch && bPressedJump) || (eGame.bPandoraCrouch && bDuck > 0)) // Joshua - PT controls
+		else if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -9121,11 +9183,11 @@ state s_ZipLine
 	function CheckForCrouch()
 	{
 		local vector extent;
-		if((eGame.bPandoraCrouch && bPressedJump) || (!eGame.bPandoraCrouch && bDuck > 0)) // Joshua - PT controls
+		if((eGame.bCrouchDrop && bPressedJump) || (!eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			ePawn.bWantsToCrouch = !ePawn.bWantsToCrouch;
 			ePawn.PlayZipLineTransition(ePawn.bWantsToCrouch);
-			if (!eGame.bPandoraCrouch) // Joshua - PT controls
+			if (!eGame.bCrouchDrop) // Joshua - PT controls
 				bDuck = 0;
 		}
 	}
@@ -9147,9 +9209,9 @@ state s_ZipLine
 			minSpeed *= 2.0;
 		}
 
-		if((!eGame.bPandoraCrouch && bPressedJump) || (eGame.bPandoraCrouch && bDuck > 0)) // Joshua - PT controls
+		if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
-			if (eGame.bPandoraCrouch) // Joshua - PT controls
+			if (eGame.bCrouchDrop) // Joshua - PT controls
 				bDuck = 0;
 			ePawn.SetPhysics(PHYS_Falling);
 			GoToState('s_PlayerJumping');
@@ -9333,7 +9395,7 @@ state s_Pole
 			}
 		}
 
-		if((!eGame.bPandoraCrouch && bPressedJump) || (eGame.bPandoraCrouch && bDuck > 0)) // Joshua - PT controls
+		if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -9446,7 +9508,7 @@ state s_PoleSlideDown extends s_SlideDownBase
 			ePawn.SetRotation(Rotator(forwardDir));
 		}
 
-		if((!eGame.bPandoraCrouch && bPressedJump) || (eGame.bPandoraCrouch && bDuck > 0)) // Joshua - PT controls
+		if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -9537,18 +9599,13 @@ Begin:
 		EMainHUD(myHUD).SaveState();
 		myHUD.GotoState('s_QuickLoadMenu');
 	}
-	Sleep(9.5);
-	if (eGame.bUsingController && CheckpointLevel == GetCurrentMapName())
-		ConsoleCommand("LOADGAME FILENAME=CHECKPOINT.en0");
-	else
-		ConsoleCommand("LOADGAME FILENAME=AUTOSAVE.en0");
 }
 
 defaultproperties
 {
     bDebugNavPoints=true
+	InputMode=IM_Keyboard // Joshua - Input mode
 	ControllerScheme=CS_Default // Joshua - Default, Pandora, PlayStation
-    bUnlockAllLevels=false // Joshua - Unlocks all levels, bypassing profile progression
 	CheckpointLevel="None" // Joshua - New variable to keep track which level the Checkpoint was on
     m_ThrowMinSpeed=(X=800.0000000,Y=0.0000000,Z=100.0000000)
     m_ThrowMaxSpeed=(X=1500.0000000,Y=0.0000000,Z=250.0000000)

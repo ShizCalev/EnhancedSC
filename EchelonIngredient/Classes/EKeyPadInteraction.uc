@@ -140,7 +140,7 @@ function KeyEvent( String Key, EInputAction Action, float Delta, optional bool b
 			break;
 
 		case "Interaction" :
-			if (!EPC.eGame.bUsingController) // Joshua - Adding controller support for keypads
+			if (!EPC.eGame.bUseController) // Joshua - Adding controller support for keypads
 				if(bAuto)
 					MyKeyPad.KeyPushed();
 			else

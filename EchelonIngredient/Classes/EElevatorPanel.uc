@@ -444,7 +444,7 @@ state s_Use
 		// No special display if not player
 		if( Epc != None )
 		{
-			if (!Epc.eGame.bUsingController) // Joshua - Adding controller support for elevators
+			if (!Epc.eGame.bUseController) // Joshua - Adding controller support for elevators
 				Epc.FakeMouseToggle(true);
 			bRenderAtEndOfFrame = true;
 			bSpecialLit = true;
@@ -469,7 +469,7 @@ state s_Use
 		local EPlayerController Epc;
 		Epc = EPlayerController(EElevatorInteraction(Interaction).InteractionController);
 
-		if (!Epc.eGame.bUsingController) // Joshua - Adding controller support for elevators
+		if (!Epc.eGame.bUseController) // Joshua - Adding controller support for elevators
 		{
 			OldSelectedButton = SelectedButton;
 

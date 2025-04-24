@@ -287,6 +287,15 @@ state s_MissionFailed
     function BeginState() {BeginState_s_MissionFailed();}
 
     function Tick(float DeltaTime) { Tick_s_MissionFailed(DeltaTime);}
+
+Begin:
+    // Joshua - Load game automatically after game over for controller mode
+    Sleep(6.0);
+	if (EPC.myHUD.IsPlayerGameOver() && Epc.CheckpointLevel == GetCurrentMapName() && Epc.eGame.bUseController)
+		ConsoleCommand("LOADGAME FILENAME=CHECKPOINT.en0");
+	else
+		ConsoleCommand("LOADGAME FILENAME=AUTOSAVE.en0");
+    stop;
 }
 
 /*=============================================================================

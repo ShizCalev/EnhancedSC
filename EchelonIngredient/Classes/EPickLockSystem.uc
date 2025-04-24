@@ -77,7 +77,7 @@ function EPickLockQuadrant FindCurrentQuadrant( float aUpDown, float aLeftRight)
 
 	EPC = EPlayerController(PickLocker);
 
-	if (!EPC.eGame.bUsingController)
+	if (!EPC.eGame.bUseController)
 	{
 		// For the PC, we want a single direction to avoid the wiggling on the keyboard.
 		// UpLeft == up, UpRigth == right, DownLeft == left, DownRight == right

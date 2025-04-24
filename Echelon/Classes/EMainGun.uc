@@ -12,30 +12,42 @@ event SetSecondaryAmmo(EInventoryItem Item)
 
 function bool SwitchROF()
 {
-	// switch ROF
-	if( !bSniperMode )
-	{
-		switch( eROFMode )
-		{
-		case ROF_Single : eROFMode = ROF_Auto; break;
-		case ROF_Auto :	eROFMode = ROF_Single; break;
-		}
-	}
+    // switch ROF
+    if( !bSniperMode )
+    {
+        switch( eROFMode )
+        {
+        case ROF_Single:
+			eROFMode = ROF_Burst;
+            break;
 
-	return !bSniperMode;
+        case ROF_Burst:
+            eROFMode = ROF_Auto;
+            break;
+
+        case ROF_Auto:
+            eROFMode = ROF_Single;
+            break;
+        }
+    }
+
+    return !bSniperMode;
 }
 
 function bool IsROFModeAvailable(ERateOfFireMode rof)
 {
     switch( rof )
-	{
+    {
         case ROF_Single:
+		case ROF_Burst:
         case ROF_Auto:
             return true;
+
         default:
             return false;
     }
 }
+
 
 //------------------------------------------------------------------------
 // Description		

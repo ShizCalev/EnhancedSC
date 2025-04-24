@@ -28,7 +28,10 @@ function EventCallBack(EAIEvent Event,Actor TriggerActor)
 function InitPattern()
 {
     local Pawn P;
+    local EPawn EP;
     local Actor A;
+    local EAlarm Alarm;
+    local int i;
 
     Super.InitPattern();
 
@@ -36,8 +39,11 @@ function InitPattern()
     {
         if(P.name == 'ELambert0')
             Characters[1] = P.controller;
+        if(P.Name == 'EPowerPlantEmployee14')
+            Characters[2] = P.controller;
     }
 
+    // Joshua - Disabling collision on these two vent frames as it was preventing the player from progressing
     ForEach AllActors(class'Actor', A)
     {
         if(A.name == 'StaticMeshActor706')
@@ -45,6 +51,32 @@ function InitPattern()
 
         if(A.name == 'StaticMeshActor821')
             A.SetCollision(False);
+    }
+
+    // Joshua - Removing EGroupAI20 from the PrimaryGroups (killing the NPC instead for now)
+    /*ForEach AllActors(class'EAlarm', Alarm)
+    {
+        if (Alarm.name == 'EAlarm5')
+        {
+            for (i = 0; i < Alarm.PrimaryGroups.Length; i++)
+            {
+                if (Alarm.PrimaryGroups[i] == EGroupAI(DynamicLoadObject("3_2_1_PowerPlant.EGroupAI20", class'EGroupAI')))
+                {
+                    Alarm.PrimaryGroups.Remove(i, 1);
+                    break;
+                }
+            }
+        }
+    }*/
+
+    // Joshua - Destroying the hat from the NPC that we teleport / kill
+    ForEach DynamicActors(class'EPawn', EP)
+    {
+        if(EP.Name == 'EPowerPlantEmployee14')
+        {
+            EP.Hat = None;
+            EP.HatMesh = None;
+        }
     }
 
     if( !bInit )
@@ -84,6 +116,9 @@ Init:
     AddGoal('4', "", 9, "", "P_3_2_1_NPP_LambertComms", "Goal_0022L", "Localization\\P_3_2_1_PowerPlant", "P_3_2_1_NPP_LambertComms", "Goal_0026L", "Localization\\P_3_2_1_PowerPlant");
     AddNote("", "P_3_2_1_NPP_LambertComms", "Note_0023L", "Localization\\P_3_2_1_PowerPlant");
     AddRecon(class 'EReconFullText3_2AF_B');
+    Teleport(2, 'ELambert'); // Joshua - Teleport conflicting NPC
+    Sleep(0.1);
+    KillNPC(2, FALSE, FALSE); // Joshua - Killing conflicting NPC
     Close();
     End();
 Collaterals:

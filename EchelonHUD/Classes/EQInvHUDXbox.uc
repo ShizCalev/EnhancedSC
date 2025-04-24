@@ -251,30 +251,38 @@ state s_QDisplayXbox
 			if( HoldCategory != CurrentCategory || HoldItem != CurrentItem )
 				Epc.Pawn.playsound(Sound'Interface.Play_NavigatePackSac', SLOT_Interface);
 		}
-		else if( Action == IST_Release )
-		{
-			if( Key == "QuickInventory" )
+    
+    if (Key == "QuickInventory")
+    {
+        // Joshua - Toggle inventory option
+        if ((Epc.bToggleInventory && Action == IST_Press) ||
+            (!Epc.bToggleInventory && Action == IST_Release))
+        {
+            // On valid exit, check for any selected item
+            if (CurrentCategory != -1 && CurrentItem != -1)
             {
-				// On valid exit, check for any selected item
-				if(CurrentCategory != -1 && CurrentItem != -1 )
-				{
-					Item = PCInventory.GetItemInCategory(GetCategory(CurrentCategory), CurrentItem + 1);
-					if( !PCInventory.IsSelected(Item) )
-    					PCInventory.SetSelectedItem(Item);
-	    			else if( !Item.IsA('EMainGun') && !Item.IsA('EOneHandedWeapon') )
-		    			PCInventory.UnEquipItem(Item);
-				}
-				else if( bPreviousConfig )
-				{
-					PCInventory.SetPreviousConfig();
-				}
+                Item = PCInventory.GetItemInCategory(GetCategory(CurrentCategory), CurrentItem + 1);
+                
+                if (!PCInventory.IsSelected(Item))
+                {
+                    PCInventory.SetSelectedItem(Item);
+                }
+                else if (!Item.IsA('EMainGun') && !Item.IsA('EOneHandedWeapon'))
+                {
+                    PCInventory.UnEquipItem(Item);
+                }
+            }
+            else if (bPreviousConfig)
+            {
+                PCInventory.SetPreviousConfig();
+            }
 
-				GotoState('');
-				Owner.GotoState(EchelonMainHud(Owner).RestoreState());
-			}
-		}
+            GotoState('');
+            Owner.GotoState(EchelonMainHud(Owner).RestoreState());
+        }
+    }
 
-		return false;
+    return false;
 	}
     
     function PostRender(Canvas C)
@@ -594,6 +602,25 @@ function DrawRateOfFire(ECanvas Canvas)
 		Canvas.Style = ERenderStyle.STY_Alpha;
         eLevel.TGAME.DrawTileFromManager(Canvas, eLevel.TGAME.qi_fire, 5, 8, 0, 0, 5, 8);
 		Canvas.Style = ERenderStyle.STY_Normal;
+
+        // Burst // Joshua - Restoring burst fire from early Splinter Cell builds
+		if(Epc.bBurstFire)
+        {
+			if(!selWeapon.IsROFModeAvailable(ROF_Burst))
+				Canvas.DrawColor.A = 25;
+			else if(selWeapon.eROFMode == ROF_Burst)
+				Canvas.DrawColor.A = BLACK_BORDER_ALPHA;
+			else
+				Canvas.DrawColor.A = INSIDE_BORDER_ALPHA;
+
+			for(j = 0; j < 3; j++)
+			{
+				Canvas.SetPos(xPos + 30 + j * 5, yPos + 8);
+				Canvas.Style = ERenderStyle.STY_Alpha;
+				eLevel.TGAME.DrawTileFromManager(Canvas, eLevel.TGAME.qi_fire, 5, 8, 0, 0, 5, 8);
+				Canvas.Style = ERenderStyle.STY_Normal;
+			}
+		}
 
         // Auto //
         if(!selWeapon.IsROFModeAvailable(ROF_Auto))

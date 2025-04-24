@@ -210,10 +210,12 @@ public:
     FStringNoInit DemoMap GCC_PACK(4);
     FStringNoInit TrainingMap;
     BITFIELD bStartGame:1 GCC_PACK(4);
-    BITFIELD bUsingController:1;
-    BITFIELD bPandoraCrouch:1;
-    BITFIELD bPandoraOpticCable:1;
+    BITFIELD bUseController:1;
+    BITFIELD bCrouchDrop:1;
+    BITFIELD bOpticCableVisions:1;
     BITFIELD bAltDoorStealth:1;
+    BITFIELD bXboxDifficulty:1;
+    BITFIELD bEliteMode:1;
     FLOAT m_minInterpolSpeed GCC_PACK(4);
     FLOAT m_grabbingDelay;
     FLOAT m_blinkDelay;
@@ -1256,7 +1258,15 @@ enum EControllerScheme
     CS_Default              =0,
     CS_Pandora              =1,
     CS_PlayStation          =2,
-    CS_MAX                  =3,
+    CS_User                 =3,
+    CS_MAX                  =4,
+};
+enum EInputMode
+{
+    IM_Auto                 =0,
+    IM_Keyboard             =1,
+    IM_Controller           =2,
+    IM_MAX                  =3,
 };
 struct ECHELON_API FCameraInfo
 {
@@ -1489,7 +1499,6 @@ public:
     BITFIELD bInvincible:1;
     BITFIELD bFullAmmo:1;
     BITFIELD bVideoMode:1;
-    BITFIELD bUnlockAllLevels:1;
     FLOAT m_LPStartTime GCC_PACK(4);
     FLOAT m_LastLedgeFenceTime;
     FLOAT m_LastHOHTime;
@@ -1570,9 +1579,13 @@ public:
     INT iGameOverMsg GCC_PACK(4);
     INT iCheatMask;
     BITFIELD bQuickLoad:1 GCC_PACK(4);
+    BITFIELD bUnlockAllLevels:1;
     BITFIELD bCheckpoint:1;
     FStringNoInit CheckpointLevel GCC_PACK(4);
+    BYTE InputMode;
     BYTE ControllerScheme;
+    BITFIELD bToggleInventory:1 GCC_PACK(4);
+    BITFIELD bBurstFire:1;
     DECLARE_FUNCTION(execCalculatePipeDestination);
     DECLARE_FUNCTION(execCanGetOutTopPipe);
     DECLARE_FUNCTION(execCalculateLadderDestination);

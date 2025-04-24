@@ -39,6 +39,7 @@ function InitPattern()
             Characters[2] = P.controller;
     }
 
+    // Joshua - Adding textures to staticmeshes without any assigned
     ForEach AllActors(class'Actor', A)
     {
         if(A.name == 'StaticMeshActor69')

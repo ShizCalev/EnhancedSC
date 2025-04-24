@@ -26,6 +26,7 @@ function EventCallBack(EAIEvent Event,Actor TriggerActor)
 function InitPattern()
 {
     local Pawn P;
+    local Actor A;
 
     Super.InitPattern();
 
@@ -35,6 +36,15 @@ function InitPattern()
             Characters[1] = P.controller;
         if(P.name == 'EAleksee0')
             Characters[2] = P.controller;
+    }
+
+    // Joshua - Fixing collision on some pipes that were not set correctly
+    ForEach AllActors(class'Actor', A)
+    {
+        if(A.name == 'StaticMeshActor128')
+            A.SetCollisionPrim(StaticMesh(DynamicLoadObject("6_1_1KolaMesh.Collision.pipes_sk2_COL", class'StaticMesh')));
+        if(A.name == 'StaticMeshActor180')
+            A.SetCollisionPrim(StaticMesh(DynamicLoadObject("6_1_1KolaMesh.Collision.pipes_sk2_COL", class'StaticMesh')));
     }
 
     if( !bInit )

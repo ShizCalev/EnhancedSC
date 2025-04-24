@@ -74,9 +74,9 @@ function FillListBox()
             L = EPCListBoxItem(m_ListBox.Items.Append(class'EPCListBoxItem'));
             L.Caption = FileManager.m_pFileList[i];
             if( GetPlayerOwner().playerInfo.Difficulty == 0)
-                L.HelpText = Localize("HUD","normal","Localization\\HUD");
+                L.HelpText = Localize("HUD","Normal","Localization\\HUD");
             else
-                L.HelpText = Localize("HUD","hard","Localization\\HUD");
+                L.HelpText = Localize("HUD","Hard","Localization\\HUD");
         }        
         //else this is not a valid profile
         else

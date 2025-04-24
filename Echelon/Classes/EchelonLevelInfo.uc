@@ -419,39 +419,78 @@ function IncreaseAlarmStage()
 		    AlarmPattern.InitPattern();
     }
 
-	if(AlarmStage < 3)
+	// Joshua - Elite Mode, 3 alarms and the mission's over.
+    if (EchelonGameInfo(Level.Game).bEliteMode)
 	{
-		AlarmStage++;
-
-		log("**** Alarm Stage increased at level: "$AlarmStage$" ****");
-
-		if( AlarmPattern !=  None)
+		if(AlarmStage < 2)
 		{
-			switch(AlarmStage)
+			AlarmStage++;
+
+			log("**** Alarm Stage increased at level: "$AlarmStage$" ****");
+
+			if( AlarmPattern !=  None)
 			{
-			case 1:
-				if(!bLiteWarnings)
-					AlarmPattern.GotoPatternLabel('AlarmStageA');
-				break;
-			case 2:
-				break;
-			case 3:
-				AlarmPattern.GotoPatternLabel('AlarmStageC');
-				break;
+				switch(AlarmStage)
+				{
+				case 1:
+					if(!bLiteWarnings)
+						AlarmPattern.GotoPatternLabel('AlarmStageA');
+					break;
+				case 2:
+					AlarmPattern.GotoPatternLabel('AlarmStageC');
+					break;
+				}
+			}
+		}
+		else if(AlarmStage == 2)
+		{
+			AlarmStage++;
+
+			log("*** Last Alarm stage reached: GameOver ***");
+
+			if( AlarmPattern !=  None)
+			{
+				log("AlarmPattern !=  None");
+				AlarmPattern.GotoPatternLabel('AlarmStageD');
 			}
 		}
 	}
-	else if(AlarmStage == 3)
+	else
 	{
-		AlarmStage++;
+		if(AlarmStage < 3)
+		{
+			AlarmStage++;
 
-		log("*** Last Alarm stage reached: GameOver ***");
+			log("**** Alarm Stage increased at level: "$AlarmStage$" ****");
 
-		if( AlarmPattern !=  None)
-        {
-            log("AlarmPattern !=  None");
-			AlarmPattern.GotoPatternLabel('AlarmStageD');
-        }
+			if( AlarmPattern !=  None)
+			{
+				switch(AlarmStage)
+				{
+				case 1:
+					if(!bLiteWarnings)
+						AlarmPattern.GotoPatternLabel('AlarmStageA');
+					break;
+				case 2:
+					break;
+				case 3:
+					AlarmPattern.GotoPatternLabel('AlarmStageC');
+					break;
+				}
+			}
+		}
+		else if(AlarmStage == 3)
+		{
+			AlarmStage++;
+
+			log("*** Last Alarm stage reached: GameOver ***");
+
+			if( AlarmPattern !=  None)
+			{
+				log("AlarmPattern !=  None");
+				AlarmPattern.GotoPatternLabel('AlarmStageD');
+			}
+		}
 	}
 }
 

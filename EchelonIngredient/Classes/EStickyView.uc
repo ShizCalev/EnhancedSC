@@ -97,7 +97,7 @@ function DrawButtons(ECanvas Canvas)
         Canvas.SetPos(xPos - BUTTON_EXIT_BOX_X - 5, yPos);
         Canvas.DrawTextAligned(Canvas.LocalizeStr("EXIT"),TXT_RIGHT); 
     	    
-    if (eGame.bUsingController) // Joshua - Controller prompts for Sticky Camera
+    if (eGame.bUseController) // Joshua - Controller prompts for Sticky Camera
     {
         // Button box //
         xPos = CAM_X + SIDEBAR_WIDTH;
