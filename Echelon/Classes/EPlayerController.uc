@@ -242,6 +242,8 @@ enum EControllerScheme
 };
 var(Enhanced) config EControllerScheme ControllerScheme;
 
+var(Enhanced) config bool bNormalizeMovement; // Joshua - Option to normalize movement
+
 var(Enhanced) config bool bToggleInventory;	// Joshua - Option to use toggle inventory instead of hold
 
 var(Enhanced) config bool bBurstFire; // Joshua - Restoring burst fire from early Splinter Cell builds
@@ -2640,7 +2642,23 @@ state s_GrabTargeting
 			ePawn.LoopAnimOnly('grabstspnt1', , 0.2);
 			m_AttackTarget.LoopAnimOnly(m_AttackTarget.AGrabWait, , 0.2);
 		}
-	}
+
+		// Joshua - Normalize movement
+		if (bNormalizeMovement)
+		{
+			if (IsPushing())
+			{
+				if (ePawn.bIsCrouched)
+					ePawn.GroundSpeed = m_speedWalkFPCr;
+				else
+					ePawn.GroundSpeed = m_speedWalkFP;
+			}
+			else
+			{
+				ePawn.GroundSpeed = 0.0;
+			}
+		}
+	}	
 
 	function NotifyFiring()
 	{
@@ -3215,6 +3233,9 @@ state s_PlayerWalking
 		local int PillTag;
 		local float AngleDir;
 		local float accelModif;
+		local float inputMagnitude; // Joshua - Normalize movement
+
+		inputMagnitude = sqrt(aForward * aForward + aStrafe * aStrafe); // Joshua - Normalize movement
 
 		if(m_camera.m_volSize != EVS_Minute)
 			PawnLookAt();
@@ -3223,6 +3244,13 @@ state s_PlayerWalking
 			return;
         
 		GetAxes(ePawn.Rotation,X,Y,Z);
+
+		// Joshua - Noramlize movement
+		if (inputMagnitude > 1.0 && bNormalizeMovement)
+		{
+			aForward /= inputMagnitude;
+			aStrafe  /= inputMagnitude;
+		}
 
 		//clauzon the player can now change is speed level
 		if(m_curWalkSpeed!=0)
@@ -4078,6 +4106,22 @@ state s_FirstPersonTargeting extends s_Targeting
 			bInTransition = true; // prevent the SheathWeapon
 			GotoState('s_PlayerSniping');
 		}
+
+		// Joshua - Normalize movement
+		if (bNormalizeMovement)
+		{
+			if (IsPushing())
+			{
+				if (ePawn.bIsCrouched)
+					ePawn.GroundSpeed = m_speedWalkFPCr;
+				else
+					ePawn.GroundSpeed = m_speedWalkFP;
+			}
+			else
+			{
+				ePawn.GroundSpeed = 0.0;
+			}
+		}
 	}
 
 Begin:
@@ -4186,6 +4230,22 @@ state s_PlayerSniping extends s_Targeting
    			Super.PlayerMove(DeltaTime);
 		else
 			KillPawnSpeed();
+
+		// Joshua - Normalize movement
+		if (bNormalizeMovement)
+		{
+			if (IsPushing())
+			{
+				/*if (ePawn.bIsCrouched)*/
+					ePawn.GroundSpeed = m_speedWalkSniping;
+				/*else
+					ePawn.GroundSpeed = m_speedWalkSnipingCr;*/ // Joshua - m_speedWalkSnipingCr doesn't exist, but could consider adding
+			}
+			else
+			{
+				ePawn.GroundSpeed = 0.0;
+			}
+		}
 	}
 
 	function float GetGroundSpeed()
@@ -4259,6 +4319,27 @@ state s_CameraJammerTargeting extends s_Targeting
 		return true;
 	}
 
+	// Joshua - Normalize movement
+	function PlayerMove(float DeltaTime)
+	{
+		Super.PlayerMove(DeltaTime);
+
+		if (bNormalizeMovement)
+		{
+			if (IsPushing())
+			{
+				if (ePawn.bIsCrouched)
+					ePawn.GroundSpeed = m_speedWalkFPCr;
+				else
+					ePawn.GroundSpeed = m_speedWalkFP;
+			}
+			else
+			{
+				ePawn.GroundSpeed = 0.0;
+			}
+		}
+	}
+
 Begin:
 	// Get camera out in hands
 	ePawn.BlendAnimOverCurrent(GetWeaponAnimation(), 1, ePawn.UpperBodyBoneName);
@@ -4313,6 +4394,27 @@ state s_LaserMicTargeting extends s_Targeting
 	event ReduceCameraSpeed(out float turnMul)
 	{
 		turnMul = 0.3f; //(FovAngle from Laser mic / DesiredFOV) * 0.5;
+	}
+
+	// Joshua - Normalize movement
+	function PlayerMove(float DeltaTime)
+	{
+		Super.PlayerMove(DeltaTime);
+
+		if (bNormalizeMovement)
+		{
+			if (IsPushing())
+			{
+				if (ePawn.bIsCrouched)
+					ePawn.GroundSpeed = m_speedWalkFPCr;
+				else
+					ePawn.GroundSpeed = m_speedWalkFP;
+			}
+			else
+			{
+				ePawn.GroundSpeed = 0.0;
+			}
+		}
 	}
 
 Begin:

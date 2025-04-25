@@ -1584,7 +1584,8 @@ public:
     FStringNoInit CheckpointLevel GCC_PACK(4);
     BYTE InputMode;
     BYTE ControllerScheme;
-    BITFIELD bToggleInventory:1 GCC_PACK(4);
+    BITFIELD bNormalizeMovement:1 GCC_PACK(4);
+    BITFIELD bToggleInventory:1;
     BITFIELD bBurstFire:1;
     DECLARE_FUNCTION(execCalculatePipeDestination);
     DECLARE_FUNCTION(execCanGetOutTopPipe);

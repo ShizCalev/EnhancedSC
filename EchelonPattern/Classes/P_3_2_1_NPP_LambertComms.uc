@@ -118,7 +118,7 @@ Init:
     AddRecon(class 'EReconFullText3_2AF_B');
     Teleport(2, 'ELambert'); // Joshua - Teleport conflicting NPC
     Sleep(0.1);
-    KillNPC(2, FALSE, FALSE); // Joshua - Killing conflicting NPC
+    KillNPC(2, TRUE, FALSE); // Joshua - Killing conflicting NPC
     Close();
     End();
 Collaterals:
