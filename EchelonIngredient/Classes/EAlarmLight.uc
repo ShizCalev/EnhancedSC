@@ -111,7 +111,7 @@ defaultproperties
     StaticMesh=StaticMesh'LightGenOBJ.UnbreakableLight.LIG_Alarm_red'
     SoundRadiusSaturation=1000.0000000
     LightType=LT_Steady
-	//LightEffect=LE_EOmniAtten // Joshua - Only Xbox had this value?
+	LightEffect=LE_EOmniAtten // Joshua - Restoring Xbox light effect, PC originally just used LE_None
     bGlowDisplay=false
     MaxDistance=250.0000000
     bAffectOwnZoneOnly=true
