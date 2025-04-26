@@ -61,6 +61,10 @@ function bool KeyEvent( EInputKey Key, EInputAction Action, FLOAT Delta )
 			Epc.SetKey("AnalogDown MoveBackward", "");
 			Epc.SetKey("AnalogLeft StrafeLeft", "");
 			Epc.SetKey("AnalogRight StrafeRight", "");
+			Epc.SetKey("JoyX \"Axis aStrafe DeadZone=0.3\"", "");
+			Epc.SetKey("JoyY \"Axis aForward DeadZone=0.3\"", "");
+			Epc.SetKey("JoyZ \"Axis aTurn DeadZone=0.3\"", "");
+			Epc.SetKey("JoyV \"Axis aLookUp DeadZone=0.3\"", "");
 			
 			if (Epc.GetStateName() == 's_FirstPersonTargeting' || Epc.GetStateName() == 's_PlayerSniping')
 			{
@@ -90,6 +94,10 @@ function bool KeyEvent( EInputKey Key, EInputAction Action, FLOAT Delta )
 			Epc.SetKey("AnalogDown MoveBackward", "");
 			Epc.SetKey("AnalogLeft StrafeLeft", "");
 			Epc.SetKey("AnalogRight StrafeRight", "");
+			Epc.SetKey("JoyX \"Axis aStrafe DeadZone=0.3\"", "");
+			Epc.SetKey("JoyY \"Axis aForward DeadZone=0.3\"", "");
+			Epc.SetKey("JoyZ \"Axis aTurn DeadZone=0.3\"", "");
+			Epc.SetKey("JoyV \"Axis aLookUp DeadZone=0.3\"", "");
 
 			if (Epc.GetStateName() == 's_FirstPersonTargeting' || Epc.GetStateName() == 's_PlayerSniping')
 			{
@@ -120,6 +128,10 @@ function bool KeyEvent( EInputKey Key, EInputAction Action, FLOAT Delta )
 			Epc.SetKey("AnalogDown MoveBackward", "");
 			Epc.SetKey("AnalogLeft StrafeLeft", "");
 			Epc.SetKey("AnalogRight StrafeRight", "");
+			Epc.SetKey("JoyX \"Axis aStrafe DeadZone=0.3\"", "");
+			Epc.SetKey("JoyY \"Axis aForward DeadZone=0.3\"", "");
+			Epc.SetKey("JoyZ \"Axis aTurn DeadZone=0.3\"", "");
+			Epc.SetKey("JoyV \"Axis aLookUp DeadZone=0.3\"", "");
 
 			if (Epc.GetStateName() == 's_FirstPersonTargeting' || Epc.GetStateName() == 's_PlayerSniping')
 			{
