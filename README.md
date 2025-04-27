@@ -14,12 +14,18 @@ The latest version of Enhanced SC can be found in the [Releases](https://github.
 > Your original saves will not be deleted, but they will appear as missing. Enhanced intentionally hides them because they aren't compatible with this version.
 
 ## Linux Installation
-If you're playing on Linux, you need to perform a DLL override in your Wine prefix to properly load Enhanced SC and [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack).
+On Linux, you need to perform a DLL override in your Wine prefix to properly load Enhanced SC and [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack).
 
-To add the DLL override in Steam, include the following in your Splinter Cell launch command:
+To add the DLL override in Steam, right-click the game in the library and select `Properties`.
+
+In the General tab, add the following to the launch options:
 ```
 WINEDLLOVERRIDES="msacm32,msvfw32=n,b" %command% -shadowmode=projector
 ```
+In the Compatibility tab, check `Force the use of a specific Steam Play compatibility tool` and select `Proton 9.0-4`. Other versions might work, but this one has been tested and confirmed to be reliable.
+
+<img src="https://github.com/user-attachments/assets/8082d3c8-f5bb-464a-8432-2e66e5ed803e" width="640"/>
+
 Unfortunately, [Xidi](https://github.com/samuelgr/Xidi) currently causes the game to crash on Linux, so controller support isn't working yet. As a result, `dinput8` will not be included in the DLL override.
 
 For more detailed instructions on how to override a DLL, refer to this [guide](https://cookieplmonster.github.io/setup-instructions/#proton-wine).
