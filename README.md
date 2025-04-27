@@ -13,6 +13,17 @@ The latest version of Enhanced SC can be found in the [Releases](https://github.
 > [!NOTE]
 > Your original saves will not be deleted, but they will appear as missing. Enhanced intentionally hides them because they aren't compatible with this version.
 
+## Linux Installation
+If you're playing on Linux, you need to perform a DLL override in your Wine prefix to properly load Enhanced SC, [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack), and [DSOAL](https://github.com/kcat/dsoal).
+
+To add the DLL override in Steam, include the following in your Splinter Cell launch command:
+```
+WINEDLLOVERRIDES="msacm32,msvfw32,dsound=n,b" %command% -shadowmode=projector
+```
+Unfortunately, [Xidi](https://github.com/samuelgr/Xidi) currently causes your game to crash on Linux, so controller support isn't working yet. As a result, we will not include `dinput8` in the DLL override.
+
+For more detailed instructions on how to override a DLL, refer to this [guide](https://cookieplmonster.github.io/setup-instructions/#proton-wine).
+
 ## Uninstallation
 To manually remove Enhanced SC from your game installation:
 - Navigate to the `System` folder, delete the `Enhanced` folder, `Engine.dll`, and `Enhanced.ini`.
