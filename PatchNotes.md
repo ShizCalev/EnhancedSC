@@ -47,3 +47,4 @@
 - [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2) is included to restore Shadow Buffer rendering and set a 60 FPS cap.
 - [ThirteenAG](https://github.com/ThirteenAG/WidescreenFixesPack) Widescreen Fix is included for widescreen support.
 - [Xidi](https://github.com/samuelgr/Xidi) is included to improve compatibility for XInput-based controllers.
+- [DSOAL](https://github.com/kcat/dsoal) is included to restore EAX sound support. To enable EAX functionality, you may need to merge the `eax_restore.reg` file from the System folder into your registry.
