@@ -22,29 +22,55 @@
   - There is some visual errors on the Xbox inventory and pause screen when using ThirteenAG Widescreen Fix.
 - Added an option to change the default controller layout with alternate control schemes.
 
-### Maps
-- Training now uses the Xbox version of the level which has lighting improvements.
-- Police Station now uses the Xbox version of the level which has lighting improvements.
-- Oil Refinery now uses the Xbox version of the level which has lighting and mesh improvements.
-- Abattoir now uses the Xbox version of the level which has mesh improvements.
-- Chinese Embassy now uses the Xbox version of the level which has lighting and mesh improvements.
-- Chinese Embassy 2 now uses the Xbox version of the level which has lighting and mesh improvements.
-- Vselka Infiltration has restored the PlayerStart position from the Xbox version.
-- Vselka Infiltration has restored a camera in the control room that was present in the Xbox version.
-- Vselka Infiltration now transitions directly into Vselka Submarine as a single mission.
-- Included experimental versions of Nuclear Power Plant and Severonickel that can be played.
-  - Using the in-game console, use `NPP1`, `NPP2`, `SEV1`, and `SEV2` to access each level.
-  - Both cut levels currently lack level-specific audio due to incompatible Xbox sound files.
-  - In Nuclear Power Plant, you may need to Quick Save and Quick Load after triggering the meltdown to ensure the event works correctly.
-  - The first part of Severonickel is currently unplayable, missing StaticMeshes and NPCs, but is available for exploration.
-  - The second part of Severonickel now starts the player with the same equipment as the first part.
-
 ### Miscellaneous
 - Save games now use a new file extension for Enhanced to prevent incompatible saves from the original game from being displayed.
 - Localization fixes, including typo corrections and consistency improvements.
+- Includes experimental versions of Nuclear Power Plant and Severonickel that can be played. Both cancelled levels currently lack level-specific audio due to incompatible Xbox sound files.
 - Includes newly recreated loading screens by [cazzhmir](https://www.youtube.com/@cazzhmir) to improve the accuracy of the story.
 - Includes updated cutscene that improve the storytelling for Kalinatek, along with two new cutscenes for Nuclear Power Plant and Severonickel.
 - [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2) is included to restore Shadow Buffer rendering and set a 60 FPS cap.
 - [ThirteenAG](https://github.com/ThirteenAG/WidescreenFixesPack) Widescreen Fix is included for widescreen support.
 - [Xidi](https://github.com/samuelgr/Xidi) is included to improve compatibility for XInput-based controllers.
 - [DSOAL](https://github.com/kcat/dsoal) is included to restore EAX sound support. To enable EAX functionality, you may need to merge the `eax_restore.reg` file from the System folder into your registry.
+
+### Maps
+- Training
+  - Based on the Xbox version for both parts, featuring lighting improvements.
+---
+- Police Station
+  - Based on the Xbox version for both parts, featuring lighting improvements.
+---
+- Oil Refinery
+  - Based on the Xbox version for the first part, featuring mesh improvements.
+  - Based on the Xbox version for the second part, featuring lighting improvements.
+---
+- Kalinatek
+  - Fixed an issue in Kalinatek's texture package by making a plant texture two-sided, allowing it to render correctly from both sides.
+---
+- Chinese Embassy
+  - Based on the Xbox version for the first part, featuring lighting and mesh improvements.
+---
+- Abattoir
+  - Based on the Xbox version for the first part, featuring mesh improvements.
+---
+- Chinese Embassy 2
+  - Based on the Xbox version for all parts, featuring lighting and mesh improvements.
+---
+- Vselka Infiltration
+  - Restored the PlayerStart position from the Xbox version.
+  - Restored a camera in the control room from the Xbox version.
+  - The level now transitions directly into Vselka Submarine, treating them as a single mission.
+---
+- Nuclear Power Plant
+  - Using the in-game console, you can access both parts with the commands `NPP1` and `NPP2`.
+  - Removed a vent frame's collision that was preventing the player from progressing.
+  - Removed a conflicting NPC that caused the game to crash due to broken pathing.
+  - Improved the turret section so that shooting the glass allows you to pass through.
+  - Fixed keypad doors that were sliding in the wrong direction.
+  - Various lighting fixes in the second part.
+  - **Note: You may need to Quick Save and Quick Load after triggering the meltdown to ensure the event works correctly.**
+---
+- Severonickel
+  - Using the in-game console, you can access both parts with the commands `SEV1` and `SEV2`.
+  - The first part is currently unplayable, missing StaticMeshes and NPCs, but available for exploration.
+  - The second part now starts the player with the same equipment as the first part.
