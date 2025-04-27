@@ -7,6 +7,7 @@
 - Added an option to use the crouch key to drop similar to later Splinter Cell games.
 - Added an option to use any vision mode in Optic Cables similar to later Splinter Cell games.
 - Added an option to use the left and right movement keys to activate Open Door Stealth instead of the back movement key. This is recommended for keyboard users, as the back movement key previously scrolled through options when trying to use Open Door Stealth.
+- Added an option for normalized movement, preventing diagonal input from increasing movement speed.
 - Added an option to enable Thermal Vision across all levels, regardless of their original settings.
 - Added an option to override Sam's mesh across all levels.
 - Added an option to use Xbox difficulty, where Sam starts with 300 HP on Normal and 198 on Hard, compared to the PC default of 200 HP on Normal and 132 on Hard.
@@ -14,6 +15,7 @@
 - Added an option to toggle the HUD on or off. `Enhanced.ini` controls the initial setting. In the in-game options, you can assign a keybind to toggle the HUD.
 - The initial speed at the start of missions is now set to the highest value.
 - Xbox renderer textures have been restored to bring lighting closer to the Xbox version.
+- Restored the Xbox light effect for alarm lights when they are triggered.
 - Checkpoints from the Xbox version of the game have been restored.
 - Improved controller support, now more closely aligned with the Xbox version.
   - Vibration is not supported due to the game using DirectInput.
