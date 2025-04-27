@@ -20,7 +20,7 @@ To add the DLL override in Steam, include the following in your Splinter Cell la
 ```
 WINEDLLOVERRIDES="msacm32,msvfw32,dsound=n,b" %command% -shadowmode=projector
 ```
-Unfortunately, [Xidi](https://github.com/samuelgr/Xidi) currently causes your game to crash on Linux, so controller support isn't working yet. As a result, we will not include `dinput8` in the DLL override.
+Unfortunately, [Xidi](https://github.com/samuelgr/Xidi) currently causes the game to crash on Linux, so controller support isn't working yet. As a result, `dinput8` will not be included in the DLL override.
 
 For more detailed instructions on how to override a DLL, refer to this [guide](https://cookieplmonster.github.io/setup-instructions/#proton-wine).
 
