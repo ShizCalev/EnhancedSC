@@ -273,12 +273,12 @@ event bool NotifyPhysicsVolumeChange(PhysicsVolume NewVolume);
 event bool NotifyHeadVolumeChange(PhysicsVolume NewVolume);
 // ***********************************************************************************************
 // * BEGIN UBI MODIF 
-// * dchabot (7 d�c. 2001)
+// * dchabot (7 Dec 2001)
 // ***********************************************************************************************
 event bool NotifyLanded(vector HitNormal, Actor HitActor);
 // ***********************************************************************************************
 // * END UBI MODIF 
-// * dchabot (7 d�c. 2001)
+// * dchabot (7 Dec 2001)
 // ***********************************************************************************************
 event bool NotifyHitWall(vector HitNormal, actor Wall);
 event bool NotifyBump(Actor Other, optional int Pill);

@@ -21,9 +21,9 @@ var Material	SpotTexture;
 defaultproperties
 {
     Dirty=true
-    Format=5
-    UClampMode=1
-    VClampMode=1
+    Format=TEXF_RGBA8
+    UClampMode=TC_Clamp
+    VClampMode=TC_Clamp
     BorderColor=(R=128,G=128,B=128,A=255)
     UBits=8
     VBits=8

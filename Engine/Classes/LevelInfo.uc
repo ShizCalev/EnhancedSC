@@ -12,7 +12,7 @@ class LevelInfo extends ZoneInfo
 
 // Textures.
 #exec Texture Import File=Textures\WhiteSquareTexture.pcx NOCONSOLE
-#exec Texture Import File=Textures\S_Vertex.pcx Name=LargeVertex NOCONSOLE
+#exec Texture Import File=Textures\S_Vertex.tga Name=LargeVertex NOCONSOLE
 
 #exec Texture Import File=Textures\heat_and_attenuation_2dA.tga Mips=Off MASKED=1 UCLAMPMODE=CLAMP VCLAMPMODE=CLAMP
 #exec Texture Import File=Textures\heat_and_attenuation_2dB.tga Mips=Off MASKED=1 UCLAMPMODE=CLAMP VCLAMPMODE=CLAMP
