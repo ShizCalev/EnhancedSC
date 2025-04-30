@@ -208,7 +208,7 @@ var float FireTimer;
 
 #exec SAVEPACKAGE FILE=..\Animations\ESam.ukx PACKAGE=ESam
 
- // Joshua - New variables to override which SamMesh to use in a level
+// Joshua - New variables to override which SamMesh to use in a level
 var config int ESam_DefaultMesh;
 var config int ESam_Training; 
 var config int ESam_Tbilisi;
@@ -225,348 +225,71 @@ var config int ESam_PresidentialPalace;
 var config int ESam_KolaCell;
 var config int ESam_Vselka;
 
+function SetSamMesh(int SamMeshType)
+{
+    switch (SamMeshType)
+    {
+        case 0:
+            break;
+        case 1:
+            Mesh = SkeletalMesh'ESam.samAMesh';
+            break;
+        case 2:
+            Mesh = SkeletalMesh'ESam.samBMesh';
+            break;
+        case 3:
+            Mesh = SkeletalMesh'ESam.samCMesh';
+            break;
+		default:
+			Mesh = EchelonLevelInfo(Level).SamMesh;
+			// JFP: Temp hack, following the Oct-30-2002 merge some maps didn't have the SamMesh set.
+			// Added this for backward compatibility.
+			if (Mesh == none)
+			{
+				Mesh = SkeletalMesh'ESam.samAMesh';
+				log("JFPDEBUG: Hardcoding the default Sam mesh, since no mesh appeared to be set in the Level. Fix this in UnrealEd. New mesh:" @ Mesh);
+			}
+			break;
+    }
+}
+
 function PostBeginPlay()
 {
-	switch (ESam_DefaultMesh)
-	{
-		case 0:
-			Mesh = EchelonLevelInfo(Level).SamMesh;
-			if (Mesh == none)
-			{
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				log("JFPDEBUG: Hardcoding the default Sam mesh, since no mesh appeared to be set in the Level. Fix this in UnrealEd. New mesh:" @ Mesh);
-			}
-			break;
-		case 1:
-			Mesh = SkeletalMesh'ESam.samAMesh';
-			break;
-		case 2:
-			Mesh = SkeletalMesh'ESam.samBMesh';
-			break;
-		case 3:
-			Mesh = SkeletalMesh'ESam.samCMesh';
-			break;
-		default:
-			Mesh = EchelonLevelInfo(Level).SamMesh;
-			// JFP: Temp hack, following the oct-30-2002 merge some maps didn't have the SamMesh set.
-			//      Added this for backward compatibility.
-			if (Mesh == none)
-			{
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				log("JFPDEBUG: Hardcoding the default Sam mesh, since no mesh appeared to be set in the Level. Fix this in UnrealEd. New mesh:" @ Mesh);
-			}
-			break;
-	}
+    if (ESam_DefaultMesh != 0)
+        SetSamMesh(ESam_DefaultMesh);
+    else
+        SetSamMesh(0);
 
-	if (GetCurrentMapName() == "0_0_2_Training" || GetCurrentMapName() == "0_0_3_Training")
-	{
-		switch (ESam_Training)
-		{
-		case 0:
-			break;
-		case 1:
-			Mesh = SkeletalMesh'ESam.samAMesh';
-			break;
-		case 2:
-			Mesh = SkeletalMesh'ESam.samBMesh';
-			break;
-		case 3:
-			Mesh = SkeletalMesh'ESam.samCMesh';
-			break;
-		default:
-			Mesh = EchelonLevelInfo(Level).SamMesh;
-			if (Mesh == none)
-				Mesh = SkeletalMesh'ESam.samAMesh';
-			break;
-		}
-	}
-	else if (GetCurrentMapName() == "1_1_0Tbilisi" || GetCurrentMapName() == "1_1_1Tbilisi" || GetCurrentMapName() == "1_1_2Tbilisi")
-	{
-		switch (ESam_Tbilisi)
-		{
-		case 0:
-			break;
-		case 1:
-			Mesh = SkeletalMesh'ESam.samAMesh';
-			break;
-		case 2:
-			Mesh = SkeletalMesh'ESam.samBMesh';
-			break;
-		case 3:
-			Mesh = SkeletalMesh'ESam.samCMesh';
-			break;
-		default:
-			Mesh = EchelonLevelInfo(Level).SamMesh;
-			if (Mesh == none)
-				Mesh = SkeletalMesh'ESam.samAMesh';
-			break;
-		}
-	}
-	else if (GetCurrentMapName() == "1_2_1DefenseMinistry" || GetCurrentMapName() == "1_2_2DefenseMinistry")
-	{
-		switch (ESam_DefenseMinistry)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "1_3_2CaspianOilRefinery" || GetCurrentMapName() == "1_3_3CaspianOilRefinery")
-	{
-		switch (ESam_CaspianOilRefinery)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "2_1_0CIA" || GetCurrentMapName() == "2_1_1CIA" || GetCurrentMapName() == "2_1_2CIA")
-	{
-		switch (ESam_CIA)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "2_2_1_Kalinatek" || GetCurrentMapName() == "2_2_2_Kalinatek" || GetCurrentMapName() == "2_2_3_Kalinatek")
-	{
-		switch (ESam_Kalinatek)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "3_4_2Severonickel" || GetCurrentMapName() == "3_4_3Severonickel")
-	{
-		switch (ESam_Severonickel)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "4_1_1ChineseEmbassy" || GetCurrentMapName() == "4_1_2ChineseEmbassy")
-	{
-		switch (ESam_ChineseEmbassy)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "4_2_1_Abattoir" || GetCurrentMapName() == "4_2_2_Abattoir")
-	{
-		switch (ESam_Abattoir)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "4_3_0ChineseEmbassy" || GetCurrentMapName() == "4_3_1ChineseEmbassy" || GetCurrentMapName() == "4_3_2ChineseEmbassy")
-	{
-		switch (ESam_ChineseEmbassy2)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "4_4_1ChineseEmbassy" || GetCurrentMapName() == "4_4_2ChineseEmbassy")
-	{
-		switch (ESam_ChineseEmbassy)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "5_1_1_PresidentialPalace" || GetCurrentMapName() == "5_1_2_PresidentialPalace")
-	{
-		switch (ESam_PresidentialPalace)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "1_6_1_1KolaCell")
-	{
-		switch (ESam_KolaCell)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	else if (GetCurrentMapName() == "1_7_1_1VselkaInfiltration" || GetCurrentMapName() == "1_7_1_2Vselka")
-	{
-		switch (ESam_Vselka)
-		{
-			case 0:
-				break;
-			case 1:
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-			case 2:
-				Mesh = SkeletalMesh'ESam.samBMesh';
-				break;
-			case 3:
-				Mesh = SkeletalMesh'ESam.samCMesh';
-				break;
-			default:
-				Mesh = EchelonLevelInfo(Level).SamMesh;
-				if (Mesh == none)
-					Mesh = SkeletalMesh'ESam.samAMesh';
-				break;
-		}
-	}
-	Super.PostBeginPlay();
+    if (GetCurrentMapName() == "0_0_2_Training" || GetCurrentMapName() == "0_0_3_Training")
+        SetSamMesh(ESam_Training);
+    else if (GetCurrentMapName() == "1_1_0Tbilisi" || GetCurrentMapName() == "1_1_1Tbilisi" || GetCurrentMapName() == "1_1_2Tbilisi")
+        SetSamMesh(ESam_Tbilisi);
+    else if (GetCurrentMapName() == "1_2_1DefenseMinistry" || GetCurrentMapName() == "1_2_2DefenseMinistry")
+        SetSamMesh(ESam_DefenseMinistry);
+    else if (GetCurrentMapName() == "1_3_2CaspianOilRefinery" || GetCurrentMapName() == "1_3_3CaspianOilRefinery")
+        SetSamMesh(ESam_CaspianOilRefinery);
+    else if (GetCurrentMapName() == "2_1_0CIA" || GetCurrentMapName() == "2_1_1CIA" || GetCurrentMapName() == "2_1_2CIA")
+        SetSamMesh(ESam_CIA);
+    else if (GetCurrentMapName() == "2_2_1_Kalinatek" || GetCurrentMapName() == "2_2_2_Kalinatek" || GetCurrentMapName() == "2_2_3_Kalinatek")
+        SetSamMesh(ESam_Kalinatek);
+    else if (GetCurrentMapName() == "3_4_2Severonickel" || GetCurrentMapName() == "3_4_3Severonickel")
+        SetSamMesh(ESam_Severonickel);
+    else if (GetCurrentMapName() == "4_1_1ChineseEmbassy" || GetCurrentMapName() == "4_1_2ChineseEmbassy")
+        SetSamMesh(ESam_ChineseEmbassy);
+    else if (GetCurrentMapName() == "4_2_1_Abattoir" || GetCurrentMapName() == "4_2_2_Abattoir")
+        SetSamMesh(ESam_Abattoir);
+    else if (GetCurrentMapName() == "4_3_0ChineseEmbassy" || GetCurrentMapName() == "4_3_1ChineseEmbassy" || GetCurrentMapName() == "4_3_2ChineseEmbassy")
+        SetSamMesh(ESam_ChineseEmbassy2);
+    else if (GetCurrentMapName() == "4_4_1ChineseEmbassy" || GetCurrentMapName() == "4_4_2ChineseEmbassy")
+        SetSamMesh(ESam_ChineseEmbassy);
+    else if (GetCurrentMapName() == "5_1_1_PresidentialPalace" || GetCurrentMapName() == "5_1_2_PresidentialPalace")
+        SetSamMesh(ESam_PresidentialPalace);
+    else if (GetCurrentMapName() == "1_6_1_1KolaCell")
+        SetSamMesh(ESam_KolaCell);
+    else if (GetCurrentMapName() == "1_7_1_1VselkaInfiltration" || GetCurrentMapName() == "1_7_1_2Vselka")
+        SetSamMesh(ESam_Vselka);
+
+    Super.PostBeginPlay();
 }
 
 //------------------------------------------------------------------------
