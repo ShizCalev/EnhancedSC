@@ -294,7 +294,7 @@ Begin:
 	if (EPC.myHUD.IsPlayerGameOver() && Epc.CheckpointLevel == GetCurrentMapName() && Epc.eGame.bUseController)
 		ConsoleCommand("LOADGAME FILENAME=CHECKPOINT.en0");
 	else
-		ConsoleCommand("LOADGAME FILENAME=AUTOSAVE.en0");
+		ConsoleCommand("LOADGAME FILENAME=" $ Localize("HUD", "AUTOSAVENAME", "Localization\\HUD") $ ".en0"); // Joshua - This loads the last autosave, but the filename needs localized by language
     stop;
 }
 
