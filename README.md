@@ -14,15 +14,19 @@ The latest version of Enhanced SC can be found in the [Releases](https://github.
 > Your original saves will not be deleted, but they will appear as missing. Enhanced intentionally hides them because they aren't compatible with this version.
 
 ## Linux Installation
-On Linux, you need to perform a DLL override in your Wine prefix to properly load Enhanced SC and [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack).
+
+> [!IMPORTANT]
+> On Linux, you'll need to use [dgVoodoo v2.79.3](https://github.com/user-attachments/files/19996965/dgVoodoo2_79_3.zip), as later versions currently cause the game to crash. Extract this version of dgVoodoo2 into your Splinter Cell directory, and overwrite the newer version when prompted.
+
+Enhanced SC, [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2), and [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack) won't load without a DLL override in your Wine prefix.
 
 To add the DLL override in Steam, right-click the game in the library and select `Properties`.
 
 In the General tab, add the following to the launch options:
 ```
-WINEDLLOVERRIDES="msacm32,msvfw32=n,b" %command% -shadowmode=projector
+WINEDLLOVERRIDES="D3D8,msacm32,msvfw32=n,b" %command%
 ```
-In the Compatibility tab, check `Force the use of a specific Steam Play compatibility tool` and select `Proton 9.0-4`. Other versions might work, but this one has been tested and confirmed to be reliable.
+In the Compatibility tab, check `Force the use of a specific Steam Play compatibility tool` and select `Proton 9.0-4`. Other versions might work, but this one has been tested.
 
 <img src="https://github.com/user-attachments/assets/8082d3c8-f5bb-464a-8432-2e66e5ed803e" width="640"/>
 
