@@ -13,7 +13,8 @@ The latest version of Enhanced SC can be found in the [Releases](https://github.
 > [!NOTE]
 > Your original saves will not be deleted, but they will appear as missing. Enhanced intentionally hides them because they aren't compatible with this version.
 
-## Linux Installation
+## Linux/Steam Deck Installation
+**This section is intended for Linux only, and should be skipped if installing on Windows.**
 
 > [!IMPORTANT]
 > On Linux, you'll need to use [dgVoodoo v2.79.3](https://github.com/user-attachments/files/19996965/dgVoodoo2_79_3.zip), as later versions currently cause the game to crash. Extract this version of dgVoodoo2 into your Splinter Cell directory, and overwrite the newer version when prompted.
