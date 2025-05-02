@@ -9,6 +9,8 @@
 
 */.vs/*
 *.log
+*.zip
+*.7z
 *.bak
 *.h
 *.ukx
@@ -17,5 +19,6 @@
 *.uax
 *.scl
 *.u
+*.bik
 
 ![Ss]ystem/Enhanced.ini
