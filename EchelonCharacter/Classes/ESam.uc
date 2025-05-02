@@ -216,7 +216,7 @@ var config int ESam_DefenseMinistry;
 var config int ESam_CaspianOilRefinery;
 var config int ESam_CIA;
 var config int ESam_Kalinatek;
-var config int ESam_NuclearPlant;
+var config int ESam_PowerPlant;
 var config int ESam_Severonickel;
 var config int ESam_ChineseEmbassy;
 var config int ESam_Abattoir;
@@ -230,6 +230,10 @@ function SetSamMesh(int SamMeshType)
     switch (SamMeshType)
     {
         case 0:
+			if (Mesh == none)
+			{
+				Mesh = SkeletalMesh'ESam.samAMesh';
+			}
             break;
         case 1:
             Mesh = SkeletalMesh'ESam.samAMesh';
@@ -272,6 +276,8 @@ function PostBeginPlay()
         SetSamMesh(ESam_CIA);
     else if (GetCurrentMapName() == "2_2_1_Kalinatek" || GetCurrentMapName() == "2_2_2_Kalinatek" || GetCurrentMapName() == "2_2_3_Kalinatek")
         SetSamMesh(ESam_Kalinatek);
+	else if (GetCurrentMapName() == "3_2_1_PowerPlant" || GetCurrentMapName() == "3_2_2_PowerPlant")
+		SetSamMesh(ESam_PowerPlant);
     else if (GetCurrentMapName() == "3_4_2Severonickel" || GetCurrentMapName() == "3_4_3Severonickel")
         SetSamMesh(ESam_Severonickel);
     else if (GetCurrentMapName() == "4_1_1ChineseEmbassy" || GetCurrentMapName() == "4_1_2ChineseEmbassy")
