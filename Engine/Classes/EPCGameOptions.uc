@@ -17,6 +17,7 @@ var config BYTE		GraphicsCaps;		//		HW Pixel Shader		HW Vertex Shader	HW Shadow 
 var config BYTE		VidMem;				// 0=	32 MB Frame Buffer
 										// 1=	64 MB Frame Buffer
 										// 2=	128+ MB Frame Buffer
+var config BYTE AntiAliasing;
 
 //Sound
 var config BYTE AmbiantVolume;           // Values from 0-100
@@ -44,6 +45,7 @@ var bool   bResolutionChanged;
 var String oldResolution;
 var BYTE   oldEffectsQuality;		 //0= Low, 1= Medium, 2=High, 3=Very High
 var BYTE   oldShadowResolution;		 //0= Low, 1= Medium, 2=High, 3=Very High
+var BYTE   oldAntiAliasing;
 
 //We can call this make the engine update it's values according to what is set in this class
 native(4016) final function UpdateEngineSettings(optional bool Sound);
@@ -60,6 +62,7 @@ function ResetGraphicsToDefault()
 	ResetConfig("Brightness");
 	ResetConfig("Gamma");
 	ResetConfig("EffectsQuality");
+	ResetConfig("AntiAliasing");
 }	
 
 //=========================================

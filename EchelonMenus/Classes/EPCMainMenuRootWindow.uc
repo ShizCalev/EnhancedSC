@@ -60,6 +60,8 @@ function PlayClickSound()
 	GetPlayerOwner().PlaySound(Sound'Interface.Play_ActionChoice', SLOT_Interface);
 }
 
+native(1182) final function bool IsTimeDemo();
+
 function Created()
 {
     Super.Created();
@@ -98,7 +100,7 @@ function Created()
    
     m_MessageBoxCW = EPCPopUpController(CreateWindow(class'EPCPopUpController', WinLeft, WinTop, WinWidth, WinHeight,self));       
 
-    if( EPCConsole(Console).HideMenusAtStart )
+    if( EPCConsole(Console).HideMenusAtStart || IsTimeDemo() )
         EPCConsole(Console).LaunchGame();    
     else
         ChangeCurrentWidget(WidgetID_MainMenu);      
