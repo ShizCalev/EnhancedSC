@@ -207,10 +207,6 @@ state Typing
 	}
 }
 
-
-
-// Decompiled with UE Explorer.
-
 defaultproperties
 {
     HistoryBot=-1

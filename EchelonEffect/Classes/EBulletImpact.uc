@@ -6,7 +6,7 @@ event PostBeginPlay()
 
 defaultproperties
 {
-    FrameBufferBlendingOp=1
+    FrameBufferBlendingOp=PB_Modulate
     MaxTraceDistance=2
     bClipBSP=true
     DrawScale=0.1000000
