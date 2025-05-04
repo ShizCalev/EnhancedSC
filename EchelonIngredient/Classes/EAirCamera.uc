@@ -287,8 +287,8 @@ event VisibilityRating GetActorVisibility()
 
 defaultproperties
 {
-    MaxDamping=400.0000000
+    MaxDamping=400.000000
     ChangeListWhenThrown=false
-    CollisionRadius=1.0000000
-    CollisionHeight=2.0000000
+    CollisionRadius=1.000000
+    CollisionHeight=2.000000
 }

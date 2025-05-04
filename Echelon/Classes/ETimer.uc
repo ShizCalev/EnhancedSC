@@ -196,7 +196,7 @@ function DrawBox(ECanvas Canvas, int xPos, int yPos, int width, int height)
 
 defaultproperties
 {
-    CriticalDelay=-1.0000000
+    CriticalDelay=-1.000000
     bDisplayInterface=true
     bHidden=true
     Texture=Texture'ETimer'

@@ -87,7 +87,7 @@ function SetInteractLocation( Pawn InteractPawn )
 
 defaultproperties
 {
-    ViewRelativeLocation=(X=40.0000000,Y=10.0000000,Z=2.0000000)
+    ViewRelativeLocation=(X=40.000000,Y=10.000000,Z=2.000000)
     ViewRelativeRotation=(Pitch=-1000,Yaw=28000,Roll=0)
     bCollideActors=false
 }

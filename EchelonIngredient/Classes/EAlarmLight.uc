@@ -109,10 +109,10 @@ defaultproperties
     bDamageable=false
     AlarmLinkType=EAlarm_Object
     StaticMesh=StaticMesh'LightGenOBJ.UnbreakableLight.LIG_Alarm_red'
-    SoundRadiusSaturation=1000.0000000
+    SoundRadiusSaturation=1000.000000
     LightType=LT_Steady
     LightEffect=LE_EOmniAtten // Joshua - Restoring Xbox light effect, PC originally just used LE_None
     bGlowDisplay=false
-    MaxDistance=250.0000000
+    MaxDistance=250.000000
     bAffectOwnZoneOnly=true
 }

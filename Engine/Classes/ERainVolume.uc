@@ -27,10 +27,10 @@ var native const Box				m_RainVolume;
 
 defaultproperties
 {
-    m_RainThickness=80.0000000
-    m_RainMatScale=35.0000000
-    m_RainSize=(X=250.0000000,Y=250.0000000,Z=450.0000000)
-    m_RainFadeScale=1.0000000
-    m_DistanceToCamera=80.0000000
+    m_RainThickness=80.000000
+    m_RainMatScale=35.000000
+    m_RainSize=(X=250.000000,Y=250.000000,Z=450.000000)
+    m_RainFadeScale=1.000000
+    m_DistanceToCamera=80.000000
     DrawType=DT_Rain
 }

@@ -24,5 +24,5 @@ var notextexport vector						RealProjectionNormal;
 
 defaultproperties
 {
-    ProjectionNormal=(X=0.0000000,Y=0.0000000,Z=1.0000000)
+    ProjectionNormal=(X=0.000000,Y=0.000000,Z=1.000000)
 }

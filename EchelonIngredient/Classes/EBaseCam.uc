@@ -139,12 +139,12 @@ defaultproperties
     SensorDetectionType=SCAN_ChangedPawns
     FollowUponDetection=true
     ZoomUponDetection=true
-    AlarmDetectionDelay=1.0000000
+    AlarmDetectionDelay=1.000000
     SoundAlert=Sound'Electronic.Play_CameraZoom'
     SoundReverse=Sound'Electronic.Play_CameraScanSwitch'
     bDestroyWhenDestructed=false
     SpawnableObjects(0)=(SpawnClass=Class'EchelonEffect.EBreakLockEmitter',SpawnAtDamagePercent=100.000000)
     AlarmLinkType=EAlarm_Trigger
     bBlockBullet=false
-    HeatIntensity=0.8000000
+    HeatIntensity=0.800000
 }

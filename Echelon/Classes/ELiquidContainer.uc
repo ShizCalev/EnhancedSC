@@ -272,6 +272,6 @@ auto state s_Normal
 defaultproperties
 {
     SpillEmitterClass=Class'EchelonEffect.ELiquidSpillEmitter'
-    LiquidLevel=100.0000000
-    LiquidDrainSpeed=5.0000000
+    LiquidLevel=100.000000
+    LiquidDrainSpeed=5.000000
 }

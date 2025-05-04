@@ -1097,16 +1097,16 @@ state s_Destructed
 defaultproperties
 {
     ObjectName="DefaultObject"
-    LastTimeChange=-1.0000000
+    LastTimeChange=-1.000000
     bDamageable=true
     bDestroyWhenDestructed=true
     HitPoints=100
     ExplosionClass=Class'EchelonEffect.EExplosion'
     ExplosionDamageClass=Class'EBurned'
-    ExplosionDamage=200.0000000
-    ExplosionMinRadius=200.0000000
-    ExplosionMaxRadius=500.0000000
-    ExplosionNoiseRadius=2000.0000000
+    ExplosionDamage=200.000000
+    ExplosionMinRadius=200.000000
+    ExplosionMaxRadius=500.000000
+    ExplosionNoiseRadius=2000.000000
     ExplosionMomentum=60000
     TriggerPatternJustOnce=true
     ChangeListWhenThrown=true

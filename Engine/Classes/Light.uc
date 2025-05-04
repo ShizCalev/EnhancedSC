@@ -14,8 +14,8 @@ defaultproperties
     bNoDelete=true
     Texture=Texture'S_Light'
     bMovable=false
-    CollisionRadius=24.0000000
-    CollisionHeight=24.0000000
+    CollisionRadius=24.000000
+    CollisionHeight=24.000000
     LightType=LT_Steady
     LightBrightness=128
     LightSaturation=255

@@ -16,7 +16,7 @@ defaultproperties
 {
     GearSoundWalk=Sound'GearCommon.Play_Random_LightGearWalk'
     GearSoundRun=Sound'GearCommon.Play_Random_LightGearRun'
-    AccuracyDeviation=1.2500000
+    AccuracyDeviation=1.250000
     GearSoundFall=Sound'GearCommon.Play_LightGearFall'
     HatMesh=StaticMesh'EMeshCharacter.FalseSoldier.Ushanka'
     bCanUseRetinalScanner=true

@@ -16,9 +16,9 @@ function StopDamage()
 
 defaultproperties
 {
-    SprayDistance=225.0000000
+    SprayDistance=225.000000
     SprayDamage=4
-    StopDamageTime=5.0000000
+    StopDamageTime=5.000000
 	Begin Object Class=SpriteEmitter Name=ExtincteurEmitter0
         Acceleration=(Z=200.000000)
         UseCollision=True

@@ -9,7 +9,7 @@ defaultproperties
 {
     GearSoundWalk=Sound'GearCommon.Play_Random_MafiosoGearWalk'
     GearSoundRun=Sound'GearCommon.Play_Random_MafiosoGearRun'
-    AccuracyDeviation=1.4000000
+    AccuracyDeviation=1.400000
     bIsHotBlooded=false
     GearSoundFall=Sound'GearCommon.Play_MediumGearFall'
     Sounds_AttackMove=Sound'CiaSecurity.Play_random_AGSCombatMove'

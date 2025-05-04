@@ -26,5 +26,5 @@ var notextexport int							PrimitivesPerParticle;
 
 defaultproperties
 {
-    LineSegmentsRange=(Min=5.0000000,Max=5.0000000)
+    LineSegmentsRange=(Min=0.000000,Max=0.000000) // (Min=5.000000,Max=5.000000)
 }

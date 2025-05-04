@@ -475,21 +475,21 @@ state s_AccessDenied extends s_Access
 defaultproperties
 {
     AccessCode="12369#"
-    CodeIntensity(0)=1.0000000
-    CodeIntensity(1)=1.0000000
-    CodeIntensity(2)=1.0000000
-    CodeIntensity(3)=1.0000000
-    CodeIntensity(4)=1.0000000
-    CodeIntensity(5)=1.0000000
-    FadeOutTimer=15.0000000
-    CONST_TextStart=(X=-0.4000000,Y=1.0000000,Z=2.7850000)
+    CodeIntensity(0)=1.000000
+    CodeIntensity(1)=1.000000
+    CodeIntensity(2)=1.000000
+    CodeIntensity(3)=1.000000
+    CodeIntensity(4)=1.000000
+    CodeIntensity(5)=1.000000
+    FadeOutTimer=15.000000
+    CONST_TextStart=(X=-0.400000,Y=1.000000,Z=2.785000)
     bIsKeypad=true
     AlarmLinkType=EAlarm_Trigger
     bAcceptsProjectors=false
     StaticMesh=StaticMesh'EMeshIngredient.KeyPadTech.keypadt'
     AmbientGlow=64
-    CollisionRadius=4.0000000
-    CollisionHeight=4.0000000
-    HeatIntensity=0.8000000
+    CollisionRadius=4.000000
+    CollisionHeight=4.000000
+    HeatIntensity=0.800000
     InteractionClass=Class'EKeyPadInteraction'
 }

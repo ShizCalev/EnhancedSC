@@ -251,6 +251,6 @@ defaultproperties
     DrawType=DT_Mesh
     Mesh=SkeletalMesh'ESkelIngredients.lockMesh'
     AmbientGlow=64
-    SoundRadiusSaturation=500.0000000
+    SoundRadiusSaturation=500.000000
     bSpecialLit=true
 }

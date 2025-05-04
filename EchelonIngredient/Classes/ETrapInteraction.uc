@@ -67,6 +67,6 @@ function SetInteractLocation(Pawn InteractPawn)
 
 defaultproperties
 {
-    CollisionRadius=70.0000000
-    CollisionHeight=30.0000000
+    CollisionRadius=70.000000
+    CollisionHeight=30.000000
 }

@@ -61,24 +61,24 @@ event BulletWentTru(Actor Instigator, vector HitLocation, vector HitNormal, vect
 
 defaultproperties
 {
-    SizeX=5000.0000000
-    SizeY=5000.0000000
-    TileX=10.0000000
-    TileY=10.0000000
-    m_fDropletFreq=0.1750000
-    m_fDropletMinSize=0.2500000
-    m_fDropletMaxSize=0.3500000
-    m_fBlurDist=0.1100000
-    m_fForceFactor=0.5000000
-    m_fVelFactor=0.5000000
-    m_fEqRestore_factor=0.1700000
-    m_fPosAtten=0.9800000
-    m_fNrmlSTScale=0.2300000
-    m_fDispSc=0.8000000
-    m_fTxCrdDispScale=0.3000000
+    SizeX=5000.000000
+    SizeY=5000.000000
+    TileX=10.000000
+    TileY=10.000000
+    m_fDropletFreq=0.175000
+    m_fDropletMinSize=0.250000
+    m_fDropletMaxSize=0.350000
+    m_fBlurDist=0.110000
+    m_fForceFactor=0.500000
+    m_fVelFactor=0.500000
+    m_fEqRestore_factor=0.170000
+    m_fPosAtten=0.980000
+    m_fNrmlSTScale=0.230000
+    m_fDispSc=0.800000
+    m_fTxCrdDispScale=0.300000
     m_cFresnelColor=(R=34,G=34,B=120,A=255)
-    m_fUpdateTime=0.0333330
-    m_fFresnelScale=1.0000000
+    m_fUpdateTime=0.033333
+    m_fFresnelScale=1.000000
     bHidden=false
     bWorldGeometry=true
     bUnlit=true

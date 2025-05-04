@@ -60,8 +60,8 @@ defaultproperties
     AlarmLinkType=EAlarm_Trigger
     DrawType=DT_Mesh
     Mesh=SkeletalMesh'ESkelIngredients.safeMesh'
-    CollisionRadius=60.0000000
-    CollisionHeight=140.0000000
+    CollisionRadius=60.000000
+    CollisionHeight=140.000000
     bBlockPlayers=true
     bBlockActors=true
     InteractionClass=Class'ERetinalSafeInteraction'

@@ -107,7 +107,7 @@ function MouseLeave()
 
 defaultproperties
 {
-    RegionScale=1.0000000
+    RegionScale=1.000000
     m_SelectedTextColor=(R=0,G=0,B=0,A=255)
     m_DisabledTextColor=(R=0,G=0,B=0,A=255)
     m_OverTextColor=(R=0,G=0,B=0,A=255)

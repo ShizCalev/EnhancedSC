@@ -50,6 +50,6 @@ defaultproperties
 {
     bDamageable=false
     StaticMesh=StaticMesh'EMeshIngredient.Elevator.ElevatorButton'
-    DrawScale=0.5000000
+    DrawScale=0.500000
     InteractionClass=Class'ETriggerInteraction'
 }

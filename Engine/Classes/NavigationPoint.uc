@@ -354,8 +354,8 @@ defaultproperties
     bHidden=true
     Texture=Texture'S_NavP'
     bCollideWhenPlacing=true
-    CollisionRadius=80.0000000
-    CollisionHeight=100.0000000
+    CollisionRadius=80.000000
+    CollisionHeight=100.000000
     bCollideWorld=true
     bIsNavPoint=true
 }

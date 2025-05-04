@@ -662,8 +662,8 @@ defaultproperties
 {
     bDamageable=false
     StaticMesh=StaticMesh'EMeshIngredient.Object.TurretCase'
-    CollisionRadius=30.0000000
-    CollisionHeight=29.0000000
+    CollisionRadius=30.000000
+    CollisionHeight=29.000000
     CollisionPrimitive=StaticMesh'EMeshIngredient.Object.TurretCase_COL'
     bStaticMeshCylColl=false
     bCPBlockPlayers=true

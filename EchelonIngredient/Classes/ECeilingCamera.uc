@@ -20,6 +20,6 @@ defaultproperties
     SoundAlert=Sound'Electronic.Play_CameraDomeZoom'
     SoundReverse=Sound'Electronic.Play_CameraDomeScanSwitch'
     Mesh=SkeletalMesh'ESkelIngredients.ceilCamMesh'
-    CollisionRadius=26.0000000
-    CollisionHeight=12.0000000
+    CollisionRadius=26.000000
+    CollisionHeight=12.000000
 }

@@ -99,6 +99,6 @@ defaultproperties
     ExplosionClass=Class'EchelonEffect.EDrumExplosionParticle'
     DrawType=DT_Mesh
     Mesh=SkeletalMesh'ETrk.Trk'
-    CollisionHeight=45.0000000
+    CollisionHeight=45.000000
     bCollideActors=false
 }

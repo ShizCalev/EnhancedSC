@@ -132,9 +132,9 @@ function Emit()
 
 defaultproperties
 {
-    RicochetNoiseRadius=1500.0000000
+    RicochetNoiseRadius=1500.000000
     clampTexture=Texture'ETexSFX.WallImpact.DecalClamp'
     bHidden=true
-    LifeSpan=3.0000000
-    SoundRadiusSaturation=300.0000000
+    LifeSpan=3.000000
+    SoundRadiusSaturation=300.000000
 }

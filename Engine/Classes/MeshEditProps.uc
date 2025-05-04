@@ -55,5 +55,5 @@ var(OriginalMaterial) name       OrigMat9;
 
 defaultproperties
 {
-    NewScale=(X=1.0000000,Y=1.0000000,Z=1.0000000)
+    NewScale=(X=1.000000,Y=1.000000,Z=1.000000)
 }

@@ -8,7 +8,7 @@ defaultproperties
     MaxAmmo=90
     ClipAmmo=30
     ClipMaxAmmo=30
-    RateOfFire=0.1000000
+    RateOfFire=0.100000
     BaseDamage=125
     FireNoiseRadius=2000
     FireSingleShotSound=Sound'Gun.Play_AK47SingleShot'
@@ -17,10 +17,10 @@ defaultproperties
     ReloadSound=Sound'Gun.Play_AK47Reload'
     EmptySound=Sound'GunCommon.Play_RifleEmpty'
     EjectedClass=Class'EShellCaseBig'
-    EjectedOffset=(X=15.6586000,Y=1.2600000,Z=11.4721000)
+    EjectedOffset=(X=15.658600,Y=1.260000,Z=11.472100)
     MuzzleFlashClass=Class'EMuzzleFlash'
-    MuzzleOffset=(X=61.7112900,Y=-0.0000200,Z=9.9906900)
+    MuzzleOffset=(X=61.711290,Y=-0.000020,Z=9.990690)
     MagazineMesh=StaticMesh'EMeshIngredient.weapon.AK47MAG'
-    MagazineOffset=(X=15.0316100,Y=0.0000000,Z=7.9718900)
+    MagazineOffset=(X=15.031610,Y=0.000000,Z=7.971890)
     StaticMesh=StaticMesh'EMeshIngredient.weapon.ak47'
 }

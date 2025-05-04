@@ -14,6 +14,6 @@ defaultproperties
     bStatic=true
     bHidden=true
     Texture=Texture'S_Keypoint'
-    CollisionRadius=10.0000000
-    CollisionHeight=10.0000000
+    CollisionRadius=10.000000
+    CollisionHeight=10.000000
 }

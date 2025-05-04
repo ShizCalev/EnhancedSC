@@ -951,20 +951,20 @@ defaultproperties
     TabUnselectedM=(X=60,Y=80,W=1,H=15)
     TabUnselectedR=(X=109,Y=80,W=2,H=15)
     TabBackground=(X=4,Y=79,W=1,H=1)
-    Size_ComboButtonWidth=12.0000000
-    Size_ComboButtonHeight=10.0000000
-    Size_ScrollbarWidth=12.0000000
-    Size_ScrollbarButtonHeight=10.0000000
-    Size_MinScrollbarHeight=6.0000000
-    Size_HMinScrollbarWidth=6.0000000
-    Size_HScrollbarHeight=12.0000000
-    Size_HScrollbarButtonWidth=10.0000000
-    Size_TabAreaHeight=15.0000000
-    Size_TabAreaOverhangHeight=2.0000000
-    Size_TabSpacing=20.0000000
-    Size_TabXOffset=1.0000000
-    Pulldown_ItemHeight=16.0000000
-    Pulldown_VBorder=4.0000000
-    Pulldown_HBorder=3.0000000
-    Pulldown_TextBorder=9.0000000
+    Size_ComboButtonWidth=12.000000
+    Size_ComboButtonHeight=10.000000
+    Size_ScrollbarWidth=12.000000
+    Size_ScrollbarButtonHeight=10.000000
+    Size_MinScrollbarHeight=6.000000
+    Size_HMinScrollbarWidth=6.000000
+    Size_HScrollbarHeight=12.000000
+    Size_HScrollbarButtonWidth=10.000000
+    Size_TabAreaHeight=15.000000
+    Size_TabAreaOverhangHeight=2.000000
+    Size_TabSpacing=20.000000
+    Size_TabXOffset=1.000000
+    Pulldown_ItemHeight=16.000000
+    Pulldown_VBorder=4.000000
+    Pulldown_HBorder=3.000000
+    Pulldown_TextBorder=9.000000
 }

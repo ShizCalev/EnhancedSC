@@ -343,7 +343,7 @@ defaultproperties
     Title="Untitled"
     VisibleGroups="None"
     bHighDetailMode=true
-    Brightness=1.0000000
+    Brightness=1.000000
     DefaultTexture=Texture'DefaultTexture'
     WhiteSquareTexture=Texture'WhiteSquareTexture'
     LargeVertex=Texture'LargeVertex'

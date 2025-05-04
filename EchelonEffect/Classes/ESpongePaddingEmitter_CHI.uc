@@ -25,4 +25,6 @@ defaultproperties
         StartVelocityRange=(X=(Min=-25.000000,Max=-75.000000),Y=(Min=-25.000000,Max=25.000000),Z=(Min=50.000000,Max=200.000000))
         VelocityLossRange=(Z=(Max=2.000000))
         Name="SpongePaddingEmitter_CHI"
+    End Object
+    Emitters(0)=MeshEmitter'SpongePaddingEmitter_CHI'
 }

@@ -77,16 +77,16 @@ auto state s_Emitting
 
 defaultproperties
 {
-    GrowModifier=0.3500000
-    DetectionRadius=250.0000000
+    GrowModifier=0.350000
+    DetectionRadius=250.000000
     bExplodeWhenDestructed=true
     ExplosionClass=Class'EchelonEffect.EMineExplosion'
     ExplosionDamageClass=Class'Engine.Crushed'
     bHidden=true
     StaticMesh=StaticMesh'EMeshIngredient.Item.FragGrenade'
-    DrawScale3D=(X=3.0000000,Y=3.0000000,Z=0.5000000)
+    DrawScale3D=(X=3.000000,Y=3.000000,Z=0.500000)
     bBlockProj=false
     LightType=LT_Steady
-    HeatIntensity=1.0000000
+    HeatIntensity=1.000000
     bIsTouchable=true
 }

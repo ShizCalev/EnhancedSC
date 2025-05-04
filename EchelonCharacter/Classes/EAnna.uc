@@ -23,9 +23,9 @@ defaultproperties
     GearSoundRun=Sound'GearCommon.Play_Random_CivilGearRun'
     bCanWhistle=false
     bDontCheckChangedActor=true
-    m_VisibilityConeAngle=0.0000000
-    m_VisibilityMaxDistance=0.0000000
-    m_VisibilityAngleVertical=0.0000000
-    m_MaxPeripheralVisionDistance=0.0000000
+    m_VisibilityConeAngle=0.000000
+    m_VisibilityMaxDistance=0.000000
+    m_VisibilityAngleVertical=0.000000
+    m_MaxPeripheralVisionDistance=0.000000
     DrawType=DT_Sprite
 }

@@ -125,19 +125,19 @@ function bool Update(float deltaTime, EPlayerController EPC)
 
 defaultproperties
 {
-    pitchSize=300.0000000
-    pitchSpeed=2.5700000
-    yawSize=250.0000000
-    yawSpeed=2.1000000
-    noiseUpSpeed=1.6000000
-    noiseDownSpeed=1.6000000
-    recoilUpSpeed=15000.0000000
-    recoilDownSpeed=3000.0000000
-    recoilFatigueUp=0.3000000
+    pitchSize=300.000000
+    pitchSpeed=2.570000
+    yawSize=250.000000
+    yawSpeed=2.100000
+    noiseUpSpeed=1.600000
+    noiseDownSpeed=1.600000
+    recoilUpSpeed=15000.000000
+    recoilDownSpeed=3000.000000
+    recoilFatigueUp=0.300000
     recoilSize=800
     recoilPitchAdd=400
     recoilYawAdd=200
-    holdMax=3.0000000
-    tiredMax=3.0000000
+    holdMax=3.000000
+    tiredMax=3.000000
     bHidden=true
 }

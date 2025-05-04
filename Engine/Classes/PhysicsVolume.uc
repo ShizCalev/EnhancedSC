@@ -144,8 +144,8 @@ function CausePainTo(Actor Other)
 
 defaultproperties
 {
-    Gravity=(X=0.0000000,Y=0.0000000,Z=-1500.0000000)
-    GroundFriction=8.0000000
-    TerminalVelocity=2500.0000000
-    FluidFriction=0.3000000
+    Gravity=(X=0.000000,Y=0.000000,Z=-1500.000000)
+    GroundFriction=8.000000
+    TerminalVelocity=2500.000000
+    FluidFriction=0.300000
 }

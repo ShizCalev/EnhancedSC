@@ -402,8 +402,8 @@ ignores SeePlayer, HearNoise, KilledBy, NotifyBump, HitWall, NotifyPhysicsVolume
 
 defaultproperties
 {
-    FovAngle=90.0000000
-    MinHitWall=-0.6000000
+    FovAngle=90.000000
+    MinHitWall=-0.600000
     AttitudeToPlayer=ATTITUDE_Hate
     bHidden=true
     bHiddenEd=true

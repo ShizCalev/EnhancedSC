@@ -137,16 +137,16 @@ function Eject(Vector Vel);
 
 defaultproperties
 {
-    MaxSpeed=2000.0000000
-    TossZ=100.0000000
-    DamageRadius=220.0000000
+    MaxSpeed=2000.000000
+    TossZ=100.000000
+    DamageRadius=220.000000
     MyDamageType=Class'DamageType'
     Physics=PHYS_Projectile
     DrawType=DT_Mesh
-    LifeSpan=140.0000000
+    LifeSpan=140.000000
     Texture=Texture'S_Camera'
-    CollisionRadius=0.0000000
-    CollisionHeight=0.0000000
+    CollisionRadius=0.000000
+    CollisionHeight=0.000000
     bCollideActors=true
     bCollideWorld=true
 }

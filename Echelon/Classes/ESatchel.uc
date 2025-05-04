@@ -124,8 +124,8 @@ defaultproperties
     bAcceptsProjectors=false
     StaticMesh=StaticMesh'EMeshIngredient.Object.Satchel'
     bNPCBulletGoTru=true
-    CollisionRadius=5.0000000
-    CollisionHeight=7.0000000
+    CollisionRadius=5.000000
+    CollisionHeight=7.000000
     bStaticMeshCylColl=false
     bBlockProj=false
     bBlockNPCVision=false

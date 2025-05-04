@@ -58,6 +58,6 @@ function PostBeginPlay()
 
 defaultproperties
 {
-    FocusMaxDistance=2000.0000000
+    FocusMaxDistance=2000.000000
     bCollideWhenPlacing=true
 }

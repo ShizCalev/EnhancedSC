@@ -113,9 +113,9 @@ event bool Build()
 
 defaultproperties
 {
-    Height=256.0000000
-    Width=256.0000000
-    Breadth=512.0000000
+    Height=256.000000
+    Width=256.000000
+    Breadth=512.000000
     WidthSegments=4
     DepthSegments=2
     GroupName="Terrain"

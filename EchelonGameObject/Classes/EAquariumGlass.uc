@@ -13,10 +13,10 @@ function float GetHitLevel( vector hit_location )
 
 defaultproperties
 {
-    hit_level=-1.0000000
+    hit_level=-1.000000
     SpillTexture=Texture'ETexSFX.water.SFX_Water_Jets'
-    LiquidLevel=80.0000000
-    LiquidDrainSpeed=2.0000000
+    LiquidLevel=80.000000
+    LiquidDrainSpeed=2.000000
     bShatterable=true
     HitPoints=200
     SpawnableObjects(0)=(SpawnClass=Class'EchelonEffect.EEauAqua',SpawnOffset=(Z=-100.000000),SpawnAtDamagePercent=100.000000)

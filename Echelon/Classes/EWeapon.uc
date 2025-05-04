@@ -721,10 +721,10 @@ defaultproperties
     BaseMomentum=150
     ShootingRange=15000
     NPCPreferredDistance=2000
-    EjectedVel=(X=0.0000000,Y=80.0000000,Z=60.0000000)
+    EjectedVel=(X=0.000000,Y=80.000000,Z=60.000000)
     bPickable=false
     ObjectHudClass=Class'EWeaponReticle'
-    SoundRadiusSaturation=1000.0000000
-    CollisionRadius=5.0000000
-    CollisionHeight=3.0000000
+    SoundRadiusSaturation=1000.000000
+    CollisionRadius=5.000000
+    CollisionHeight=3.000000
 }

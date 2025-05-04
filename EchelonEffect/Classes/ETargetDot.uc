@@ -3,6 +3,6 @@ class ETargetDot extends Actor
 
 defaultproperties
 {
-    DrawScale=0.1000000
+    DrawScale=0.100000
     Style=STY_Masked
 }

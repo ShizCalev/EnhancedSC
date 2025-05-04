@@ -9709,22 +9709,22 @@ defaultproperties
 	InputMode=IM_Keyboard // Joshua - Input mode
 	ControllerScheme=CS_Default // Joshua - Default, Pandora, PlayStation
 	CheckpointLevel="None" // Joshua - New variable to keep track which level the Checkpoint was on
-    m_ThrowMinSpeed=(X=800.0000000,Y=0.0000000,Z=100.0000000)
-    m_ThrowMaxSpeed=(X=1500.0000000,Y=0.0000000,Z=250.0000000)
-    m_ThrowVarSpeed=1000.0000000
-    m_speedRun=420.0000000
-    m_speedRunCr=299.0000000
-    m_speedWalk=120.0000000
-    m_speedWalkCr=60.0000000
-    m_speedWalkFP=120.0000000
-    m_speedWalkFPCr=75.0000000
-    m_speedWalkSniping=100.0000000
-    m_speedBTWCr=75.0000000
-    m_speedBTW=130.0000000
-    m_speedFence=70.0000000
-    m_speedGrab=80.0000000
-    m_speedGrabFP=60.0000000
-    m_speedCarry=130.0000000
-    m_turnMul=0.5000000
-    m_towardAngle=0.7070000
+    m_ThrowMinSpeed=(X=800.000000,Y=0.000000,Z=100.000000)
+    m_ThrowMaxSpeed=(X=1500.000000,Y=0.000000,Z=250.000000)
+    m_ThrowVarSpeed=1000.000000
+    m_speedRun=420.000000
+    m_speedRunCr=299.000000
+    m_speedWalk=120.000000
+    m_speedWalkCr=60.000000
+    m_speedWalkFP=120.000000
+    m_speedWalkFPCr=75.000000
+    m_speedWalkSniping=100.000000
+    m_speedBTWCr=75.000000
+    m_speedBTW=130.000000
+    m_speedFence=70.000000
+    m_speedGrab=80.000000
+    m_speedGrabFP=60.000000
+    m_speedCarry=130.000000
+    m_turnMul=0.500000
+    m_towardAngle=0.707000
 }

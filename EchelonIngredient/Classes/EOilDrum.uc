@@ -70,9 +70,9 @@ defaultproperties
     HitPoints=300
     ExplosionClass=Class'EchelonEffect.EDrumExplosionParticle'
     StaticMesh=StaticMesh'EMeshIngredient.Object.oildrum'
-    DrawScale=0.8000000
-    CollisionRadius=28.0000000
-    CollisionHeight=46.0000000
+    DrawScale=0.800000
+    CollisionRadius=28.000000
+    CollisionHeight=46.000000
     bCollideWorld=true
     bBlockPlayers=true
     bBlockActors=true

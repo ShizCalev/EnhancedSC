@@ -101,7 +101,7 @@ defaultproperties
     MaxAmmo=60
     ClipAmmo=30
     ClipMaxAmmo=30
-    RateOfFire=0.0720000
+    RateOfFire=0.072000
     BaseDamage=100
     FireNoiseRadius=800
     FireSingleShotSound=Sound'FisherEquipement.Play_FN2000SingleShot'
@@ -110,18 +110,18 @@ defaultproperties
     ReloadSound=Sound'FisherEquipement.Play_FN2000Reload'
     EmptySound=Sound'GunCommon.Play_RifleEmpty'
     EjectedClass=Class'EShellCaseBig'
-    EjectedOffset=(X=22.0000000,Y=2.5025000,Z=9.0000000)
-    MuzzleOffset=(X=53.0620000,Y=0.0000000,Z=7.4747900)
+    EjectedOffset=(X=22.000000,Y=2.502500,Z=9.000000)
+    MuzzleOffset=(X=53.062000,Y=0.000000,Z=7.474790)
     MagazineMesh=StaticMesh'EMeshIngredient.weapon.F2000MAG'
-    MagazineOffset=(X=-11.6460000,Y=0.0000100,Z=3.5576100)
-    RecoilStrength=1.0000000
-    RecoilAngle=0.2500000
-    RecoilFadeIn=20.0000000
-    RecoilFadeOut=6.0000000
+    MagazineOffset=(X=-11.646000,Y=0.000010,Z=3.557610)
+    RecoilStrength=1.000000
+    RecoilAngle=0.250000
+    RecoilFadeIn=20.000000
+    RecoilFadeOut=6.000000
     UseAccuracy=true
-    AccuracyMovementModifier=5.0000000
-    AccuracyReturnModifier=13.0000000
-    AccuracyBase=0.2000000
+    AccuracyMovementModifier=5.000000
+    AccuracyReturnModifier=13.000000
+    AccuracyBase=0.200000
     ObjectHudClass=Class'EF2000Reticle'
     StaticMesh=StaticMesh'EMeshIngredient.weapon.f2000'
 }

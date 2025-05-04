@@ -15,6 +15,6 @@ defaultproperties
 {
     Ammo=20
     StaticMesh=StaticMesh'EMeshIngredient.Object.Bulletcase'
-    CollisionRadius=4.0000000
-    CollisionHeight=5.0000000
+    CollisionRadius=4.000000
+    CollisionHeight=5.000000
 }

@@ -224,11 +224,11 @@ event float GetMoveSpeed(MoveFlags MoveFlags)
 
 defaultproperties
 {
-    WalkSpeed=73.0000000
-    RunSpeed=325.0000000
+    WalkSpeed=73.000000
+    RunSpeed=325.000000
     GearSoundWalk=Sound'GearCommon.Play_Random_CivilGearWalk'
     GearSoundRun=Sound'GearCommon.Play_Random_CivilGearRun'
     bNoBlending=true
-    GroundSpeed=200.0000000
+    GroundSpeed=200.000000
     Mesh=SkeletalMesh'ENPC.mitchMesh'
 }

@@ -1998,35 +1998,35 @@ function EInteractObject GetInteraction( Pawn InteractPawn )
 
 defaultproperties
 {
-    fZOffsetAdjust=1.0000000
-    Zbias=0.0010000
+    fZOffsetAdjust=1.000000
+    Zbias=0.001000
     DrawType=DT_Sprite
     Texture=Texture'S_Actor'
-    DrawScale=1.0000000
-    DrawScale3D=(X=1.0000000,Y=1.0000000,Z=1.0000000)
+    DrawScale=1.000000
+    DrawScale3D=(X=1.000000,Y=1.000000,Z=1.000000)
     Style=STY_Normal
     bMovable=true
-    SoundRadiusSaturation=200.0000000
-    SoundRadiusBackground=-1.0000000
-    CollisionRadius=22.0000000
-    CollisionHeight=22.0000000
+    SoundRadiusSaturation=200.000000
+    SoundRadiusBackground=-1.000000
+    CollisionRadius=22.000000
+    CollisionHeight=22.000000
     bBlockPeeking=true
     RestoreInitialLightType=true
     bGlowDisplay=true
-    VolumeTotalFalloffScale=1.0000000
+    VolumeTotalFalloffScale=1.000000
     VolumeInitialAlpha=255
-    TurnOffDistance=5000.0000000
-    TurnOffDistancePercentageFadeIn=0.9000000
-    MinDistance=50.0000000
-    MaxDistance=1000.0000000
-    GF2LightBeamMaxDistance=-1.0000000
-    SpotHeight=45.0000000
-    SpotWidth=45.0000000
-    HeatOpacity=1.0000000
+    TurnOffDistance=5000.000000
+    TurnOffDistancePercentageFadeIn=0.900000
+    MinDistance=50.000000
+    MaxDistance=1000.000000
+    GF2LightBeamMaxDistance=-1.000000
+    SpotHeight=45.000000
+    SpotWidth=45.000000
+    HeatOpacity=1.000000
     bIsTouchable=true
     bIsNPCRelevant=true
     bIsPlayerRelevant=true
-    Mass=100.0000000
+    Mass=100.000000
     bJustTeleported=true
     iRenderPriority=64
 }

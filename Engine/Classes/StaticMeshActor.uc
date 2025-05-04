@@ -86,8 +86,8 @@ defaultproperties
     bAcceptsProjectors=true
     DrawType=DT_StaticMesh
     bShadowCast=true
-    CollisionRadius=1.0000000
-    CollisionHeight=1.0000000
+    CollisionRadius=1.000000
+    CollisionHeight=1.000000
     bCollideActors=true
     bBlockProj=true
     bBlockBullet=true

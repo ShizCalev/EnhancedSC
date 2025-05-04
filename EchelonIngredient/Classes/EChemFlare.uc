@@ -98,20 +98,20 @@ state s_Inventory
 
 defaultproperties
 {
-    GlowTime=30.0000000
-    ScaleGlow=1.0000000
+    GlowTime=30.000000
+    ScaleGlow=1.000000
     MaxQuantity=10
     bDynamicLight=true
     StaticMesh=StaticMesh'EMeshIngredient.Item.GreenStick'
-    CollisionRadius=1.0000000
-    CollisionHeight=1.0000000
+    CollisionRadius=1.000000
+    CollisionHeight=1.000000
     LightEffect=LE_EOmniAtten
     LightBrightness=153
     LightHue=26
     LightSaturation=59
     bGlowDisplay=false
-    MinDistance=1.0000000
-    MaxDistance=50.0000000
+    MinDistance=1.000000
+    MaxDistance=50.000000
     bIsProjectile=true
-    Mass=10.0000000
+    Mass=10.000000
 }

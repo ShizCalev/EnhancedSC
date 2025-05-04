@@ -66,7 +66,7 @@ defaultproperties
     MaxAmmo=20
     ClipAmmo=8
     ClipMaxAmmo=8
-    RateOfFire=0.7500000
+    RateOfFire=0.750000
     BaseDamage=25
     BaseMomentum=40000
     FireNoiseRadius=2000
@@ -76,8 +76,8 @@ defaultproperties
     ShootingRange=1500
     NPCPreferredDistance=1000
     EjectedClass=Class'EShellCaseSG'
-    EjectedOffset=(X=14.8618000,Y=1.5058000,Z=8.5301000)
+    EjectedOffset=(X=14.861800,Y=1.505800,Z=8.530100)
     MuzzleFlashClass=Class'EMuzzleFlash'
-    MuzzleOffset=(X=69.0000000,Y=0.0000000,Z=9.0000000)
+    MuzzleOffset=(X=69.000000,Y=0.000000,Z=9.000000)
     StaticMesh=StaticMesh'EMeshIngredient.weapon.spas'
 }

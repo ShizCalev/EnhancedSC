@@ -109,5 +109,5 @@ defaultproperties
 {
     bCanOpenDoors=true
     bCanDoSpecial=true
-    MinHitWall=-0.5000000
+    MinHitWall=-0.500000
 }

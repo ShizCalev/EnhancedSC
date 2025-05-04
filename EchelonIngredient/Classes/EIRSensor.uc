@@ -145,7 +145,7 @@ defaultproperties
     DamagedMeshes(0)=(StaticMesh=StaticMesh'EGO_OBJ.GenObjGO.GO_LaserSystemA01B',Percent=100.000000)
     TriggerPatternJustOnce=false
     StaticMesh=StaticMesh'EGO_OBJ.GenObjGO.GO_LaserSystemA00B'
-    DrawScale=2.0000000
+    DrawScale=2.000000
     bBlockProj=false
     bBlockBullet=false
     bBlockNPCVision=false

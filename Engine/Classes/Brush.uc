@@ -36,9 +36,9 @@ var() bool  bColored;
 
 defaultproperties
 {
-    MainScale=(Scale=(X=1.0000000,Y=1.0000000,Z=1.0000000))
-    PostScale=(Scale=(X=1.0000000,Y=1.0000000,Z=1.0000000))
-    TempScale=(Scale=(X=1.0000000,Y=1.0000000,Z=1.0000000))
+    MainScale=(Scale=(X=1.000000,Y=1.000000,Z=1.000000))
+    PostScale=(Scale=(X=1.000000,Y=1.000000,Z=1.000000))
+    TempScale=(Scale=(X=1.000000,Y=1.000000,Z=1.000000))
     bStatic=true
     bHidden=true
     bNoDelete=true

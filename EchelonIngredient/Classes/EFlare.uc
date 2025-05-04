@@ -80,13 +80,13 @@ state s_Inventory
 
 defaultproperties
 {
-    Lifetime=10.0000000
+    Lifetime=10.000000
     MaxQuantity=10
-    HitNoiseRadius=500.0000000
+    HitNoiseRadius=500.000000
     StaticMesh=StaticMesh'EMeshIngredient.Item.Flare'
-    CollisionRadius=2.0000000
-    CollisionHeight=2.0000000
-    HeatIntensity=0.8000000
+    CollisionRadius=2.000000
+    CollisionHeight=2.000000
+    HeatIntensity=0.800000
     bIsProjectile=true
-    Mass=15.0000000
+    Mass=15.000000
 }

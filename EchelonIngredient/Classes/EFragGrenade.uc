@@ -76,19 +76,19 @@ function Select( EInventory Inv )
 defaultproperties
 {
     MaxQuantity=6
-    HitNoiseRadius=750.0000000
+    HitNoiseRadius=750.000000
     bDamageable=true
     bExplodeWhenDestructed=true
     ExplosionClass=Class'EchelonEffect.EGrenadeExplosion'
     ExplosionDamageClass=Class'Engine.Crushed'
-    ExplosionDamage=100.0000000
-    ExplosionMinRadius=300.0000000
-    ExplosionMaxRadius=400.0000000
-    ExplodeTimer=3.0000000
+    ExplosionDamage=100.000000
+    ExplosionMinRadius=300.000000
+    ExplosionMaxRadius=400.000000
+    ExplodeTimer=3.000000
     StaticMesh=StaticMesh'EMeshIngredient.Item.FragGrenade'
-    DrawScale=0.5000000
-    CollisionRadius=4.0000000
-    CollisionHeight=4.0000000
+    DrawScale=0.500000
+    CollisionRadius=4.000000
+    CollisionHeight=4.000000
     bIsProjectile=true
-    Mass=60.0000000
+    Mass=60.000000
 }

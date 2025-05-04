@@ -73,6 +73,6 @@ function Touch(actor Other)
 defaultproperties
 {
     bStartFix=true
-    CollisionRadius=40.0000000
-    CollisionHeight=40.0000000
+    CollisionRadius=40.000000
+    CollisionHeight=40.000000
 }

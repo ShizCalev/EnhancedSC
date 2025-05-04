@@ -96,6 +96,6 @@ defaultproperties
     MaterialBackdrop=Texture'MaterialBackdrop'
     TexPropCube=StaticMesh'TexPropCube'
     TexPropSphere=StaticMesh'TexPropSphere'
-    GridSize=(X=16.0000000,Y=16.0000000,Z=16.0000000)
+    GridSize=(X=16.000000,Y=16.000000,Z=16.000000)
     ShowNavMarkers=true
 }

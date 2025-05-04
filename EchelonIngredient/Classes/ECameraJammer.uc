@@ -208,10 +208,10 @@ defaultproperties
 {
     JammingDegree=15
     JammingDistance=2500
-    BatteryCharge=10.0000000
+    BatteryCharge=10.000000
     Category=CAT_GADGETS
     ObjectHudClass=Class'ECameraJammerView'
     StaticMesh=StaticMesh'EMeshIngredient.Item.CameraJammer'
-    CollisionRadius=2.0000000
-    CollisionHeight=2.0000000
+    CollisionRadius=2.000000
+    CollisionHeight=2.000000
 }

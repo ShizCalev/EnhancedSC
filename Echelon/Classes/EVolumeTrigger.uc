@@ -43,5 +43,5 @@ function TakeDamage( int Damage, Pawn EventInstigator, vector HitLocation, vecto
 defaultproperties
 {
     TriggerType=TT_PawnProximity
-    RepeatTriggerTime=0.5000000
+    RepeatTriggerTime=0.500000
 }

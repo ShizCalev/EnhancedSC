@@ -850,8 +850,8 @@ defaultproperties
     bIsRetinalScanner=true
     AlarmLinkType=EAlarm_Trigger
     StaticMesh=StaticMesh'EMeshIngredient.Object.retinal_scanner'
-    CollisionRadius=8.0000000
-    CollisionHeight=37.0000000
+    CollisionRadius=8.000000
+    CollisionHeight=37.000000
     bBlockPlayers=true
     bBlockActors=true
     InteractionClass=Class'ERetinalScannerInteraction'

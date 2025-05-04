@@ -68,6 +68,6 @@ defaultproperties
     MaxQuantity=10
     ChangeListWhenThrown=false
     StaticMesh=StaticMesh'EMeshIngredient.weapon.FoamGrenade'
-    CollisionRadius=4.0000000
-    CollisionHeight=4.0000000
+    CollisionRadius=4.000000
+    CollisionHeight=4.000000
 }

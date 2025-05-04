@@ -69,12 +69,12 @@ defaultproperties
 {
     DrawType=DT_Mesh
     Mesh=SkeletalMesh'ESkelIngredients.fishMesh'
-    CollisionRadius=2.0000000
-    CollisionHeight=5.0000000
+    CollisionRadius=2.000000
+    CollisionHeight=5.000000
     bCollideWorld=true
     bBlockProj=false
     bBlockNPCVision=false
     bBlockPeeking=false
-    HeatIntensity=0.8000000
+    HeatIntensity=0.800000
     bIsSoftBody=true
 }

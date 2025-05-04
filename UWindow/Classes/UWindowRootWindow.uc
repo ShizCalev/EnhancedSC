@@ -468,6 +468,6 @@ function Tick(float Delta)
 
 defaultproperties
 {
-    GUIScale=1.0000000
+    GUIScale=1.000000
     bAllowConsole=true
 }

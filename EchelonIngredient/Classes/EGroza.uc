@@ -8,7 +8,7 @@ defaultproperties
     MaxAmmo=60
     ClipAmmo=20
     ClipMaxAmmo=20
-    RateOfFire=0.0850000
+    RateOfFire=0.085000
     BaseDamage=125
     FireNoiseRadius=2000
     FireSingleShotSound=Sound'Gun.Play_GROZSingleShot'
@@ -17,8 +17,8 @@ defaultproperties
     ReloadSound=Sound'Gun.Play_GROZReload'
     EmptySound=Sound'GunCommon.Play_RifleEmpty'
     EjectedClass=Class'EShellCaseBig'
-    EjectedOffset=(X=15.6586000,Y=1.2600000,Z=11.4721000)
+    EjectedOffset=(X=15.658600,Y=1.260000,Z=11.472100)
     MuzzleFlashClass=Class'EMuzzleFlash'
-    MuzzleOffset=(X=74.0000000,Y=0.0000000,Z=9.0000000)
+    MuzzleOffset=(X=74.000000,Y=0.000000,Z=9.000000)
     StaticMesh=StaticMesh'EMeshIngredient.weapon.ak47'
 }

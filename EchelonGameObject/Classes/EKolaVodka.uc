@@ -22,14 +22,14 @@ defaultproperties
     SpawnableObjects(0)=(SpawnClass=Class'EchelonEffect.EGlassSmallParticle',SpawnAtDamagePercent=66.000000)
     SpawnableObjects(1)=(SpawnClass=Class'EchelonEffect.EGlassSmallParticle',SpawnAtDamagePercent=33.000000)
     SpawnableObjects(2)=(SpawnClass=Class'EchelonEffect.EGlassSmallParticle',SpawnAtDamagePercent=100.000000)
-    ExplosionNoiseRadius=1500.0000000
+    ExplosionNoiseRadius=1500.000000
     HitSound(0)=Sound'ThrowObject.Play_Random_BottleBreak'
     BounceSound=Sound'ThrowObject.Play_Random_BottleImpact'
     bAcceptsProjectors=false
     StaticMesh=StaticMesh'EGO_OBJ.Kola_ObjGO.GO_KolaVODKA'
-    SoundRadiusSaturation=450.0000000
-    CollisionRadius=5.0000000
-    CollisionHeight=5.0000000
+    SoundRadiusSaturation=450.000000
+    CollisionRadius=5.000000
+    CollisionHeight=5.000000
     bIsProjectile=true
-    Mass=45.0000000
+    Mass=45.000000
 }

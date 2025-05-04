@@ -37,5 +37,5 @@ function SpawnPart( vector Offset, float Scale )
 defaultproperties
 {
     StaticMesh=StaticMesh'LightGenOBJ.Chanderler.Go_Chanderler'
-    DrawScale=10.0000000
+    DrawScale=10.000000
 }

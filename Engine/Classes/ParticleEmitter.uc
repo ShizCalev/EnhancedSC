@@ -258,28 +258,28 @@ native function SpawnParticle( int Amount );
 
 defaultproperties
 {
-    ExtentMultiplier=(X=1.0000000,Y=1.0000000,Z=1.0000000)
-    DampingFactorRange=(X=(Max=1.0000000),Y=(Max=1.0000000),Z=(Max=1.0000000))
+    ExtentMultiplier=(X=1.000000,Y=1.000000,Z=1.000000)
+    DampingFactorRange=(X=(Max=1.000000),Y=(Max=1.000000),Z=(Max=1.000000))
     SpawnFromOtherEmitter=-1
-    ColorMultiplierRange=(X=(Min=1.0000000,Max=1.0000000),Y=(Min=1.0000000,Max=1.0000000),Z=(Min=1.0000000,Max=1.0000000))
-    LightingAttenuationFactor=1.0000000
-    FadeOutFactor=(W=1.0000000,X=1.0000000,Y=1.0000000,Z=1.0000000)
-    FadeInFactor=(W=1.0000000,X=1.0000000,Y=1.0000000,Z=1.0000000)
+    ColorMultiplierRange=(X=(Min=1.000000,Max=1.000000),Y=(Min=1.000000,Max=1.000000),Z=(Min=1.000000,Max=1.000000))
+    LightingAttenuationFactor=1.000000
+    FadeOutFactor=(W=1.000000,X=1.000000,Y=1.000000,Z=1.000000)
+    FadeInFactor=(W=1.000000,X=1.000000,Y=1.000000,Z=1.000000)
     MaxParticles=10
     RespawnDeadParticles=true
     AutoDestroy=true
     AddLocationFromOtherEmitter=-1
-    StartMassRange=(Min=1.0000000,Max=1.0000000)
+    StartMassRange=(Min=1.000000,Max=1.000000)
     AlphaTest=true
     ZTest=true
-    SpinCCWorCW=(X=0.5000000,Y=0.5000000,Z=0.5000000)
+    SpinCCWorCW=(X=0.500000,Y=0.500000,Z=0.500000)
     UseRegularSizeScale=true
-    StartSizeRange=(X=(Min=1.0000000,Max=1.0000000),Y=(Min=1.0000000,Max=1.0000000),Z=(Min=1.0000000,Max=1.0000000))
+    StartSizeRange=(X=(Min=1.000000,Max=1.000000),Y=(Min=1.000000,Max=1.000000),Z=(Min=1.000000,Max=1.000000))
     AutomaticInitialSpawning=true
     DrawStyle=PTDS_Translucent
     Texture=Texture'S_Emitter'
-    LifetimeRange=(Min=4.0000000,Max=4.0000000)
+    LifetimeRange=(Min=4.000000,Max=4.000000)
     AddVelocityFromOtherEmitter=-1
-    AddVelocityMultiplierRange=(X=(Min=1.0000000,Max=1.0000000),Y=(Min=1.0000000,Max=1.0000000),Z=(Min=1.0000000,Max=1.0000000))
+    AddVelocityMultiplierRange=(X=(Min=1.000000,Max=1.000000),Y=(Min=1.000000,Max=1.000000),Z=(Min=1.000000,Max=1.000000))
     GlowScale=(R=255,G=255,B=255,A=255)
 }

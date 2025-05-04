@@ -4,10 +4,10 @@
 //=============================================================================
 class Console extends Interaction;
 	
-// BEGIN UBI MODIF 
-#exec TEXTURE IMPORT NAME=ConsoleBK FILE=TEXTURES\Black.PCX	
-#exec TEXTURE IMPORT NAME=ConsoleBdr FILE=TEXTURES\White.PCX	
-// END UBI MODIF 
+// BEGIN UBI MODIF
+#exec TEXTURE IMPORT NAME=ConsoleBK FILE=TEXTURES\Black.PCX
+#exec TEXTURE IMPORT NAME=ConsoleBdr FILE=TEXTURES\White.PCX
+// END UBI MODIF
 	
 // Constants.
 const MaxHistory=16;		// # of command history to remember.

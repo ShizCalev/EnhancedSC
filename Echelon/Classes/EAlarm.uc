@@ -273,6 +273,6 @@ state s_Off
 
 defaultproperties
 {
-    DelayBeforeAlarmOff=15.0000000
+    DelayBeforeAlarmOff=15.000000
     bHidden=true
 }

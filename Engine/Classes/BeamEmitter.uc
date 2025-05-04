@@ -70,8 +70,8 @@ var 	notextexport array<actor>				HitActors;
 
 defaultproperties
 {
-    BeamTextureUScale=1.0000000
-    BeamTextureVScale=1.0000000
+    BeamTextureUScale=1.000000
+    BeamTextureVScale=1.000000
     LowFrequencyPoints=3
     HighFrequencyPoints=10
     BranchEmitter=-1

@@ -95,5 +95,5 @@ defaultproperties
     Category=CAT_MAINGUN
     bEquipable=false
     bIsProjectile=true
-    Mass=60.0000000
+    Mass=60.000000
 }

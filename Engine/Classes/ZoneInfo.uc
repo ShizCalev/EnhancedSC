@@ -145,10 +145,10 @@ defaultproperties
     PlayStressMusic=true
     AmbientSaturation=255
     DistanceFogColor=(R=128,G=128,B=128,A=0)
-    DistanceFogStart=3000.0000000
-    DistanceFogEnd=8000.0000000
-    TexUPanSpeed=1.0000000
-    TexVPanSpeed=1.0000000
+    DistanceFogStart=3000.000000
+    DistanceFogEnd=8000.000000
+    TexUPanSpeed=1.000000
+    TexVPanSpeed=1.000000
     Sound_type=SLOT_Ambient
     InteriorZone=true
     PlayExplorationMusic=true

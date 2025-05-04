@@ -60,10 +60,10 @@ defaultproperties
     bDamageable=false
     bNPCBulletGoTru=true
     bPlayerBulletGoTru=true
-    CollisionRadius=10.0000000
-    CollisionHeight=15.0000000
+    CollisionRadius=10.000000
+    CollisionHeight=15.000000
     bStaticMeshCylColl=false
     bBlockProj=false
     bBlockNPCVision=false
-    HeatOpacity=0.2000000
+    HeatOpacity=0.200000
 }

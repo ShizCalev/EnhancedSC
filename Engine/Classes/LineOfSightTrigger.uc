@@ -40,7 +40,7 @@ function Trigger( actor Other, Pawn EventInstigator, optional name InTag ) // UB
 
 defaultproperties
 {
-    MaxViewDist=3000.0000000
+    MaxViewDist=3000.000000
     bEnabled=true
     MaxViewAngle=15
     bCollideActors=false

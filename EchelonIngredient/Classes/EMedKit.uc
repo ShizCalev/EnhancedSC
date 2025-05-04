@@ -50,11 +50,11 @@ function Select( EInventory Inv )
 
 defaultproperties
 {
-    HealthPointRecover=0.2500000
+    HealthPointRecover=0.250000
     MaxQuantity=5
     bEquipable=false
     StaticMesh=StaticMesh'EMeshIngredient.Item.MedKit'
-    CollisionRadius=16.0000000
-    CollisionHeight=5.0000000
+    CollisionRadius=16.000000
+    CollisionHeight=5.000000
     bBlockPlayers=true
 }

@@ -64,9 +64,9 @@ function bool Build()
 
 defaultproperties
 {
-    Height=256.0000000
-    OuterRadius=512.0000000
-    InnerRadius=384.0000000
+    Height=256.000000
+    OuterRadius=512.000000
+    InnerRadius=384.000000
     Sides=8
     GroupName="Cylinder"
     AlignToSide=true

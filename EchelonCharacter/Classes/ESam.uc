@@ -650,14 +650,14 @@ singular event BaseChange()
 
 defaultproperties
 {
-    m_HoistOffset=(X=60.0000000,Y=0.0000000,Z=206.5000000)
-    m_HoistCrOffset=(X=57.0000000,Y=0.0000000,Z=179.0000000)
-    m_HoistFeetOffset=(X=57.0000000,Y=0.0000000,Z=40.0000000)
-    m_HoistFeetCrOffset=(X=57.0000000,Y=0.0000000,Z=12.5000000)
-    m_HoistWaistOffset=(X=57.0000000,Y=0.0000000,Z=109.5000000)
-    m_HoistWaistCrOffset=(X=57.0000000,Y=0.0000000,Z=82.0000000)
-    m_NLOutTopAnimOffset=(X=78.0000000,Y=0.0000000,Z=191.5000000)
-    m_POutTopAnimOffset=(X=85.0000000,Y=45.8000000,Z=192.1000000)
+    m_HoistOffset=(X=60.000000,Y=0.000000,Z=206.500000)
+    m_HoistCrOffset=(X=57.000000,Y=0.000000,Z=179.000000)
+    m_HoistFeetOffset=(X=57.000000,Y=0.000000,Z=40.000000)
+    m_HoistFeetCrOffset=(X=57.000000,Y=0.000000,Z=12.500000)
+    m_HoistWaistOffset=(X=57.000000,Y=0.000000,Z=109.500000)
+    m_HoistWaistCrOffset=(X=57.000000,Y=0.000000,Z=82.000000)
+    m_NLOutTopAnimOffset=(X=78.000000,Y=0.000000,Z=191.500000)
+    m_POutTopAnimOffset=(X=85.000000,Y=45.800000,Z=192.100000)
     GearSoundFall=Sound'GearCommon.Play_MediumGearFall'
     EyeBoneName="B Head"
     UpperBodyBoneName="B Spine1"
@@ -681,38 +681,38 @@ defaultproperties
     PawnSampleBrightness(13)=(BoneName="B L Thigh")
     PawnSampleBrightness(14)=(BoneName="B L Calf")
     PawnSampleBrightness(15)=(BoneName="B L Foot")
-    DamageLookupTable(0)=33.0000000
-    DamageLookupTable(1)=20.0000000
-    DamageLookupTable(8)=17.0000000
+    DamageLookupTable(0)=33.000000
+    DamageLookupTable(1)=20.000000
+    DamageLookupTable(8)=17.000000
     bCanJump=true
-    GroundSpeed=400.0000000
-    JumpZ=500.0000000
-    AirControl=0.1000000
-    CrouchHeight=60.0000000
-    CrouchRadius=35.0000000
+    GroundSpeed=400.000000
+    JumpZ=500.000000
+    AirControl=0.100000
+    CrouchHeight=60.000000
+    CrouchRadius=35.000000
     Health=200
-    m_NormalArmsZone=(X=0.0000000,Y=0.0000000,Z=35.0000000)
-    m_NormalArmsRadius=110.0000000
-    m_CrouchedArmsZone=(X=0.0000000,Y=0.0000000,Z=32.0000000)
-    m_CrouchedArmsRadius=60.0000000
-    m_LedgeGrabArmsZone=(X=37.0000000,Y=0.0000000,Z=117.0000000)
-    m_LedgeGrabArmsRadius=38.0000000
-    m_HandOverHandArmsZone=(X=0.0000000,Y=0.0000000,Z=128.0000000)
-    m_HandOverHandArmsRadius=16.0000000
-    m_NarrowLadderArmsZone=(X=37.0000000,Y=0.0000000,Z=102.5000000)
-    m_NarrowLadderArmsRadius=15.0000000
-    m_PipeArmsZone=(X=37.0000000,Y=0.0000000,Z=90.0000000)
-    m_PipeArmsRadius=20.0000000
-    m_ZipLineArmsZone=(X=0.0000000,Y=0.0000000,Z=110.0000000)
-    m_ZipLineArmsRadius=20.0000000
-    m_FenceArmsZone=(X=36.0000000,Y=0.0000000,Z=89.0000000)
-    m_FenceArmsRadius=30.0000000
-    m_NormalFeetZone=(X=0.0000000,Y=0.0000000,Z=-85.0000000)
-    m_NormalFeetRadius=60.0000000
-    m_CrouchedFeetZone=(X=0.0000000,Y=0.0000000,Z=-50.0000000)
-    m_CrouchedFeetRadius=60.0000000
-    m_PoleArmsZone=(X=40.0000000,Y=0.0000000,Z=100.0000000)
-    m_PoleArmsRadius=30.0000000
+    m_NormalArmsZone=(X=0.000000,Y=0.000000,Z=35.000000)
+    m_NormalArmsRadius=110.000000
+    m_CrouchedArmsZone=(X=0.000000,Y=0.000000,Z=32.000000)
+    m_CrouchedArmsRadius=60.000000
+    m_LedgeGrabArmsZone=(X=37.000000,Y=0.000000,Z=117.000000)
+    m_LedgeGrabArmsRadius=38.000000
+    m_HandOverHandArmsZone=(X=0.000000,Y=0.000000,Z=128.000000)
+    m_HandOverHandArmsRadius=16.000000
+    m_NarrowLadderArmsZone=(X=37.000000,Y=0.000000,Z=102.500000)
+    m_NarrowLadderArmsRadius=15.000000
+    m_PipeArmsZone=(X=37.000000,Y=0.000000,Z=90.000000)
+    m_PipeArmsRadius=20.000000
+    m_ZipLineArmsZone=(X=0.000000,Y=0.000000,Z=110.000000)
+    m_ZipLineArmsRadius=20.000000
+    m_FenceArmsZone=(X=36.000000,Y=0.000000,Z=89.000000)
+    m_FenceArmsRadius=30.000000
+    m_NormalFeetZone=(X=0.000000,Y=0.000000,Z=-85.000000)
+    m_NormalFeetRadius=60.000000
+    m_CrouchedFeetZone=(X=0.000000,Y=0.000000,Z=-50.000000)
+    m_CrouchedFeetRadius=60.000000
+    m_PoleArmsZone=(X=40.000000,Y=0.000000,Z=100.000000)
+    m_PoleArmsRadius=30.000000
     bTravel=true
     bIsPlayerPawn=true
 }

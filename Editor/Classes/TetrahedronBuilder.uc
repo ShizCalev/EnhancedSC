@@ -56,7 +56,7 @@ event bool Build()
 
 defaultproperties
 {
-    Radius=256.0000000
+    Radius=256.000000
     SphereExtrapolation=1
     GroupName="Tetrahedron"
     BitmapFilename="BBSphere"

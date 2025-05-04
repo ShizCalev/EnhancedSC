@@ -137,10 +137,10 @@ state s_Camera
 
 defaultproperties
 {
-    MinFov=10.0000000
-    MaxFov=90.0000000
-    ZoomSpeed=95.0000000
-    Damping=400.0000000
+    MinFov=10.000000
+    MaxFov=90.000000
+    ZoomSpeed=95.000000
+    Damping=400.000000
     MaxQuantity=20
     ObjectHudClass=Class'EStickyView'
     StaticMesh=StaticMesh'EMeshIngredient.Item.StickyCamera'

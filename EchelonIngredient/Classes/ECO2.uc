@@ -2,9 +2,9 @@ class ECO2 extends EConeDamageEmitter;
 
 defaultproperties
 {
-    SprayDistance=300.0000000
+    SprayDistance=300.000000
     SprayDamage=4
-    StopDamageTime=5.0000000
+    StopDamageTime=5.000000
     Begin Object Class=SpriteEmitter Name=CO2
         Acceleration=(Z=2.000000)
         UseCollision=True

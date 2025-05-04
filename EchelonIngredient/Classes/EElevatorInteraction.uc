@@ -118,6 +118,6 @@ function KeyEvent( String Key, EInputAction Action, float Delta, optional bool b
 
 defaultproperties
 {
-    ViewRelativeLocation=(X=30.0000000,Y=-8.0000000,Z=0.0000000)
+    ViewRelativeLocation=(X=30.000000,Y=-8.000000,Z=0.000000)
     ViewRelativeRotation=(Pitch=-2000,Yaw=32768,Roll=0)
 }

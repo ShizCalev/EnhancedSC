@@ -331,7 +331,7 @@ Begin:
 
 defaultproperties
 {
-    Damping=1000.0000000
+    Damping=1000.000000
     Category=CAT_GADGETS
     ObjectHudClass=Class'EOpticCableView'
     StaticMesh=none

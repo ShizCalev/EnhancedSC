@@ -68,7 +68,7 @@ state s_Off
 defaultproperties
 {
     ButtonMesh=StaticMesh'EMeshIngredient.Object.LightSwitchButton'
-    ButtonOffset=(X=2.0000000,Y=0.0000000,Z=0.0000000)
+    ButtonOffset=(X=2.000000,Y=0.000000,Z=0.000000)
     StaticMesh=StaticMesh'EMeshIngredient.Object.LightSwitch'
-    CollisionRadius=2.0000000
+    CollisionRadius=2.000000
 }

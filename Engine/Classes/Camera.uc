@@ -9,10 +9,10 @@ class Camera extends PlayerController
 
 defaultproperties
 {
-    Location=(X=-500.0000000,Y=-300.0000000,Z=300.0000000)
+    Location=(X=-500.000000,Y=-300.000000,Z=300.000000)
     Texture=Texture'S_Camera'
-    CollisionRadius=16.0000000
-    CollisionHeight=39.0000000
+    CollisionRadius=16.000000
+    CollisionHeight=39.000000
     LightBrightness=100
     LightRadius=16
     bDirectional=true

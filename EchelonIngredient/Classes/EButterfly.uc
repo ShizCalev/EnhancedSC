@@ -27,6 +27,6 @@ defaultproperties
     DrawType=DT_Mesh
     Mesh=SkeletalMesh'ESkelIngredients.mothMesh'
     bCollideActors=false
-    HeatIntensity=0.2000000
+    HeatIntensity=0.200000
     bIsSoftBody=true
 }

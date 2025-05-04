@@ -664,9 +664,9 @@ defaultproperties
     PatrolAngle=90
     PatrolSpeed=15
     RotationVelocity=5000
-    VisibilityConeAngle=40.0000000
-    VisibilityMaxDistance=500.0000000
-    BulletsPerMinute=60.0000000
+    VisibilityConeAngle=40.000000
+    VisibilityMaxDistance=500.000000
+    BulletsPerMinute=60.000000
     BulletDamage=1
     HeadBone="Head"
     DrawType=DT_Mesh

@@ -31,8 +31,8 @@ defaultproperties
 {
     StaticMesh=StaticMesh'EMeshCharacter.spetsnaz.headset'
     bDontAffectEchelonLighting=true
-    CollisionRadius=16.0000000
-    CollisionHeight=2.0000000
+    CollisionRadius=16.000000
+    CollisionHeight=2.000000
     bCollideActors=false
     LightType=LT_Steady
     LightEffect=LE_ESpotShadowDistAtten
@@ -44,8 +44,8 @@ defaultproperties
     bInvalidateLightCachingIfMoved=true
     UsesSpotLightBeam=true
     VolumeInitialAlpha=10
-    MinDistance=4.0000000
-    MaxDistance=1500.0000000
-    SpotHeight=2.5000000
-    SpotWidth=2.5000000
+    MinDistance=4.000000
+    MaxDistance=1500.000000
+    SpotHeight=2.500000
+    SpotWidth=2.500000
 }

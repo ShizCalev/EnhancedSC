@@ -367,12 +367,12 @@ defaultproperties
     ShadowFiltering=true
     FadeOutNearPlane=707
     FadeOutFarPlane=1000
-    OrthoZoom=40000.0000000
-    DesiredFOV=85.0000000
-    DefaultFOV=85.0000000
+    OrthoZoom=40000.000000
+    DesiredFOV=85.000000
+    DefaultFOV=85.000000
     CheatClass=Class'CheatManager'
     InputClass=Class'PlayerInput'
-    FovAngle=85.0000000
+    FovAngle=85.000000
     bIsPlayer=true
     bTravel=true
 }

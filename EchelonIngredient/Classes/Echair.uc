@@ -10,8 +10,8 @@ defaultproperties
     bTableChair=true
     bDamageable=false
     StaticMesh=StaticMesh'EGO_OBJ.GenObjGO.GO_WheelChair'
-    CollisionRadius=25.0000000
-    CollisionHeight=30.0000000
+    CollisionRadius=25.000000
+    CollisionHeight=30.000000
     bCollideWorld=true
     bBlockPlayers=true
     bBlockActors=true

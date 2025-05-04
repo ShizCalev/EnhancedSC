@@ -109,6 +109,6 @@ defaultproperties
 {
     MaxQuantity=5
     StaticMesh=StaticMesh'EMeshIngredient.Item.StickyShocker'
-    CollisionRadius=4.0000000
-    CollisionHeight=2.0000000
+    CollisionRadius=4.000000
+    CollisionHeight=2.000000
 }

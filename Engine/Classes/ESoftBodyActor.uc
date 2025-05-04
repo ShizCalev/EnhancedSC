@@ -61,13 +61,13 @@ event Detach(Actor Other)
 
 defaultproperties
 {
-    Gravity=(X=0.0000000,Y=0.0000000,Z=-980.0000000)
-    dragForce=60.0000000
-    hitDamping=1.0000000
+    Gravity=(X=0.000000,Y=0.000000,Z=-980.000000)
+    dragForce=60.000000
+    hitDamping=1.000000
     nbIter=1
     nbNormalizeIter=1
-    CollisionRadius=1.0000000
-    CollisionHeight=1.0000000
+    CollisionRadius=1.000000
+    CollisionHeight=1.000000
     bCollideActors=true
     bBlockProj=true
     bBlockBullet=true

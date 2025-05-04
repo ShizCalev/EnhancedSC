@@ -105,6 +105,6 @@ function Tick( float DeltaTime )
 
 defaultproperties
 {
-    DamagePerSec=100.0000000
+    DamagePerSec=100.000000
     bBlockActors=true
 }

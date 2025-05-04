@@ -35,6 +35,6 @@ defaultproperties
     bPickable=true
     bDamageable=false
     StaticMesh=StaticMesh'EMeshIngredient.Object.Briefcase'
-    CollisionHeight=6.0000000
+    CollisionHeight=6.000000
     bCollideActors=false
 }

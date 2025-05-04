@@ -18,5 +18,5 @@ defaultproperties
     SpawnableObjects(4)=(SpawnClass=Class'EchelonEffect.EChanderlerCrystalParticule',SpawnAtDamagePercent=100.000000)
     SpawnableObjects(5)=(SpawnClass=Class'EchelonEffect.EMirrorspark',SpawnAtDamagePercent=100.000000)
     StaticMesh=StaticMesh'LightGenOBJ.Chanderler.Go_SmallChanderlerB0'
-    DrawScale=4.0000000
+    DrawScale=4.000000
 }

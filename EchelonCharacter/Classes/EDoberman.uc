@@ -104,10 +104,10 @@ defaultproperties
     PlayBreath=Sound'Dog.Play_DogBreath'
     StopBreath=Sound'Dog.Stop_DogBreath'
     DogHit=Sound'Dog.Play_random_DogHit'
-    PlayerFarDistance=101.0000000
-    PlayerCloseDistance=100.0000000
-    PlayerVeryCloseDistance=90.0000000
-    IntuitionTime=10.7500000
+    PlayerFarDistance=101.000000
+    PlayerCloseDistance=100.000000
+    PlayerVeryCloseDistance=90.000000
+    IntuitionTime=10.750000
     DrawType=DT_Mesh
     Mesh=SkeletalMesh'EDog.dobeMesh'
 }

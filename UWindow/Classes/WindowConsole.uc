@@ -468,5 +468,5 @@ function NotifyAfterLevelChange()
 defaultproperties
 {
     RootWindow="UWindow.UWindowRootWindow"
-    MouseScale=0.6000000
+    MouseScale=0.600000
 }

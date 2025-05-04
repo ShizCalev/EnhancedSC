@@ -38,11 +38,11 @@ defaultproperties
     PatrolSpeed=8
     RotationVelocity=6000
     SensorType=DETECT_Heat
-    SensorThreshold=0.0100000
+    SensorThreshold=0.010000
     SensorDetectionType=SCAN_AllChangedActors
     FollowUponDetection=true
     ShootUponDetection=true
-    BulletsPerMinute=180.0000000
+    BulletsPerMinute=180.000000
     BulletDamage=100
     SoundAlert=Sound'Gun.Play_TurretDetection'
     SoundFire=Sound'Gun.Play_TurretInfiniteShot'
@@ -51,8 +51,8 @@ defaultproperties
     SoundDisable=Sound'Gun.StopGo_TurretDisable'
     bDamageable=false
     Mesh=SkeletalMesh'ESkelIngredients.m249Mesh'
-    CollisionRadius=30.0000000
-    CollisionHeight=60.0000000
+    CollisionRadius=30.000000
+    CollisionHeight=60.000000
     bBlockProj=false
     bBlockBullet=false
     bBlockNPCVision=false

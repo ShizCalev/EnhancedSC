@@ -111,7 +111,7 @@ var native const array<byte> OldHeightmap;
 
 defaultproperties
 {
-    TerrainScale=(X=64.0000000,Y=64.0000000,Z=64.0000000)
+    TerrainScale=(X=64.000000,Y=64.000000,Z=64.000000)
     bStatic=true
     bWorldGeometry=true
     Texture=Texture'S_TerrainInfo'

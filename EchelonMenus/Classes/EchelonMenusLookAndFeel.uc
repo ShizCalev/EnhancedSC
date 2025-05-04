@@ -245,12 +245,12 @@ defaultproperties
     FrameTitleX=6
     FrameTitleY=4
     EditBoxTextColor=(R=51,G=51,B=51,A=255)
-    Size_ComboButtonWidth=16.0000000
-    Size_ComboButtonHeight=10.0000000
-    Size_ScrollbarWidth=11.0000000
-    Size_ScrollbarButtonHeight=10.0000000
-    Size_MinScrollbarHeight=6.0000000
-    Size_HMinScrollbarWidth=6.0000000
-    Size_HScrollbarHeight=18.0000000
-    Size_HScrollbarButtonWidth=12.0000000
+    Size_ComboButtonWidth=16.000000
+    Size_ComboButtonHeight=10.000000
+    Size_ScrollbarWidth=11.000000
+    Size_ScrollbarButtonHeight=10.000000
+    Size_MinScrollbarHeight=6.000000
+    Size_HMinScrollbarWidth=6.000000
+    Size_HScrollbarHeight=18.000000
+    Size_HScrollbarButtonWidth=12.000000
 }

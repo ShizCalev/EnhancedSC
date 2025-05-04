@@ -53,8 +53,8 @@ function LostChild( Actor Other )
 defaultproperties
 {
     MaxQuantity=6
-    HitNoiseRadius=750.0000000
+    HitNoiseRadius=750.000000
     StaticMesh=StaticMesh'EMeshIngredient.weapon.FoamGrenade'
-    CollisionRadius=4.0000000
-    CollisionHeight=4.0000000
+    CollisionRadius=4.000000
+    CollisionHeight=4.000000
 }

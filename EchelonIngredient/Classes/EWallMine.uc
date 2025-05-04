@@ -399,14 +399,14 @@ defaultproperties
     DetectionRadius=200
     DetectionHeight=100
     ExplosionDelay=1.750000
-    ActivationDelay=8.0000000
+    ActivationDelay=8.000000
     MovementThreshold=200
-    TickNoiseRadius=500.0000000
+    TickNoiseRadius=500.000000
     MaxQuantity=3
     bDamageable=true
     bExplodeWhenDestructed=true
     ExplosionSound=Sound'FisherEquipement.Play_WallMineExplosion'
     StaticMesh=StaticMesh'EMeshIngredient.Item.wallmine'
-    CollisionRadius=4.5000000
-    CollisionHeight=5.5000000
+    CollisionRadius=4.500000
+    CollisionHeight=5.500000
 }

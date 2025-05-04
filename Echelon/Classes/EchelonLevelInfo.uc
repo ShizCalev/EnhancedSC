@@ -632,8 +632,8 @@ defaultproperties
 {
     AlarmPatternClass=Class'LambertWarnings'
     bMusicEnabled=true
-    AlarmModifier(0)=1.0000000
-    AlarmModifier(1)=0.6600000
-    AlarmModifier(2)=0.3300000
+    AlarmModifier(0)=1.000000
+    AlarmModifier(1)=0.660000
+    AlarmModifier(2)=0.330000
     RandomWhistle=Sound'GenericLife.Play_GenericWhistle1'
 }

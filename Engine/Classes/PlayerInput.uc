@@ -38,5 +38,5 @@ event PlayerInput( float DeltaTime )
 
 defaultproperties
 {
-    shouldMouseInvert=1.0000000
+    shouldMouseInvert=1.000000
 }

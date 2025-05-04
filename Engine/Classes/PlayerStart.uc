@@ -10,7 +10,7 @@ class PlayerStart extends NavigationPoint
 defaultproperties
 {
     Texture=Texture'S_Player'
-    CollisionRadius=40.0000000
-    CollisionHeight=88.0000000
+    CollisionRadius=40.000000
+    CollisionHeight=88.000000
     bDirectional=true
 }

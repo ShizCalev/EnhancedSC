@@ -76,6 +76,6 @@ defaultproperties
     Category=CAT_GADGETS
     MaxQuantity=10
     StaticMesh=StaticMesh'EMeshIngredient.Item.DisposablePick'
-    CollisionRadius=5.0000000
-    CollisionHeight=1.5000000
+    CollisionRadius=5.000000
+    CollisionHeight=1.500000
 }

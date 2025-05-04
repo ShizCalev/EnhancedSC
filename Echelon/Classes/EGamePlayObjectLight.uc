@@ -201,7 +201,7 @@ state s_Destructed
 defaultproperties
 {
     bShatterable=true
-    ExplosionNoiseRadius=400.0000000
+    ExplosionNoiseRadius=400.000000
     bBlockNPCVision=false
     bIsEchelonLight=true
 }

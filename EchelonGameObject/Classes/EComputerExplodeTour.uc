@@ -8,9 +8,9 @@ defaultproperties
     SpawnableObjects(1)=(SpawnClass=Class'EchelonEffect.ElightDarkSmoke',SpawnAtDamagePercent=100.000000)
     SpawnableObjects(3)=(SpawnClass=Class'EchelonEffect.EExplosionComputer',SpawnAtDamagePercent=100.000000)
     HitSound(0)=Sound'DestroyableObjet.Play_ComputerDestroyed'
-    LastRenderTime=45972.6500000
+    LastRenderTime=45972.650000
     Tag="EGameplayObject"
-    Location=(X=2614.7250000,Y=215.2554000,Z=-325.0000000)
+    Location=(X=2614.725000,Y=215.255400,Z=-325.000000)
     Rotation=(Pitch=0,Yaw=-16320,Roll=0)
     StaticMesh=StaticMesh'EGO_OBJ.GenObjGO.GO_OFF_computer'
 }

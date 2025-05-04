@@ -155,8 +155,8 @@ defaultproperties
     InitialState="None"
     bNPCBulletGoTru=true
     bPlayerBulletGoTru=true
-    SoundRadiusSaturation=500.0000000
+    SoundRadiusSaturation=500.000000
     bBlockNPCShot=false
     bBlockNPCVision=false
-    HeatOpacity=0.3000000
+    HeatOpacity=0.300000
 }

@@ -17,6 +17,6 @@ class EDeleteMe extends Actor;
 defaultproperties
 {
     Texture=Texture'InvalidSign'
-    DrawScale=0.3000000
+    DrawScale=0.300000
     Style=STY_Translucent
 }

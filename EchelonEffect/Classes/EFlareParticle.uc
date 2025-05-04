@@ -87,7 +87,7 @@ defaultproperties
     LightBrightness=255
     LightHue=31
     LightRadius=15
-    MinDistance=0.0000000
-    MaxDistance=200.0000000
-    TrailerOffset=(X=0.0000000,Y=0.0000000,Z=11.0000000)
+    MinDistance=0.000000
+    MaxDistance=200.000000
+    TrailerOffset=(X=0.000000,Y=0.000000,Z=11.000000)
 }

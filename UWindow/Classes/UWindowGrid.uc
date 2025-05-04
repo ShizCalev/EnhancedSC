@@ -222,5 +222,5 @@ function KeyDown(int Key, float X, float Y)
 
 defaultproperties
 {
-    RowHeight=10.0000000
+    RowHeight=10.000000
 }

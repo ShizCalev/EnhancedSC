@@ -1453,8 +1453,8 @@ event AIEventCallBack(EAIController Instigator, EAIEvent Event)
 defaultproperties
 {
     bEventExclusivity=true
-    DelayBetweenGrenades=10.0000000
-    fSeeInterrogationTimer=-10.0000000
+    DelayBetweenGrenades=10.000000
+    fSeeInterrogationTimer=-10.000000
     bHidden=true
     Texture=Texture'GroupAI'
 }

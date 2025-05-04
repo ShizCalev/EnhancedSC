@@ -242,7 +242,7 @@ state s_ProjectorAlert
 
 defaultproperties
 {
-    ResumePatrolTime=3.0000000
+    ResumePatrolTime=3.000000
     ProjPatrolSpeed=-1
     ProjAlertSpeed=-1
     FollowUponDetection=true
@@ -260,10 +260,10 @@ defaultproperties
     LightSaturation=232
     LightRadius=154
     LightCone=70
-    MinDistance=85.0000000
-    MaxDistance=2000.0000000
-    SpotHeight=40.0000000
-    SpotWidth=40.0000000
+    MinDistance=85.000000
+    MaxDistance=2000.000000
+    SpotHeight=40.000000
+    SpotWidth=40.000000
     RotationRate=(Pitch=5000,Yaw=5000,Roll=5000)
     bRotateToDesired=true
 }

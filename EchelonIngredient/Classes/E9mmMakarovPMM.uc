@@ -8,15 +8,15 @@ defaultproperties
     MaxAmmo=36
     ClipAmmo=12
     ClipMaxAmmo=12
-    RateOfFire=0.1870000
+    RateOfFire=0.187000
     BaseDamage=100
     FireNoiseRadius=2000
     FireSingleShotSound=Sound'Gun.Play_MAKASingleShot'
     ReloadSound=Sound'Gun.Play_MAKAReload'
     EmptySound=Sound'GunCommon.Play_PistolEmpty'
     EjectedClass=Class'EShellCaseSmall'
-    EjectedOffset=(X=2.5964000,Y=0.9221000,Z=7.2461000)
+    EjectedOffset=(X=2.596400,Y=0.922100,Z=7.246100)
     MuzzleFlashClass=Class'EMuzzleFlash'
-    MuzzleOffset=(X=14.4818600,Y=0.0000200,Z=7.9742200)
+    MuzzleOffset=(X=14.481860,Y=0.000020,Z=7.974220)
     StaticMesh=StaticMesh'EMeshIngredient.weapon.Makarov'
 }

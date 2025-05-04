@@ -31,6 +31,6 @@ defaultproperties
 {
     bDamageable=true
     StaticMesh=StaticMesh'EMeshIngredient.Object.Generator'
-    CollisionRadius=115.0000000
-    CollisionHeight=66.0000000
+    CollisionRadius=115.000000
+    CollisionHeight=66.000000
 }

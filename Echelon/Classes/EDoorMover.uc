@@ -394,15 +394,15 @@ state TriggerToggle
 defaultproperties
 {
     Usable=true
-    DoorWidth=128.0000000
-    DoorRadius=160.0000000
-    DoorPathExtraCost=500.0000000
+    DoorWidth=128.000000
+    DoorRadius=160.000000
+    DoorPathExtraCost=500.000000
     bOpenTriggerOnceOnly=true
     bCloseTriggerOnceOnly=true
     bUseTriggered=true
     InitialState="TriggerOpenTimed"
-    CollisionRadius=10.0000000
-    CollisionHeight=10.0000000
+    CollisionRadius=10.000000
+    CollisionHeight=10.000000
     CollisionPrimitive=StaticMesh'Generic_Mesh.Door.door_gen'
     bBlockPlayers=false
     bBlockActors=false

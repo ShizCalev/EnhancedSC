@@ -8,5 +8,5 @@ var Matrix M;
 
 defaultproperties
 {
-    PanRate=0.1000000
+    PanRate=0.100000
 }

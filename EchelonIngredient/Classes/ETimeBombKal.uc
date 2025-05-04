@@ -74,8 +74,8 @@ state s_Timing
 
 defaultproperties
 {
-    TimeToExplosion=120.0000000
+    TimeToExplosion=120.000000
     bExplodeWhenDestructed=true
-    ExplosionDamage=1000.0000000
+    ExplosionDamage=1000.000000
     StaticMesh=StaticMesh'EMeshIngredient.Object.Bomb_kal'
 }

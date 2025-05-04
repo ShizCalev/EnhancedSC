@@ -102,6 +102,6 @@ defaultproperties
     ObjectName="DataStick"
     bDamageable=false
     StaticMesh=StaticMesh'EMeshIngredient.Item.MemoryStick'
-    CollisionRadius=2.0000000
-    CollisionHeight=2.0000000
+    CollisionRadius=2.000000
+    CollisionHeight=2.000000
 }

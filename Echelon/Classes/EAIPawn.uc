@@ -1976,17 +1976,17 @@ function bool PressingFire()
 
 defaultproperties
 {
-    AccuracyDeviation=1.0000000
-    MinSearchTime=30.0000000
-    DyingGaspRadius=900.0000000
-    KnockedGaspRadius=250.0000000
-    ElectrocutedGaspRadius=400.0000000
-    IntuitionTime=1.0000000
-    TimeBeforePlayerCanHide=0.7500000
-    PlayerCanHideDistance=50.0000000
-    Laziness_DefaultState=0.7000000
-    Laziness_AwareState=0.4000000
-    Laziness_AlertState=0.2000000
+    AccuracyDeviation=1.000000
+    MinSearchTime=30.000000
+    DyingGaspRadius=900.000000
+    KnockedGaspRadius=250.000000
+    ElectrocutedGaspRadius=400.000000
+    IntuitionTime=1.000000
+    TimeBeforePlayerCanHide=0.750000
+    PlayerCanHideDistance=50.000000
+    Laziness_DefaultState=0.700000
+    Laziness_AwareState=0.400000
+    Laziness_AlertState=0.200000
     IgnoreGroupNoiseType=NOISE_HeavyFootstep
     IgnoreNPCNoiseType=NOISE_HeavyFootstep
     EyeBoneName="BLftEye"
@@ -2010,12 +2010,12 @@ defaultproperties
 	PawnSampleBrightness(14)=(BoneName="B L Calf")
 	PawnSampleBrightness(15)=(BoneName="B L Foot")
     AnimSequence="waitStNmFd2"
-    GroundSpeed=400.0000000
-    AirControl=0.3500000
-    CrouchHeight=45.0000000
-    CrouchRadius=35.0000000
-    m_NarrowLadderArmsZone=(X=38.0000000,Y=0.0000000,Z=100.0000000)
-    m_NarrowLadderArmsRadius=10.0000000
+    GroundSpeed=400.000000
+    AirControl=0.350000
+    CrouchHeight=45.000000
+    CrouchRadius=35.000000
+    m_NarrowLadderArmsZone=(X=38.000000,Y=0.000000,Z=100.000000)
+    m_NarrowLadderArmsRadius=10.000000
     bBlockNPCVision=false
     bIsNPCPawn=true
 }

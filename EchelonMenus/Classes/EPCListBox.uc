@@ -34,7 +34,7 @@ function DoubleClickItem(UWindowListBoxItem I)
 defaultproperties
 {
     m_IRightPadding=4
-    ItemHeight=18.0000000
+    ItemHeight=18.000000
     ListClass=Class'EPCListBoxItem'
     TextColor=(R=51,G=51,B=51,A=255)
     Align=2

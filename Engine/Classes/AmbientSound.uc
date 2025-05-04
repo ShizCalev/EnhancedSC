@@ -10,5 +10,5 @@ class AmbientSound extends Keypoint;
 defaultproperties
 {
     Texture=Texture'S_Ambient'
-    SoundRadiusSaturation=100.0000000
+    SoundRadiusSaturation=100.000000
 }

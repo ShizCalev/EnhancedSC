@@ -5341,5 +5341,5 @@ defaultproperties
 {
     FA_StepSize=3
     CurrentGEID=-1
-    FocusInfo=(YawInterpolationSpeed=25000.0000000,YawMinOffset=4000.0000000,YawMaxOffset=8000.0000000,MinTurnSpeed=1.2500000,MaxTurnSpeed=3.0000000,SwitchTimeBase=1.2000000,SwitchTimeOffset=0.7500000)
+    FocusInfo=(YawInterpolationSpeed=25000.000000,YawMinOffset=4000.000000,YawMaxOffset=8000.000000,MinTurnSpeed=1.250000,MaxTurnSpeed=3.000000,SwitchTimeBase=1.200000,SwitchTimeOffset=0.750000)
 }

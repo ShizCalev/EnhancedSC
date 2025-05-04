@@ -29,24 +29,24 @@ var			 float		prevVlength;
 
 defaultproperties
 {
-    scaleU=1.0000000
-    scaleV=1.0000000
+    scaleU=1.000000
+    scaleV=1.000000
     nbU=3
     nbV=3
-    Ulength=10.0000000
-    Vlength=10.0000000
+    Ulength=10.000000
+    Vlength=10.000000
     TopFixed=true
     prevNbU=3
     prevNbV=3
-    prevUlength=10.0000000
-    prevVlength=10.0000000
-    windMin=(X=0.0000000,Y=-100.0000000,Z=0.0000000)
-    windMax=(X=0.0000000,Y=300.0000000,Z=0.0000000)
-    windUScale=2.0000000
-    windVScale=2.0000000
-    windUPan=0.7000000
-    windVPan=0.3100000
-    collRepulse=0.1000000
+    prevUlength=10.000000
+    prevVlength=10.000000
+    windMin=(X=0.000000,Y=-100.000000,Z=0.000000)
+    windMax=(X=0.000000,Y=300.000000,Z=0.000000)
+    windUScale=2.000000
+    windVScale=2.000000
+    windUPan=0.700000
+    windVPan=0.310000
+    collRepulse=0.100000
     nbIter=3
     nbNormalizeIter=2
     collSubDiv=1

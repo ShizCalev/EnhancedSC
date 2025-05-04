@@ -16,7 +16,7 @@ var(Compression) float   MaxPosError;
 
 defaultproperties
 {
-    GlobalCompression=1.0000000
-    MaxAngleError=0.0025000
-    MaxPosError=0.0100000
+    GlobalCompression=1.000000
+    MaxAngleError=0.002500
+    MaxPosError=0.010000
 }

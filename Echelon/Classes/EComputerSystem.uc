@@ -154,6 +154,6 @@ Begin:
 
 defaultproperties
 {
-    PowerSaveAfter=15.0000000
+    PowerSaveAfter=15.000000
     ScreenSaver=EGlow'EGO_Tex.GenTexGO.GO_lcdfishGLW'
 }

@@ -375,28 +375,28 @@ Stunned:
 
 defaultproperties
 {
-    BoneFadeIn=0.1000000
-    BoneFadeOut=0.2000000
+    BoneFadeIn=0.100000
+    BoneFadeOut=0.200000
     bNoBlending=true
     bNoPersonality=true
     BasicPatternClass=Class'EDogPattern'
-    m_VisibilityConeAngle=100.0000000
-    m_VisibilityMaxDistance=2500.0000000
-    m_VisibilityAngleVertical=75.0000000
-    VisTable_Alert(0)=300.0000000
-    VisTable_Alert(1)=1100.0000000
-    VisTable_Alert(2)=1400.0000000
-    VisTable_Alert(3)=1700.0000000
-    VisTable_Alert(4)=2000.0000000
-    VisTable_Investigate(1)=1600.0000000
-    VisTable_Investigate(2)=1900.0000000
-    VisTable_Investigate(3)=2200.0000000
-    VisTable_Investigate(4)=2500.0000000
-    SmellRadius=350.0000000
+    m_VisibilityConeAngle=100.000000
+    m_VisibilityMaxDistance=2500.000000
+    m_VisibilityAngleVertical=75.000000
+    VisTable_Alert(0)=300.000000
+    VisTable_Alert(1)=1100.000000
+    VisTable_Alert(2)=1400.000000
+    VisTable_Alert(3)=1700.000000
+    VisTable_Alert(4)=2000.000000
+    VisTable_Investigate(1)=1600.000000
+    VisTable_Investigate(2)=1900.000000
+    VisTable_Investigate(3)=2200.000000
+    VisTable_Investigate(4)=2500.000000
+    SmellRadius=350.000000
     TurnSpeed_Alert=16384
     bIsDog=true
     DrawType=DT_Sprite
-    SoundRadiusSaturation=50.0000000
-    CollisionHeight=50.0000000
+    SoundRadiusSaturation=50.000000
+    CollisionHeight=50.000000
     bIsNPCPawn=true
 }

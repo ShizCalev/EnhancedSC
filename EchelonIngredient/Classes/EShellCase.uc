@@ -77,13 +77,13 @@ function Eject(Vector Vel)
 
 defaultproperties
 {
-    MaxSpeed=1000.0000000
+    MaxSpeed=1000.000000
     DrawType=DT_StaticMesh
-    LifeSpan=3.0000000
+    LifeSpan=3.000000
     StopSoundsWhenKilled=true
     bCollideActors=false
-    HeatIntensity=0.8000000
-    Mass=1.0000000
+    HeatIntensity=0.800000
+    Mass=1.000000
     bBounce=true
     bFixedRotationDir=true
 }

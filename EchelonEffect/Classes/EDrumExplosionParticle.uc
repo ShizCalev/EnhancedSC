@@ -68,5 +68,5 @@ defaultproperties
         Name="SpriteEmitter1"
     End Object
     Emitters(1)=SpriteEmitter'SpriteEmitter1'
-    SoundRadiusSaturation=1000.0000000
+    SoundRadiusSaturation=1000.000000
 }

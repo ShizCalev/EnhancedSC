@@ -129,6 +129,6 @@ defaultproperties
     Category=CAT_GADGETS
     ObjectHudClass=Class'ELaserMicView'
     StaticMesh=none
-    CollisionRadius=4.0000000
-    CollisionHeight=4.0000000
+    CollisionRadius=4.000000
+    CollisionHeight=4.000000
 }

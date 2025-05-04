@@ -7,5 +7,5 @@ defaultproperties
 {
     ShellSound=Sound'GunCommon.Play_Switch_ShellSingleImpact'
     StaticMesh=StaticMesh'EMeshIngredient.weapon.CaseBig'
-    DrawScale=0.7500000
+    DrawScale=0.750000
 }

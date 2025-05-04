@@ -86,7 +86,7 @@ state s_Reloading
 
 defaultproperties
 {
-    SliderOffset=(X=5.1390000,Y=0.0000000,Z=6.5780000)
+    SliderOffset=(X=5.139000,Y=0.000000,Z=6.578000)
     Category=CAT_GADGETS
     bPickable=true
 }

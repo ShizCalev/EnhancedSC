@@ -69,7 +69,7 @@ defaultproperties
 {
     GearSoundWalk=Sound'GearCommon.Play_Random_CivilGearWalk'
     GearSoundRun=Sound'GearCommon.Play_Random_CivilGearRun'
-    AccuracyDeviation=1.4000000
+    AccuracyDeviation=1.400000
     bIsHotBlooded=false
     GearSoundFall=Sound'GearCommon.Play_CivilGearFall'
     Sounds_AttackMove=Sound'CiaAgentMale.Play_random_AGMCombatMove'

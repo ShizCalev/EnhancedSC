@@ -21,7 +21,7 @@ var() vector
 
 defaultproperties
 {
-    Amplitude=1.0000000
-    Frequency=1.0000000
-    Wavelength=1.0000000
+    Amplitude=1.000000
+    Frequency=1.000000
+    Wavelength=1.000000
 }

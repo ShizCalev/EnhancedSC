@@ -216,5 +216,5 @@ defaultproperties
     ConfirmTextureDetailText="Increasing texture detail above its default value may degrade performance on some machines.\\n\\nAre you sure you want to make this change?"
     ConfirmDriverTitle="Change Video Driver"
     ConfirmDriverText="This option will restart Unreal now, and enable you to change your video driver.  Do you want to do this?"
-    ControlOffset=20.0000000
+    ControlOffset=20.000000
 }

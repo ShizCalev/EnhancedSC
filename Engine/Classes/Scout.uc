@@ -13,8 +13,8 @@ function PreBeginPlay()
 
 defaultproperties
 {
-    AccelRate=1.0000000
-    CollisionRadius=52.0000000
+    AccelRate=1.000000
+    CollisionRadius=52.000000
     bCollideActors=false
     bCollideWorld=false
     bBlockPlayers=false

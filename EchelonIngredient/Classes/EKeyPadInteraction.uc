@@ -171,6 +171,6 @@ function int GetValidkey()
 
 defaultproperties
 {
-    ViewRelativeLocation=(X=15.0000000,Y=-4.0000000,Z=0.0000000)
+    ViewRelativeLocation=(X=15.000000,Y=-4.000000,Z=0.000000)
     ViewRelativeRotation=(Pitch=-2000,Yaw=32768,Roll=0)
 }

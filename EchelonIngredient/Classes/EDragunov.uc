@@ -11,14 +11,14 @@ defaultproperties
     MaxAmmo=20
     ClipAmmo=10
     ClipMaxAmmo=10
-    RateOfFire=0.7500000
+    RateOfFire=0.750000
     BaseDamage=300
     FireNoiseRadius=200
     FireSingleShotSound=Sound'Gun.Play_DRAGSingleShot'
     ReloadSound=Sound'Gun.Play_DRAGReload'
     EmptySound=Sound'GunCommon.Play_RifleEmpty'
     EjectedClass=Class'EShellCaseBig'
-    EjectedOffset=(X=16.8423000,Y=1.6204000,Z=5.4418000)
-    MuzzleOffset=(X=110.0000000,Y=0.0000000,Z=9.0000000)
+    EjectedOffset=(X=16.842300,Y=1.620400,Z=5.441800)
+    MuzzleOffset=(X=110.000000,Y=0.000000,Z=9.000000)
     StaticMesh=StaticMesh'EMeshIngredient.weapon.dragunov'
 }

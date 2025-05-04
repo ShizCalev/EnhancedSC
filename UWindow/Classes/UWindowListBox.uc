@@ -406,7 +406,7 @@ function MouseWheelUp(FLOAT X, FLOAT Y)
 
 defaultproperties
 {
-    ItemHeight=10.0000000
+    ItemHeight=10.000000
     m_IFirstItemYOffset=3
     ListClass=Class'UWindowListBoxItem'
     TextColor=(R=255,G=255,B=255,A=255)

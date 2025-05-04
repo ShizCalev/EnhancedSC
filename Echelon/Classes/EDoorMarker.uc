@@ -167,7 +167,7 @@ defaultproperties
     bDoNotUseAsHidePoint=true
     bStatic=false
     bCollideWhenPlacing=false
-    CollisionRadius=200.0000000
+    CollisionRadius=200.000000
     bCollideActors=true
     bCollideWorld=false
     bIsNavMarker=true

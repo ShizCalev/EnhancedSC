@@ -215,21 +215,21 @@ state s_Fixed
 
 defaultproperties
 {
-    m_yawSpeed=40000.0000000
-    m_pitchSpeed=25000.0000000
+    m_yawSpeed=40000.000000
+    m_pitchSpeed=25000.000000
     m_minPitch=-16380
     m_maxPitch=16380
-    m_pitchCurveBias=0.2000000
-    m_constraintSpeed=30000.0000000
-    m_resetPitchSpeed=45000.0000000
-    m_resetYawSpeed=75000.0000000
-    m_absoluteMinDist=25.0000000
-    m_targetZMaxDist=100.0000000
-    m_collisionRadius=15.0000000
-    m_collisionHeight=15.0000000
-    m_NPCDistance=200.0000000
-    m_closeupDist=200.0000000
-    m_closeupHeight=20.0000000
-    m_closeupDamping=0.6000000
+    m_pitchCurveBias=0.200000
+    m_constraintSpeed=30000.000000
+    m_resetPitchSpeed=45000.000000
+    m_resetYawSpeed=75000.000000
+    m_absoluteMinDist=25.000000
+    m_targetZMaxDist=100.000000
+    m_collisionRadius=15.000000
+    m_collisionHeight=15.000000
+    m_NPCDistance=200.000000
+    m_closeupDist=200.000000
+    m_closeupHeight=20.000000
+    m_closeupDamping=0.600000
     bHidden=true
 }

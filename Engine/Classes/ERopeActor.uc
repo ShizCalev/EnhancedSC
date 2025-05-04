@@ -9,8 +9,8 @@ var int   nbSeg;
 defaultproperties
 {
     bUnlit=true
-    CollisionRadius=0.0000000
-    CollisionHeight=0.0000000
+    CollisionRadius=0.000000
+    CollisionHeight=0.000000
     bIsRope=true
     bIsTouchable=false
     bIsNPCRelevant=false

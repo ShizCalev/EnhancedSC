@@ -114,7 +114,7 @@ state() s_Off
 
 defaultproperties
 {
-    ReTriggerDelay=0.2000000
+    ReTriggerDelay=0.200000
     bDamageable=false
     bIsSwitchObject=true
     InteractionClass=Class'ETriggerInteraction'

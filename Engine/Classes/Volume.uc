@@ -18,7 +18,7 @@ native function bool Encompasses(Actor Other); // returns true if center of acto
 // ***********************************************************************************************
 // * BEGIN UBI MODIF MClarke (June 17th 2002)
 // ***********************************************************************************************
-final native (1551) function bool EncompLoc(Vector _Loc); // returns true if Loc is within volume
+final native(1551) function bool EncompLoc(Vector _Loc); // returns true if Loc is within volume
 // ***********************************************************************************************
 // * END UBI MODIF 
 // ***********************************************************************************************

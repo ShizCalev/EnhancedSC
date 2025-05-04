@@ -21,8 +21,8 @@ var Matrix M;
 
 defaultproperties
 {
-    UOscillationRate=1.0000000
-    VOscillationRate=1.0000000
-    UOscillationAmplitude=0.1000000
-    VOscillationAmplitude=0.1000000
+    UOscillationRate=1.000000
+    VOscillationRate=1.000000
+    UOscillationAmplitude=0.100000
+    VOscillationAmplitude=0.100000
 }

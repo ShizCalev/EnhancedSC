@@ -522,6 +522,6 @@ defaultproperties
     bAcceptsProjectors=false
     StaticMesh=StaticMesh'EMeshIngredient.Elevator.elevatorpanel'
     AmbientGlow=64
-    HeatIntensity=0.8000000
+    HeatIntensity=0.800000
     InteractionClass=Class'EElevatorInteraction'
 }

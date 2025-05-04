@@ -8,7 +8,7 @@ defaultproperties
     MaxAmmo=60
     ClipAmmo=20
     ClipMaxAmmo=20
-    RateOfFire=0.0710000
+    RateOfFire=0.071000
     BaseDamage=100
     FireNoiseRadius=2000
     FireSingleShotSound=Sound'Gun.Play_VZ61SingleShot'
@@ -17,8 +17,8 @@ defaultproperties
     ReloadSound=Sound'Gun.Play_VZ61Reload'
     EmptySound=Sound'GunCommon.Play_RifleEmpty'
     EjectedClass=Class'EShellCaseSmall'
-    EjectedOffset=(X=8.7864000,Y=1.1104000,Z=10.1073000)
+    EjectedOffset=(X=8.786400,Y=1.110400,Z=10.107300)
     MuzzleFlashClass=Class'EMuzzleFlash'
-    MuzzleOffset=(X=21.5561400,Y=0.0000200,Z=9.8127400)
+    MuzzleOffset=(X=21.556140,Y=0.000020,Z=9.812740)
     StaticMesh=StaticMesh'EMeshIngredient.weapon.Mk23'
 }

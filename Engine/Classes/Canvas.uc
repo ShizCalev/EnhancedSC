@@ -226,8 +226,8 @@ defaultproperties
     Verdana=Font'Verdana'
     EMissionFont=Font'EMissionFont'
     bDrawTile=true
-    Z=1.0000000
-	Style=1 // Joshua - Style=STY_Normal does not work here
+    Z=1.000000
+    Style=1 // Joshua - Canvas.Style is a byte, not a proper ERenderStyle enum
     DrawColor=(R=127,G=127,B=127,A=255)
     SmallFont=Font'SmallFont'
     MedFont=Font'MediumFont'

@@ -8,7 +8,7 @@ defaultproperties
     MaxAmmo=90
     ClipAmmo=30
     ClipMaxAmmo=30
-    RateOfFire=0.0920000
+    RateOfFire=0.092000
     BaseDamage=125
     FireNoiseRadius=2000
     FireSingleShotSound=Sound'Gun.Play_QBZ9SingleShot'
@@ -17,8 +17,8 @@ defaultproperties
     ReloadSound=Sound'Gun.Play_QBZ9Reload'
     EmptySound=Sound'GunCommon.Play_RifleEmpty'
     EjectedClass=Class'EShellCaseBig'
-    EjectedOffset=(X=-12.0000000,Y=1.7000000,Z=10.5000000)
+    EjectedOffset=(X=-12.000000,Y=1.700000,Z=10.500000)
     MuzzleFlashClass=Class'EMuzzleFlash'
-    MuzzleOffset=(X=49.6729900,Y=0.0000100,Z=9.1076800)
+    MuzzleOffset=(X=49.672990,Y=0.000010,Z=9.107680)
     StaticMesh=StaticMesh'EMeshIngredient.weapon.QBZType85'
 }

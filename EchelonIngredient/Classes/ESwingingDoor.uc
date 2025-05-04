@@ -318,9 +318,9 @@ function StayOpen(Actor Other, bool pawnOpen, bool playerOpen)
 defaultproperties
 {
     KnobOffsetX=120
-    TimePerQuadrant=1.0000000
+    TimePerQuadrant=1.000000
     TiltPerQuadrant=5
-    MoveThreshold=0.1000000
+    MoveThreshold=0.100000
     OpeningSound=Sound'Door.Play_WoodDoorOpen'
     OpeningStealthSound=Sound'Door.Play_WoodDoorOpenSilent'
     ClosedSound=Sound'Door.Play_WoodDoorClose'
