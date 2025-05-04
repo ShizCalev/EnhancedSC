@@ -419,7 +419,7 @@ function IncreaseAlarmStage()
 		    AlarmPattern.InitPattern();
     }
 
-	// Joshua - Elite Mode, 3 alarms and the mission's over.
+	// Joshua - Elite Mode, 3 alarms and the mission's over
     if (EchelonGameInfo(Level.Game).bEliteMode)
 	{
 		if(AlarmStage < 2)

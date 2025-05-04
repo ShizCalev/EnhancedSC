@@ -2,8 +2,8 @@
 // EPlayerInfo.
 //=============================================================================
 class EPlayerInfo extends Actor 
-	  config(SplinterCellUser)
-      //config(Enhanced) // Joshua - Class, configurable in Enhanced config
+	  //config(SplinterCellUser)
+      config(Enhanced) // Joshua - Class, configurable in Enhanced config
 	  native;
 
 /*-----------------------------------------------------------------------------
@@ -37,10 +37,23 @@ var config int    SfxVol;
 var config int    AmbVol;
 var config int    iLastSaveType;
 var config bool   bValidProfile;
-// Joshua - Enable once Engine package gets fixed
-//var config bool   bUnlockAllMaps; // Joshua - New variable to unlock all maps in the game
+var config bool   bUnlockAllLevels; // Joshua - New variable to unlock all levels in the game
 
 defaultproperties
 {
+    // Joshua - Adding UnlockedMap properties, previously set in SplinterCellUser.ini (not sure if needed)
+    UnlockedMap(0)="0_0_2_Training"
+    UnlockedMap(1)="1_1_0Tbilisi"
+    UnlockedMap(2)="1_2_1DefenseMinistry"
+    UnlockedMap(3)="1_3_2CaspianOilRefinery"
+    UnlockedMap(4)="2_1_0CIA"
+    UnlockedMap(5)="2_2_1_Kalinatek"
+    UnlockedMap(6)="4_1_1ChineseEmbassy"
+    UnlockedMap(7)="4_2_1_Abattoir"
+    UnlockedMap(8)="4_3_0ChineseEmbassy"
+    UnlockedMap(9)="5_1_1_PresidentialPalace"
+    UnlockedMap(10)="1_6_1_1KolaCell"
+    UnlockedMap(11)="1_7_1_1VselkaInfiltration"
+    UnlockedMap(12)="1_7_1_2Vselka"
     bHidden=true
 }

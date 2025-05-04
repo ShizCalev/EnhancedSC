@@ -219,9 +219,6 @@ var int iGameOverMsg;
 var int iCheatMask;
 var bool bQuickLoad;
 
-var(Enhanced) config bool bUnlockAllLevels; // Joshua - Unlocks all levels, bypassing profile progression
-// Engine.EPlayerInfo.bUnlockAllLevels would be ideal but Engine package currently has issues compiling
-
 var bool bCheckpoint; // Joshua - New variable for Checkpoints
 var string CheckpointLevel; // Joshua - New variable to keep track which level the Checkpoint was on
 

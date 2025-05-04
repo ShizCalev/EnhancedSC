@@ -79,7 +79,7 @@ function bool KeyEvent( EInputKey Key, EInputAction Action, FLOAT Delta )
 			Epc.SetKey("Joy3 Scope", "");
 			Epc.SetKey("Joy4 Jump", "");
 			Epc.SetKey("Joy5 QuickInventory", "");
-			Epc.SetKey("Joy6 QuickInventory", ""); // Joshua - Pandora used whistling here.
+			Epc.SetKey("Joy6 QuickInventory", ""); // Joshua - Pandora used whistling here
 			Epc.SetKey("Joy7 AltFire", "");
 			Epc.SetKey("Joy8 Fire", "");
 			//Epc.SetKey("Joy9 None", "");
@@ -102,7 +102,7 @@ function bool KeyEvent( EInputKey Key, EInputAction Action, FLOAT Delta )
 			if (Epc.GetStateName() == 's_FirstPersonTargeting' || Epc.GetStateName() == 's_PlayerSniping')
 			{
 				Epc.SetKey("Joy1 ReloadGun", "");
-				Epc.SetKey("Joy11 SwitchROF", ""); // Joshua - Pandora used both thumbsticks to snipe because it had no ROF.
+				Epc.SetKey("Joy11 SwitchROF", ""); // Joshua - Pandora used both thumbsticks to snipe because it had no ROF
 				Epc.SetKey("Joy12 ToggleSnipe", "");
 			}
 			break;
@@ -140,7 +140,7 @@ function bool KeyEvent( EInputKey Key, EInputAction Action, FLOAT Delta )
 			}
 			break;
 
-		case CS_User: // Joshua - No hardcoded binds, custom controller bindings using SplinterCellUser.ini.
+		case CS_User: // Joshua - No hardcoded binds, custom controller bindings using SplinterCellUser.ini
 			break;
 
 	}
