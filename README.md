@@ -19,7 +19,7 @@ The latest version of Enhanced SC can be found in the [Releases](https://github.
 > [!IMPORTANT]
 > On Linux, you'll need to use [dgVoodoo v2.79.3](https://github.com/user-attachments/files/19996965/dgVoodoo2_79_3.zip), as later versions currently cause the game to crash. Extract this version of dgVoodoo2 into your Splinter Cell directory, and overwrite the newer version when prompted.
 
-Enhanced SC, [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2), and [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack) won't load without a DLL override in your Wine prefix.
+Enhanced SC, [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2), [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack), and [Xidi](https://github.com/samuelgr/Xidi) won't load without a DLL override in your Wine prefix.
 
 To add the DLL override in Steam, right-click the game in the library and select `Properties`.
 
