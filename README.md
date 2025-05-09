@@ -25,13 +25,11 @@ To add the DLL override in Steam, right-click the game in the library and select
 
 In the General tab, add the following to the launch options:
 ```
-WINEDLLOVERRIDES="D3D8,msacm32,msvfw32=n,b" %command%
+WINEDLLOVERRIDES="D3D8,msacm32,msvfw32,dinput8=n,b" %command%
 ```
 In the Compatibility tab, check `Force the use of a specific Steam Play compatibility tool` and select `Proton 9.0-4`. Other versions might work, but this one has been tested.
 
 <img src="https://github.com/user-attachments/assets/8082d3c8-f5bb-464a-8432-2e66e5ed803e" width="640"/>
-
-Unfortunately, [Xidi](https://github.com/samuelgr/Xidi) currently causes the game to crash on Linux, so controller support isn't working yet. As a result, `dinput8` will not be included in the DLL override.
 
 For more detailed instructions on how to override a DLL, refer to this [guide](https://cookieplmonster.github.io/setup-instructions/#proton-wine).
 
