@@ -33,6 +33,19 @@ In the Compatibility tab, check `Force the use of a specific Steam Play compatib
 
 For more detailed instructions on how to override a DLL, refer to this [guide](https://cookieplmonster.github.io/setup-instructions/#proton-wine).
 
+To use [Xidi](https://github.com/samuelgr/Xidi), you must install the `Visual C++ 2015–2012 libraries` via [Protontricks](https://github.com/Matoking/protontricks).
+
+<details>
+  <summary>Protontricks Setup</summary>
+<img src="https://github.com/user-attachments/assets/829f91f9-a72a-4c90-b038-2349099a261a" width="640"/>
+
+<img src="https://github.com/user-attachments/assets/9d54a414-f867-461e-bc60-bc40150ae7aa" width="640"/>
+
+<img src="https://github.com/user-attachments/assets/7e66900c-a800-4a19-862d-367be857fa9c" width="640"/>
+
+<img src="https://github.com/user-attachments/assets/8ebdbfcc-daca-4f80-b96f-23f78c7b0559" width="640"/>
+</details>
+
 ## Uninstallation
 To manually remove Enhanced SC from your game installation:
 - Navigate to the `System` folder, delete the `Enhanced` folder, `Engine.dll`, and `Enhanced.ini`.
