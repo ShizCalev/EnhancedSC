@@ -27,24 +27,11 @@ In the General tab, add the following to the launch options:
 ```
 WINEDLLOVERRIDES="D3D8,msacm32,msvfw32,dinput8=n,b" %command%
 ```
-In the Compatibility tab, check `Force the use of a specific Steam Play compatibility tool` and select `Proton 9.0-4`. Other versions might work, but this one has been tested.
+In the Compatibility tab, check `Force the use of a specific Steam Play compatibility tool` and select `Proton 10.0-1 (beta)`. Other versions may work, but this one has been tested.
 
-<img src="https://github.com/user-attachments/assets/8082d3c8-f5bb-464a-8432-2e66e5ed803e" width="640"/>
+<img src="https://github.com/user-attachments/assets/93d1d1f4-3c84-49e1-b481-621ecefe9061" width="640"/>
 
 For more detailed instructions on how to override a DLL, refer to this [guide](https://cookieplmonster.github.io/setup-instructions/#proton-wine).
-
-To use [Xidi](https://github.com/samuelgr/Xidi), you must install the `Visual C++ 2015–2012 libraries` via [Protontricks](https://github.com/Matoking/protontricks).
-
-<details>
-  <summary>Protontricks Setup</summary>
-<img src="https://github.com/user-attachments/assets/829f91f9-a72a-4c90-b038-2349099a261a" width="640"/>
-
-<img src="https://github.com/user-attachments/assets/9d54a414-f867-461e-bc60-bc40150ae7aa" width="640"/>
-
-<img src="https://github.com/user-attachments/assets/7e66900c-a800-4a19-862d-367be857fa9c" width="640"/>
-
-<img src="https://github.com/user-attachments/assets/8ebdbfcc-daca-4f80-b96f-23f78c7b0559" width="640"/>
-</details>
 
 ## Uninstallation
 To manually remove Enhanced SC from your game installation:
