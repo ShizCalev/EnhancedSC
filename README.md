@@ -15,10 +15,10 @@ The latest version of Enhanced SC can be found in the [Releases](https://github.
 > [!NOTE]
 > Your original saves will not be deleted, but they will appear as missing. Enhanced intentionally hides them because they aren't compatible with this version.
 
-## Linux/Steam Deck Installation
+## Linux / Steam Deck Installation
 **This section is intended for Linux only, and should be skipped if installing on Windows.**
 
-Download [Enhanced SC v1.2 Linux](https://github.com/Joshhhuaaa/EnhancedSC/releases/download/v1.2/Enhanced-SC-v1.2-Linux.7z) instead of the standard release. This version includes dgVoodoo v2.79.3 for Linux, since newer versions currently cause the game to crash.
+Download [Enhanced SC v1.2 Linux (Steam Deck)](https://github.com/Joshhhuaaa/EnhancedSC/releases/download/v1.2/Enhanced-SC-v1.2-Linux.7z) instead of the standard release. This version includes dgVoodoo v2.79.3 for Linux, since newer versions currently cause the game to crash.
 
 Enhanced SC, [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2), [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack), and [Xidi](https://github.com/samuelgr/Xidi) won't load without a DLL override in your Wine prefix.
 
