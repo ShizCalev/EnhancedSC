@@ -3,7 +3,7 @@ A major patch for the original Splinter Cell, fixing bugs and adding gameplay im
 
 For a full list of patch notes, refer to the [Patch Notes](PatchNotes.md) page.
 
-[![Discord](https://img.shields.io/discord/934536491420508281?color=%237289DA&label=Members&logo=discord&logoColor=white)](https://discord.gg/k6mZJcfjSh)
+[![Discord](https://img.shields.io/discord/1371978442194817254?color=%237289DA&label=Members&logo=discord&logoColor=white)](https://discord.gg/k6mZJcfjSh)
 
 ## Installation
 The latest version of Enhanced SC can be found in the [Releases](https://github.com/Joshhhuaaa/EnhancedSC/releases) page. Please note that saves from Enhanced SC are not compatible with the original version of the game.
