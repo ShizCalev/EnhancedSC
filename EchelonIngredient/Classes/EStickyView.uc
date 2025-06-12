@@ -29,12 +29,18 @@ state s_Online
 {
 	function DrawView(HUD Hud, ECanvas Canvas)
 	{
+        local EPlayerController EPC; // Joshua - Show cam toggle
+        EPC = EPlayerController(Camera.Owner);
+
         Super.DrawView(Hud, Canvas);
 
-        // Sticky Cam specific stuff
-        DrawZoomMeter(Canvas);
-        DrawDistanceMeter(Canvas);
-        DrawPitchBars(Canvas);
+        if (EPC.bShowScope && EPC.bShowHUD)
+        {
+            // Sticky Cam specific stuff
+            DrawZoomMeter(Canvas);
+            DrawDistanceMeter(Canvas);
+            DrawPitchBars(Canvas);
+        }
 	}
 }
 

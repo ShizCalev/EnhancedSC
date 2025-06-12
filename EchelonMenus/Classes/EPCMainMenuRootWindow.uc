@@ -125,6 +125,7 @@ function ChangeCurrentWidget( eGameWidgetID widgetID)
 	m_OptionsWidget.m_ControlsArea.m_bFirstRefresh = true;
 	m_OptionsWidget.m_SoundsArea.m_bFirstRefresh = true;
 	m_OptionsWidget.m_GraphicArea.m_bFirstRefresh = true;
+	m_OptionsWidget.m_EnhancedArea.m_bFirstRefresh = true; // Joshua - Enhanced area settings
 
 
     if(m_CurrentWidget != None)

@@ -133,6 +133,7 @@ HostageDEAD:
     Log("");
 HostageSam:
     Log("");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     PlayerMove(false);
     Speech(Localize("P_4_2_2_Abt_LambertNote", "Speech_0048L", "Localization\\P_4_2_2_Abattoir"), Sound'S4_2_Voice.Play_42_95_01', 1, 0, TR_HEADQUARTER, 0, true);
@@ -152,6 +153,7 @@ cam2:
     CinCamera(0, 'EFocusPoint20', 'EFocusPoint19',);
 JumpCam:
     Log("");
+    SetProfileDeletion();
     Sleep(3);
     CinCamera(1, , ,);
     PlayerMove(false);

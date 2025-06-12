@@ -39,6 +39,26 @@ function InitPattern()
             Characters[2] = P.controller;
     }
 
+    // Joshua - Chinese Embassy 2 requires 2 bullets to shoot lights to avoid detection for Elite mode
+    if (!bInit && EchelonGameInfo(Level.Game).bEliteMode && EPlayerController(Characters[0]) != None && EPlayerController(Characters[0]).HandGun != None)
+    {
+        if(EPlayerController(Characters[0]).HandGun.Ammo == 0 && EPlayerController(Characters[0]).HandGun.ClipAmmo == 0)
+        {
+            if(EPlayerController(Characters[0]).playerStats.BulletFired == 0)
+            {
+                // No bullets fired, give 2
+                EPlayerController(Characters[0]).HandGun.Ammo = 2;
+                EPlayerController(Characters[0]).HandGun.ClipAmmo = 2;
+            }
+            else if(EPlayerController(Characters[0]).playerStats.BulletFired == 1)
+            {
+                // 1 bullet fired, give 1
+                EPlayerController(Characters[0]).HandGun.Ammo = 1;
+                EPlayerController(Characters[0]).HandGun.ClipAmmo = 1;
+            }
+        }
+    }
+
     if( !bInit )
     {
     bInit=TRUE;
@@ -55,6 +75,7 @@ state Pattern
 Begin:
 TruckFailed:
     Log("Communicator 43_32");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_4_3_2_Communications", "Speech_0001L", "Localization\\P_4_3_2ChineseEmbassy"), Sound'S4_3_2Voice.Play_43_32_01', 1, 0, TR_HEADQUARTER, 0, true);
@@ -88,6 +109,7 @@ FeirongFiles:
     End();
 KeypadFailedA:
     Log("Communicator 43_53 'Thermal Murder Failure'");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_4_3_2_Communications", "Speech_0014L", "Localization\\P_4_3_2ChineseEmbassy"), Sound'S4_3_Voice.Play_43_53_01', 1, 0, TR_HEADQUARTER, 0, true);
@@ -96,6 +118,7 @@ KeypadFailedA:
     End();
 KeypadFailedB:
     Log("Communicator 43_12");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_4_3_2_Communications", "Speech_0015L", "Localization\\P_4_3_2ChineseEmbassy"), Sound'S4_3_Voice.Play_43_12_01', 1, 0, TR_HEADQUARTER, 0, true);
@@ -104,6 +127,7 @@ KeypadFailedB:
     End();
 GenericFail:
     Log("If Sam fails something");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_4_3_2_Communications", "Speech_0026L", "Localization\\P_4_3_2ChineseEmbassy"), Sound'Lambert.Play_41_95_01', 1, 0, TR_HEADQUARTER, 0, true);

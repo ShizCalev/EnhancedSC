@@ -97,6 +97,7 @@ FireTrapBTrigger:
     End();
 FeirongObjectiveNotDone:
     Log("FeirongObjectiveNotDone");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
 	SoundActors[1].PlaySound(Sound'Gun.Play_MAKASingleShot', SLOT_SFX);
     Sleep(1);

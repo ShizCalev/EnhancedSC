@@ -43,7 +43,7 @@ function InitPattern()
         XboxCamera.PatrolAngle = 60;
         XboxCamera.PatrolSpeed = 3;
         XboxCamera.VisibilityMaxDistance = 500.0;
-        XboxCamera.TriggerPatternJustOnce = False;
+        XboxCamera.TriggerPatternJustOnce = false;
         XboxCamera.NeutralRotation.PitchDegreeModifier = -25;
         XboxCamera.NeutralRotation.YawDegreeModifier = 0;
         XboxCamera.NeutralRotation.RollDegreeModifier = 0;
@@ -79,7 +79,7 @@ function InitPattern()
 
         ForEach DynamicActors(class'EGameplayObject', EGO)
         {
-            if (C.name == 'EIRSensor0')
+            if (EGO.name == 'ECeilingCamera1')
             {
                 XboxCamera.Alarm = EGO.Alarm;
                 XboxCamera.GroupAI = EGO.GroupAI;

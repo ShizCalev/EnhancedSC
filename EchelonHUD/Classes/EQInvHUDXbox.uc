@@ -147,9 +147,12 @@ function PostRender(Canvas C)
 	local ECanvas Canvas;
 	Canvas = ECanvas(C);
 
-    DrawHandItem(Canvas, SCREEN_END_Y - eGame.HUD_OFFSET_Y - ITEMBOX_HEIGHT_L - ITEMBOX_HEIGHT_B - SPACE_BETWEEN_BOX - SPACE_EXTRA_GOAL, false);
-    DrawStealthMeter(Canvas);
-    DrawRateOfFire(Canvas);
+	if (Epc.bShowInventory && Epc.bShowHUD)
+	{
+        DrawHandItem(Canvas, SCREEN_END_Y - eGame.HUD_OFFSET_Y - ITEMBOX_HEIGHT_L - ITEMBOX_HEIGHT_B - SPACE_BETWEEN_BOX - SPACE_EXTRA_GOAL, false);
+        DrawStealthMeter(Canvas);
+        DrawRateOfFire(Canvas);
+    }
 
 
 
@@ -158,17 +161,15 @@ function PostRender(Canvas C)
 	{
 		sCurrentGoal = Localize(Epc.CurrentGoalSection, Epc.CurrentGoalKey, Epc.CurrentGoalPackage);
 
-		if ( sCurrentGoal != "(null)" ) 
+		if ( sCurrentGoal != "(null)" && Epc.bShowCurrentGoal && Epc.bShowHUD ) 
 			DisplayCurrentGoal(Canvas);
 	}
 
 	// Display icon 
-	if (Epc.bNewGoal || Epc.bNewNote || Epc.bNewRecon )
+    if ((Epc.bNewGoal || Epc.bNewNote || Epc.bNewRecon) && Epc.bShowMissionInformation && Epc.bShowHUD)
 	{		
 		DisplayIconsGoalNoteRecon(Canvas);
 	}
-
-
 }
 
 //-------------------------------------------------------------------------------
@@ -316,7 +317,10 @@ state s_QDisplayXbox
 			return;
 		}
 
-		Epc.SetPause(true);
+        if (Epc.bInteractionPause) // Joshua - Adding interaction pause option
+			Epc.SetPause(true);
+		else
+			EPC.bStopInput = true;
 		bPreviousConfig = false;
 
 		if ( !Epc.EPawn.IsPlaying(Sound'Interface.Play_OpenPackSac') )
@@ -340,7 +344,10 @@ state s_QDisplayXbox
 			Epc.EPawn.playsound(Sound'Interface.Play_ClosePackSac', SLOT_Interface);
 
         Epc.FakeMouseToggle(false);
-		Epc.SetPause(false);
+        if (Epc.bInteractionPause) // Joshua - Adding interaction pause option
+			Epc.SetPause(false);
+		else
+			Epc.bStopInput = false;
 
 		CurrentItem		= -1;
 		CurrentCategory = -1;
@@ -1402,6 +1409,6 @@ defaultproperties
     TextSelectedColor=(R=96,G=101,B=79,A=255)
     TextDisabledColor=(R=51,G=56,B=41,A=255)
     HUDColor=(R=128,G=128,B=128,A=255)
-    bHidden=True
-    bAlwaysTick=True
+    bHidden=true
+    bAlwaysTick=true
 }

@@ -5,9 +5,12 @@
 [Ss]ounds
 [Ss]taticMeshes
 [Ss]ystem
+[Tt]extures/*
+![Tt]extures/[Ff]ont/
 [Vv]ideos
 
 */.vs/*
+.vscode/
 *.log
 *.zip
 *.7z
@@ -20,5 +23,3 @@
 *.scl
 *.u
 *.bik
-
-![Ss]ystem/Enhanced.ini

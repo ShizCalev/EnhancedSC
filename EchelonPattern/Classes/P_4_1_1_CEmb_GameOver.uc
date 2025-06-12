@@ -54,6 +54,7 @@ state Pattern
 Begin:
 MissionFailed:
     Log("MissionFailed");
+    SetProfileDeletion();
     PlayerMove(false);
     IgnoreAlarmStage(TRUE);
     DisableMessages(TRUE, TRUE);

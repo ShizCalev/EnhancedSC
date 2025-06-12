@@ -154,6 +154,7 @@ GrimReturn:
     End();
 GrimDown:
     Log("Grim has been killed or knocked out");
+    SetProfileDeletion();
     SetExclusivity(TRUE);
     DisableMessages(TRUE, TRUE);
     PlayerMove(false);

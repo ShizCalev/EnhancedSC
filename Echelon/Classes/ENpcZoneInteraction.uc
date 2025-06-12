@@ -2,6 +2,7 @@ class ENpcZoneInteraction extends EInteractObject;
 
 var	EPawn					Npc;
 var	EPlayerController		Epc;
+var bool                    bAlreadyInterrogated; // Joshua - Flag to track if this NPC has already been interrogated
 
 // conversation
 var EPattern				ConversationPattern;
@@ -304,7 +305,6 @@ state s_NpcTalkInteraction
 			InitInteract(EchelonGameInfo(Level.Game).pPlayer);
 	}
 	}
-
 	function InitInteract( Controller Instigator )
 	{
 		// Set the player Controller
@@ -314,10 +314,17 @@ state s_NpcTalkInteraction
 		Epc = EPlayerController(Instigator);
 		ConversationPattern.Characters[0] = Instigator;
 		ConversationPattern.Characters[1] = Npc.Controller;
-
 		// Begin interrogation with a grabbed guy .. shake him
 		if( Instigator.GetStateName() == 's_Grab' )
+		{
 			Instigator.GotoState(,'ForceInterrogate');
+			// Only increment the interrogation stat if this NPC hasn't been interrogated before
+			if( !bAlreadyInterrogated )
+			{
+				Epc.playerStats.AddStat("NPCsInterrogated");
+				bAlreadyInterrogated = true;
+			}
+		}
 		// Begin interrogation shilw walking .. just freeze
 		else
 		{
@@ -343,8 +350,8 @@ state s_NpcTalkInteraction
 			str = Localize("Interaction", "NpcZone2", "Localization\\HUD");
 		else
 			str = Localize("Interaction", "NpcZone3", "Localization\\HUD");
-
-			return str @ Localize("Interaction", "NpcZone4", "Localization\\HUD");
+			
+		return str $ Localize("Interaction", "NpcZone4", "Localization\\HUD"); // Joshua - Removed space after Interrogate / Talk To
 	}
 }
 

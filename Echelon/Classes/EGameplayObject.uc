@@ -379,10 +379,19 @@ event Destructed()
 			break;
 		}
 	}
-
+	
 	// send event to GroupAI when destroyed
 	if ( GroupAI != None && DestroyedJumpLabel != '' )
 		GroupAI.SendJumpEvent(DestroyedJumpLabel, false, false);
+
+	// Joshua - Only track stats if the player destroyed the object and it's not an EGameplayObjectPattern
+	if(Instigator != None && Instigator.bIsPlayerPawn && !IsA('EGameplayObjectPattern'))
+	{
+		if (ObjectLights.Length > 0) // If object has lights, consider it light destroyed
+			EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("LightDestroyed");
+		else
+			EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("ObjectDestroyed");
+	}
 
 	if( bDestroyWhenDestructed )
 		Destroy();
@@ -412,6 +421,7 @@ final function Explode()
 	local actor		Victims;
 	local float		damageScale, dist;
 	local vector	dir;
+	local Pawn		OriginalInstigator; // Joshua - Workaround for objects destroyed
 
 	// Sound
 	PlaySound(ExplosionSound, SLOT_SFX);
@@ -429,6 +439,12 @@ final function Explode()
 
 	if ( ExplosionDamage == 0 ) 
 		return;
+
+	// Joshua - If this explosion comes from an EGameplayObjectPattern, clear the Instigator
+	// so objects destroyed by the explosion don't count toward player stats
+	OriginalInstigator = Instigator;
+	if( IsA('EGameplayObjectPattern') )
+		Instigator = None;
 
 	bHurtEntry = true;
 	foreach CollidingActors( class 'Actor', Victims, ExplosionMaxRadius )
@@ -463,6 +479,9 @@ final function Explode()
 			);
 		} 
 	}
+	
+	// Joshua - Restore original instigator
+	Instigator = OriginalInstigator;
 	bHurtEntry = false;
 }
 

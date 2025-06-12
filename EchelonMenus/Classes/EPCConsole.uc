@@ -18,6 +18,7 @@ var BOOL   bShowFakeWindow;
 var BOOL   bMusicPlaying;
 var BOOL   bInGameMenuActive;
 var BOOL   bMainMenuActive;
+var BOOL   bAltHeld; // Joshua - Track Alt key state for Alt+F4
 
 var config BOOL StartMenus;
 var config BOOL HideMenusAtStart;
@@ -215,6 +216,22 @@ state FakeWindow extends UWindow
         
         if(bShowLog)log("Console state FakeWindow KeyEvent eAction"@eAction@"Key"@eKey);
         
+        // Joshua - Track Alt key state for Alt+F4
+        if( eKey == IK_Alt )
+        {
+            if( eAction == IST_Press || eAction == IST_Hold )
+                bAltHeld = true;
+            else if( eAction == IST_Release )
+                bAltHeld = false;
+        }
+        
+        // Joshua - Alt+F4 to quit the game
+        if( bAltHeld && eAction == IST_Press && eKey == IK_F4 )
+        {
+            ViewportOwner.Actor.ConsoleCommand("QUIT");
+            return true;
+        }
+        
         switch(eAction)
         {
         case IST_Release:
@@ -380,9 +397,38 @@ state UWindow
     function bool KeyEvent( EInputKey eKey, EInputAction eAction, FLOAT fDelta )
     {
         local byte k;
-        k = eKey;        
+        local EMainMenuHUD MenuHUD;
+        k = eKey;
         
         if(bShowLog)log("Console state Uwindow KeyEvent eAction"@eAction@"Key"@eKey);
+
+        // Joshua - Track Alt key state for Alt+F4
+        if( eKey == IK_Alt )
+        {
+            if( eAction == IST_Press || eAction == IST_Hold )
+                bAltHeld = true;
+            else if( eAction == IST_Release )
+                bAltHeld = false;
+        }
+        
+        // Joshua - Alt+F4 to quit the game
+        if( bAltHeld && eAction == IST_Press && eKey == IK_F4 )
+        {
+            ViewportOwner.Actor.ConsoleCommand("QUIT");
+            return true;
+        }
+
+        // Joshua - Add functionality to skip inactivity videos
+        if(eAction == IST_Press)
+        {
+            MenuHUD = EchelonMainHUD(ViewportOwner.Actor.myHUD).MainMenuHUD;
+            if(MenuHUD != None && MenuHUD.bInactVideoPlaying)
+            {
+                MenuHUD.bStopInactVideo = True;
+                return true;
+            }
+        }
+
 
         switch(eAction)
         {

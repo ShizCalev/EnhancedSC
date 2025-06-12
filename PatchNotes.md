@@ -1,49 +1,98 @@
 # Enhanced SC Patch Notes
 
 ### Gameplay
-- Frag Grenades have been increased from 100 to 150 damage, making them lethal to enemies on Hard difficulty.
-- The explosion delay for Wall Mines has been reduced from 1.75 seconds to 0.50 seconds to prevent running past the mine before it explodes.
-- Improved the Optic Cable's enter and exit sounds, as the exit sound was previously missing from the PC version.
-- Added an option to use the crouch key to drop similar to later Splinter Cell games.
+- Added Mission Statistics that can be viewed while playing a mission and upon completing a mission.
+- Added a new difficulty called Elite, which removes starting ammo unless required, reduces initial health, disables saves, and includes other level-specific changes.
+- Added a Permadeath Mode, where failing a mission deletes your profile.
+- Added Open Door Stealth as a separate door interaction, similar to Chaos Theory.
+- Improved the Optic Cable's enter and exit sounds, restoring the missing exit sound on PC version.
+- Increased the lifespan for bullet shell casings from 3 seconds to 30 seconds.
+- Added an option to whistle similar to later Splinter Cell games.
+- Added an option to restore the burst fire mode for the SC-20K, featured in builds prior to E3 2002.
+- Added an option to randomize lockpick combinations.
 - Added an option to use any vision mode in Optic Cables similar to later Splinter Cell games.
-- Added an option to use the left and right movement keys to activate Open Door Stealth instead of the back movement key. This is recommended for keyboard users, as the back movement key previously scrolled through options when trying to use Open Door Stealth.
-- Added an option for normalized movement, preventing diagonal input from increasing movement speed.
 - Added an option to enable Thermal Vision across all levels, regardless of their original settings.
-- Added an option to override Sam's mesh across all levels.
-- Added an option to use Xbox difficulty, where Sam starts with 300 HP on Normal and 198 on Hard, compared to the PC default of 200 HP on Normal and 132 on Hard.
-- Added a new challenge mode called Elite, which removes starting ammo, reduces initial health, and disables quick saves and other changes.
-- Added an option to toggle the HUD on or off. `Enhanced.ini` controls the initial setting. In the in-game options, you can assign a keybind to toggle the HUD.
-- The initial speed at the start of missions is now set to the highest value.
+- Added an option to make Frag Grenades lethal to enemies on Hard difficulty.
+- Added an option to control the explosion delay for Wall Mines:
+  - 1.75 seconds (Default)
+  - 0.50 seconds (Elite)
+  - 0.00 seconds (Instant)
+- Added an option for the interaction box and inventory to not pause the game, similar to Chaos Theory.
+- Added an option to restore the checkpoints from the Xbox version.
+- Added an option to use Xbox difficulty, where Sam starts with 300 HP on Normal and 198 HP on Hard, compared to the PC default of 200 HP on Normal and 132 HP on Hard.
+- Added an option to hide letterboxing in cinematics.
+- Added an option to unlock all levels, including their individual parts.
+- Added an option to show/hide individual HUD elements:
+  - Communications Box
+  - Timer
+  - Inventory
+  - Current Goal
+  - Mission Information
+  - Crosshair
+  - Scope Frames
+- Added an option to override Sam's suit across all levels.
 - Xbox renderer textures have been restored to bring lighting closer to the Xbox version.
 - Restored the Xbox light effect for alarm lights when they are triggered.
-- Checkpoints from the Xbox version of the game have been restored.
-- Improved controller support, now more closely aligned with the Xbox version.
+
+### Input
+- Added an option to set the initial movement speed.
+- Added an option for normalized movement, preventing diagonal input from increasing movement speed.
+- Added an option to use the crouch key to drop similar to later Splinter Cell games.
+- Added an option to toggle Back to Wall peek when weapon is equipped.
+- Added an option to toggle the inventory, so holding the key is no longer required, similar to Pandora Tomorrow.
+- Added an option to assign a keybind to toggle the HUD on or off.
+- Improved controller support to more closely match the Xbox version.
   - Vibration is not supported due to the game using DirectInput.
-  - There is some visual errors on the Xbox inventory and pause screen when using ThirteenAG Widescreen Fix.
+  - Some visual errors may appear on the Xbox inventory and pause screens when using the ThirteenAG Widescreen Fix.
 - Added an option to change the default controller layout with alternate control schemes.
+- Added Alt+F4 support to exit the game during menus or in-game.
 
 ### Miscellaneous
+- Added an "Enhanced" tab in the Settings menu for configuring Enhanced settings.
+- All mission parts now require a keypress to continue after loading, not just the initial part.
 - Save games now use a new file extension for Enhanced to prevent incompatible saves from the original game from being displayed.
+- Fixed an issue in the PC version where inactivity videos couldn't be skipped.
+- The "Mission Complete" screen now requires a keypress to continue, giving players the chance to view their Mission Statistics without a timer.
+- Increased the inactivity timer from 100 seconds to 300 seconds before inactivity videos start playing.
+- Added a debug command `FixCam` that locks the camera in place, similar to the `fixecam` command in Chaos Theory.
 - Localization fixes, including typo corrections and consistency improvements.
 - Includes experimental versions of Nuclear Power Plant and Severonickel that can be played. Both cancelled levels currently lack level-specific audio due to incompatible Xbox sound files.
 - Includes newly recreated loading screens by [cazzhmir](https://www.youtube.com/@cazzhmir) to improve the accuracy of the story.
 - Includes updated cutscene that improve the storytelling for Kalinatek, along with two new cutscenes for Nuclear Power Plant and Severonickel.
-- [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2) is included to restore Shadow Buffer rendering and set a 60 FPS cap.
+- [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2) is included to restore Shadow Buffer rendering and set a [60 FPS cap](https://youtu.be/X3tuerrwhnw).
 - [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack) is included for widescreen support.
 - [Xidi](https://github.com/samuelgr/Xidi) is included to improve compatibility for XInput-based controllers.
+- Thanks to [iLL_Pazzo](https://www.twitch.tv/ill_pazzo) (French), [NoSleepCoffee](https://www.twitch.tv/nosleepcoffee), [Andry66power](https://www.twitch.tv/andry66power) (Italian), [Distro](https://www.twitch.tv/distrotv) (German), and [MatthewDoomer](https://www.twitch.tv/matthewdoomer) (Spanish) for translating Enhanced localization.
 
 ### Maps
 - Training
   - Based on the Xbox version for both parts, featuring lighting improvements.
 ---
 - Police Station
-  - Based on the Xbox version for both parts, featuring lighting improvements.
+  - Based on the Xbox version for all parts, featuring lighting improvements.
+  - Restored the extraction van from Xbox version.
+  - Fixed an issue in the Police Station by making a plant texture two-sided, allowing it to render correctly from both sides.
+---
+- Defense Ministry
+  - Applied alternate character meshes to increase NPC variety.
 ---
 - Oil Refinery
   - Based on the Xbox version for the first part, featuring mesh improvements.
   - Based on the Xbox version for the second part, featuring lighting improvements.
+  - Applied alternate character meshes to increase NPC variety.
+  - Changed the default mesh for Sam to Partial Sleeves.
+  - The loading screen for the second part has been updated to a more fitting version from the September 2002 build.
+---
+- CIA HQ
+  - Changed the default mesh for Sam to Balaclava.
+  - On Elite mode, tripping an alarm before accessing the CIA central server will result in mission failure.
+  - On Elite mode, the fan timer has been reduced from 100 seconds to 60 seconds.
+  - Fixed the bug where killing Mitchell Dougherty during Lambert's speech wouldn't fail the mission.
 ---
 - Kalinatek
+  - Included the Xbox version, featuring lighting improvements.
+  - Restored two previously unused character meshes to increase NPC variety.
+  - On Elite mode, the bomb timer has been reduced from 150 seconds to 100 seconds.
   - Fixed an issue in Kalinatek's texture package by making a plant texture two-sided, allowing it to render correctly from both sides.
 ---
 - Chinese Embassy
@@ -51,25 +100,44 @@
 ---
 - Abattoir
   - Based on the Xbox version for the first part, featuring mesh improvements.
+  - Applied alternate character meshes to increase NPC variety.
+  - The kill objective will no longer complete from knocking out the primary target.
+  - Prevent a bug where the player could keep retriggering the same objective and dialogue.
+  - After completing the final objective, the player can still move around in case enemies are still around.
+  - Changed the default mesh for Sam to Partial Sleeves.
 ---
 - Chinese Embassy 2
   - Based on the Xbox version for all parts, featuring lighting and mesh improvements.
+  - Changed the default mesh for Sam to Partial Sleeves.
+  - Fixed an issue where fight music would persist for the rest of the mission if the player sneaked past the guards destroying Feirong's data.
 ---
-- Vselka Infiltration
+- Kola Cell
+  - The kill objective will no longer complete from knocking out the primary target.
+  - Changed the default mesh for Sam to Standard.
+  - Restored the Russian stress and fight soundtracks.
+  - Added alternate mix of common fight theme.
+---
+- Vselka
   - Restored the PlayerStart position from the Xbox version.
   - Restored a camera in the control room from the Xbox version.
   - The level now transitions directly into Vselka Submarine, treating them as a single mission.
+  - Alarm stages will no longer be ignored for the initial part.
+  - On Elite mode, the extraction timer has been reduced from 150 seconds to 100 seconds.
+  - Restored the Russian stress and fight soundtracks.
+  - Added alternate mix of common fight theme.
 ---
 - Nuclear Power Plant
-  - Using the in-game console, you can access both parts with the commands `NPP1` and `NPP2`.
   - Removed a vent frame's collision that was preventing the player from progressing.
   - Removed a conflicting NPC that caused the game to crash due to broken pathing.
   - Improved the turret section so that shooting the glass allows you to pass through.
   - Fixed keypad doors that were sliding in the wrong direction.
   - Various lighting fixes in the second part.
+  - Added turret controllers for the turrets.
+  - Fixed disposable picks that were assigned the wrong StaticMesh.
   - **Note: You may need to Quick Save and Quick Load after triggering the meltdown to ensure the event works correctly.**
 ---
 - Severonickel
-  - Using the in-game console, you can access both parts with the commands `SEV1` and `SEV2`.
   - The first part is currently unplayable, missing StaticMeshes and NPCs, but available for exploration.
   - The second part now starts the player with the same equipment as the first part.
+  - Fixed a StaticMesh that was clipping through a ceiling.
+  - Added textures for several StaticMeshes that had none assigned.

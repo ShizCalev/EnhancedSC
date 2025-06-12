@@ -89,14 +89,24 @@ state s_Online
     -----------------------------------------------------------------------------*/
 	function DrawView(HUD Hud,ECanvas Canvas)
 	{
-		DrawFilm(Canvas);
-        DrawNoiseBars(Canvas);
-        DrawSideBars(Canvas);
-        DrawButtons(Canvas);
-        DrawIcon(Canvas);
-        DrawTopAndBottomBars(Canvas);
-        DrawCrosshair(Canvas);        
-        DrawBlackMask(Canvas);
+        local EPlayerController EPC; // Joshua - Show cam toggle
+        EPC = EPlayerController(Camera.Owner);
+
+        if (EPC.bShowScope && EPC.bShowHUD)
+        {
+            DrawFilm(Canvas);
+            DrawNoiseBars(Canvas);
+            DrawSideBars(Canvas);
+            DrawButtons(Canvas);
+            DrawIcon(Canvas);
+            DrawTopAndBottomBars(Canvas);
+        }
+        
+        if(EPC.bShowCrosshair && EPC.bShowHUD) // Joshua - Show crosshair toggle
+                DrawCrosshair(Canvas);        
+
+        if (EPC.bShowScope && EPC.bShowHUD)
+            DrawBlackMask(Canvas);
 	}
 }
 

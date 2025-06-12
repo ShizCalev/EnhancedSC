@@ -62,6 +62,7 @@ KOorKillBob:
     CheckFlags(V1_7_1_1VselkaInfiltration(Level.VarObject).BobDone,TRUE,'End');
 LambertCallsItOffBob:
     Log("LambertCallsItOffBob");
+    SetProfileDeletion();
     PlayerMove(false);
     Speech(Localize("P_1_7_1_1_Bob", "Speech_0001L", "Localization\\P_1_7_1_1VselkaInfiltration"), Sound'S3_1_1Voice.Play_31_22_01', 2, 0, TR_HEADQUARTER, 0, false);
     Close();

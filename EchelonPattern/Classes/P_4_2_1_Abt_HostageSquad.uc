@@ -35,11 +35,23 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'EGeorgianSoldier20')
+        {
             Characters[1] = P.controller;
+            EAIController(Characters[1]).bAllowKnockout = true;
+            EAIController(Characters[1]).bWasFound = true;
+        }
         if(P.name == 'EGeorgianSoldier21')
+        {
             Characters[2] = P.controller;
+            EAIController(Characters[2]).bAllowKnockout = true;
+            EAIController(Characters[2]).bWasFound = true;
+        }
         if(P.name == 'EGeorgianSoldier30')
+        {
             Characters[3] = P.controller;
+            EAIController(Characters[3]).bAllowKnockout = true;
+            EAIController(Characters[3]).bWasFound = true;
+        }
     }
 
     if( !bInit )

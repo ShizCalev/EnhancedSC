@@ -57,6 +57,55 @@ function PostBeginPlay()
 {
 	local EMemoryStick Ms;
     local int i;
+	local EEventTrigger EventTrigger;
+
+	// Joshua - Assigning new default meshes to these levels
+	switch(GetCurrentMapName())
+	{
+		case "1_3_2CaspianOilRefinery":
+        case "1_3_3CaspianOilRefinery": 
+                EchelonLevelInfo(Level).SamMesh = SkeletalMesh'ESam.samCMesh';
+                break;
+
+        case "2_1_0CIA":
+        case "2_1_1CIA":
+        case "2_1_2CIA":
+                EchelonLevelInfo(Level).SamMesh = SkeletalMesh'ESam.samBMesh';
+                break;
+
+        case "4_2_1_Abattoir":
+        case "4_2_2_Abattoir":
+                EchelonLevelInfo(Level).SamMesh = SkeletalMesh'ESam.samCMesh';
+                break;
+
+        case "4_3_0ChineseEmbassy":
+        case "4_3_1ChineseEmbassy":
+		case "4_3_2ChineseEmbassy":
+				EchelonLevelInfo(Level).SamMesh = SkeletalMesh'ESam.samCMesh';
+				break;
+
+		case "1_6_1_1KolaCell":
+				EchelonLevelInfo(Level).SamMesh = SkeletalMesh'ESam.samAMesh';
+				break;
+	}
+
+	// Joshua - Disable initial pattern from this event trigger, moving it to EchelonPlayerStart
+	if (GetCurrentMapName() == "3_4_3Severonickel")
+	{
+		ForEach AllActors(class'EEventTrigger', EventTrigger)
+		{
+			if(EventTrigger.name == 'EEventTrigger10')
+			{
+				EventTrigger.SetCollision(False);
+				EventTrigger.GroupTag = '';
+				EventTrigger.JumpLabel = '';
+			}
+		}
+	}
+
+	// Joshua - Enabling alarm stages for Vselka
+	if (GetCurrentMapName() == "1_7_1_1VselkaInfiltration")
+        bIgnoreAlarmStage = false;
 
     
     TGAME = spawn(class'ETGAME', self);
@@ -425,6 +474,7 @@ function IncreaseAlarmStage()
 		if(AlarmStage < 2)
 		{
 			AlarmStage++;
+			EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("AlarmTriggered");
 
 			log("**** Alarm Stage increased at level: "$AlarmStage$" ****");
 
@@ -445,6 +495,7 @@ function IncreaseAlarmStage()
 		else if(AlarmStage == 2)
 		{
 			AlarmStage++;
+			EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("AlarmTriggered");
 
 			log("*** Last Alarm stage reached: GameOver ***");
 
@@ -460,6 +511,7 @@ function IncreaseAlarmStage()
 		if(AlarmStage < 3)
 		{
 			AlarmStage++;
+			EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("AlarmTriggered");
 
 			log("**** Alarm Stage increased at level: "$AlarmStage$" ****");
 
@@ -482,6 +534,7 @@ function IncreaseAlarmStage()
 		else if(AlarmStage == 3)
 		{
 			AlarmStage++;
+			EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("AlarmTriggered");
 
 			log("*** Last Alarm stage reached: GameOver ***");
 

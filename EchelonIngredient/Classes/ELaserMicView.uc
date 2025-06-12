@@ -36,13 +36,19 @@ state s_Use
 
 		Canvas.Style = ERenderStyle.STY_Alpha;
 
-		DrawNoiseBars(Canvas);
-		DrawSideBars(Canvas);
-		DrawTopBar(Canvas);
-		DrawBottomBar(Canvas);
-		DrawCrosshair(Canvas);
-		DrawBlackMask(Canvas);
-		
+        if(epc.bShowScope && Epc.bShowHUD) // Joshua - Show scope toggle
+        {
+            DrawNoiseBars(Canvas);
+            DrawSideBars(Canvas);
+            DrawTopBar(Canvas);
+            DrawBottomBar(Canvas);
+        }
+        if(epc.bShowCrosshair && Epc.bShowHUD) // Joshua - Show crosshair toggle
+            DrawCrosshair(Canvas);
+
+        if(epc.bShowScope && Epc.bShowHUD) // Joshua - Show scope toggle
+            DrawBlackMask(Canvas);	
+
 		Canvas.Style = ERenderStyle.STY_Normal;
 	}
 }

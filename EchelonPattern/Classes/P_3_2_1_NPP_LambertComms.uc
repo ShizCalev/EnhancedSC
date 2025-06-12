@@ -30,6 +30,7 @@ function InitPattern()
     local Pawn P;
     local EPawn EP;
     local Actor A;
+    local EGameplayObject EGO;
     local EAlarm Alarm;
     local int i;
 
@@ -39,8 +40,26 @@ function InitPattern()
     {
         if(P.name == 'ELambert0')
             Characters[1] = P.controller;
-        if(P.Name == 'EPowerPlantEmployee14')
+        if(P.Name == 'EPowerPlantEmployee14') // Joshua - Killing conflicting NPC
+        {
             Characters[2] = P.controller;
+            EAIController(Characters[2]).bNotInStats = true;
+        }
+        if(P.Name == 'ECIABureaucratF0')
+        {
+            Characters[3] = P.controller;
+            EAIController(Characters[3]).bNotInStats = true;
+        }
+    }
+
+    // Joshua - Disposable pick was assigned the incorrect mesh
+    ForEach DynamicActors(class'EGameplayObject', EGO)
+    {
+        if(EGO.name == 'EDisposablePick0')
+        {
+            EGO.SetStaticMesh(StaticMesh'EMeshIngredient.Item.DisposablePick');
+            EGO.SetLocation(EGO.Location + vect(0,0,-22));
+        }
     }
 
     // Joshua - Disabling collision on these two vent frames as it was preventing the player from progressing
@@ -142,6 +161,7 @@ EmployeeHurt:
     End();
 SecondTime:
     Log("2 strikes, you're out Sam.");
+    SetProfileDeletion();
     Speech(Localize("P_3_2_1_NPP_LambertComms", "Speech_0005L", "Localization\\P_3_2_1_PowerPlant"), Sound'S3_2_1Voice.Play_32_90_03', 1, 0, TR_HEADQUARTER, 0, false);
     Sleep(2.5);
     Close();
@@ -173,6 +193,7 @@ Load322:
     End();
 Screwed:
     Log("Generic Mission Over.");
+    SetProfileDeletion();
     Speech(Localize("P_3_2_1_NPP_LambertComms", "Speech_0018L", "Localization\\P_3_2_1_PowerPlant"), None, 1, 0, TR_HEADQUARTER, 0, false);
     Sleep(4);
     Close();

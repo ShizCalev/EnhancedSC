@@ -269,7 +269,7 @@ if (Epc.eGame.bOpticCableVisions)
 	// Thermal vision
 	else if (Epc.bDPadRight != 0)
 	{
-		if (!Epc.bNoThermalAvailable)
+		if (!Epc.Goggle.bNoThermalAvailable)
 		{
 			if (RenderingMode != REN_ThermalVision)
 			{

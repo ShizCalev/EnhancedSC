@@ -37,7 +37,20 @@ var config int    SfxVol;
 var config int    AmbVol;
 var config int    iLastSaveType;
 var config bool   bValidProfile;
-var config bool   bUnlockAllLevels; // Joshua - New variable to unlock all levels in the game
+
+// Joshua - New variable for mission unlocks
+enum ELevelUnlock
+{
+  LU_Disabled, // Use the profile's progression
+  LU_Enabled, // Unlock all levels
+  LU_AllParts // Unlock all levels and their parts
+};
+var config ELevelUnlock LevelUnlock;
+
+exec function SaveEnhancedOptions()
+{
+	SaveConfig("Enhanced");
+}
 
 defaultproperties
 {
@@ -56,4 +69,5 @@ defaultproperties
     UnlockedMap(11)="1_7_1_1VselkaInfiltration"
     UnlockedMap(12)="1_7_1_2Vselka"
     bHidden=true
+    LevelUnlock=LU_Disabled
 }

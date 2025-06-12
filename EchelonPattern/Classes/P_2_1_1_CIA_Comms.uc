@@ -36,6 +36,11 @@ function InitPattern()
             Characters[1] = P.controller;
         if(P.name == 'EAnna0')
             Characters[2] = P.controller;
+        if(P.name == 'ECIAAgent2')
+        {
+            Characters[3] = P.controller;
+            EAIController(Characters[3]).bAllowKnockout = true;
+        }
     }
 
     if( !bInit )
@@ -55,6 +60,8 @@ state Pattern
 Begin:
 Start:
     Log("");
+    if(isEliteMode())  // Joshua - Enhanced change: One alarm and the mission is over until accessing the CIA central server
+        SetAlarmStage(3);
     Sleep(1);
 FGun:
     Log("Lambert tell sam his gun in place");
@@ -75,6 +82,11 @@ comm2120:
     Log("CPUaccessed");
     SetFlags(V2_1_1CIA(Level.VarObject).ServerDone,TRUE);
     GoalCompleted('GoalServer');
+    if(IsEliteMode()) // Joshua - Enhanced change: Removing the one alarm limit, player has accessed CIA central server
+    {
+        GoalCompleted('GoalAlarm');
+        SetAlarmStage(0);
+    }
     AddGoal('GoalPC', "", 4, "", "P_2_1_1_CIA_Comms", "Goal_0066L", "Localization\\P_2_1_1CIA", "P_2_1_1_CIA_Comms", "Goal_0067L", "Localization\\P_2_1_1CIA");
     AddNote("", "P_2_1_1_CIA_Comms", "Note_0068L", "Localization\\P_2_1_1CIA");
     Speech(Localize("P_2_1_1_CIA_Comms", "Speech_0024L", "Localization\\P_2_1_1CIA"), Sound'S2_1_1Voice.Play_21_20_01', 0, 2, TR_HEADQUARTER, 0, false);

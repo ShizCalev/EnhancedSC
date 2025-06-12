@@ -65,6 +65,7 @@ var EQInvHUD			QuickInvAndCurrentItems;
 var EQInvHUDXbox		QuickInvAndCurrentItemsXbox; // Joshua - Xbox quick inventory
 var EMainMenuHUD        MainMenuHUD;
 var EGameMenuHUD		GameMenuHUD;
+var EPlayerStatsHUD     PlayerStatsHUD; // Joshua - Mission statistics display
 
 var int					TimerCounter;
 var int					OldTimeCounter;
@@ -83,11 +84,16 @@ var bool bStockInMemory;
 //var bool bSubMap;
 //var bool bDisplaySplash;
 
-// Joshua - New HUD toggle
-var(Enhanced) config bool bShowHUD;
-exec function ToggleHUD()
+// Joshua - New HUD toggles
+var(Enhanced) config bool bShowLifeBar;
+var(Enhanced) config bool bShowInteractionBox;
+var(Enhanced) config bool bShowCommunicationBox;
+var(Enhanced) config bool bShowTimer;
+var(Enhanced) config bool bLetterBoxCinematics;
+
+exec function SaveEnhancedOptions()
 {
-	bShowHUD = !bShowHUD;
+	SaveConfig("Enhanced");
 }
 
 native(1757) final function CheckError(ECanvas Canvas, bool bGameWasPause);
@@ -154,12 +160,13 @@ function PostBeginPlay()
 	if( Epc == None )
 		Log("ERROR: invalid PlayerController for EchelonMainHud");
 
-    QuickInvAndCurrentItems = spawn(class'EQInvHUD',self);
+    QuickInvAndCurrentItems 	= spawn(class'EQInvHUD',self);
 	QuickInvAndCurrentItemsXbox = spawn(class'EQInvHUDXbox',self); // Joshua - Xbox quick inventory
-    GameMenuHUD             = spawn(class'EGameMenuHUD',self);
+    GameMenuHUD             	= spawn(class'EGameMenuHUD',self);
+    PlayerStatsHUD         		= spawn(class'EPlayerStatsHUD',self); // Joshua - Mission statistics screen
     
     // Joshua - Start of controller related
-    MainMenuHUD             = spawn(class'EMainMenuHUD', self);
+    MainMenuHUD            		= spawn(class'EMainMenuHUD', self);
 
 	// (Yanick Mimee) June-13-2002
 	// Var initialization
@@ -293,7 +300,7 @@ function DrawSaveLoadBox(ECanvas Canvas)
 		{
 			if (Epc.bCheckpoint)
 			{
-				DrawErrorMsgBox( Canvas, Localize("HUD", "SAVEGAME", "Localization\\HUD") );	
+				DrawErrorMsgBox( Canvas, Localize("Common", "Checkpoint", "Localization\\Enhanced") );	
 			}
 			else
 				DrawErrorMsgBox( Canvas, Localize("HUD", "AUTOSAVING", "Localization\\HUD") );
@@ -658,17 +665,23 @@ function DrawMainHUD(ECanvas Canvas)
 {
 	Canvas.Style     = ERenderStyle.STY_Normal;
 
-	if (bShowHUD)
+	if (Epc.bShowHUD)
 	{
-		// Transmissions
-		CommunicationBox.Draw(Canvas);
+		if(bShowCommunicationBox)
+		{
+			// Transmissions
+			CommunicationBox.Draw(Canvas);
+		}
 
-		// Life display
-		DrawLifeBar(Canvas);
+		if(bShowLifeBar)
+		{
+			// Life display
+			DrawLifeBar(Canvas);
+		}
 	}
 
 	// Quick Inventory
-	if (bShowHUD || GetStateName() == 'QuickInventory')
+	if ((Epc.bShowHUD) || GetStateName() == 'QuickInventory')
 	{
 		if (!eGame.bUseController) // Joshua - Check if they're using a controller
 			QuickInvAndCurrentItems.PostRender(Canvas);
@@ -676,7 +689,7 @@ function DrawMainHUD(ECanvas Canvas)
 			QuickInvAndCurrentItemsXbox.PostRender(Canvas); // Joshua - Xbox quick inventory
 	}
 
-	if (bShowHUD || (!Epc.egi.bInteracting && (Epc.IManager.GetNbInteractions() > 1)) || (Epc.egi.bInteracting && (Epc.IManager.GetNbInteractions() > 2)))
+	if ((Epc.bShowHUD && bShowInteractionBox) || (!Epc.egi.bInteracting && (Epc.IManager.GetNbInteractions() > 1)) || (Epc.egi.bInteracting && (Epc.IManager.GetNbInteractions() > 2)))
 	{
 	// Interaction manager
 	DisplayInteractIcons(Canvas, false);
@@ -686,8 +699,11 @@ function DrawMainHUD(ECanvas Canvas)
 	DrawDebugInfo(Canvas);
 
     // Timer //
-    if( TimerView != None )
-        TimerView.PostRender(Canvas);
+	if(Epc.bShowHUD && bShowTimer)
+	{
+		if( TimerView != None )
+			TimerView.PostRender(Canvas);
+	}
 }
 
 /*-----------------------------------------------------------------------------
@@ -838,10 +854,9 @@ state MainHUD
 		}
 	}
 	 */
-
+	 
 	function bool KeyEvent( string Key, EInputAction Action, FLOAT Delta )
-	{		
-
+	{
 		if( Action == IST_Press || Action == IST_Hold )
 		{
 			switch( Key )
@@ -851,6 +866,14 @@ state MainHUD
 				{
 					SaveState();
 					GotoState('QuickInventory');
+					return true;
+				}
+				break;
+			case "PlayerStats" :
+				if( Level.Pauser == None && Epc.CanAccessPlayerStats() && !Epc.bStopInput )
+				{
+					SaveState();
+					GotoState('PlayerStats');
 					return true;
 				}
 				break;
@@ -865,10 +888,9 @@ state MainHUD
 		local ECanvas Canvas;
 		
 		Canvas = ECanvas(C);
-    			
-				
-    					
-		DrawMainHUD(Canvas);				
+    							
+
+		DrawMainHUD(Canvas);	
 
 		// Draw item selected
 		if( hud_master != None )
@@ -924,16 +946,22 @@ state s_Slavery
 				Epc.GetStateName() == 's_GrabTargeting'			||
 				Epc.GetStateName() == 's_PlayerSniping' )
 			{
-				if (bShowHUD)
+				if (Epc.bShowHUD)
 				{
-					// Transmissions
-					CommunicationBox.Draw(Canvas);
+					if(bShowCommunicationBox)
+					{
+						// Transmissions
+						CommunicationBox.Draw(Canvas);
+					}
 
-					// Life Bar
-					DrawLifeBar(Canvas);
+					if(bShowLifeBar)
+					{
+						// Life Bar
+						DrawLifeBar(Canvas);
+					}
 				}
 
-				if( Epc.GetStateName() != 's_PlayerSniping' && ( bShowHUD || GetStateName() == 'QuickInventory' ) )
+				if( Epc.GetStateName() != 's_PlayerSniping' && ( Epc.bShowHUD || GetStateName() == 'QuickInventory' ) )
 				{
 					// Quick Inventory
 					if (!eGame.bUseController) // Joshua - Check if they're using a controller
@@ -944,13 +972,16 @@ state s_Slavery
 			}
 
 			//Interactions
-			if( Epc.GetStateName() == 's_FirstPersonTargeting' && ( bShowHUD || ( !Epc.egi.bInteracting && ( Epc.IManager.GetNbInteractions() > 1 ) ) || ( Epc.egi.bInteracting && (Epc.IManager.GetNbInteractions() > 2 ) ) ) )
+			if( Epc.GetStateName() == 's_FirstPersonTargeting' && ( ( Epc.bShowHUD && bShowInteractionBox ) || ( !Epc.egi.bInteracting && ( Epc.IManager.GetNbInteractions() > 1 ) ) || ( Epc.egi.bInteracting && (Epc.IManager.GetNbInteractions() > 2 ) ) ) )
 				DisplayInteractIcons(Canvas, false);
 		}
 
-			// Timer //
-		if( TimerView != None )
-			TimerView.PostRender(Canvas);
+		// Timer //
+		if(Epc.bShowHUD && bShowTimer)
+		{
+			if( TimerView != None )
+				TimerView.PostRender(Canvas);
+		}
 		
 
 		DrawSaveLoadBox(Canvas);
@@ -979,6 +1010,20 @@ state s_Slavery
 				{
 					SaveState();
 					GotoState('QuickInventory');
+					return true;
+				}
+				break;
+			case "PlayerStats" :
+				if( Epc.CanAccessPlayerStats() &&
+					!Epc.bStopInput && 
+					Level.Pauser == None && 
+					(Epc.GetStateName() == 's_FirstPersonTargeting'	 ||
+					 Epc.GetStateName() == 's_CameraJammerTargeting' ||
+					 Epc.GetStateName() == 's_RappellingTargeting'	 ||
+					 Epc.GetStateName() == 's_SplitTargeting') )
+				{
+					SaveState();
+					GotoState('PlayerStats');
 					return true;
 				}
 				break;
@@ -1403,6 +1448,8 @@ state s_Mission
         
         GameMenuHUD.PostRender(Canvas);
 
+		PlayerStatsHUD.PostRender(Canvas);
+	
 		CheckError( Canvas, Epc.GetPause());
 
         DrawDebugInfo(Canvas);
@@ -1422,9 +1469,10 @@ Complete:
 	StartFadeOut(40.0f);
 	StopRender(false);
 	if(!GameMenuHUD.bFinalMap)
-		PlaySound(Sound'CommonMusic.Play_theme_MissionSuccess', SLOT_Fisher);	
+		PlaySound(Sound'CommonMusic.Play_theme_MissionSuccess', SLOT_Fisher);
 	GameMenuHUD.GotoState('s_MissionComplete');
-	Sleep(5);
+	Sleep(6);
+	PlayerStatsHUD.GoToState('s_MissionComplete');
 	Stop;
 }
 
@@ -1454,14 +1502,20 @@ state s_Cinematic
 
 		Canvas = ECanvas(C);
 
-        // Draw Black Line //
-        Canvas.DrawLine(0, 0, 640, 60, Canvas.black, -1, eLevel.TMENU);
-        Canvas.DrawLine(0, 480-60, 640, 60, Canvas.black, -1, eLevel.TMENU);
+		if(bLetterBoxCinematics)
+		{
+			// Draw Black Line //
+			Canvas.DrawLine(0, 0, 640, 60, Canvas.black, -1, eLevel.TMENU);
+			Canvas.DrawLine(0, 480-60, 640, 60, Canvas.black, -1, eLevel.TMENU);
+		}
 
 		DrawDebugInfo(Canvas);
         
-        // Transmissions //
-	    CommunicationBox.Draw(Canvas);
+		if(Epc.bShowHUD && bShowCommunicationBox)
+		{
+			// Transmissions
+			CommunicationBox.Draw(Canvas);
+		}
 
 		CheckError( Canvas, Epc.GetPause());
 
@@ -1488,7 +1542,92 @@ state s_Cinematic
 	}
 }
 
+/*=============================================================================
+ State:         PlayerStats
+
+ Description:   Shows player statistics when PlayerStats key is pressed
+=============================================================================*/
+state PlayerStats
+{
+	Ignores FullInventory, SaveState;
+
+	function BeginState()
+	{
+		PlayerStatsHUD.GotoState('s_StandardDisplay');
+	}
+
+	function EndState()
+	{
+		if( PlayerStatsHUD.GetStateName() == 's_StandardDisplay' )
+			PlayerStatsHUD.GotoState('');
+	}
+	function bool KeyEvent( string Key, EInputAction Action, FLOAT Delta )
+	{
+		return PlayerStatsHUD.KeyEvent(Key, Action, Delta);
+	}
+
+	function PostRender( Canvas C )
+	{
+		local ECanvas Canvas;
+		Canvas = ECanvas(C);
+		Canvas.Style = ERenderStyle.STY_Normal;
+		
+		// Only show lifebar when stats are up
+		if(Epc.bShowHUD && bShowLifeBar)
+		{
+			DrawLifeBar(Canvas);
+		}
+		
+		PlayerStatsHUD.PostRender(C);
+		
+		CheckError(Canvas, Epc.GetPause());
+		Super.PostRender(C);
+	}
+}
+
+/*=============================================================================
+ State:         s_FinalMapStats
+
+ Description:   Shows mission statistics on final map before ending cutscene
+=============================================================================*/
+state s_FinalMapStats
+{
+    Ignores FullInventory, Slave, NormalView;
+
+    function BeginState()
+    {
+        StopRender(false);
+        PlayerStatsHUD.GotoState('s_FinalMapStats');
+    }
+
+    function bool KeyEvent( string Key, EInputAction Action, FLOAT Delta )
+    {
+        return PlayerStatsHUD.KeyEvent(Key, Action, Delta);
+    }
+
+    function PostRender( Canvas C )	
+    {
+        local ECanvas Canvas;
+        Canvas=ECanvas(C);
+
+        Canvas.Style = ERenderStyle.STY_Normal;
+        
+        PlayerStatsHUD.PostRender(Canvas);
+    
+        CheckError( Canvas, Epc.GetPause());
+
+        DrawDebugInfo(Canvas);
+
+        Super.PostRender(Canvas);
+    }
+}
+
 defaultproperties
 {
     bAlwaysTick=true
+	bShowLifeBar=true
+	bShowInteractionBox=true
+	bShowCommunicationBox=true
+	bShowTimer=true
+	bLetterBoxCinematics=true
 }

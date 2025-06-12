@@ -54,6 +54,7 @@ state Pattern
 Begin:
 death:
     Log("Thou shalt not kill");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);
     PlayerMove(false);

@@ -112,6 +112,7 @@ Death:
 ObjectiveFailed:
     Log("ObjectiveFailed");
     CheckFlags(V3_3_1MiningTown(Level.VarObject).LeadTechDone,TRUE,'End');
+    SetProfileDeletion();
     Speech(Localize("P_3_3_1_Mine_MTBehavior", "Speech_0002L", "Localization\\P_3_3_1MiningTown"), None, 2, 0, TR_HEADQUARTER, 0, false);
     Sleep(3);
     Close();
@@ -119,6 +120,7 @@ ObjectiveFailed:
     End();
 TooMuchKill:
     Log("TooMuchKill");
+    SetProfileDeletion();
     Speech(Localize("P_3_3_1_Mine_MTBehavior", "Speech_0003L", "Localization\\P_3_3_1MiningTown"), None, 2, 0, TR_HEADQUARTER, 0, false);
     Sleep(4);
     Close();

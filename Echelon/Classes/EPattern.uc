@@ -3269,6 +3269,8 @@ function KillNPC(int iIndex, optional bool bJustKnockOut, optional bool bDontAdd
     //log("KillNPC"@iIndex@bJustKnockOut@bDontAddToChgActLst);
 
 	EP = EPawn(Characters[iIndex].pawn);
+	// Joshua - NPCs killed or knocked with the KillNPC will not affect the Stealth Rating
+	EAIController(EP.Controller).bNotInStats = true;
 
     if (EP != None)
     {
@@ -3363,7 +3365,10 @@ function LevelChange(string URL)
 {
 	//don't travel if SAM is dead
 	if(Characters[0].pawn.health > 0)
-	ConsoleCommand("TRAVEL MAPNAME="$URL@"ITEMS=TRUE");
+	{
+		ConsoleCommand("TRAVEL MAPNAME="$URL@"ITEMS=TRUE");
+		EPlayerController(Characters[0]).playerStats.OnLevelChange(); // Joshua - For mission statistics, saves the mission time from the previous part
+	}
 }
 
 /*-----------------------------------------------------------------------------
@@ -4265,6 +4270,11 @@ function QuickSaveLoad(bool bSave, bool bFade)
 //------------------------------------------------------------------------
 function SetAlarmStage(int iNewStage)
 {
+	// Joshua - Clamp to 2 in Elite mode as 3 alarms and the mission's over
+	if (IsEliteMode() && iNewStage <= 3)
+    {
+        iNewStage = 2;
+    }
     if((iNewStage >= 0) && (iNewStage <= 3))
     {
         EchelonLevelInfo(Level).AlarmStage = iNewStage;
@@ -4483,6 +4493,84 @@ function ToggleGroupAI(bool bEnable, Name GroupTag0, Name GroupTag1, Name GroupT
             }
 	    }
     }
+}
+
+//--------------------------------[Joshua - May 12th 2025]-----
+//
+// Description
+//  Set profile deletion for permadeath mode.
+//
+//
+//------------------------------------------------------------------------
+function SetProfileDeletion()
+{
+    local EPlayerController EPC;
+
+    EPC = EPlayerController(Characters[0]);
+
+	if(EPC.eGame.bPermadeathMode)
+		EPC.bProfileDeletionPending = true;
+}
+
+//--------------------------------[Joshua - May 21st 2025]-----
+//
+// Description
+//  Check if the profile is on Elite difficulty.
+//
+//
+//------------------------------------------------------------------------
+function bool IsEliteMode()
+{
+    local EPlayerController EPC;
+
+    EPC = EchelonGameInfo(Level.Game).pPlayer;
+
+	return EPC.eGame.bEliteMode;
+}
+
+
+//--------------------------------[Joshua - June 1st 2025]-----
+//
+// Description
+// Set when the player is identified by NPCs. For dogs, checks if their master's group
+// has already identified the player to prevent duplicate counts.
+//
+//------------------------------------------------------------------------
+function PlayerIdentified()
+{
+    local EAIController  MasterController, DogController;
+    local EPawn MasterPawn;
+    
+    if(EGroupAI(Owner).bPlayerIdentifiedCounted || 
+       EAIController(Characters[1]).bBlockDetection || 
+       EAIController(Characters[1]).bBlockJumpDetection ||
+	   EAIController(Characters[1]).bNotInStats)
+    {
+        return;
+    }
+
+    // Check if this is a dog with a master
+    if(Characters[1] != None && EDog(Characters[1].Pawn) != None)
+    {
+        DogController = EAIController(Characters[1]);
+
+        if(DogController.Master != None)
+        {
+            MasterPawn = DogController.Master;
+            MasterController = EAIController(MasterPawn.Controller);
+
+            if(MasterController != None && MasterController.Group != None)
+            {
+                if(MasterController.Group.bPlayerIdentifiedCounted)
+                    return;
+
+                MasterController.Group.bPlayerIdentifiedCounted = true;
+            }
+        }
+    }
+
+    EGroupAI(Owner).bPlayerIdentifiedCounted = true;
+    EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("PlayerIdentified");
 }
 
 //default state

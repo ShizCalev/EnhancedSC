@@ -170,6 +170,7 @@ auto state idle
 SeePlayer:
 
 	plog("SeePlayer");
+	PlayerIdentified();
 	GotoPatternState('Wait', 'StartBark');
 	End();
 
@@ -371,6 +372,7 @@ MasterOutOfRadius:
 ////////////////////////////////
 SeePlayer:
 	plog("SeePlayer");
+	PlayerIdentified();
 	GotoPatternState('Wait', 'StartBark');
 	End();
 
@@ -597,6 +599,7 @@ MakeDamage:
 SeePlayer:
 
 	plog("SeePlayer");
+	PlayerIdentified();
 	BroadcastToMaster();
 
 	if( EPawn(Characters[1].pawn).ICanBark() )

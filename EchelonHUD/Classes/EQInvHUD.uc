@@ -156,28 +156,27 @@ function PostRender(Canvas C)
 
 	Canvas = ECanvas(C);
 
-    DrawHandItem(Canvas, SCREEN_END_Y - eGame.HUD_OFFSET_Y - ITEMBOX_HEIGHT_L - ITEMBOX_HEIGHT_B - SPACE_BETWEEN_BOX - SPACE_EXTRA_GOAL, false);
-    DrawStealthMeter(Canvas);
-    DrawRateOfFire(Canvas);
-
-
+	if (Epc.bShowInventory && Epc.bShowHUD)
+	{
+    	DrawHandItem(Canvas, SCREEN_END_Y - eGame.HUD_OFFSET_Y - ITEMBOX_HEIGHT_L - ITEMBOX_HEIGHT_B - SPACE_BETWEEN_BOX - SPACE_EXTRA_GOAL, false);
+    	DrawStealthMeter(Canvas);
+    	DrawRateOfFire(Canvas);
+	}
 
 	// Display current goal
 	if ( Epc.CurrentGoal != "" && (Epc.CurrentGoalSection != "") && (Epc.CurrentGoalKey != "") && (Epc.CurrentGoalPackage != "") ) 
 	{
 		sCurrentGoal = Localize(Epc.CurrentGoalSection, Epc.CurrentGoalKey, Epc.CurrentGoalPackage);
 
-		if ( sCurrentGoal != "(null)" ) 
+		if ( sCurrentGoal != "(null)" && Epc.bShowCurrentGoal && Epc.bShowHUD )
 		DisplayCurrentGoal(Canvas);
 	}
 
 	// Display icon 
-	if (Epc.bNewGoal || Epc.bNewNote || Epc.bNewRecon )
+	if ((Epc.bNewGoal || Epc.bNewNote || Epc.bNewRecon) && Epc.bShowMissionInformation && Epc.bShowHUD)
 	{		
 		DisplayIconsGoalNoteRecon(Canvas);
 	}
-
-
 }
 
 //-------------------------------------------------------------------------------
@@ -187,8 +186,13 @@ state s_QDisplay
 	function BeginState()
 	{
 		bPreviousConfig = false;
-		Epc.SetPause(true);
 		Epc.FakeMouseToggle(true);
+
+		if (Epc.bInteractionPause) // Joshua - Adding interaction pause option
+			Epc.SetPause(true);
+		else
+			Epc.bStopInput = true;
+		
 
 		if ( !Epc.EPawn.IsPlaying(Sound'Interface.Play_OpenPackSac') )
 			Epc.EPawn.playsound(Sound'Interface.Play_OpenPackSac', SLOT_Interface);
@@ -205,7 +209,11 @@ state s_QDisplay
 			Epc.EPawn.playsound(Sound'Interface.Play_ClosePackSac', SLOT_Interface);
 
 		Epc.FakeMouseToggle(false);
-		Epc.SetPause(false);
+		if (Epc.bInteractionPause) // Joshua - Adding interaction pause option
+			Epc.SetPause(false);
+		else
+			Epc.bStopInput = false;
+
 
 		CurrentItem		= -1;
 		CurrentCategory = -1;

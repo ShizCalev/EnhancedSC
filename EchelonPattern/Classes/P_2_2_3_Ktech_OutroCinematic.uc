@@ -32,9 +32,13 @@ function InitPattern()
         if(P.name == 'EWilkes1')
             Characters[1] = P.controller;
         if(P.name == 'EMafiaMuscle18')
+        {
             Characters[2] = P.controller;
+            EAIController(Characters[2]).bAllowKnockout = true;
+        }
         if(P.name == 'EMafiaMuscle19')
             Characters[3] = P.controller;
+            EAIController(Characters[3]).bAllowKnockout = true;
     }
 
     if( !bInit )

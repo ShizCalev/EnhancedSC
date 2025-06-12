@@ -58,7 +58,10 @@ function InitPattern()
         if(P.name == 'ECIASecurity3')
             Characters[1] = P.controller;
         if(P.name == 'spetsnaz0')
+        {
             Characters[2] = P.controller;
+            EAIController(Characters[2]).bAllowKnockout = true;
+        }
         if(P.name == 'ELambert0')
             Characters[3] = P.controller;
     }

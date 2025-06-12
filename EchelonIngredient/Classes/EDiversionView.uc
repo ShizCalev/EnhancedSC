@@ -35,9 +35,13 @@ state s_Online
 {
 	function DrawView(HUD Hud,ECanvas Canvas)
 	{
-		Super.DrawView(Hud, Canvas);			
-       
-        DrawPitchBars(Canvas);
+        local EPlayerController EPC; // Joshua - Show cam toggle
+        EPC = EPlayerController(Camera.Owner);
+
+		Super.DrawView(Hud, Canvas);
+
+        if (EPC.bShowScope && EPC.bShowHUD)
+            DrawPitchBars(Canvas);
 	}
 }
 

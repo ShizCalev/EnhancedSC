@@ -66,6 +66,7 @@ DishCriteriaMet:
 AlarmCheck:
     Log("Checking to see if it is safe to have an alarm go off.");
     CheckFlags(V3_4_2Severonickel(Level.VarObject).SafeAlarm,TRUE,'DoNothing');
+    SetProfileDeletion();
     GameOver(false, 0);
     End();
 DoNothing:

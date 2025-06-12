@@ -130,6 +130,7 @@ Grim06Abort:
     End();
 SamOnStreets:
     Log("Lambert pulls the plug because Sam went down to the streets.");
+    SetProfileDeletion();
     SetExclusivity(TRUE);
     DisableMessages(TRUE, TRUE);
     PlayerMove(false);
@@ -146,6 +147,7 @@ BloodyMurder:
     End();
 StrikeTwo:
     Log("Sam has killed 2 civilians");
+    SetProfileDeletion();
     SetExclusivity(TRUE);
     DisableMessages(TRUE, TRUE);
     PlayerMove(false);

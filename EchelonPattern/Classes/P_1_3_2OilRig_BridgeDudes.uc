@@ -57,7 +57,10 @@ function InitPattern()
         if(P.name == 'EGeorgianSoldier0')
             Characters[1] = P.controller;
         if(P.name == 'EGeorgianSoldier1')
+        {
             Characters[2] = P.controller;
+            EAIController(Characters[2]).bNotInStats = true;
+        }
     }
 
     if( !bInit )

@@ -29,7 +29,8 @@ function DrawView(HUD Hud,ECanvas Canvas)
 {
 	Super.DrawView(Hud, Canvas);
 
-	DrawCrosshair(Canvas);
+    if (Epc.bShowCrosshair && Epc.bShowHUD) // Joshua - Show crosshair toggle
+	    DrawCrosshair(Canvas);
 }
 
 function DrawCrosshair(ECanvas Canvas)
@@ -93,7 +94,7 @@ state s_Reloading
 		Super.DrawView(Hud, Canvas);
         Canvas.SetDrawColor(128,128,128);
 
-	    if(bDrawCrosshair)
+	    if(bDrawCrosshair && Epc.bShowCrosshair && Epc.bShowHUD) // Joshua - Show crosshair toggle
 	        DrawCrosshair(Canvas);
     }
 }

@@ -13,7 +13,7 @@ function PostBeginPlay()
 	{
 		bCollideWorld = false;
 		LifeSpan = 1.5;
-}
+	}
 }
 
 function HitWall( vector HitNormal, actor Wall )
@@ -79,7 +79,7 @@ defaultproperties
 {
     MaxSpeed=1000.000000
     DrawType=DT_StaticMesh
-    LifeSpan=3.000000
+    LifeSpan=30.000000 // Joshua - Incrased from 3.0 to 30.0 before despawning
     StopSoundsWhenKilled=true
     bCollideActors=false
     HeatIntensity=0.800000

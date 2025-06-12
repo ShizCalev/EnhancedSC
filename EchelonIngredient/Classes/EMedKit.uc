@@ -35,12 +35,14 @@ function Select( EInventory Inv )
 	if( Epc.ePawn.InitialHealth-Epc.Pawn.Health < HealthPoint )
 	{
 		Epc.SendTransmissionMessage(Localize("Transmission", "MedKitUsed", "Localization\\HUD"), TR_CONSOLE);
-		Epc.Pawn.Health = Epc.ePawn.InitialHealth;
+		Epc.Pawn.Health = Epc.ePawn.InitialHealth;			
+		Epc.playerStats.AddStat("MedkitUsed");
 	}
 	else
 	{
 		Epc.SendTransmissionMessage(Localize("Transmission", "MedKitUsed", "Localization\\HUD"), TR_CONSOLE);
 		Epc.Pawn.Health += HealthPoint;
+		Epc.playerStats.AddStat("MedkitUsed");
 	}
 
 	// Remove it from inventory

@@ -53,7 +53,10 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'EAzeriColonel0')
+        {
             Characters[1] = P.controller;
+            EAIController(Characters[1]).bAllowKnockout = true;
+        }
         if(P.name == 'ELambert0')
             Characters[2] = P.controller;
     }
@@ -108,6 +111,7 @@ AlarmRun:
 ColDead:
     Log("ColDead");
     CheckFlags(DoorUnlocked,TRUE,'End');
+    SetProfileDeletion();
     SendPatternEvent('LaserDoneBogusGroup','LamTalkOff');
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);

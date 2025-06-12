@@ -52,7 +52,12 @@ function InitPattern()
         if(P.name == 'EFikrat0')
             Characters[3] = P.controller;
         if(P.name == 'ENikoladze2')
+        {
             Characters[4] = P.controller;
+            EAIController(Characters[4]).bAllowKill = true;
+            EAIController(Characters[4]).bAllowKnockout = true;
+            EAIController(Characters[4]).bWasFound = true;
+        }
     }
 
     if( !bInit )
@@ -199,6 +204,7 @@ CrisDied:
     Log("CrisDied");
     LaserMicSession(1,,100,'SlowLeaving');
     Close();
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);
     Goal_Set(1,GOAL_MoveTo,9,,,,'ShotInCrisWinHidHereA',,FALSE,,MOVE_JogAlert,,MOVE_JogAlert);

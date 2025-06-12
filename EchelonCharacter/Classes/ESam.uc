@@ -1,8 +1,7 @@
 //===============================================================================
 //  [sam] 
 //===============================================================================
-class ESam extends EPawn
-	config(Enhanced); // Joshua - Class, configurable in Enhanced config
+class ESam extends EPawn;
 
 var float FireTimer;
 
@@ -208,33 +207,21 @@ var float FireTimer;
 
 #exec SAVEPACKAGE FILE=..\Animations\ESam.ukx PACKAGE=ESam
 
-// Joshua - New variables to override which SamMesh to use in a level
-var config int ESam_DefaultMesh;
-var config int ESam_Training; 
-var config int ESam_Tbilisi;
-var config int ESam_DefenseMinistry;
-var config int ESam_CaspianOilRefinery;
-var config int ESam_CIA;
-var config int ESam_Kalinatek;
-var config int ESam_PowerPlant;
-var config int ESam_Severonickel;
-var config int ESam_ChineseEmbassy;
-var config int ESam_Abattoir;
-var config int ESam_ChineseEmbassy2;
-var config int ESam_PresidentialPalace;
-var config int ESam_KolaCell;
-var config int ESam_Vselka;
-
+// Joshua - New Sam mesh function
 function SetSamMesh(int SamMeshType)
 {
     switch (SamMeshType)
     {
-        case 0:
-			if (Mesh == none)
+		case 0:
+			Mesh = EchelonLevelInfo(Level).SamMesh;
+			if( Mesh == none )
 			{
-				Mesh = SkeletalMesh'ESam.samAMesh';
+				// JFP: Temp hack, following the Oct-30-2002 merge some maps didn't have the SamMesh set.
+				// Added this for backward compatibility.
+				Mesh=SkeletalMesh'ESam.samAMesh';
+				log("JFPDEBUG: Hardcoding the default Sam mesh, since no mesh appeared to be set in the Level. Fix this in UnrealEd. New mesh:"@Mesh);
 			}
-            break;
+			break;
         case 1:
             Mesh = SkeletalMesh'ESam.samAMesh';
             break;
@@ -244,57 +231,99 @@ function SetSamMesh(int SamMeshType)
         case 3:
             Mesh = SkeletalMesh'ESam.samCMesh';
             break;
-		default:
+        default:
 			Mesh = EchelonLevelInfo(Level).SamMesh;
-			// JFP: Temp hack, following the Oct-30-2002 merge some maps didn't have the SamMesh set.
-			// Added this for backward compatibility.
-			if (Mesh == none)
+			if( Mesh == none )
 			{
-				Mesh = SkeletalMesh'ESam.samAMesh';
-				log("JFPDEBUG: Hardcoding the default Sam mesh, since no mesh appeared to be set in the Level. Fix this in UnrealEd. New mesh:" @ Mesh);
+				Mesh=SkeletalMesh'ESam.samAMesh';
 			}
-			break;
+            break;
     }
 }
 
 function PostBeginPlay()
 {
-    if (ESam_DefaultMesh != 0)
-        SetSamMesh(ESam_DefaultMesh);
-    else
-        SetSamMesh(0);
+    // Joshua - Check for level specific overrides
+    switch(GetCurrentMapName())
+    {
+        case "0_0_2_Training":
+        case "0_0_3_Training":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Training);
+            break;
+            
+        case "1_1_0Tbilisi":
+        case "1_1_1Tbilisi": 
+        case "1_1_2Tbilisi":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Tbilisi);
+            break;
 
-    if (GetCurrentMapName() == "0_0_2_Training" || GetCurrentMapName() == "0_0_3_Training")
-        SetSamMesh(ESam_Training);
-    else if (GetCurrentMapName() == "1_1_0Tbilisi" || GetCurrentMapName() == "1_1_1Tbilisi" || GetCurrentMapName() == "1_1_2Tbilisi")
-        SetSamMesh(ESam_Tbilisi);
-    else if (GetCurrentMapName() == "1_2_1DefenseMinistry" || GetCurrentMapName() == "1_2_2DefenseMinistry")
-        SetSamMesh(ESam_DefenseMinistry);
-    else if (GetCurrentMapName() == "1_3_2CaspianOilRefinery" || GetCurrentMapName() == "1_3_3CaspianOilRefinery")
-        SetSamMesh(ESam_CaspianOilRefinery);
-    else if (GetCurrentMapName() == "2_1_0CIA" || GetCurrentMapName() == "2_1_1CIA" || GetCurrentMapName() == "2_1_2CIA")
-        SetSamMesh(ESam_CIA);
-    else if (GetCurrentMapName() == "2_2_1_Kalinatek" || GetCurrentMapName() == "2_2_2_Kalinatek" || GetCurrentMapName() == "2_2_3_Kalinatek")
-        SetSamMesh(ESam_Kalinatek);
-	else if (GetCurrentMapName() == "3_2_1_PowerPlant" || GetCurrentMapName() == "3_2_2_PowerPlant")
-		SetSamMesh(ESam_PowerPlant);
-    else if (GetCurrentMapName() == "3_4_2Severonickel" || GetCurrentMapName() == "3_4_3Severonickel")
-        SetSamMesh(ESam_Severonickel);
-    else if (GetCurrentMapName() == "4_1_1ChineseEmbassy" || GetCurrentMapName() == "4_1_2ChineseEmbassy")
-        SetSamMesh(ESam_ChineseEmbassy);
-    else if (GetCurrentMapName() == "4_2_1_Abattoir" || GetCurrentMapName() == "4_2_2_Abattoir")
-        SetSamMesh(ESam_Abattoir);
-    else if (GetCurrentMapName() == "4_3_0ChineseEmbassy" || GetCurrentMapName() == "4_3_1ChineseEmbassy" || GetCurrentMapName() == "4_3_2ChineseEmbassy")
-        SetSamMesh(ESam_ChineseEmbassy2);
-    else if (GetCurrentMapName() == "4_4_1ChineseEmbassy" || GetCurrentMapName() == "4_4_2ChineseEmbassy")
-        SetSamMesh(ESam_ChineseEmbassy);
-    else if (GetCurrentMapName() == "5_1_1_PresidentialPalace" || GetCurrentMapName() == "5_1_2_PresidentialPalace")
-        SetSamMesh(ESam_PresidentialPalace);
-    else if (GetCurrentMapName() == "1_6_1_1KolaCell")
-        SetSamMesh(ESam_KolaCell);
-    else if (GetCurrentMapName() == "1_7_1_1VselkaInfiltration" || GetCurrentMapName() == "1_7_1_2Vselka")
-        SetSamMesh(ESam_Vselka);
+		case "1_2_1DefenseMinistry":
+        case "1_2_2DefenseMinistry": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_DefenseMinistry);
+            break;
 
+		case "1_3_2CaspianOilRefinery":
+        case "1_3_3CaspianOilRefinery": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_CaspianOilRefinery);
+            break;
+
+        case "2_1_0CIA":
+        case "2_1_1CIA":
+		case "2_1_2CIA":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_CIA);
+            break;
+            
+        case "2_2_1_Kalinatek":
+        case "2_2_2_Kalinatek": 
+        case "2_2_3_Kalinatek":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Kalinatek);
+            break;
+
+		case "3_2_1_PowerPlant":
+        case "3_2_2_PowerPlant": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_PowerPlant);
+            break;
+
+        case "3_4_2Severonickel":
+        case "3_4_3Severonickel":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Severonickel);
+            break;
+            
+        case "4_1_1ChineseEmbassy":
+        case "4_1_2ChineseEmbassy": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_ChineseEmbassy);
+            break;
+
+		case "4_2_1_Abattoir":
+        case "4_2_2_Abattoir": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Abattoir);
+            break;
+
+        case "4_3_0ChineseEmbassy":
+        case "4_3_1ChineseEmbassy":
+		case "4_3_2ChineseEmbassy":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_ChineseEmbassy2);
+            break;
+            
+		case "5_1_1_PresidentialPalace":
+        case "5_1_2_PresidentialPalace": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_PresidentialPalace);
+            break;			
+            
+		case "1_6_1_1KolaCell":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_KolaCell);
+            break;	
+
+		case "1_7_1_1VselkaInfiltration":
+        case "1_7_1_2Vselka": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Vselka);
+            break;
+
+		default:
+			SetSamMesh(0);
+			break;
+    }
+ 
     Super.PostBeginPlay();
 }
 

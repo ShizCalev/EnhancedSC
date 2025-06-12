@@ -51,9 +51,17 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'spetsnaz19')
+        {
             Characters[1] = P.controller;
+            EAIController(Characters[1]).bAllowKnockout = true;
+            EAIController(Characters[1]).bBlockDetection = true;
+            EAIController(Characters[1]).bWasFound = true;
+        }
         if(P.name == 'spetsnaz20')
             Characters[2] = P.controller;
+            EAIController(Characters[2]).bAllowKnockout = true;
+            EAIController(Characters[2]).bBlockDetection = true;
+            EAIController(Characters[2]).bWasFound = true;
     }
 
     if( !bInit )

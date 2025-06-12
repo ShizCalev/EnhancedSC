@@ -40,7 +40,10 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'EAleksee0')
+        {
             Characters[1] = P.controller;
+            EAIController(Characters[1]).bAllowKnockout = true;
+        }
         if(P.name == 'spetsnaz10')
             Characters[2] = P.controller;
     }
@@ -111,6 +114,7 @@ KilledOrKOed:
 AlekIsOut:
     Log("AlekIsOut");
     CheckFlags(V1_6_1_1KolaCell(Level.VarObject).RetinalObj,TRUE,'End');
+    SetProfileDeletion();
     Sleep(1);
     GameOver(false, 6);
     End();

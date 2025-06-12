@@ -26,11 +26,17 @@ var()  string TrainingMap;    // Map loaded for Training
 var    bool bStartGame;       // true only the first time you go in main menu
 
 var bool bUseController; // Joshua - Adjusts HUD, inventory, lockpicking, keypad, turrets for controller
-var(Enhanced) config bool bCrouchDrop; // Joshua - When hanging or using a zipline, crouch drops and jump raises legs
+var(Enhanced) config bool bEnableCheckpoints; // Joshua - Restores the checkpoints from the Xbox version
+
+var(Enhanced) config bool bThermalOverride; // Joshua - Enables thermal vision to be available for all levels, regardless of their original settings
 var(Enhanced) config bool bOpticCableVisions; // Joshua - Allows the Optic Cable use all vision modes like Pandora Tomorrow
-var(Enhanced) config bool bAltDoorStealth; // Joshua - Use left/right to toggle Open Door Stealth instead of back direction
-var config bool bXboxDifficulty; // Joshua - Xbox difficulty, Sam has more health on Xbox
-var config bool bEliteMode; // Joshua - Elite mode, no starting ammo, lower health, no saving, 3 alarms
+var(Enhanced) config bool bScaleFragDamage; // Joshua - Scales frag damage so that enemies die with one frag grenade on Hard difficulty
+var(Enhanced) config bool bRandomizeLockpick; // Joshua - Randomizes all the lockpick combinations on doors
+
+var(Enhanced) config bool bXboxDifficulty; // Joshua - Xbox difficulty, Sam has more health on Xbox
+var(Enhanced) config bool bEliteMode; // Joshua - Elite mode, no starting ammo, lower health, no saving, 3 alarms
+var(Enhanced) config bool bPermadeathMode; // Joshua - Permadeath mode, profile deletion upon mission failure
+
 
 //=============================================================================
 // Variables used as constants
@@ -144,6 +150,37 @@ var(SurfaceNoise) SurfaceNoiseInfo NormalSurface;
 var(SurfaceNoise) SurfaceNoiseInfo LoudSurface;
 var(SurfaceNoise) SurfaceNoiseInfo VeryLoudSurface;
 
+// Joshua - Option to reduce delay to prevent running past the wallmine before it explodes
+enum EWallMineDelay
+{
+    WMD_Default,  //1.75
+    WMD_Enhanced, //0.50
+    WMD_Instant   //0.00
+};
+var(Enhanced) config EWallMineDelay WallMineDelay;
+
+// Joshua - New variables to override which SamMesh to use in a level
+enum ESamMeshType
+{
+    SMT_Default,        // Default mesh assigned by level
+    SMT_Standard,       // SamAMesh
+    SMT_Balaclava,      // SamBMesh
+    SMT_PartialSleeves  // SamCMesh
+};
+var config ESamMeshType ESam_Training; 
+var config ESamMeshType ESam_Tbilisi;
+var config ESamMeshType ESam_DefenseMinistry;
+var config ESamMeshType ESam_CaspianOilRefinery;
+var config ESamMeshType ESam_CIA;
+var config ESamMeshType ESam_Kalinatek;
+var config ESamMeshType ESam_PowerPlant;
+var config ESamMeshType ESam_Severonickel;
+var config ESamMeshType ESam_ChineseEmbassy;
+var config ESamMeshType ESam_Abattoir;
+var config ESamMeshType ESam_ChineseEmbassy2;
+var config ESamMeshType ESam_PresidentialPalace;
+var config ESamMeshType ESam_KolaCell;
+var config ESamMeshType ESam_Vselka;
 
 //=============================================================================
 
@@ -170,7 +207,6 @@ function PostBeginPlay()
 
 	if ( ELevel == none )
 		log("ECHELON LEVEL INFO COULD NOT BE SET");
-
 }
 
 //---------------------------------------[David Kalina - 12 Apr 2001]-----
@@ -209,32 +245,40 @@ event PlayerController Login(string Portal,
 
     pPlayer.m_curWalkSpeed = m_defautSpeed;
 
-    // Joshua - Elite mode, no starting ammo, Normal=100/Hard=*0.66=66)
+    // Joshua - Elite mode
     if (bEliteMode)
     {
         pPlayer.CheatManager = None;
-        pPlayer.ePawn.InitialHealth = 100; // Should we do this in ESam/EPawn?
+        pPlayer.ePawn.InitialHealth = 100; // 100 * 0.66 = 66 HP
         pPlayer.ePawn.Health = pPlayer.ePawn.InitialHealth;
 
-        if (pPlayer.MainGun != None)
+        if (pPlayer.MainGun != None) // No SC-20K ammo
         {
             pPlayer.MainGun.Ammo = 0;
             pPlayer.MainGun.ClipAmmo = 0;
         }
 
-        if (pPlayer.HandGun != None)
+        if (pPlayer.HandGun != None) // No SC Pistol ammo
         {
             pPlayer.HandGun.Ammo = 0;
             pPlayer.HandGun.ClipAmmo = 0;
         }
     }
-    else if (bXboxDifficulty) // Joshua - (Xbox: Normal=300/Hard=*0.66=198, PC: Normal=200/Hard=*0.66=132)
+    // Joshua - Xbox difficulty
+    else if (bXboxDifficulty)
     {
+        // Xbox = 300 HP, PC = 200 HP [Normal]
+        // Xbox = 198 HP, PC = 132 HP [Hard]
         pPlayer.ePawn.InitialHealth = 300;
         pPlayer.ePawn.Health = pPlayer.ePawn.InitialHealth;
     }
 
 	return NewPlayer;
+}
+
+exec function SaveEnhancedOptions()
+{
+	SaveConfig("Enhanced");
 }
 
 native(2345) final function string GetStringBinding(EchelonEnums.eKEY_BIND Key);
@@ -251,7 +295,7 @@ defaultproperties
     m_grabbingDelay=0.200000
     m_blinkDelay=3.000000
     m_maxSpeedInterval=5
-    m_defautSpeed=1
+    m_defautSpeed=5 // Joshua - Default speed in original game is 1
     m_forwardGentle=0.500000
     m_forwardCrawl=0.100000
     m_forwardFull=0.900000
@@ -341,4 +385,25 @@ defaultproperties
     VeryLoudSurface=(WalkRadius=500.000000,JogRadius=1500.000000,CrouchWalkRadius=100.000000,CrouchJogRadius=840.000000,LandingRadius=1600.000000,QuietLandingRadius=200.000000)
     GameName="Echelon"
     PlayerControllerClassName="Echelon.EPlayerController"
+    bOpticCableVisions=true
+    bThermalOverride=false
+    bEnableCheckpoints=true
+    bXboxDifficulty=false
+    bScaleFragDamage=true
+    bRandomizeLockpick=true
+    WallMineDelay=WMD_Default
+    ESam_Training=SMT_Default
+    ESam_Tbilisi=SMT_Default
+    ESam_DefenseMinistry=SMT_Default
+    ESam_CaspianOilRefinery=SMT_Default
+    ESam_CIA=SMT_Default
+    ESam_Kalinatek=SMT_Default
+    ESam_PowerPlant=SMT_Default
+    ESam_Severonickel=SMT_Default
+    ESam_ChineseEmbassy=SMT_Default
+    ESam_Abattoir=SMT_Default
+    ESam_ChineseEmbassy2=SMT_Default
+    ESam_PresidentialPalace=SMT_Default
+    ESam_KolaCell=SMT_Default
+    ESam_Vselka=SMT_Default
 }

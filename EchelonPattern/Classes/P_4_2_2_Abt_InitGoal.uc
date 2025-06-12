@@ -24,8 +24,43 @@ function EventCallBack(EAIEvent Event,Actor TriggerActor)
 function InitPattern()
 {
     local Pawn P;
+    local EVolume V;
+    local EHat Hat;
 
     Super.InitPattern();
+
+    ForEach AllActors(class'EVolume', V)
+    {
+        // Joshua - Disabling the volume after it triggers once, as the player could infinitely retrigger it to add the same objective
+        if(V.name == 'EVolume9')
+            V.bTriggerOnlyOnce = true;
+    }
+
+    // Joshua - Replace NPC skins for variety
+    if (!bInit)
+    {
+        ForEach DynamicActors(class'Pawn', P)
+        {
+            if(P.name == 'EGeorgianSoldier23' || P.name == 'EGeorgianSoldier25' || P.name == 'EGeorgianSoldier27')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.GESoldier.GESoldierA", class'Texture'));
+            }
+            if(P.name == 'EGeorgianSoldier29')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.GESoldier.GESoldierA", class'Texture'));
+                EPawn(P).Hat = None;
+                EPawn(P).HatMesh = None;
+            }
+        }
+
+        ForEach AllActors(Class'EHat', Hat)
+        {
+            if (Hat.name == 'EHat4')
+            {
+                Hat.Destroy();
+            }
+        }
+    }
 
     if( !bInit )
     {

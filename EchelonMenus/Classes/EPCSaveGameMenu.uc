@@ -103,13 +103,18 @@ function FillListBox()
     local EPlayerInfo    PlayerInfo;
     local String         Path;    //Do something
 	local String         Name;
+    local array<string>  AllParts; // Joshua - Mission unlocked mode 
+
+    // Joshua - Added to check for Elite mode
+    local EPlayerController EPC;
     
     PlayerInfo = GetPlayerOwner().playerInfo;
+    EPC = EPlayerController(GetPlayerOwner());
     
     m_FileListBox.Clear();
     //Filling Save Games
     FileManager = EPCMainMenuRootWindow(Root).m_FileManager;
-    Path = "..\\Save\\"$PlayerInfo.PlayerName$"\\*.en0"; // Joshua - Enhanced save games are not compatible, changing extension to avoid confusion
+    Path = "..\\Save\\"$PlayerInfo.PlayerName$"\\*.en1"; // Joshua - Enhanced save games are not compatible, changing extension to avoid confusion
     FileManager.DetailedFindFiles(Path);
 
     for(i=0; i< FileManager.m_pDetailedFileList.Length ; i++)
@@ -129,28 +134,92 @@ function FillListBox()
 	m_FileListBox.Sort();
 
     m_ListBox.Clear();
+
     //Filling Unlocked Levels
     i=0;
-    while(PlayerInfo.UnlockedMap[i] != "")
-    {        
+    if (PlayerInfo.LevelUnlock == LU_AllParts && !EPC.eGame.bEliteMode && !EPC.eGame.bPermadeathMode)
+    {
+        AllParts.Length = 31;
+        AllParts[0] = "0_0_2_Training";
+        AllParts[1] = "0_0_3_Training";
+        AllParts[2] = "1_1_0Tbilisi";
+        AllParts[3] = "1_1_1Tbilisi";
+        AllParts[4] = "1_1_2Tbilisi";
+        AllParts[5] = "1_2_1DefenseMinistry";
+        AllParts[6] = "1_2_2DefenseMinistry";
+        AllParts[7] = "1_3_2CaspianOilRefinery";
+        AllParts[8] = "1_3_3CaspianOilRefinery";
+        AllParts[9] = "2_1_0CIA";
+        AllParts[10] = "2_1_1CIA";
+        AllParts[11] = "2_1_2CIA";
+        AllParts[12] = "2_2_1_Kalinatek";
+        AllParts[13] = "2_2_2_Kalinatek";
+        AllParts[14] = "2_2_3_Kalinatek";
+        AllParts[15] = "4_1_1ChineseEmbassy";
+        AllParts[16] = "4_1_2ChineseEmbassy";
+        AllParts[17] = "4_2_1_Abattoir";
+        AllParts[18] = "4_2_2_Abattoir";
+        AllParts[19] = "4_3_0ChineseEmbassy";
+        AllParts[20] = "4_3_1ChineseEmbassy";
+        AllParts[21] = "4_3_2ChineseEmbassy";
+        AllParts[22] = "5_1_1_PresidentialPalace";
+        AllParts[23] = "5_1_2_PresidentialPalace";
+        AllParts[24] = "1_6_1_1KolaCell";
+        AllParts[25] = "1_7_1_1VselkaInfiltration";
+        AllParts[26] = "1_7_1_2Vselka";
+        AllParts[27] = "3_2_1_PowerPlant";
+        AllParts[28] = "3_2_2_PowerPlant";
+        AllParts[29] = "3_4_2Severonickel";
+        AllParts[30] = "3_4_3Severonickel";
+
+        for (i = 0; i < AllParts.Length; ++i)
+        {
+            L = EPCListBoxItem(m_ListBox.Items.Append(class'EPCListBoxItem'));
+            L.Caption = AllParts[i];
+            L.m_bLocked = false;
+        }
+    }
+    else
+    {
+        while(PlayerInfo.UnlockedMap[i] != "")
+        {        
+            // Joshua - Unlisting Vselka Submarine as it has been merged into Vselka Infiltration
+            if(i == 12) 
+            {
+                i++;
+                continue;
+            }        
+            L = EPCListBoxItem(m_ListBox.Items.Append(class'EPCListBoxItem'));
+            L.Caption = PlayerInfo.UnlockedMap[i];
+            
+            // Original Maps
+            if (i<10)
+            {
+                if (PlayerInfo.LevelUnlock == LU_Enabled && !EPC.eGame.bEliteMode && !EPC.eGame.bPermadeathMode) // Joshua - Unlocks all levels, bypassing profile progression
+                
+                    L.m_bLocked = false;
+                else
+                    L.m_bLocked = (i > PlayerInfo.MapCompleted);
+            }
+            // Joshua - Downloadable maps require Presidential Palace to be unlocked in Enhanced
+            else if (i >= 10 && i <= 12) // Kola Cell, Vselka
+            {
+                if (PlayerInfo.LevelUnlock == LU_Enabled && !EPC.eGame.bEliteMode && !EPC.eGame.bPermadeathMode) // Joshua - Unlocks all levels, bypassing profile progression
+                    L.m_bLocked = false;
+                else
+                    L.m_bLocked = (PlayerInfo.MapCompleted < 9);
+            }
+            
+            i++;
+        }
+        // Joshua - Adding cut levels to end of list
         L = EPCListBoxItem(m_ListBox.Items.Append(class'EPCListBoxItem'));
-        L.Caption = PlayerInfo.UnlockedMap[i];
-		
-		// Original Maps
-		if (i<10)
-		{
-            if (PlayerInfo.bUnlockAllLevels) // Joshua - Unlocks all levels, bypassing profile progression
-                L.m_bLocked = false;
-            else
-                L.m_bLocked = (i > PlayerInfo.MapCompleted);
-		}
-		// All downloadable maps are unlocked
-		else
-		{
-			L.m_bLocked = false;
-		}
-		
-        i++;
+        L.Caption = "3_2_1_PowerPlant";
+        L.m_bLocked = false;
+
+        L = EPCListBoxItem(m_ListBox.Items.Append(class'EPCListBoxItem'));
+        L.Caption = "3_4_2Severonickel";
+        L.m_bLocked = false;
     }
 }
 
@@ -158,8 +227,6 @@ function Paint(Canvas C, float MouseX, float MouseY)
 {
     Render( C , MouseX, MouseY);	
 }
-
-
 
 function Notify(UWindowDialogControl C, byte E)
 {
@@ -210,7 +277,7 @@ function ConfirmButtonPressed()
         if(m_FileListBox.SelectedItem != None)
         {
 			// Added extension (.sav ) (YM)
-            Error = GetPlayerOwner().ConsoleCommand("LoadGame Filename="$EPCListBoxItem(m_FileListBox.SelectedItem).Caption$".en0"); // Joshua - Enhanced save games are not compatible, changing extension to avoid confusion       
+            Error = GetPlayerOwner().ConsoleCommand("LoadGame Filename="$EPCListBoxItem(m_FileListBox.SelectedItem).Caption$".en1"); // Joshua - Enhanced save games are not compatible, changing extension to avoid confusion       
         }
         else
             return;

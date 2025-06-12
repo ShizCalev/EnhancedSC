@@ -35,7 +35,10 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'EHamlet0')
+        {
             Characters[1] = P.controller;
+            EAIController(Characters[1]).bAllowKnockout = true;
+        }
     }
 
     if( !bInit )

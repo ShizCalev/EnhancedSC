@@ -1,5 +1,4 @@
-class EchelonPlayerStart extends PlayerStart
-	config(Enhanced); // Joshua - Class, configurable in Enhanced config
+class EchelonPlayerStart extends PlayerStart;
 
 struct InventoryInfo
 {
@@ -10,7 +9,6 @@ struct InventoryInfo
 var() array<InventoryInfo>	DynInitialInventory;
 var() array<Sound>			m_StartSounds;
 var() bool					bNoThermalAvailable;
-var() config bool			bThermalOverride;
 
 var()  Name					GroupTag;
 var()  Name					JumpLabel;
@@ -18,7 +16,8 @@ var	   int					NbTicks;
 
 function PostBeginPlay()
 {
-	if (bThermalOverride && !EchelonGameInfo(Level.Game).bEliteMode)
+	// Joshua - Thermal override toggle, disabled on Elite
+	if (EchelonGameInfo(Level.Game).bThermalOverride && !EchelonGameInfo(Level.Game).bEliteMode && bNoThermalAvailable)
 		bNoThermalAvailable = false;
 
 	// Joshua - Dirty fix to move Vselka Infiltration spawn point to Xbox version
@@ -28,10 +27,13 @@ function PostBeginPlay()
 		SetRotation(rot(0, 38088, 0));
 	}
 
-	// Joshua - Severonickel Part 2 spawn point lowered so Sam doesn't fall in air at start
 	if (GetCurrentMapName() == "3_4_3Severonickel")
 	{
+		// Joshua - Severonickel Part 2 spawn point lowered so Sam doesn't fall in air at start
 		SetLocation(vect(3528.004150, 1708.404541, 592.0));
+		// Joshua - Moving the initial pattern to the PlayerStart, it was initially an EEventTrigger
+		GroupTag = 'LambertAI';
+		JumpLabel = 'InitGoals';
 	}
 	
 	super.PostBeginPlay();

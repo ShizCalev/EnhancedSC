@@ -202,7 +202,7 @@ function DrawView(HUD Hud, ECanvas Canvas)
 {
 	Super.DrawView(Hud, Canvas);
 
-	if( F2000 != None && F2000.bSniperMode )
+	if( F2000 != None && F2000.bSniperMode && Epc.bShowScope && Epc.bShowHUD) // Joshua - Show scope toggle
 	{			
         DrawDistanceMeter(Canvas);
         DrawQuickInv(Canvas);		

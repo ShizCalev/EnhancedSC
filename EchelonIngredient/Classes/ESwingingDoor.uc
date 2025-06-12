@@ -47,6 +47,12 @@ function PostBeginPlay()
 
 	Super.PostBeginPlay();
 
+	// Joshua - Option to randomize lock pick combinations
+	if(EchelonGameInfo(Level.Game).bRandomizeLockpick)
+    {
+        RandomizeLockPattern();
+    }
+
 	// Validate opening direction
 	if( KeyRot[1].Yaw < 0 && KeyRot[2].Yaw > 0 )
 	{
@@ -315,6 +321,37 @@ function StayOpen(Actor Other, bool pawnOpen, bool playerOpen)
 	Super.StayOpen(Other, pawnOpen, playerOpen);
 }
 
+// Joshua - Option to randomize lock pick combinations
+function RandomizeLockPattern()
+{
+    local int i;
+    
+    // Skip if all combinations are PL_None
+    if(Combinaison[0] == PL_None && 
+       Combinaison[1] == PL_None &&
+       Combinaison[2] == PL_None &&
+       Combinaison[3] == PL_None &&
+       Combinaison[4] == PL_None &&
+       Combinaison[5] == PL_None)
+    {
+        return;
+    }
+
+    // Randomize each non-None position
+    for(i = 0; i < 6; i++)
+    {
+        if(Combinaison[i] != PL_None)
+        {
+            switch(Rand(4))
+            {
+                case 0: Combinaison[i] = PL_UpLeft; break;
+                case 1: Combinaison[i] = PL_UpRight; break;
+                case 2: Combinaison[i] = PL_DownLeft; break;
+                case 3: Combinaison[i] = PL_DownRight; break;
+            }
+        }
+    }
+}
 defaultproperties
 {
     KnobOffsetX=120

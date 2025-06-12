@@ -38,7 +38,11 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'ERussianCivilian1')
+        {
             Characters[1] = P.controller;
+             // Joshua - Blocking this drunk to prevent an additional "intruder" stat if the cops see you
+            EAIController(Characters[1]).bBlockDetection = true;
+        }
     }
 
     if( !bInit )

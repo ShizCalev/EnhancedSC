@@ -72,6 +72,7 @@ SetDogDead:
     End();
 ImportantMemberDied:
     Log("ImportantMemberDied");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);
@@ -120,6 +121,7 @@ FeirongSecondLamCall:
 LaserMicFailure:
     Log("LaserMicFailure");
     CheckFlags(V4_1_2ChineseEmbassy(Level.VarObject).LastMikDone,TRUE,'End');
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);
@@ -130,6 +132,7 @@ End:
     End();
 LaserMicFailureB:
     Log("LaserMicFailureB");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_4_1_2_CEmb_WTF", "Speech_0038L", "Localization\\P_4_1_2ChineseEmbassy"), Sound'S4_1_2Voice.Play_41_38_01', 1, 0, TR_HEADQUARTER, 0, true);
@@ -138,6 +141,7 @@ LaserMicFailureB:
     End();
 GameOver:
     Log("Game Over   -  Follow truck");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_4_1_2_CEmb_WTF", "Speech_0044L", "Localization\\P_4_1_2ChineseEmbassy"), Sound'S4_1_2Voice.Play_41_19_01', 1, 0, TR_HEADQUARTER, 0, true);

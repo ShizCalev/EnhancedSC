@@ -34,7 +34,10 @@ function InitPattern()
         if(P.name == 'spetsnaz11')
             Characters[2] = P.controller;
         if(P.name == 'EAleksee0')
+        {
             Characters[3] = P.controller;
+            EAIController(Characters[3]).bAllowKnockout = true;
+        }
     }
 
     if( !bInit )

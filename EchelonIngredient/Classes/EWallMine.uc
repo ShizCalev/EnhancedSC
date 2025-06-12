@@ -1,11 +1,10 @@
 class EWallMine extends EInventoryItem
-	config(Enhanced) // Joshua - Class, configurable in Enhanced config
 	native;
 
 var() int	DetectionRadius,
 			DetectionHeight;
 // Joshua - ExplosionDelay, configurable in Enhanced config
-var() config float	ExplosionDelay;			// Time left before explosion, may be set in editor .. must not be modified while playing
+var() float	ExplosionDelay;			// Time left before explosion, may be set in editor .. must not be modified while playing
 var() float ActivationDelay;		// Time before wallmine activates on wall
 var() int	MovementThreshold;
 var() float TickNoiseRadius;		// how far noise of WallMineTick travels 
@@ -18,11 +17,26 @@ function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 
-	// Joshua - Elite Mode will override this setting if greater than 0.5
-	if (EchelonGameInfo(Level.Game).bEliteMode)
+	// Joshua - Option to reduce delay to prevent running past the wallmine before it explodes
+	switch (EchelonGameInfo(Level.Game).WallMineDelay)
 	{
-		if (ExplosionDelay > 0.5)	
+		case WMD_Default:
+			ExplosionDelay = 1.75;
+			break;
+
+		case WMD_Enhanced:
 			ExplosionDelay = 0.5;
+			break;
+
+		case WMD_Instant:
+			ExplosionDelay = 0.0;
+			break;
+	}
+
+	// Joshua - Elite Mode will override this setting if greater than 0.5
+	if (EchelonGameInfo(Level.Game).bEliteMode && ExplosionDelay > 0.5)
+	{
+		ExplosionDelay = 0.5;
 	}
 
 	// Destroy Interaction if placed on wall by designer

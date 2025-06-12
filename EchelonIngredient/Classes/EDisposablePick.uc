@@ -30,6 +30,7 @@ function PlaceOnDoor()
 
 	// Unlock door
 	Door.Unlock();
+	EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("LockDestroyed");
 	Destroy();
 }
 

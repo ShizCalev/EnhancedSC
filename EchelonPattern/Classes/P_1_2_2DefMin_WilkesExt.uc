@@ -62,6 +62,7 @@ state Pattern
 Begin:
 KilledWilkes:
     Log("KilledWilkes");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);
     PlayerMove(false);

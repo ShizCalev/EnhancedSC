@@ -2355,6 +2355,11 @@ function PlayInAir()
 	victime = EPawn(Trace(HitLocation, HitNormal, TraceEnd, TraceStart, true, Extent, , true));
 	if(victime != None && !victime.bOrientOnSlope)
 	{
+		// Joshua - Set bBlockJumpDetection to prevent head jump from counting as PlayerIdentified
+		if(victime.Controller != None && EAIController(victime.Controller) != None)
+		{
+			EAIController(victime.Controller).bBlockJumpDetection = true;
+		}
 		PlayAnimOnly(ALandAttack, ,0.1);
 		return;
 	}
@@ -2904,6 +2909,28 @@ function TakeDamage( int Damage, Pawn instigatedBy, Vector Hitlocation, vector H
 			//plog("passing damage to controller.");
 			Controller.damageAttitudeTo(instigatedBy, Damage, backUpdamageType,PillTag);
 		}
+
+		if(instigatedBy != Self && Controller != None && !bIsPlayerPawn && instigatedBy != None && instigatedBy.bIsPlayerPawn && !EAIController(Controller).bWasInjured && !EAIController(Controller).bNotInStats)
+		{
+			if (!EAIController(Controller).bWasKnockedOut)
+			{
+				if (bIsDog)
+				{
+					EPlayerController(instigatedBy.Controller).playerStats.AddStat("EnemyInjured");
+					EAIController(Controller).bWasInjured = true;
+				}
+				else if (bHostile)
+				{
+					EPlayerController(instigatedBy.Controller).playerStats.AddStat("EnemyInjured");
+					EAIController(Controller).bWasInjured = true;
+				}
+				else
+				{
+					EPlayerController(instigatedBy.Controller).playerStats.AddStat("CivilianInjured");
+					EAIController(Controller).bWasInjured = true;
+				}
+			}
+		}
 	}
 	else if ( !bAlreadyDead )
 	{
@@ -3242,7 +3269,6 @@ function DiedE( Controller Killer, int PillTag, vector momentum )
 		{
 			bKilledByPlayer = true;
 			MakeNoise( DyingGaspRadius, NOISE_DyingGasp );
-
 		}
 		// If Npc killed the player
 		else if( Controller.bIsPlayer )
@@ -4417,6 +4443,28 @@ state s_Sitting
 			{
 				//plog("passing damage to controller.");
 				Controller.damageAttitudeTo(instigatedBy, Damage, damageType);
+			}
+			
+			if(instigatedBy != Self && Controller != None && !bIsPlayerPawn && instigatedBy != None && instigatedBy.bIsPlayerPawn && !EAIController(Controller).bWasInjured && !EAIController(Controller).bNotInStats)
+			{
+				if (!EAIController(Controller).bWasKnockedOut)
+				{
+					if (bIsDog)
+					{
+						EPlayerController(instigatedBy.Controller).playerStats.AddStat("EnemyInjured");
+						EAIController(Controller).bWasInjured = true;
+					}
+					else if (bHostile)
+					{
+						EPlayerController(instigatedBy.Controller).playerStats.AddStat("EnemyInjured");
+						EAIController(Controller).bWasInjured = true;
+					}
+					else
+					{
+						EPlayerController(instigatedBy.Controller).playerStats.AddStat("CivilianInjured");
+						EAIController(Controller).bWasInjured = true;
+					}
+				}
 			}
 		}
 		else if ( !bAlreadyDead )

@@ -96,6 +96,7 @@ SafeStreets:
 SamOnStreets:
     Log("Lambert pulls the plug because Sam went down to the streets.");
     CheckFlags(V1_1_1Tbilisi(Level.VarObject).GoalStreets,TRUE,'DoNothing');
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     SetExclusivity(TRUE);
     PlayerMove(false);
@@ -119,6 +120,7 @@ BloodyMurder:
     End();
 StrikeTwo:
     Log("Sam has killed two civilians. Launching Game Over");
+    SetProfileDeletion();
     SetExclusivity(TRUE);
     DisableMessages(TRUE, TRUE);
     PlayerMove(false);

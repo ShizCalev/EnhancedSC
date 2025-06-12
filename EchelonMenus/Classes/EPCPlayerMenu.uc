@@ -102,7 +102,12 @@ function EscapeMenu()
 
 function ConfirmButtonPressed()
 {    
-    local String Error;    
+    local String Error;
+
+    // Joshua - Added for Elite mode
+    local EPlayerController EPC;
+
+    EPC = EPlayerController(GetPlayerOwner());
 
     ///////////////////////////////////////////////////////////////////////////////////
     //                  CREATE A PROFILE
@@ -116,6 +121,18 @@ function ConfirmButtonPressed()
 
 			// No map completed yet, we just created a profile.
 			GetPlayerOwner().playerInfo.MapCompleted = 0;
+
+            if (EPC.playerInfo.Difficulty == 2 || EPC.playerInfo.Difficulty == 4) // Elite or Elite Permadeath
+                EPC.eGame.bEliteMode = true;
+            else
+                EPC.eGame.bEliteMode = false;
+
+            if (EPC.playerInfo.Difficulty > 2) // Permadeath toggle
+                EPC.eGame.bPermadeathMode = true;
+            else
+                EPC.eGame.bPermadeathMode = false;
+
+            EPC.eGame.SaveEnhancedOptions();
 
 			Error = GetPlayerOwner().ConsoleCommand("SAVEPROFILE NAME="$m_CreateArea.GetProfileName());
 
@@ -145,8 +162,19 @@ function ConfirmButtonPressed()
         if(m_LoadDelArea.m_ListBox.SelectedItem != None)
         {
             //We should only have valid profiles listed so we can't load a wrong profile
-            GetPlayerOwner().ConsoleCommand("LOADPROFILE NAME="$EPCListBoxItem(m_LoadDelArea.m_ListBox.SelectedItem).Caption); 
-            Root.ChangeCurrentWidget(WidgetID_SaveGames);            
+            GetPlayerOwner().ConsoleCommand("LOADPROFILE NAME="$EPCListBoxItem(m_LoadDelArea.m_ListBox.SelectedItem).Caption);
+            if (EPC.playerInfo.Difficulty == 2 || EPC.playerInfo.Difficulty == 4) // Elite or Elite Permadeath
+                EPC.eGame.bEliteMode = true;
+            else
+                EPC.eGame.bEliteMode = false;
+
+            if (EPC.playerInfo.Difficulty > 2) // Permadeath toggle
+                EPC.eGame.bPermadeathMode = true;
+            else
+                EPC.eGame.bPermadeathMode = false;
+
+            EPC.eGame.SaveEnhancedOptions();
+            Root.ChangeCurrentWidget(WidgetID_SaveGames);
         }        
     }
 }

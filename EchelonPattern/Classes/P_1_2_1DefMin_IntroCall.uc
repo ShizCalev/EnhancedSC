@@ -35,6 +35,16 @@ function InitPattern()
             Characters[1] = P.controller;
     }
 
+    // Joshua - Defense Ministry requires 1 bullet to shoot a unavoidable camera for Elite mode
+    if (!bInit && EchelonGameInfo(Level.Game).bEliteMode && EPlayerController(Characters[0]) != None && EPlayerController(Characters[0]).HandGun != None)
+    {
+        if(EPlayerController(Characters[0]).HandGun.Ammo == 0 && EPlayerController(Characters[0]).HandGun.ClipAmmo == 0 && EPlayerController(Characters[0]).playerStats.BulletFired == 0)
+        {
+            EPlayerController(Characters[0]).HandGun.Ammo = 1;
+            EPlayerController(Characters[0]).HandGun.ClipAmmo = 1;
+        }
+    }
+
     if( !bInit )
     {
     bInit=TRUE;

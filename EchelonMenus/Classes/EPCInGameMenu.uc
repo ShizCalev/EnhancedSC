@@ -81,7 +81,7 @@ function Notify(UWindowDialogControl C, byte E)
         switch(C)
         {
         case m_MainMenu:            
-			if(m_SettingsArea.m_SoundsArea.m_bModified || m_SettingsArea.m_GraphicArea.m_bModified || m_SettingsArea.m_ControlsArea.m_bModified)
+			if(m_SettingsArea.m_SoundsArea.m_bModified || m_SettingsArea.m_GraphicArea.m_bModified || m_SettingsArea.m_ControlsArea.m_bModified || m_SettingsArea.m_EnhancedArea.m_bModified) // Joshua - Added Enhance area
 			{
 				m_bAskExitToMenu = true;
 				m_MessageBoxSettings = EPCMainMenuRootWindow(Root).m_MessageBoxCW.CreateMessageBox(Self, Caps(Localize("OPTIONS","SETTINGSCHANGE","Localization\\HUD")), Caps(Localize("OPTIONS","SETTINGSCHANGEMESSAGE","Localization\\HUD")), MB_YesNo, MR_No, MR_No);
@@ -95,7 +95,7 @@ function Notify(UWindowDialogControl C, byte E)
         case m_GoToGame:
 			if(GetPlayerOwner().CanGoBackToGame() && !m_SaveLoadArea.m_SaveArea.WindowIsVisible())
 			{
-				if(m_SettingsArea.m_SoundsArea.m_bModified || m_SettingsArea.m_GraphicArea.m_bModified || m_SettingsArea.m_ControlsArea.m_bModified)
+				if(m_SettingsArea.m_SoundsArea.m_bModified || m_SettingsArea.m_GraphicArea.m_bModified || m_SettingsArea.m_ControlsArea.m_bModified || m_SettingsArea.m_EnhancedArea.m_bModified) // Joshua - Added Enhance area
 				{
 					m_bStartGame = true;    //Return to game after Message box
 					m_MessageBoxSettings = EPCMainMenuRootWindow(Root).m_MessageBoxCW.CreateMessageBox(Self, Caps(Localize("OPTIONS","SETTINGSCHANGE","Localization\\HUD")), Caps(Localize("OPTIONS","SETTINGSCHANGEMESSAGE","Localization\\HUD")), MB_YesNo, MR_No, MR_No);
@@ -111,7 +111,7 @@ function Notify(UWindowDialogControl C, byte E)
         case m_BSaveLoad:        
             if( UWindowButton(C).m_bSelected == false )
             {
-                if(m_SettingsArea.m_SoundsArea.m_bModified || m_SettingsArea.m_GraphicArea.m_bModified || m_SettingsArea.m_ControlsArea.m_bModified)
+                if(m_SettingsArea.m_SoundsArea.m_bModified || m_SettingsArea.m_GraphicArea.m_bModified || m_SettingsArea.m_ControlsArea.m_bModified || m_SettingsArea.m_EnhancedArea.m_bModified) // Joshua - Added Enhance area
                     m_MessageBoxSettings = EPCMainMenuRootWindow(Root).m_MessageBoxCW.CreateMessageBox(Self, Caps(Localize("OPTIONS","SETTINGSCHANGE","Localization\\HUD")), Caps(Localize("OPTIONS","SETTINGSCHANGEMESSAGE","Localization\\HUD")), MB_YesNo, MR_No, MR_No);
 
                 ChangeMenuSection(UWindowButton(C));
@@ -203,6 +203,7 @@ function MessageBoxDone(UWindowWindow W, MessageBoxResult Result)
             m_SettingsArea.m_GraphicArea.SaveOptions();
             m_SettingsArea.m_SoundsArea.SaveOptions();
             m_SettingsArea.m_ControlsArea.SaveOptions();
+            m_SettingsArea.m_EnhancedArea.SaveOptions();  // Joshua - Added Enhance area
             
             GO.UpdateEngineSettings();
 			
@@ -216,6 +217,7 @@ function MessageBoxDone(UWindowWindow W, MessageBoxResult Result)
 		m_SettingsArea.m_GraphicArea.m_bModified  = false;
 		m_SettingsArea.m_SoundsArea.m_bModified   = false;
 		m_SettingsArea.m_ControlsArea.m_bModified = false;
+        m_SettingsArea.m_EnhancedArea.m_bModified = false;  // Joshua - Added Enhance area
         
         if(m_bStartGame)
         {
@@ -248,11 +250,30 @@ function GameLoaded(bool success)
 
 //Called when we return from game
 function Reset()
-{   
+{
+    local EPlayerController EPC;
+    local EPCFileManager FileManager;
+    local String ProfilePath;
+
+    EPC = EPlayerController(GetPlayerOwner());
+
+    if (EPC.eGame.bPermadeathMode && EPC.bProfileDeletionPending)
+    {
+        FileManager = EPCMainMenuRootWindow(Root).m_FileManager;
+        if(FileManager != None)
+        {
+            ProfilePath = "..\\Save\\"$EPC.playerInfo.PlayerName;
+            FileManager.DeleteDirectory(ProfilePath, true);
+            
+            GetLevel().ConsoleCommand("Open menu\\menu");
+            return;
+        }
+    }     
+
     m_MissionInfoArea.Reset();
     m_InventoryArea.Reset();
     m_SaveLoadArea.Reset();
-    m_SettingsArea.Reset();
+    m_SettingsArea.Reset();   
 }
 
 function GoToSaveLoadArea()
@@ -292,6 +313,7 @@ function ChangeMenuSection( UWindowButton _SelectMe)
 	m_SettingsArea.m_GraphicArea.m_bFirstRefresh  = true;
 	m_SettingsArea.m_SoundsArea.m_bFirstRefresh   = true;
 	m_SettingsArea.m_ControlsArea.m_bFirstRefresh = true;
+    m_SettingsArea.m_EnhancedArea.m_bFirstRefresh = true;  // Joshua - Added Enhance area
 
 	if(_SelectMe != m_InventoryArea)
 		m_InventoryArea.SetCurrentItem(0);

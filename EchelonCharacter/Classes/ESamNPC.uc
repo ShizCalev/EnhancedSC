@@ -12,6 +12,39 @@ class ESamNPC extends EAIPawn
 // 
 //------------------------------------------------------------------------
 
+function SetSamMesh(int SamMeshType)
+{
+    switch (SamMeshType)
+    {
+		case 0:
+			Mesh = EchelonLevelInfo(Level).SamMesh;
+			if( Mesh == none )
+			{
+				// JFP: Temp hack, following the Oct-30-2002 merge some maps didn't have the SamMesh set.
+				// Added this for backward compatibility.
+				Mesh=SkeletalMesh'ESam.samAMesh';
+				log("JFPDEBUG: Hardcoding the default Sam mesh, since no mesh appeared to be set in the Level. Fix this in UnrealEd. New mesh:"@Mesh);
+			}
+			break;
+        case 1:
+            Mesh = SkeletalMesh'ESam.samAMesh';
+            break;
+        case 2:
+            Mesh = SkeletalMesh'ESam.samBMesh';
+            break;
+        case 3:
+            Mesh = SkeletalMesh'ESam.samCMesh';
+            break;
+        default:
+			Mesh = EchelonLevelInfo(Level).SamMesh;
+			if( Mesh == none )
+			{
+				Mesh=SkeletalMesh'ESam.samAMesh';
+			}
+            break;
+    }
+}
+
 function PostBeginPlay()
 {
 	local EWeapon Weapon;
@@ -20,8 +53,88 @@ function PostBeginPlay()
 
 	RandomizedAnimRate = 0.97f + RandRange(0.0f, 0.06f);
 
+	// Joshua - Check for level specific overrides
+	switch(GetCurrentMapName())
+    {
+        case "0_0_2_Training":
+        case "0_0_3_Training":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Training);
+            break;
+            
+        case "1_1_0Tbilisi":
+        case "1_1_1Tbilisi": 
+        case "1_1_2Tbilisi":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Tbilisi);
+            break;
+
+		case "1_2_1DefenseMinistry":
+        case "1_2_2DefenseMinistry": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_DefenseMinistry);
+            break;
+
+		case "1_3_2CaspianOilRefinery":
+        case "1_3_3CaspianOilRefinery": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_CaspianOilRefinery);
+            break;
+
+        case "2_1_0CIA":
+        case "2_1_1CIA":
+		case "2_1_2CIA":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_CIA);
+            break;
+            
+        case "2_2_1_Kalinatek":
+        case "2_2_2_Kalinatek": 
+        case "2_2_3_Kalinatek":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Kalinatek);
+            break;
+
+		case "3_2_1_PowerPlant":
+        case "3_2_2_PowerPlant": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_PowerPlant);
+            break;
+
+        case "3_4_2Severonickel":
+        case "3_4_3Severonickel":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Severonickel);
+            break;
+            
+        case "4_1_1ChineseEmbassy":
+        case "4_1_2ChineseEmbassy": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_ChineseEmbassy);
+            break;
+
+		case "4_2_1_Abattoir":
+        case "4_2_2_Abattoir": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Abattoir);
+            break;
+
+        case "4_3_0ChineseEmbassy":
+        case "4_3_1ChineseEmbassy":
+		case "4_3_2ChineseEmbassy":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_ChineseEmbassy2);
+            break;
+            
+		case "5_1_1_PresidentialPalace":
+        case "5_1_2_PresidentialPalace": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_PresidentialPalace);
+            break;			
+            
+		case "1_6_1_1KolaCell":
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_KolaCell);
+            break;	
+
+		case "1_7_1_1VselkaInfiltration":
+        case "1_7_1_2Vselka": 
+			SetSamMesh(EchelonGameInfo(Level.Game).ESam_Vselka);
+            break;
+
+		default:
+			SetSamMesh(0);
+			break;
+    }
+
 	// load generic anim packages
-	Mesh = EchelonLevelInfo(Level).SamMesh;
 	Anim = MeshAnimation(DynamicLoadObject("ESam.samAnims", class'MeshAnimation'));
 	LinkSkelAnim( Anim );
 

@@ -52,6 +52,7 @@ function GiveView( bool bFromPlayer )
 
 	// UnBlock the PlayerController
 	Epc.bLockedCamera = false;
+	Epc.bDisableWhistle = false;
 	Epc.m_camera.GotoState('s_Following');
 	Epc.SetRotation(Epc.backupRotation);
 	Epc.SetBase(None);
@@ -216,6 +217,8 @@ state s_Camera
 		WallAdjust();
 
 		Epc.m_camera.Tilt(2000, 50000, 5000);
+
+		Epc.bDisableWhistle = true;
 	}
 
 	// same as Normalize for a rotator but for an int only

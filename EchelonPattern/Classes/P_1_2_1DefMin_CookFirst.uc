@@ -95,6 +95,7 @@ Milestone:
     End();
 BothDead:
     Log("BothDeadCookFirst");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);
     PlayerMove(false);

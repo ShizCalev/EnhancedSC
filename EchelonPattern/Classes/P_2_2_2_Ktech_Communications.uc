@@ -26,6 +26,7 @@ function EventCallBack(EAIEvent Event,Actor TriggerActor)
 function InitPattern()
 {
     local Pawn P;
+    local ETimer Timer; // Joshua - Adjusting timer for Elite mode
 
     Super.InitPattern();
 
@@ -35,6 +36,36 @@ function InitPattern()
             Characters[1] = P.controller;
         if(P.name == 'ECIABureaucratF0')
             Characters[2] = P.controller;
+    }
+
+    // Joshua - Adjusting timer for Elite mode
+    if(IsEliteMode())
+    {
+        ForEach AllActors(class'ETimer', Timer)
+        {
+            if(Timer.Name == 'ETimer0')
+                Timer.TimerDelay = 100.0; // 150.0
+        }
+    }
+
+    // Joshua - Replace NPC skins for variety
+    if (!bInit)
+    {
+        ForEach DynamicActors(class'Pawn', P)
+        {
+            if(P.name == 'EMafiaMuscle5' || P.name == 'EMafiaMuscle11' || P.name =='EMafiaMuscle13')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.Grunt.GruntA", class'Texture'));
+            }
+            if(P.name == 'EMafiaMuscle8' || P.name == 'EMafiaMuscle12' || P.name == 'EMafiaMuscle17')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.Grunt.GruntB", class'Texture'));
+            }
+            if(P.name == 'EMercenaryTechnician7')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.MercTech.MercTechB", class'Texture'));
+            }
+        }
     }
 
     if( !bInit )
@@ -62,6 +93,7 @@ HostagesRescue:
     End();
 HostageKilled:
     Log("Communicator 22_28 'Dead Hostage Failure'");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_2_2_2_Ktech_Communications", "Speech_0046L", "Localization\\P_2_2_2_Kalinatek"), Sound'S2_2_2Voice.Play_22_28_01', 1, 0, TR_HEADQUARTER, 0, true);
@@ -101,6 +133,7 @@ FuseBoxAlreadyDone:
     End();
 DefuseBombFailed:
     Log("Communicator 22_32 'Time Up'");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     ShakeCamera(200, 55000, 50);
     Speech(Localize("P_2_2_2_Ktech_Communications", "Speech_0037L", "Localization\\P_2_2_2_Kalinatek"), Sound'S2_2_2Voice.Play_22_32_01', 1, 0, TR_HEADQUARTER, 0, true);
@@ -108,6 +141,7 @@ DefuseBombFailed:
     End();
 BombExploded:
     Log("If Sam shoots the bomb, game over");
+    SetProfileDeletion();
     PlayerMove(false);
     Sleep(1);
     GameOver(false, 0);
@@ -142,6 +176,7 @@ BombNotDefused:
     End();
 IvanIsDead:
     Log("Communicator 22_52 'Dead Ivan Failure'");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_2_2_2_Ktech_Communications", "Speech_0043L", "Localization\\P_2_2_2_Kalinatek"), Sound'S2_2_2Voice.Play_22_52_01', 1, 0, TR_HEADQUARTER, 0, true);

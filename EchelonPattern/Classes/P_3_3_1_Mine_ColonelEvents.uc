@@ -80,6 +80,7 @@ DoorOpened:
     End();
 Failure:
     Log("Failure");
+    SetProfileDeletion();
     Speech(Localize("P_3_3_1_Mine_ColonelEvents", "Speech_0002L", "Localization\\P_3_3_1MiningTown"), None, 2, 0, TR_HEADQUARTER, 0, false);
     Sleep(3);
     Close();

@@ -100,6 +100,7 @@ OneKillDone:
     End();
 TooMuchKillDone:
     Log("TooMuchKillDone");
+    SetProfileDeletion();
     Speech(Localize("P_3_3_1_Mine_TechInfoUpdate", "Speech_0016L", "Localization\\P_3_3_1MiningTown"), None, 3, 0, TR_HEADQUARTER, 0, false);
     Sleep(4);
     Close();

@@ -167,6 +167,7 @@ Sound07:
     End();
 BloodyMurder:
     Log("Sam has murdered someone");
+    SetProfileDeletion();
     SetExclusivity(TRUE);
     DisableMessages(TRUE, TRUE);
     PlayerMove(false);

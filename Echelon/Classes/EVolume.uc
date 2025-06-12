@@ -1,5 +1,4 @@
 class EVolume extends PhysicsVolume
-	Config(Enhanced) // Joshua - Class, configurable in Enhanced config
 	native;
 
 #exec OBJ LOAD FILE=..\Sounds\ThrowObject.uax
@@ -41,9 +40,6 @@ var()  bool			  bExplosiveVolume;
 var()  bool			  bDetectCarriedPawn;
 var	   bool			  bAlreadyVisited;
 
-// Joshua - Checkpoint toggle for Enhanced config
-var config bool bEnableCheckpoints;
-
 // Camera
 var(Camera)	EVolumeSize VolumeSize;
 
@@ -70,8 +66,7 @@ function PostBeginPlay()
 	//               We go to the save state, but we can't render the message box, so we can't continue since
 	//               we're stuck in this state. Bypass all saves for now.
 	// Joshua - bSaveGame must be true in order to have PC checkpoints
-	if (!bEnableCheckpoints)
-		bSavegame = false;
+	//	bSavegame = false;
 }
 
 function CheckExplosive(Actor weapon, Pawn Instigator)
@@ -129,7 +124,7 @@ function bool IsRelevant( actor Other )
 
 function Touch(actor Other)
 {
-	local Pawn       Player;
+	local Pawn Player;
 	local EGroupAI Group;
 	local EGameplayObject EGO;
 
@@ -138,17 +133,20 @@ function Touch(actor Other)
 	if((bSavegame) 
      && (Other.bIsPlayerPawn) 
      && (EPawn(Other).Controller != None) 
-     && ((!EchelonGameInfo(Level.Game).bEliteMode && EchelonLevelInfo(Level).AlarmStage < 4)
-	 	|| (EchelonGameInfo(Level.Game).bEliteMode && EchelonLevelInfo(Level).AlarmStage < 3)) // Joshua - Elite only allows for 3 alarms
-	 && !IsGameOver())   // Do not save if the player is about to be put GameOver because of the alarm stage
+	 && ((!EchelonGameInfo(Level.Game).bEliteMode && EchelonLevelInfo(Level).AlarmStage < 4)
+	 || (EchelonGameInfo(Level.Game).bEliteMode && EchelonLevelInfo(Level).AlarmStage < 3)) // Joshua - Elite only allows for 3 alarms
+	 && !IsGameOver()) // Do not save if the player is about to be put GameOver because of the alarm stage
 	{
 		// Joshua - New method to add PC checkpoints
-		EPlayerController(EPawn(Other).Controller).bAutoSaveLoad=True;
-		EPlayerController(EPawn(Other).Controller).bSavingTraining=True;
-		EPlayerController(EPawn(Other).Controller).bCheckpoint=True;
-		EPlayerController(EPawn(Other).Controller).CheckpointLevel=GetCurrentMapName();
-		ConsoleCommand("SAVEGAME FILENAME=CHECKPOINT OVERWRITE=TRUE");
-		bSavegame = False;
+		if(EchelonGameInfo(level.Game).bEnableCheckpoints)
+		{
+			EPlayerController(EPawn(Other).Controller).bAutoSaveLoad=true;
+			EPlayerController(EPawn(Other).Controller).bSavingTraining=true;
+			EPlayerController(EPawn(Other).Controller).bCheckpoint=true;
+			EPlayerController(EPawn(Other).Controller).CheckpointLevel=GetCurrentMapName();
+			ConsoleCommand("SAVEGAME FILENAME=" $ Localize("Common", "CheckpointName", "Localization\\Enhanced") $ " OVERWRITE=TRUE");
+		}
+		bSavegame = false;
 	}
 	else if(bIsAnEventtrigger)
 	{

@@ -167,6 +167,7 @@ nothing:
     End();
 GameOverMan:
     Log("");
+    SetProfileDeletion();
     GameOver(false, 0);
     End();
 GetinCR:

@@ -122,6 +122,12 @@ function TakeDamage( int Damage, Pawn EventInstigator, vector HitLocation, vecto
 	// add to changed actors list
 	Level.AddChange(self, CHANGE_BrokenObject);
 
+	// Track stats if the player destroyed the glass
+	if(EventInstigator != None && EventInstigator.bIsPlayerPawn)
+	{
+		EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("ObjectDestroyed");
+	}
+
 	FakeDestroy();
 }
 

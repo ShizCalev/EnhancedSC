@@ -30,6 +30,7 @@ function InitPattern()
 {
     local Pawn P;
     local Actor A;
+    local ETimer Timer; // Joshua - Adjusting timer for Elite mode
 
     Super.InitPattern();
 
@@ -43,6 +44,16 @@ function InitPattern()
     {
         if(A.name == 'EFanBladeCIA2')
             SoundActors[0] = A;
+    }
+
+    // Joshua - Adjusting timer for Elite mode
+    if(IsEliteMode())
+    {
+        ForEach AllActors(class'ETimer', Timer)
+        {
+            if(Timer.Name == 'ETimer1')
+                Timer.TimerDelay = 60.0; // 100.0
+        }
     }
 
     if( !bInit )
@@ -63,6 +74,8 @@ state Pattern
 Begin:
 Start:
     Log("");
+    if(IsEliteMode()) // Joshua - Enhanced change: Removing the one alarm limit, player has accessed CIA central server
+        SetAlarmStage(3);
     Sleep(2.5);
     SendUnrealEvent('VentFan5');
     SendUnrealEvent('CleanMover');
@@ -70,6 +83,8 @@ Start:
     Speech(Localize("P_2_1_0_CIA_Comms", "Speech_0045L", "Localization\\P_2_1_0CIA"), Sound'S2_1_0Voice.Play_21_05_01', 1, 2, TR_HEADQUARTER, 0, false);
     AddGoal('GoalServer', "", 8, "", "P_2_1_0_CIA_Comms", "Goal_0046L", "Localization\\P_2_1_0CIA", "P_2_1_0_CIA_Comms", "Goal_0047L", "Localization\\P_2_1_0CIA");
     AddGoal('GoalFatality', "", 10, "", "P_2_1_0_CIA_Comms", "Goal_0048L", "Localization\\P_2_1_0CIA", "P_2_1_0_CIA_Comms", "Goal_0049L", "Localization\\P_2_1_0CIA");
+    if(IsEliteMode()) // Joshua - Enhanced change: Removing the one alarm limit, player has accessed CIA central server
+        AddGoal('GoalAlarm', "", 6, "", "P_2_1_0_CIA_Comms", "Goal_0050L", "Localization\\P_2_1_0CIA", "P_2_1_0_CIA_Comms", "Goal_0051L", "Localization\\P_2_1_0CIA");
     AddNote("", "P_2_1_0_CIA_Comms", "Note_0050L", "Localization\\P_2_1_0CIA");
 Notetvsion:
     AddNote("", "P_2_1_0_CIA_Comms", "Note_0068L", "Localization\\P_2_1_0CIA");

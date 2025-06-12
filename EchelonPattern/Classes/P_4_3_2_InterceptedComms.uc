@@ -53,6 +53,7 @@ state Pattern
 Begin:
 AlarmTrucks:
     Log("Intercepted Enemy Communication 43_34 'Alarm Trucks'");
+    SetProfileDeletion();
     Speech(Localize("P_4_3_2_InterceptedComms", "Speech_0001L", "Localization\\P_4_3_2ChineseEmbassy"), Sound'S4_3_2Voice.Play_43_34_01', 1, 0, TR_NPCS, 0, false);
     Close();
     GameOver(false, 0);

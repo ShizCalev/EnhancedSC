@@ -67,6 +67,8 @@ var EChangeEvent                ChangeHistory[16];
 var float                       ChangeHistory_LastChangeBark;
 var float                       ChangeHistory_PrevChangeBark; 
 
+var(Enhanced) bool bPlayerIdentifiedCounted;
+
 native(1418) final function Broadcast(EAIController Instigator,BroadCastType _BCType, Vector _EventLocation, optional bool bOnlyRadio);
 
 native(1550) final function int ChangeHistory_AddChangeAndSuggestBehavior(Vector Location, EChangeType ChangeType);  
@@ -114,6 +116,7 @@ function PostBeginPlay()
 	}
 
 	Player =  EchelonGameInfo(Level.Game).pPlayer;
+	bPlayerIdentifiedCounted = false;
 }
 
 
@@ -232,7 +235,6 @@ function bool IsAMemberInAttack()
 
 	return false;
 }
-
 
 //--------------------------------------------------[Frederic Blais]-----
 // SetDefaultPattern
@@ -1333,7 +1335,6 @@ event AIEventCallBack(EAIController Instigator, EAIEvent Event)
 			return;
 		}
 	}
-
 
 	//reset the flag if the player is seen
 	if(Instigator.bPlayerSeen)

@@ -73,6 +73,7 @@ Milestone:
     End();
 LastKill:
     Log("LastKill");
+    SetProfileDeletion();
     Speech(Localize("P_3_3_2_Mine_MinerFirst", "Speech_0002L", "Localization\\P_3_3_2MiningTown"), None, 2, 0, TR_HEADQUARTER, 0, false);
     Sleep(4);
     Close();

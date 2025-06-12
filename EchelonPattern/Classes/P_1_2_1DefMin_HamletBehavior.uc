@@ -74,7 +74,10 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'EHamlet0')
+        {
             Characters[1] = P.controller;
+            EAIController(Characters[1]).bAllowKnockout = true;
+        }
         if(P.name == 'ELambert0')
             Characters[2] = P.controller;
     }
@@ -146,6 +149,7 @@ Death:
     End();
 KillBeforeInt:
     Log("KillBeforeInt");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);
     PlayerMove(false);

@@ -4,7 +4,7 @@ state s_Sneaking
 {
 	function DrawView( HUD hud, ECanvas Canvas )
 	{
-		DrawSniperMask(Canvas);
+		if((EchelonGameInfo(Level.Game).pPlayer).bShowScope && EchelonGameInfo(Level.Game).pPlayer.bShowHUD) // Joshua - Show scope toggle
+			DrawSniperMask(Canvas);
 	}
 }
-

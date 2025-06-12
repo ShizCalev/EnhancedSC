@@ -100,7 +100,7 @@ GrinkoDead:
     Jump('GDb');
 GDa:
     Log("GDa");
-    PlayerMove(false);
+    //PlayerMove(false); // Joshua - Removing the player movement lock after completing the objective
 GDb:
     Log("GDb");
     CheckFlags(GdeadPass1,TRUE,'GDc');

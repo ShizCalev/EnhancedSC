@@ -64,6 +64,7 @@ KillDone:
     End();
 TooMuchKill:
     Log("TooMuchKill");
+    SetProfileDeletion();
     Speech(Localize("P_3_3_1_Mine_GeeksSleeping", "Speech_0002L", "Localization\\P_3_3_1MiningTown"), None, 3, 0, TR_HEADQUARTER, 0, false);
     Sleep(4);
     Close();

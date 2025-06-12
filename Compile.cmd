@@ -14,6 +14,7 @@ if not exist .\Editor\Inc\ mkdir .\Editor\Inc
 if not exist .\Engine\Inc\ mkdir .\Engine\Inc
 if not exist .\UDebugMenu\Inc\ mkdir .\UDebugMenu\Inc
 if not exist .\UWindow\Inc\ mkdir .\UWindow\Inc
+if not exist .\Enhanced\Inc\ mkdir .\Enhanced\Inc
 
 del ".\System\Echelon.u"
 del ".\System\EchelonIngredient.u"
@@ -21,9 +22,8 @@ del ".\System\EchelonCharacter.u"
 del ".\System\EchelonHUD.u"
 del ".\System\EchelonPattern.u"
 del ".\System\EchelonMenus.u"
-
-:: Not working yet, currently using v1.3
-:: del ".\System\Engine.u"
+del ".\System\Engine.u"
+del ".\System\Enhanced.u"
 
 :: Not needed yet, currently using v1.3
 :: del ".\System\Core.u"

@@ -92,11 +92,11 @@ function ProcessZoning()
 					//check visibility factor for each NPC
 					if((NPC.GetVisibilityFactor(true) > 30) && (!NPC.bIsDog) && (!NPC.bSniper))
 					{
-						if( !NPC.bBodyDetected && !bAlarmIsRunning )
+						if( !NPC.bBodyDetected && !bAlarmIsRunning && !NPC.AI.bWasFound && !NPC.AI.bNotInStats)
 						{
 							//flag the NPC as found
 							NPC.bBodyDetected=true;
-
+							EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("BodyFound");
 							bBodyFound=true;
 						}
 					}

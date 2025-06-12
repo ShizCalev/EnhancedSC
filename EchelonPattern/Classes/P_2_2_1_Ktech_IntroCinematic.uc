@@ -34,6 +34,7 @@ function EventCallBack(EAIEvent Event,Actor TriggerActor)
 function InitPattern()
 {
     local Pawn P;
+    local EHat Hat;
 
     Super.InitPattern();
 
@@ -43,6 +44,30 @@ function InitPattern()
             Characters[1] = P.controller;
         if(P.name == 'ELambert0')
             Characters[2] = P.controller;
+    }
+
+    // Joshua - Replace NPC skins for variety
+    if (!bInit)
+    {
+        ForEach DynamicActors(class'Pawn', P)
+        {
+            if(P.name == 'EMafiaMuscle0')
+            {
+                Hat = spawn(class'EHat', EPawn(P));
+                Hat.SetStaticMesh(StaticMesh(DynamicLoadObject("EMeshCharacter.Mafia.KnitCap", class'StaticMesh')));
+                Hat.Setup();
+                EPawn(P).AttachToBone(Hat, 'HatBone');
+                EPawn(P).Hat = Hat;
+            }
+            if(P.name == 'EMafiaMuscle5' || P.name == 'EMafiaMuscle8')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.Grunt.GruntA", class'Texture'));
+            }
+            if(P.name == 'EMafiaMuscle14')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.Grunt.GruntB", class'Texture'));
+            }
+        }
     }
 
     if( !bInit )
@@ -78,6 +103,7 @@ DontPlayIntro:
     End();
 WilkesDied:
     Log("If Sam Kills Wilkes");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     PlayerMove(false);
     Speech(Localize("P_2_2_1_Ktech_IntroCinematic", "Speech_0013L", "Localization\\P_2_2_1_Kalinatek"), Sound'Lambert.Play_41_95_01', 0, 0, TR_HEADQUARTER, 0, true);

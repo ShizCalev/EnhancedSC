@@ -116,6 +116,7 @@ CloseComputer:
     End();
 ComputerDestroyed:
     Log("If the Server is destroyed");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     Sleep(2);
     GameOver(false, 6);

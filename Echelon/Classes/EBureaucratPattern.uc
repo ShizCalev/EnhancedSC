@@ -358,6 +358,7 @@ auto state idle
 SeePlayer:
 
 	log("SeePlayer -- Bureaucrat - "$Characters[1],,LPATTERN);
+	PlayerIdentified();
     Broadcast(1, BC_BACKUP_BARK_ATTACK);
 	CheckFlags(bPlayerSeenOnce, true, 'RunAndHide');	
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_SeePlayer;
@@ -369,6 +370,7 @@ SeePlayer:
 SeePlayerSurprised:
 
 	log("SeePlayerSurprised -- Bureaucrat - "$Characters[1],,LPATTERN);
+	PlayerIdentified();
     Broadcast(1, BC_BACKUP_BARK_ATTACK);
 	CheckFlags(bPlayerSeenOnce, true, 'RunAndHide');
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_SurprisedByPlayer;
@@ -380,6 +382,11 @@ SeePlayerSurprised:
 SeeUnconsciousBody:
 
 	plog("SeeUnconsciousBody -- EventTarget:  " $ TriggerEvent.EventTarget);
+	if ( !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound && !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bNotInStats )
+	{
+		EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("BodyFound");
+		EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound = true;
+	}
 	ResetGoals(1);
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_SeeUnconscious;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -393,6 +400,7 @@ SeeUnconsciousBody:
 SeeLiveGrenade:
 
 	plog("SeeLiveGrenade");
+	PlayerIdentified();
 	ResetGoals(1);
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_GroupScatter;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -404,6 +412,11 @@ SeeLiveGrenade:
 SeeDeadBody:
 	
 	plog("SeeDeadBody" );
+	if ( !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound && !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bNotInStats )
+	{
+		EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("BodyFound");
+		EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound = true;
+	}
 	if ( EPawn(TriggerEvent.EventTarget) != none ) 
 	{
 		plog("   Time Since Death :  " $ Level.TimeSeconds - EPawn(TriggerEvent.EventTarget).TimeOfDeath);
@@ -588,7 +601,8 @@ HearGunshot:
 
 HearRicochet:
 	
-	plog("HearRicochet"); 
+	plog("HearRicochet");
+	PlayerIdentified();
 	ResetGoals(1);	
 	ForceUpdatePlayerLocation(1);	
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_UnderFire;
@@ -643,7 +657,8 @@ HearWallMineTick:
 
 TakeDamage:
 
-	log("TakeDamage -- Bureaucrat - "$Characters[1],,LPATTERN);	
+	log("TakeDamage -- Bureaucrat - "$Characters[1],,LPATTERN);
+	PlayerIdentified();
 	ePawn(Characters[1].Pawn).StopAllVoicesActor();
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_HitByBullet;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -653,7 +668,7 @@ TakeDamage:
 
 
 FirstTimeAlerted:
-
+	PlayerIdentified();
 	ResetGoals(1);
 	ChangeState(1,'s_alert');
     SetFlags(bPlayerSeenOnce, true);
@@ -1052,6 +1067,7 @@ SearchFailedAfterPlayerSeen:
 SeePlayer:
 
 	log("SeePlayer -- Bureaucrat - "$Characters[1],,LPATTERN);
+	PlayerIdentified();
     ChangeState(1,'s_alert');
 	Broadcast(1, BC_BACKUP_RADIO_ATTACK);
 	CheckFlags(bPlayerSeenOnce, true, 'RunAndHide');
@@ -1063,7 +1079,8 @@ SeePlayer:
 
 TakeDamage:
 
-	log("TakeDamage -- Bureaucrat - "$Characters[1],,LPATTERN);	
+	log("TakeDamage -- Bureaucrat - "$Characters[1],,LPATTERN);
+	PlayerIdentified();
     ChangeState(1,'s_alert');
 	ePawn(Characters[1].Pawn).StopAllVoicesActor();
 	Broadcast(1, BC_BACKUP_BARK_ATTACK);
@@ -1074,6 +1091,7 @@ TakeDamage:
 SeePlayerSurprised:
 
 	log("SeePlayerSurprised -- Bureaucrat - "$Characters[1],,LPATTERN);
+	PlayerIdentified();
     ChangeState(1,'s_alert');
 	Broadcast(1, BC_BACKUP_RADIO_ATTACK);
 	CheckFlags(bPlayerSeenOnce, true, 'RunAndHide');
@@ -1123,6 +1141,11 @@ LightsShotOut:
 SeeUnconsciousBody:
 	
 	plog("SeeUnconsciousBody -- EventTarget:  " $ TriggerEvent.EventTarget);
+	if ( !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound && !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bNotInStats )
+	{
+		EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("BodyFound");
+		EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound = true;
+	}
 	ResetGoals(1);
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_SeeUnconscious;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -1134,6 +1157,11 @@ SeeUnconsciousBody:
 SeeDeadBody:
 	
 	plog("SeeDeadBody");
+	if ( !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound && !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bNotInStats )
+	{
+		EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("BodyFound");
+		EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound = true;
+	}
 	if ( EPawn(TriggerEvent.EventTarget) != none ) 
 	{
 		plog("   Time Since Death :  " $ Level.TimeSeconds - EPawn(TriggerEvent.EventTarget).TimeOfDeath);
@@ -1207,7 +1235,8 @@ HearViolentNoise:
 
 HearRicochet:
 	
-	plog("HearRicochet"); 
+	plog("HearRicochet");
+	PlayerIdentified();
 	ResetGoals(1);
     ChangeState(1,'s_alert');
     ForceUpdatePlayerLocation(1);
@@ -1235,7 +1264,7 @@ HearFriendlyScream:
 // ----- Action Labels -----
 
 FirstTimeAlerted:
-
+	PlayerIdentified();
 	ResetGoals(1);
 	ChangeState(1,'s_alert');
 	SetFlags(bPlayerSeenOnce, true);
@@ -1423,6 +1452,7 @@ StartHide:
 TakeDamage:
 
 	plog("TakeDamage");
+	PlayerIdentified();
 	ePawn(Characters[1].Pawn).StopAllVoicesActor();
 	Sleep(0.5);
     ResetGoals(1);

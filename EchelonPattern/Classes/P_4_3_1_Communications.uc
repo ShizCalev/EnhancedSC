@@ -44,6 +44,26 @@ function InitPattern()
             Characters[4] = P.controller;
     }
 
+    // Joshua - Chinese Embassy 2 requires 2 bullets to shoot lights to avoid detection for Elite mode
+    if (!bInit && EchelonGameInfo(Level.Game).bEliteMode && EPlayerController(Characters[0]) != None && EPlayerController(Characters[0]).HandGun != None)
+    {
+        if(EPlayerController(Characters[0]).HandGun.Ammo == 0 && EPlayerController(Characters[0]).HandGun.ClipAmmo == 0)
+        {
+            if(EPlayerController(Characters[0]).playerStats.BulletFired == 0)
+            {
+                // No bullets fired, give 2
+                EPlayerController(Characters[0]).HandGun.Ammo = 2;
+                EPlayerController(Characters[0]).HandGun.ClipAmmo = 2;
+            }
+            else if(EPlayerController(Characters[0]).playerStats.BulletFired == 1)
+            {
+                // 1 bullet fired, give 1
+                EPlayerController(Characters[0]).HandGun.Ammo = 1;
+                EPlayerController(Characters[0]).HandGun.ClipAmmo = 1;
+            }
+        }
+    }
+
     if( !bInit )
     {
     bInit=TRUE;
@@ -78,6 +98,7 @@ BasementDataRetrieveSuccess:
     End();
 BasementDataRetrieveFailed:
     Log("BasementDataRetrieveFailed");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(FALSE, TRUE);
     Speech(Localize("P_4_3_1_Communications", "Speech_0011L", "Localization\\P_4_3_1ChineseEmbassy"), Sound'S4_3_1Voice.Play_43_21_01', 1, 0, TR_HEADQUARTER, 0, true);
@@ -86,6 +107,7 @@ BasementDataRetrieveFailed:
     End();
 KeypadFailedA:
     Log("Communicator 43_53 'Thermal Murder Failure'");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_4_3_1_Communications", "Speech_0021L", "Localization\\P_4_3_1ChineseEmbassy"), Sound'S4_3_Voice.Play_43_53_01', 1, 0, TR_HEADQUARTER, 0, true);
@@ -95,6 +117,7 @@ KeypadFailedA:
 KeypadFailedB:
     Log("Communicator 43_12");
     CheckFlags(V4_3_1ChineseEmbassy(Level.VarObject).BothKeypadADied,TRUE,'KeypadFailedA');
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_4_3_1_Communications", "Speech_0022L", "Localization\\P_4_3_1ChineseEmbassy"), Sound'S4_3_Voice.Play_43_12_01', 1, 0, TR_HEADQUARTER, 0, true);
@@ -120,6 +143,7 @@ ThermalKeypadExplanationC:
     End();
 GenericFail:
     Log("Generic Fail for Sam");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(FALSE, TRUE);
     Speech(Localize("P_4_3_1_Communications", "Speech_0036L", "Localization\\P_4_3_1ChineseEmbassy"), Sound'Lambert.Play_41_95_01', 1, 0, TR_HEADQUARTER, 0, true);

@@ -171,16 +171,19 @@ function DrawView(HUD Hud, ECanvas Canvas)
 	oLoc += lll.x * (Vect(1,0,0) >> oRot);
 	oLoc += lll.y * (Vect(0,1,0) >> oRot);
 	oLoc += lll.z * (Vect(0,0,1) >> oRot);
-	
-    Canvas.BeginScene(0, 0, Canvas.ViewPortSizeX(), Canvas.ViewPortSizeY(), Canvas.ViewPortSizeX(), Canvas.ViewPortSizeY(), Canvas.E_CLEAR_ALL);
-	bHidden = TRUE;
-	
-	Canvas.DrawCameraPortal(oLoc, oRot, 90.0, Canvas.E_CLEAR_NONE);
-	bHidden = FALSE;
-	
-	Canvas.BeginScene(0, 0, Canvas.ViewPortSizeX(), Canvas.ViewPortSizeY(), 640.0f, 480.0f, Canvas.E_CLEAR_NONE);	
-    DrawStaticFrame(Canvas); 
-    DrawDynamicStuff(Canvas);
+
+    if(eGame.pPlayer.bShowInventory && eGame.pPlayer.bShowHUD) // Joshua - Show Retinal Scanner info only if inventory enabled
+	{
+        Canvas.BeginScene(0, 0, Canvas.ViewPortSizeX(), Canvas.ViewPortSizeY(), Canvas.ViewPortSizeX(), Canvas.ViewPortSizeY(), Canvas.E_CLEAR_ALL);
+        bHidden = TRUE;
+        
+        Canvas.DrawCameraPortal(oLoc, oRot, 90.0, Canvas.E_CLEAR_NONE);
+        bHidden = FALSE;
+        
+        Canvas.BeginScene(0, 0, Canvas.ViewPortSizeX(), Canvas.ViewPortSizeY(), 640.0f, 480.0f, Canvas.E_CLEAR_NONE);	
+        DrawStaticFrame(Canvas); 
+        DrawDynamicStuff(Canvas);
+    }
 }
 
 function TileTex( int xTopLeft, int yTopLeft, int width, int height, ECanvas Canvas, int TextInd )

@@ -8,6 +8,7 @@ function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 
+	Skins[1] = Material'LightGenTex.LightGen.red_glow'; // Joshua - Fixing an issue where alarm lights always appeared lit when inactive
 	LightType = LT_None;
 }
 
@@ -53,6 +54,8 @@ state s_Alert
 		LightType = default.LightType;
 		LastTimeChange	= Level.TimeSeconds;
 
+		Skins[1] = None; // Joshua - Removing the skin so the light appears lit
+
 		bGlowDisplay = true;
 
 		Timer();
@@ -63,6 +66,8 @@ state s_Alert
 	{
 		LightType = LT_None;
 		LastTimeChange	= Level.TimeSeconds;
+
+		Skins[1] = Material'LightGenTex.LightGen.red_glow'; // Joshua - Restoring the skin so the light turns off
 
 		bGlowDisplay = false;
 

@@ -675,6 +675,7 @@ HearCloseTurretFire:
 HearRicochet:
 	
 	plog("HearRicochet");					// duck, look around, stand back up -- move in direction of shot
+	PlayerIdentified();
 	ResetGoals(1);	
 	//ForceUpdatePlayerLocation(1);
 	if(ePawn(Characters[1].Pawn).ICanBark())
@@ -736,7 +737,8 @@ HearExplosion:
 	
 SeePlayer:
 	
-	plog("SeePlayer");	
+	plog("SeePlayer");
+	PlayerIdentified();
 	ResetGoals(1);
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_SeePlayer;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -748,7 +750,8 @@ SeePlayer:
 	
 SeePlayerSurprised:
 	
-	plog("SeePlayerSurprised");	
+	plog("SeePlayerSurprised");
+	PlayerIdentified();
 	ResetGoals(1);
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_SurprisedByPlayer;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -761,6 +764,7 @@ SeePlayerSurprised:
 TakeDamage:
 	
 	plog("TakeDamage");
+	PlayerIdentified();
 	ePawn(Characters[1].Pawn).StopAllVoicesActor();
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_HitByBullet;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -785,6 +789,7 @@ SeePlayerInvestigate:
 SeeLiveGrenade:
 	
 	plog("SeeLiveGrenade");
+	PlayerIdentified();
 	ResetGoals(1);
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_GroupScatter;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -815,6 +820,11 @@ SeeLiveGrenadeB:
 SeeUnconsciousBody:
 	
 	plog("SeeUnconsciousBody -- EventTarget:  " $ TriggerEvent.EventTarget);
+	if ( !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound && !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bNotInStats )
+	{
+		EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("BodyFound");
+		EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound = true;
+	}
 	ResetGoals(1);
 	bReactedToAlarm=1; //to trigger the postattack behavior
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_SeeUnconscious;
@@ -828,6 +838,11 @@ SeeUnconsciousBody:
 SeeDeadBody:
 	
 	plog("SeeDeadBody" );
+	if ( !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound && !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bNotInStats )
+	{
+		EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("BodyFound");
+		EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound = true;
+	}
 	bReactedToAlarm=1; //to trigger the postattack behavior
 	if ( EPawn(TriggerEvent.EventTarget) != none ) 
 	{
@@ -846,6 +861,7 @@ SeeDeadBody:
 SeeJustDied:
 
 	plog("JustDied");
+	PlayerIdentified();
 	ResetGoals(1);
     if(!ePawn(TriggerEvent.EventTarget).bIsDog)
 	    ePawn(Characters[1].Pawn).Bark_Type = BARK_SeeCorpse;
@@ -1401,6 +1417,7 @@ AlarmBegin:
 AttackPlayer:
 	
 	plog("AttackPlayer");
+	PlayerIdentified();
 	ForceUpdatePlayerLocation(1);
 	GotoPatternState('Attack', 'AttackPlayer');
 	End();	
@@ -1408,6 +1425,7 @@ AttackPlayer:
 AttackPlayerSurprised:
 
 	plog("AttackPlayer - surprised");
+	PlayerIdentified();
 	ForceUpdatePlayerLocation(1);
 	GotoPatternState('Attack', 'AttackPlayerSurprised');
 	End();	
@@ -1416,6 +1434,7 @@ AttackPlayerSurprised:
 AttackedFromUnknownLocation:
 	
 	plog("AttackedFromUnknownLocation");
+	PlayerIdentified();
 	//ForceUpdatePlayerLocation(1);
 	AskGroupForPlayerPosition('SamIsSeenByOneMember');
 	GotoPatternState('Attack', 'AttackedFromUnknownLocation');
@@ -1603,7 +1622,8 @@ CoverFailed:
 
 SeePlayer:
 	
-	plog("SeePlayer");	
+	plog("SeePlayer");
+	PlayerIdentified();
 	ResetGoals(1);
 	Broadcast(1, BC_BACKUP_RADIO_ATTACK);
 	CheckPlayerSeenOnce(1, 'AttackPlayer');
@@ -1614,7 +1634,8 @@ SeePlayer:
 
 SeePlayerSurprised:
 	
-	plog("SeePlayerSurprised");	
+	plog("SeePlayerSurprised");
+	PlayerIdentified();
 	ResetGoals(1);
 	Broadcast(1, BC_BACKUP_RADIO_ATTACK);
 	CheckPlayerSeenOnce(1, 'AttackPlayer');
@@ -1635,6 +1656,7 @@ AttackRequestFromGroupMember:
 AttackPlayer:
 
 	plog("AttackPlayer");
+	PlayerIdentified();
 	GotoPatternState('Attack', 'AttackPlayer');
 	End();	
 
@@ -1642,6 +1664,7 @@ AttackPlayer:
 AttackPlayerSurprised:
 
 	plog("AttackPlayer - surprised");
+	PlayerIdentified();
 	GotoPatternState('Attack', 'AttackPlayerSurprised');
 	End();	
 
@@ -1649,6 +1672,7 @@ AttackPlayerSurprised:
 AttackedFromUnknownLocation:
 
 	plog("AttackedFromUnknownLocation");
+	PlayerIdentified();
 	GotoPatternState('Attack', 'AttackedFromUnknownLocation');
 	End();	
 
@@ -2156,6 +2180,7 @@ HearTurretFire:
 HearRicochet:
 	
 	plog("HearRicochet");
+	PlayerIdentified();
 	ResetGoals(1);	
 	//ForceUpdatePlayerLocation(1);
 	if(ePawn(Characters[1].Pawn).ICanBark())
@@ -2259,7 +2284,8 @@ RequestTakeCover:
 SeePlayer:
 SeePlayerAgain:
 	
-	plog("SeePlayer");	
+	plog("SeePlayer");
+	PlayerIdentified();
 	ResetGoals(1);
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_SeePlayer;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -2271,7 +2297,8 @@ SeePlayerAgain:
 
 SeePlayerSurprised:
 	
-	plog("SeePlayerSurprised");	
+	plog("SeePlayerSurprised");
+	PlayerIdentified();
 	ResetGoals(1);
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_SurprisedByPlayer;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -2283,6 +2310,7 @@ SeePlayerSurprised:
 TakeDamage:
 	
 	plog("TakeDamage");
+	PlayerIdentified();
 	Broadcast(1, BC_BACKUP_RADIO_ATTACK);
 	ePawn(Characters[1].Pawn).StopAllVoicesActor();
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_HitByBullet;
@@ -2321,6 +2349,7 @@ InvestigateRequestFromGroupMember:
 SeeLiveGrenade:
 	
 	plog("SeeLiveGrenade");
+	PlayerIdentified();
 	ResetGoals(1);
 	ePawn(Characters[1].Pawn).Bark_Type = BARK_GroupScatter;
 	Talk(ePawn(Characters[1].Pawn).Sounds_Barks,1,0,false);
@@ -2357,6 +2386,11 @@ TakeCoverAndWait:
 SeeUnconsciousBody:
 	
 	plog("SeeUnconsciousBody -- EventTarget:  " $ TriggerEvent.EventTarget);
+	if ( !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound && !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bNotInStats )
+	{
+		EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("BodyFound");
+		EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound = true;
+	}
 	//ResetGoals(1);
 	bReactedToAlarm=1; //to trigger the postattack behavior
 	
@@ -2378,6 +2412,11 @@ SeeUnconsciousBody:
 SeeDeadBody:
 	
 	plog("SeeDeadBody");
+	if ( !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound && !EAIController(EPawn(TriggerEvent.EventTarget).Controller).bNotInStats )
+	{
+		EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("BodyFound");
+		EAIController(EPawn(TriggerEvent.EventTarget).Controller).bWasFound = true;
+	}
 	bReactedToAlarm=1; //to trigger the postattack behavior
 	if ( EPawn(TriggerEvent.EventTarget) != none ) 
 	{
@@ -2396,6 +2435,7 @@ SeeDeadBody:
 SeeJustDied:
 
 	plog("JustDied");
+	PlayerIdentified();
 	ResetGoals(1);
     if(!ePawn(TriggerEvent.EventTarget).bIsDog)
 	    ePawn(Characters[1].Pawn).Bark_Type = BARK_SeeCorpse;
@@ -2752,6 +2792,7 @@ AlarmBegin:
 AttackPlayer:
 	
 	plog("AttackPlayer");
+	PlayerIdentified();
 	ForceUpdatePlayerLocation(1);
 	GotoPatternState('Attack', 'AttackPlayer');
 	End();	
@@ -2759,6 +2800,7 @@ AttackPlayer:
 AttackPlayerSurprised:
 
 	plog("AttackPlayer - surprised");
+	PlayerIdentified();
 	ForceUpdatePlayerLocation(1);
 	GotoPatternState('Attack', 'AttackPlayerSurprised');
 	End();	
@@ -2766,6 +2808,7 @@ AttackPlayerSurprised:
 AttackedFromUnknownLocation:
 	
 	plog("AttackedFromUnknownLocation");
+	PlayerIdentified();
 	ForceUpdatePlayerLocation(1);
 	GotoPatternState('Attack', 'AttackedFromUnknownLocation');
 	End();	
@@ -3240,6 +3283,7 @@ WaitAndAttack:
 TakeDamage:
 
 	plog("TakeDamage");
+	PlayerIdentified();
 	SetFlags(bFirstTimeCharge,true);
 	ForceUpdatePlayerLocation(1);
 	Broadcast(1, BC_BACKUP_BARK_ATTACK);
@@ -3263,6 +3307,7 @@ TakeDamage:
 AttackedFromUnknownLocation:
 
 	plog("AttackedFromUnknownLocation");
+	PlayerIdentified();
 	ResetGoals(1);
 	SetFlags(bRunForAttackPoint,false);
 	//Checkflags(bFirstTimeCharge,true,'BlindFire');
@@ -3273,6 +3318,7 @@ AttackedFromUnknownLocation:
 HearRicochet:
 
 	plog("HearRicochet");
+	PlayerIdentified();
 	ForceUpdatePlayerLocation(1);
 	Broadcast(1, BC_BACKUP_BARK_ATTACK);
 	Jump('WaitAttack');
@@ -3349,6 +3395,7 @@ WaitPlayerInZone:
 SeePlayer:
 
 	plog("See Player Alert-Surprised");
+	PlayerIdentified();
 	CheckIfChargeShouldContinue(1, 'SeePlayerB');
 	Jump('SeePlayerB');
 
@@ -3725,6 +3772,7 @@ ThrowGrenade:
 AttackPlayer:
 
 	plog("AttackPlayer");
+	PlayerIdentified();
 	CheckIfInZone('PlayerInZone');
 	ResetGoals(1);
 	Goal_Attack(1, 14, 5.0f +  RandBias(0.50, 5.75f), Characters[0].Pawn, MOVE_JogAlert,false);
@@ -3733,6 +3781,7 @@ AttackPlayer:
 AttackPlayerSurprised:
 
 	plog("AttackPlayer -- Surprised");
+	PlayerIdentified();
 	CheckIfInZone('PlayerInZone');
 	ResetGoals(1);
 	Reaction(1, 50, TriggerEvent.EventLocation, REACT_Surprised);

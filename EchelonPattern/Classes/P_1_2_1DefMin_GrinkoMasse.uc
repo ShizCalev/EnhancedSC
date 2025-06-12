@@ -110,6 +110,7 @@ JumpHereLaserMicFuck:
     Log("JumpHereLaserMicFuck");
     Close();
     LaserMicSession(1,,70,'LambertProud');
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);
     ResetGoals(1);

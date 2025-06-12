@@ -35,6 +35,18 @@ function InitPattern()
             Characters[1] = P.controller;
     }
 
+    // Joshua - Replace NPC skins for variety
+    if (!bInit)
+    {
+        ForEach DynamicActors(class'Pawn', P)
+        {
+            if(P.name == 'EGeorgianSoldier1')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.GESoldier.GESoldierA", class'Texture'));
+            }
+        }
+    }
+
     if( !bInit )
     {
     bInit=TRUE;

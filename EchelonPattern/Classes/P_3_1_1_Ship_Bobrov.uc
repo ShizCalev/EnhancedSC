@@ -62,6 +62,7 @@ Out:
 GameOverMan:
     Log("");
     CheckFlags(V3_1_1_ShipYard(Level.VarObject).BobrovHadTalk,TRUE,'NotOver');
+    SetProfileDeletion();
     SendPatternEvent('LambertComm','nothing');
     Speech(Localize("P_3_1_1_Ship_Bobrov", "Speech_0001L", "Localization\\P_3_1_1_ShipYard"), None, 2, 0, TR_HEADQUARTER, 0, false);
     Sleep(5);

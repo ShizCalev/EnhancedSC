@@ -37,7 +37,10 @@ function InitPattern()
         if(P.name == 'EGeorgianPalaceGuard10')
             Characters[2] = P.controller;
         if(P.name == 'EEliteForceCristavi8')
+        {
             Characters[3] = P.controller;
+            EAIController(Characters[3]).bAllowKnockout = true;
+        }
         if(P.name == 'EEliteForceCristavi7')
             Characters[4] = P.controller;
     }

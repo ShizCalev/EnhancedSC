@@ -27,6 +27,22 @@ function InitPattern()
 
     Super.InitPattern();
 
+    // Joshua - Replace NPC skins for variety
+    if (!bInit)
+    {
+        ForEach DynamicActors(class'Pawn', P)
+        {
+            if(P.name == 'EMafiaMuscle2' || P.name == 'EMafiaMuscle5' || P.name =='EMafiaMuscle8' || P.name =='EMafiaMuscle12' || P.name == 'EMafiaMuscle16' || P.name == 'EMafiaMuscle19')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.Grunt.GruntA", class'Texture'));
+            }
+            if(P.name == 'EMafiaMuscle6' || P.name == 'EMafiaMuscle10' || P.name == 'EMafiaMuscle14' || P.name == 'EMafiaMuscle18')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.Grunt.GruntB", class'Texture'));
+            }
+        }
+    }
+
     if( !bInit )
     {
     bInit=TRUE;

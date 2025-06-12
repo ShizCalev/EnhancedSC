@@ -120,10 +120,12 @@ JointChiefsA:
     End();
 AlexDeathFail:
     Log("Sam killed Alekseevich, this is a Game Over Condition");
+    SetProfileDeletion();
     GameOver(false, 0);
     End();
 MasseDeathFail:
     Log("Sam has killed Phillip Masse, this is a Game Over Condition");
+    SetProfileDeletion();
     GameOver(false, 0);
     End();
 LevelEnd:

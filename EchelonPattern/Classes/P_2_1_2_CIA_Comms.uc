@@ -38,7 +38,10 @@ function InitPattern()
         if(P.name == 'ELambert7')
             Characters[1] = P.controller;
         if(P.name == 'EMitch7')
+        {
             Characters[2] = P.controller;
+            EAIController(Characters[2]).bAllowKnockout = true;
+        }
     }
 
     if( !bInit )
@@ -148,6 +151,7 @@ MitchKO:
     CheckFlags(V2_1_2CIA(Level.VarObject).ordertokidnap,TRUE,'TheBaxterGuy');
 FromWilkesAndBaxterKO:
     Log("FromWilkesAndBaxterKOorKillDough");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);
     PlayerMove(false);

@@ -19,9 +19,10 @@ function EventCallBack(EAIEvent Event,Actor TriggerActor)
         case AI_DEAD:
             EventJump('Fin');
             break;
-        case AI_UNCONSCIOUS:
-            EventJump('Fin');
-            break;
+        // Joshua - The player must kill Grinko to complete the mission, a knockout will no longer complete the objective
+        //case AI_UNCONSCIOUS:
+        //    EventJump('Fin');
+        //    break;
         default:
             break;
         }
@@ -37,7 +38,12 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'EGrinko0')
+        {
             Characters[1] = P.controller;
+            EAIController(Characters[1]).bAllowKill = true;
+            EAIController(Characters[1]).bAllowKnockout = true;
+            EAIController(Characters[1]).bWasFound = true;
+        }
     }
 
     if( !bInit )

@@ -66,24 +66,31 @@ function PostBeginPlay()
 function DrawView(HUD Hud,ECanvas Canvas)
 {
     local int xPos, yPos;
+    local EPlayerController EPC; // Joshua - Show crosshair toggle
 
-    xPos = 640 - eGame.HUD_OFFSET_X - CAMJAM_WIDTH - LIFEBAR_WIDTH;
-    yPos = eGame.HUD_OFFSET_Y;
+    EPC = EPlayerController(camjam.Owner);
 
-    DrawBorders(Canvas, xPos, yPos, CAMJAM_WIDTH, CAMJAM_HEIGHT);
+    if(EPC.bShowInventory && EPC.bShowHUD) // Joshua - Show Camera Jammer info only if inventory enabled
+    {
+        xPos = 640 - eGame.HUD_OFFSET_X - CAMJAM_WIDTH - LIFEBAR_WIDTH;
+        yPos = eGame.HUD_OFFSET_Y;
 
-    Canvas.DrawRectangle(xPos + 9, yPos + 9, CAMJAM_WIDTH - 18, CAMJAM_HEIGHT - 18, 2, darkgreen, -1, eLevel.TGAME);
+        DrawBorders(Canvas, xPos, yPos, CAMJAM_WIDTH, CAMJAM_HEIGHT);
 
-    Canvas.DrawRectangle(xPos + 12, yPos + 12, CAMJAM_WIDTH - 24, CAMJAM_HEIGHT - 24, 1, lightgreen, -1, eLevel.TGAME);
+        Canvas.DrawRectangle(xPos + 9, yPos + 9, CAMJAM_WIDTH - 18, CAMJAM_HEIGHT - 18, 2, darkgreen, -1, eLevel.TGAME);
 
-    Canvas.DrawLine(xPos + 13, yPos + 22, CAMJAM_WIDTH - 26, 1, lightgreen, -1, eLevel.TGAME);
-    Canvas.DrawLine(xPos + 13, yPos + 38, CAMJAM_WIDTH - 26, 1, lightgreen, -1, eLevel.TGAME);
-    Canvas.DrawLine(xPos + 13, yPos + 47, CAMJAM_WIDTH - 26, 1, lightgreen, -1, eLevel.TGAME);
+        Canvas.DrawRectangle(xPos + 12, yPos + 12, CAMJAM_WIDTH - 24, CAMJAM_HEIGHT - 24, 1, lightgreen, -1, eLevel.TGAME);
 
-    DrawBatteryMeter(Canvas, xPos + (CAMJAM_WIDTH - BATTERY_WIDTH)/2, yPos + 47 - BATTERY_HEIGHT/2);
-    DrawCamJamInfo(Canvas, xPos + 14, yPos + 27, CAMJAM_WIDTH - 28);
+        Canvas.DrawLine(xPos + 13, yPos + 22, CAMJAM_WIDTH - 26, 1, lightgreen, -1, eLevel.TGAME);
+        Canvas.DrawLine(xPos + 13, yPos + 38, CAMJAM_WIDTH - 26, 1, lightgreen, -1, eLevel.TGAME);
+        Canvas.DrawLine(xPos + 13, yPos + 47, CAMJAM_WIDTH - 26, 1, lightgreen, -1, eLevel.TGAME);
 
-    if(camjam != None && camjam.GetStateName() == 's_Jamming')
+
+        DrawBatteryMeter(Canvas, xPos + (CAMJAM_WIDTH - BATTERY_WIDTH)/2, yPos + 47 - BATTERY_HEIGHT/2);
+        DrawCamJamInfo(Canvas, xPos + 14, yPos + 27, CAMJAM_WIDTH - 28);
+    }
+
+    if(camjam != None && camjam.GetStateName() == 's_Jamming' && EPC.bShowCrosshair && EPC.bShowHUD) // Joshua - Show crosshair toggle
         DrawCrosshair(Canvas);
 }
 
@@ -209,7 +216,7 @@ function DrawCamJamInfo(ECanvas Canvas, int xPos, int yPos, int width)
 
     if(szText != "" && bBlink)
     {
-        Canvas.Font = font'EHUDfont';
+        Canvas.Font = font'EHUDFont';
         Canvas.DrawColor = lightgreen;
 
         Canvas.Textsize(szText, xLen, yLen);

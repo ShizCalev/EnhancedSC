@@ -23,7 +23,8 @@ function EventCallBack(EAIEvent Event,Actor TriggerActor)
             EventJump('Death');
             break;
         case AI_UNCONSCIOUS:
-            EventJump('Death');
+        // Joshua - The player must kill Masse to complete the mission, a knockout will no longer complete the objective
+            EventJump('UnconsciousMasse');
             break;
         default:
             break;
@@ -41,9 +42,17 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'EMasse0')
+        {
             Characters[1] = P.controller;
+            EAIController(Characters[1]).bAllowKill = true;
+            EAIController(Characters[1]).bAllowKnockout = true;
+            EAIController(Characters[1]).bWasFound = true;
+        }
         if(P.name == 'spetsnaz13')
+        {
             Characters[2] = P.controller;
+            EAIController(Characters[2]).bAllowKnockout = true;
+        }
     }
 
     ForEach AllActors(class'Actor', A)
@@ -106,12 +115,13 @@ Bark:
 Death:
     Log("Death");
     CheckIfIsDead(1,'MasseDeath');
-    CheckIfIsUnconscious(1,'MasseDeath');
+    // Joshua - We don't want to go to MasseDeath for unconscious state anymore
     End();
 MasseDeath:
     Log("MasseDeath");
     CheckFlags(V1_6_1_1KolaCell(Level.VarObject).PCObj,FALSE,'TooSoon');
     CheckIfIsDead(1,'KillIsDone');
+    // Joshua - Only completing the objective if Masse is actually dead, not just unconscious
     End();
 KillIsDone:
     Log("KillIsDone");
@@ -122,7 +132,12 @@ KillIsDone:
     End();
 TooSoon:
     Log("TooSoon");
+    SetProfileDeletion();
     GameOver(false, 6);
+    End();
+UnconsciousMasse:
+    Log("UnconsciousMasse");
+    CheckIfIsUnconscious(1,'MasseDeath');
     End();
 NikolaiAttack:
     Log("NikolaiAttack");

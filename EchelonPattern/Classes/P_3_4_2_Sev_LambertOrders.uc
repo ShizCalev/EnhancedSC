@@ -44,6 +44,20 @@ function InitPattern()
     {
         if(A.name == 'StaticMeshActor69')
             A.Skins[0] = Texture(DynamicLoadObject("EGO_Tex.GO_doorexplode", class'Texture'));
+        if(A.name == 'StaticMeshActor306')
+            A.Skins[0] = Texture(DynamicLoadObject("3_4_Severo_tex.Bathroom.Cabinet02_sev", class'Texture'));
+        if(A.name == 'StaticMeshActor322')
+            A.Skins[0] = Texture(DynamicLoadObject("3_4_Severo_tex.Bathroom.toilette_sev", class'Texture'));
+    }
+
+    // Joshua - Hiding staticmeshes that are clipping through the floor
+        ForEach AllActors(class'Actor', A)
+    {
+        if(A.name == 'StaticMeshActor590' || A.name == 'StaticMeshActor591')
+        {
+            A.bHidden = true;
+            A.SetCollision(false);
+        }
     }
 
     if( !bInit )
@@ -149,10 +163,12 @@ JointChiefsA:
     End();
 AlexDeathFail:
     Log("Sam killed Alekseevich, this is a Game Over Condition");
+    SetProfileDeletion();
     GameOver(false, 0);
     End();
 MasseDeathFail:
     Log("Sam has killed Phillip Masse, this is a Game Over Condition");
+    SetProfileDeletion();
     GameOver(false, 0);
     End();
 Spike:

@@ -43,7 +43,6 @@ var float				AccuracyModifier;
 var EGoggle				Goggle;							// Sam's head gear
 var bool				bInGunTransition;
 var bool				bDrawWeapon;					// Since draw and sheath animation is the same.
-var bool				bNoThermalAvailable; 			// Joshua - Copied from EchelonPlayerStart so we can use it globally
 var transient			EGameInteraction	egi;
 
 // OUR INPUTS
@@ -240,10 +239,31 @@ enum EControllerScheme
 var(Enhanced) config EControllerScheme ControllerScheme;
 
 var(Enhanced) config bool bNormalizeMovement; // Joshua - Option to normalize movement
+var(Enhanced) config bool bCrouchDrop; // Joshua - When hanging or using a zipline, crouch drops and jump raises legs
 
 var(Enhanced) config bool bToggleInventory;	// Joshua - Option to use toggle inventory instead of hold
+var(Enhanced) config bool bInteractionPause; // Joshua - If the interaction box or inventory is active, pause the game
 
 var(Enhanced) config bool bBurstFire; // Joshua - Restoring burst fire from early Splinter Cell builds
+
+var(Enhanced) bool bProfileDeletionPending; // Joshua - Player has failed a mission in Permadeath mode, profile is pending to be deleted
+
+var(Enhanced) config bool bWhistle; // Joshua - Option to enable whistling
+var float m_WhistleTime; // Joshua - New variable to keep track of last whistle
+var bool bDisableWhistle; // Joshua - Used to disable whistle while in Diversion Camera
+
+var(Enhanced) bool bToggleBTWTargeting; // Joshua - Used to toggle BTW targeting instead of holding direction
+
+var EPlayerStats playerStats; // Joshua - Player statistics tracking
+var bool bConfirmStats;
+
+// Joshua - Global HUD variables
+var(Enhanced) config bool bShowHUD;
+var(Enhanced) config bool bShowInventory;
+var(Enhanced) config bool bShowCurrentGoal;
+var(Enhanced) config bool bShowMissionInformation;
+var(Enhanced) config bool bShowCrosshair;
+var(Enhanced) config bool bShowScope;
 
 const MAX_REGULAR_MAP = 13;
 
@@ -573,6 +593,9 @@ function PostBeginPlay()
 	GoalList     = new class'ESList';
 	ReconList     = new class'ESList';
 	ProfileList  = new class'ESList';
+	
+	if (playerStats == None)
+    	playerStats = Spawn(class'EPlayerStats', self);
 
 	iGameOverMsg = -1;
 
@@ -957,9 +980,6 @@ function Possess(Pawn aPawn)
 				Index++;
 			}
 		}
-
-		// Joshua - Set thermal vision toggle globally
-		bNoThermalAvailable = EPlayerStart.bNoThermalAvailable;
 	}
 
 	Super.Possess(aPawn);
@@ -1084,8 +1104,10 @@ exec function FreezePawns()
 {
 	local EPawn P;
 
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+	
+	playerStats.bCheatsActive = true;
 
 	ForEach DynamicActors(class'EPawn', P)
 	{
@@ -1109,8 +1131,10 @@ exec function Reverse()
 	local EGoal goal;
 	local EAIController AI;
 
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 	return;
+
+	playerStats.bCheatsActive = true;
 
 	if ( ViewTarget != none && EPawn(ViewTarget) != none )
 		AI = EAIController(EPawn(ViewTarget).Controller);
@@ -1138,6 +1162,10 @@ exec function Reverse()
 //------------------------------------------------------------------------
 exec function IncSpeed()
 {
+	// Joshua - Prevent zoom and speed when stats are shown
+	if (myHUD != None && myHUD.GetStateName() == 'PlayerStats')
+		return;
+
 	bIncSpeedPressed = true;
 	bMustZoomIn		 = true;
 
@@ -1154,6 +1182,10 @@ exec function IncSpeed()
 //------------------------------------------------------------------------
 exec function DecSpeed()
 {
+	// Joshua - Prevent zoom and speed when stats are shown
+	if (myHUD != None && myHUD.GetStateName() == 'PlayerStats')
+		return;
+
 	bDecSpeedPressed = true;
 	bMustZoomOut	 = true;
 
@@ -1203,8 +1235,10 @@ exec function ResetCamera()
 //------------------------------------------------------------------------
 exec function Noise(float volume, optional NoiseType ntype, optional float zthreshold)
 {
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
 
 	if (ntype == 0)			ntype = NOISE_HeavyFootstep;
 	if (zthreshold == 0.0f) zthreshold = EPawn.CollisionHeight * 2.0f;
@@ -1221,8 +1255,10 @@ exec function ShowNavPoints()
 	local NavigationPoint nav;
 	local EInfoPoint key;
 
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
 
 	bDebugNavPoints = !bDebugNavPoints;
 
@@ -1236,8 +1272,10 @@ exec function ShowNavPoints()
 
 exec function Invincible()
 {
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
 
 	bInvincible = !bInvincible;
 	if ( bInvincible )
@@ -1248,8 +1286,10 @@ exec function Invincible()
 
 exec function Health()
 {
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
 
 	if( ePawn.Health > 0 )
 		ePawn.Health = ePawn.InitialHealth;
@@ -1257,8 +1297,10 @@ exec function Health()
 
 exec function StopTimer()
 {
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
 
 	if( EMainHUD(MyHud).TimerView != None )
 		EMainHUD(MyHud).TimerView.Disable('Tick');
@@ -1266,8 +1308,11 @@ exec function StopTimer()
 
 exec function Ammo()
 {
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
+
 	if( MainGun != None )
 		MainGun.Ammo = MainGun.default.MaxAmmo;
 	if( HandGun != None )
@@ -1276,15 +1321,21 @@ exec function Ammo()
 
 exec function KillSam()
 {
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
+
     ePawn.TakeDamage(2000, ePawn, vect(0,0,0), vect(0,0,0), vect(0,0,0), class'Crushed');
 }
 
 exec function KillTarget()
 {
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
+
     m_AttackTarget.TakeDamage(2000, ePawn, vect(0,0,0), vect(0,0,0), vect(0,0,0), class'Crushed');
 }
 
@@ -1292,8 +1343,10 @@ exec function KillAll(class<actor> aClass)
 {
 	local Actor A;
 
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
 
 	if ( ClassIsChildOf(aClass, class'Pawn') )
 	{
@@ -1310,8 +1363,10 @@ function KillAllPawns(class<Pawn> aClass)
 {
 	local Pawn P;
 
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
 	
 	ForEach DynamicActors(class'Pawn', P)
 		if ( ClassIsChildOf(P.Class, aClass)
@@ -1327,8 +1382,11 @@ function KillAllPawns(class<Pawn> aClass)
 
 exec function KillPawns()
 {
-	if (eGame.bEliteMode)
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
 		return;
+
+	playerStats.bCheatsActive = true;
+
 	KillAllPawns(class'Pawn');
 }
 
@@ -1359,12 +1417,6 @@ exec function Mission( optional float i )
 	EndMission(i==0, 4);
 }
 
-// Joshua - Command to toggle controller mode while in-game
-exec function Controller()
-{
-	eGame.bUseController = !eGame.bUseController;
-}
-
 // Joshua - Console shortcuts to cut levels
 exec function Sev1()
 {
@@ -1386,6 +1438,34 @@ exec function NPP2()
 	ConsoleCommand("Open 3_2_2_PowerPlant");
 }
 
+exec function XBLA()
+{
+	ConsoleCommand("Open XBLTestA");	
+}
+
+exec function XBLB()
+{
+	ConsoleCommand("Open XBLTestB");	
+}
+
+exec function FixCam()
+{
+	if (eGame.bEliteMode || eGame.bPermadeathMode)
+		return;
+
+	playerStats.bCheatsActive = true;
+
+	if(m_camera.IsInState('s_Fixed'))
+		m_camera.GotoState('s_Following');
+	else
+		m_camera.GotoState('s_Fixed');
+}
+
+exec function SaveEnhancedOptions()
+{
+	SaveConfig("Enhanced");
+}
+
 //	                                                        
 //	EEEEE   N   N   DDDD            DDDD     &&&     CCCC   
 //	EE      NN  N   DD DD           DD DD   && &&   CC      
@@ -1400,6 +1480,7 @@ function NotifyFiring()
 	w = EWeapon(ePawn.HandItem);
 	if(w != None)
 	{
+		playerStats.AddStat("BulletFired");
 		Level.RumbleVibrate(0.07, 0.75);
 		if(w.IsA('ETwoHandedWeapon'))
 			ePawn.Recoil(Vector(Rotation), w.RecoilStrength, w.RecoilAngle, w.RecoilStartAlpha, w.RecoilFadeIn, w.RecoilFadeOut);
@@ -1681,11 +1762,21 @@ function EndMission( bool bMissionComplete, int iFailureType )
 {
 	// Stop player input
 	bStopInput = true;
-
+	
 	// Check if wouldn't be already in mission state
 	// Or allow the same for timer
 	if( iGameOverMsg != -1 && iGameOverMsg != iFailureType )
 		return;
+
+	// Joshua - Hack for Presidential Palace to display mission statistics before ending cutscene
+	if (GetCurrentMapName() == "5_1_2_PresidentialPalace" && bMissionComplete && iFailureType == 0)
+	{
+		playerStats.OnMissionComplete(); // Joshua - For mission statistics, pauses the mission time
+		myHUD.GoToState('s_FinalMapStats');
+
+        if (bConfirmStats == false)
+            return;
+	}
 
 	// Extra stuff
 	ProcessEndMission();
@@ -1695,9 +1786,16 @@ function EndMission( bool bMissionComplete, int iFailureType )
 
 	// Change hud state
 	if( bMissionComplete )
+	{
+		playerStats.OnMissionComplete(); // Joshua - For mission statistics, pauses the mission time
 		myHUD.GotoState('s_Mission', 'Complete');
+	}
 	else
+	{
+		if(eGame.bPermadeathMode)
+			bProfileDeletionPending = true;
 		myHUD.GoToState('s_Mission', 'Failed');
+	}
 }
 function ProcessEndMission();
 
@@ -1730,6 +1828,10 @@ function bool SlowGunBack();
 
 function bool CanInteract();
 function bool CanAccessQuick();
+function bool CanAccessPlayerStats() // Joshua - Accessing the PlayerStats
+{
+	return true;
+}
 
 exec function FullInv()
 {
@@ -2125,6 +2227,31 @@ function Reload4()
 function Trigger( actor Other, pawn EventInstigator, optional name InTag )
 {
 	SpecialWaitAnim = '';
+}
+
+// Joshua - New function to toggle HUD
+exec function ToggleHUD()
+{
+	bShowHUD = !bShowHUD;
+}
+
+// Joshua - New function to whistle
+exec function Whistle()
+{
+	if(Level.Pauser != None || bStopInput || bDisableWhistle)
+	{
+		return;
+	}
+
+	if(!EPawn.IsPawnTalking() && bWhistle && Level.TimeSeconds - m_WhistleTime > 1.0)
+	{
+		ePawn.PlaySound(Sound'FisherEquipement.Play_Random_StickyCamNoise', SLOT_Interface);
+
+		ePawn.MakeNoise(750, NOISE_Object_Falling);
+		//Pawn.MakeNoise(1250, NOISE_Whistle);
+
+		m_WhistleTime = Level.TimeSeconds;
+	}
 }
 
 //-----
@@ -2659,6 +2786,7 @@ state s_GrabTargeting
 
 	function NotifyFiring()
 	{
+		playerStats.AddStat("BulletFired");
 		Level.RumbleVibrate(0.07, 0.75);
 		ePawn.BlendAnimOverCurrent('grabstspfr1', 1, ePawn.UpperBodyBoneName);
 	}
@@ -3356,6 +3484,11 @@ state s_PlayerWalking
 		return !bInTransition && !bInGunTransition;
 	}
 
+	function bool CanAccessPlayerStats()
+	{
+		return !bInGunTransition;
+	}
+
 	function bool CanAddInteract( EInteractObject IntObj )
 	{
 		return true;
@@ -3997,6 +4130,11 @@ state s_Targeting
 		return ePawn.FullInventory.GetSelectedItem() == MainGun && !bInTransition && !bInGunTransition && !bLockedCamera;
 	}
 
+	function bool CanAccessPlayerStats()
+	{
+		return false; //!bInGunTransition && !bLockedCamera;
+	}
+
 	function bool CanSwitchToHandItem( EInventoryItem Item )
 	{
 		return Item.IsA('ESecondaryAmmo');
@@ -4058,6 +4196,7 @@ state s_FirstPersonTargeting extends s_Targeting
 	{
 		if( ePawn.WeaponStance == 1 )
 		{
+			playerStats.AddStat("BulletFired");
 			Level.RumbleVibrate(0.07, 0.75);
 			if( !ePawn.bIsCrouched )
 				ePawn.BlendAnimOverCurrent('WaitStSpFr1', 1, ePawn.UpperBodyBoneName);
@@ -4838,7 +4977,10 @@ state s_Throw
 		m_ThrowSpeed = m_ThrowMinSpeed;
 		FastIKFade();
 		bInTransition = false;
-		bThrowTargeting = true;
+		if(bShowCrosshair && bShowHUD) // Joshua - Hide throw targeting if crosshair hidden
+			bThrowTargeting = true;
+		else
+			bThrowTargeting = false;
 		ePawn.WeaponStance = 1;
 		ePawn.SwitchAnims();
 		m_camera.SetMode(ECM_Throw);
@@ -4903,7 +5045,10 @@ state s_Throw
 
 		CheckForCrouch();
 
-		bThrowTargeting = true;
+		if(bShowCrosshair && bShowHUD) // Joshua - Hide throw targeting if crosshair hidden
+			bThrowTargeting = true;
+		else
+			bThrowTargeting = false;
 
 		PlayOnGroundSniping((pushingForce > 0.3), pushingForce * GetGroundSpeed(), false);
 
@@ -5041,6 +5186,11 @@ state s_Turret extends s_InteractWithObject
 	}
 
 	function bool CanAccessQuick()
+	{
+		return false;
+	}
+
+	function bool CanAccessPlayerStats()
 	{
 		return false;
 	}
@@ -5203,6 +5353,11 @@ state s_KeyPadInteract extends s_InteractWithObject
 	{
 		return false;
 	}
+
+	function bool CanAccessPlayerStats()
+	{
+		return false;
+	}
 }
 
 // ----------------------------------------------------------------------
@@ -5349,6 +5504,11 @@ state s_PickLock extends s_InteractWithObject
 	function bool CanSwitchGoggleManually()
 	{
 		return true;
+	}
+
+	function bool CanAccessPlayerStats()
+	{
+		return false;
 	}
 
 	function ProcessToggleCinematic()
@@ -6319,11 +6479,14 @@ state s_PlayerBTWTargeting extends s_PlayerBTWBase
 			JumpLabelPrivate = 'Release';
 			ProcessScope();
 		}
-		else if((m_BTWSide && (aStrafe < eGame.m_gentleForce)) ||
-				(!m_BTWSide && (aStrafe > -eGame.m_gentleForce)) ||
-				(CheckBTWEyes() < 2))
+		if(!bToggleBTWTargeting) // Joshua - Toggle BTW targetting
 		{
-			ProcessScope();
+			if((m_BTWSide && (aStrafe < eGame.m_gentleForce)) ||
+					(!m_BTWSide && (aStrafe > -eGame.m_gentleForce)) ||
+					(CheckBTWEyes() < 2))
+			{
+				ProcessScope();
+			}
 		}
 		else
 		{
@@ -6356,6 +6519,7 @@ state s_PlayerBTWTargeting extends s_PlayerBTWBase
 
 	function NotifyFiring()
 	{
+		playerStats.AddStat("BulletFired");
 		Level.RumbleVibrate(0.07, 0.75);
 		if(m_BTWSide)
 			ePawn.BlendAnimOverCurrent('BackStSpFrR', 1, ePawn.UpperBodyBoneName);
@@ -6577,6 +6741,11 @@ state s_Rappelling
 	function bool CanAccessQuick()
 	{
 		return !bInTransition && !bInGunTransition;
+	}
+
+	function bool CanAccessPlayerStats()
+	{
+		return !bInGunTransition;
 	}
 
 	function bool CanAddInteract( EInteractObject IntObj )
@@ -6822,10 +6991,16 @@ state s_RappellingTargeting
 		return ePawn.FullInventory.GetSelectedItem() == MainGun && !bInTransition && !bInGunTransition;
 	}
 
+	function bool CanAccessPlayerStats()
+	{
+		return false; // !bInGunTransition;
+	}
+
 	function NotifyFiring()
 	{
 		if( ePawn.WeaponStance == 1 )
 		{
+			playerStats.AddStat("BulletFired");
 			Level.RumbleVibrate(0.07, 0.75);
 			ePawn.BlendAnimOverCurrent('raplstspfr1', 1, ePawn.UpperBodyBoneName);
 		}
@@ -7104,6 +7279,11 @@ state s_Split
 		return true;
 	}
 
+	function bool CanAccessPlayerStats()
+	{
+		return true;
+	}
+
 	function ProcessScope()
 	{
 		if( bInTransition || bInGunTransition || ActiveGun == None )
@@ -7213,6 +7393,7 @@ state s_SplitTargeting extends s_RappellingTargeting
 	{
 		if( ePawn.WeaponStance == 1 )
 		{
+			playerStats.AddStat("BulletFired");
 			Level.RumbleVibrate(0.07, 0.75);
 			ePawn.BlendAnimOverCurrent('SpltStSpFr1', 1, ePawn.UpperBodyBoneName);
 		}
@@ -7377,9 +7558,9 @@ state s_Fence
 		ePawn.Acceleration   = NewAccel;
 		ePawn.Acceleration *= eGame.m_onGroundAccel;
 
-		if(((eGame.bCrouchDrop && bDuck > 0) || (!eGame.bCrouchDrop && bPressedJump)) || !ePawn.m_validFence)
+		if(((bCrouchDrop && bDuck > 0) || (!bCrouchDrop && bPressedJump)) || !ePawn.m_validFence)
 		{
-			if (eGame.bCrouchDrop)
+			if (bCrouchDrop)
 				bDuck = 0;
 			ePawn.Velocity = X * -200.0;
 			if ( ePawn.Base.SurfaceType == SURFACE_FenceMetal )
@@ -7564,6 +7745,11 @@ state s_Ledge
 		return !bInTransition;
 	}
 
+	function bool CanAccessPlayerStats()
+	{
+		return true;
+	}
+
 	event bool NotifyLanded(vector HitNormal, Actor HitActor)
 	{
 		GoToState('s_PlayerWalking');
@@ -7648,7 +7834,7 @@ state s_Ledge
 
         GetAxes(ePawn.Rotation,X,Y,Z);
 
-		if(aForward < eGame.m_backwardFull || ((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0))) // Joshua - PT controls
+		if(aForward < eGame.m_backwardFull || ((!bCrouchDrop && bPressedJump) || (bCrouchDrop && bDuck > 0))) // Joshua - PT controls
 		{
 			ePawn.SetPhysics(PHYS_Falling);
 			GoToState('s_PlayerJumping');
@@ -7939,6 +8125,11 @@ state s_HandOverHand
 		return !bInTransition;
 	}
 
+	function bool CanAccessPlayerStats()
+	{
+		return true;
+	}
+
 	function PlayerTick( float deltaTime )
 	{		
 		Super.PlayerTick(DeltaTime);
@@ -7958,13 +8149,13 @@ state s_HandOverHand
 
         GetAxes(ePawn.Rotation, X, Y, Z);
 
-		if((eGame.bCrouchDrop && bDuck > 0) || (!eGame.bCrouchDrop && bPressedJump)) // Joshua - PT controls
+		if((bCrouchDrop && bDuck > 0) || (!bCrouchDrop && bPressedJump)) // Joshua - PT controls
 		{
 			GoToState(,'FallDown');
 		}
-		else if((eGame.bCrouchDrop && bPressedJump) || (!eGame.bCrouchDrop && bDuck > 0)) // PT controls
+		else if((bCrouchDrop && bPressedJump) || (!bCrouchDrop && bDuck > 0)) // PT controls
 		{
-			if (eGame.bCrouchDrop)
+			if (bCrouchDrop)
 				bPressedJump = False;
 			else
 				bDuck = 0;
@@ -8091,7 +8282,7 @@ state s_HandOverHandFeetUp
 			testExtent.Z = ePawn.default.CollisionHeight;
 			if(ePawn.FastPointCheck(testPos, testExtent, true, true))
 			{
-				if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
+				if((!bCrouchDrop && bPressedJump) || (bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 					JumpLabelPrivate = 'FallDown';
 				else
 					JumpLabelPrivate = '';
@@ -8199,7 +8390,7 @@ state s_HOHTargeting extends s_FirstPersonTargeting
 
 		ePawn.AimAt(AAHOH, Vector(Rotation), Vector(ePawn.Rotation), -80, 50, -80, 80);
 
-		if( (!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
+		if( (!bCrouchDrop && bPressedJump) || (bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpLabelPrivate = 'FallDown';
 			GoToState(,'PutGunBack');
@@ -8208,6 +8399,7 @@ state s_HOHTargeting extends s_FirstPersonTargeting
 
 	function NotifyFiring()
 	{
+		playerStats.AddStat("BulletFired");
 		Level.RumbleVibrate(0.07, 0.75);
 		ePawn.BlendAnimOverCurrent('piphstspfr1', 1, ePawn.UpperBodyBoneName);
 	}
@@ -8406,7 +8598,7 @@ state s_NarrowLadder
 		if(aForward > eGame.m_backwardFull)
 			m_LPSlideStartTime = Level.TimeSeconds;
 
-		if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
+		if((!bCrouchDrop && bPressedJump) || (bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -8708,7 +8900,7 @@ state s_NarrowLadderSlideDown extends s_SlideDownBase
 		{
 			return;
 		}
-		else if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
+		else if((!bCrouchDrop && bPressedJump) || (bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -8956,7 +9148,7 @@ state s_Pipe
 			ePawn.Acceleration = vect(0, 0, 0);
 		}
 
-		if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
+		if((!bCrouchDrop && bPressedJump) || (bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -9112,7 +9304,7 @@ state s_PipeSlideDown extends s_SlideDownBase
 		{
 			return;
 		}
-		else if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
+		else if((!bCrouchDrop && bPressedJump) || (bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -9282,11 +9474,11 @@ state s_ZipLine
 	function CheckForCrouch()
 	{
 		local vector extent;
-		if((eGame.bCrouchDrop && bPressedJump) || (!eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
+		if((bCrouchDrop && bPressedJump) || (!bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			ePawn.bWantsToCrouch = !ePawn.bWantsToCrouch;
 			ePawn.PlayZipLineTransition(ePawn.bWantsToCrouch);
-			if (!eGame.bCrouchDrop) // Joshua - PT controls
+			if (!bCrouchDrop) // Joshua - PT controls
 				bDuck = 0;
 		}
 	}
@@ -9308,9 +9500,9 @@ state s_ZipLine
 			minSpeed *= 2.0;
 		}
 
-		if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
+		if((!bCrouchDrop && bPressedJump) || (bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
-			if (eGame.bCrouchDrop) // Joshua - PT controls
+			if (bCrouchDrop) // Joshua - PT controls
 				bDuck = 0;
 			ePawn.SetPhysics(PHYS_Falling);
 			GoToState('s_PlayerJumping');
@@ -9494,7 +9686,7 @@ state s_Pole
 			}
 		}
 
-		if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
+		if((!bCrouchDrop && bPressedJump) || (bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -9607,7 +9799,7 @@ state s_PoleSlideDown extends s_SlideDownBase
 			ePawn.SetRotation(Rotator(forwardDir));
 		}
 
-		if((!eGame.bCrouchDrop && bPressedJump) || (eGame.bCrouchDrop && bDuck > 0)) // Joshua - PT controls
+		if((!bCrouchDrop && bPressedJump) || (bCrouchDrop && bDuck > 0)) // Joshua - PT controls
 		{
 			JumpRelease();
 		}
@@ -9663,6 +9855,9 @@ state s_Dead
 		// Prevents having another EndMission overwrite this one, set failure type
 		iGameOverMsg = 0;
 
+		if(eGame.bPermaDeathMode)
+			bProfileDeletionPending = true;
+
 		ePawn.bCollideSB = false;
 
 		// Remove Sam's vision
@@ -9703,9 +9898,6 @@ Begin:
 defaultproperties
 {
     bDebugNavPoints=true
-	InputMode=IM_Keyboard // Joshua - Input mode
-	ControllerScheme=CS_Default // Joshua - Default, Pandora, PlayStation
-	CheckpointLevel="None" // Joshua - New variable to keep track which level the Checkpoint was on
     m_ThrowMinSpeed=(X=800.000000,Y=0.000000,Z=100.000000)
     m_ThrowMaxSpeed=(X=1500.000000,Y=0.000000,Z=250.000000)
     m_ThrowVarSpeed=1000.000000
@@ -9724,4 +9916,21 @@ defaultproperties
     m_speedCarry=130.000000
     m_turnMul=0.500000
     m_towardAngle=0.707000
+	CheckpointLevel="None" // Joshua - New variable to keep track which level the Checkpoint was on
+	InputMode=IM_Auto // Joshua - Input mode
+	ControllerScheme=CS_Default // Joshua - Default, Pandora, PlayStation
+	bNormalizeMovement=true // Joshua - Option to normalize movement
+	bToggleInventory=false // Joshua - Option to use toggle inventory instead of hold
+	bInteractionPause=false // Joshua - If the interaction box or inventory is active, pause the game
+	bBurstFire=true // Joshua - Restoring burst fire from early Splinter Cell builds
+	bWhistle=true // Joshua - Option to enable whlisting in keybinds
+	m_WhistleTime=-10.00 // Joshua - New variable to keep track of last whistle
+	bToggleBTWTargeting=true // Joshua - Used to toggle BTW targeting instead of holding direction
+	bShowHUD=true
+	bShowInventory=true
+	bShowCurrentGoal=true
+	bShowMissionInformation=true
+	bShowCrosshair=true
+	bShowScope=true
+	CheatClass=Class'ECheatManager'
 }

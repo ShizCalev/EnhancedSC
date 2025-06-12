@@ -14,6 +14,7 @@ if not exist .\Editor\Inc\ mkdir .\Editor\Inc
 if not exist .\Engine\Inc\ mkdir .\Engine\Inc
 if not exist .\UDebugMenu\Inc\ mkdir .\UDebugMenu\Inc
 if not exist .\UWindow\Inc\ mkdir .\UWindow\Inc
+if not exist .\Enhanced\Inc\ mkdir .\Enhanced\Inc
 
 del ".\System\Core.u"
 del ".\System\Engine.u"
@@ -28,6 +29,7 @@ del ".\System\EchelonPattern.u"
 del ".\System\UWindow.u"
 del ".\System\UDebugMenu.u"
 del ".\System\EchelonMenus.u"
+del ".\System\Enhanced.u"
 
 echo Compiling scripts for Enhanced SC
 

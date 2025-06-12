@@ -173,6 +173,13 @@ AlreadyDone:
 DataRetreived:
     Log("If Sam retrieves the data on the computer");
     Sleep(3);
+    // Joshua - After completing objective, reset combat state so we don't hear fight music forever
+    ResetGroupGoals();
+    ChangeGroupState('s_default');
+    Goal_Default(1,GOAL_Guard,9,,'BasementSoldier02',,,,FALSE,,MOVE_WalkAlert,,MOVE_WalkAlert);
+    Goal_Default(2,GOAL_Guard,9,,'BasementSoldier01',,,,FALSE,,MOVE_WalkRelaxed,,MOVE_WalkRelaxed);
+    Goal_Default(3,GOAL_Guard,9,,'FeirongComputer',,'BasementDataNode10',,FALSE,,MOVE_WalkRelaxed,,MOVE_WalkRelaxed);
+    // Joshua - End of modify
     DisableMessages(FALSE, TRUE);
     SendPatternEvent('LambertComms','BasementDataRetrieveSuccess');
     End();

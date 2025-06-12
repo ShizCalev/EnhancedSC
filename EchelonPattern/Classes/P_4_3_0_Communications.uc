@@ -37,6 +37,27 @@ function InitPattern()
             Characters[1] = P.controller;
     }
 
+    // Joshua - Chinese Embassy 2 requires 2 bullets to shoot lights to avoid detection for Elite mode
+    if (!bInit && EchelonGameInfo(Level.Game).bEliteMode && EPlayerController(Characters[0]) != None && EPlayerController(Characters[0]).HandGun != None)
+    {
+        if(EPlayerController(Characters[0]).HandGun.Ammo == 0 && EPlayerController(Characters[0]).HandGun.ClipAmmo == 0)
+        {
+            if(EPlayerController(Characters[0]).playerStats.BulletFired == 0)
+            {
+                // No bullets fired, give 2
+                EPlayerController(Characters[0]).HandGun.Ammo = 2;
+                EPlayerController(Characters[0]).HandGun.ClipAmmo = 2;
+            }
+            else if(EPlayerController(Characters[0]).playerStats.BulletFired == 1)
+            {
+                // 1 bullet fired, give 1
+                EPlayerController(Characters[0]).HandGun.Ammo = 1;
+                EPlayerController(Characters[0]).HandGun.ClipAmmo = 1;
+            }
+        }
+    }
+
+
     if( !bInit )
     {
     bInit=TRUE;
@@ -72,6 +93,7 @@ ThermalKeypadExplanationA:
     End();
 GenericFail:
     Log("If Sam fails something");
+    SetProfileDeletion();
     PlayerMove(false);
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_4_3_0_Communications", "Speech_0036L", "Localization\\P_4_3_0ChineseEmbassy"), Sound'Lambert.Play_41_95_01', 1, 0, TR_HEADQUARTER, 0, true);

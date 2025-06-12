@@ -281,7 +281,8 @@ function CheckLineTrace( float DeltaTime )
 	local Material	HitMaterial;
 	local EWallHit	Spark;
 	local Rotator	projRot;
-	local vector		X, Y, Z;
+	local vector	X, Y, Z;
+	local Pawn		Instigator;  // Joshua - Added for PlayerStats
 	
 	// Do nothing if can't pawn bullet
 	if( fBulletElapsedTime < (60.0f/BulletsPerMinute) )
@@ -324,8 +325,14 @@ function CheckLineTrace( float DeltaTime )
 
 		if( !Other.bWorldGeometry )
 		{
+			// Joshua - Pass player as instigator if using SCAN_AllPawnsAndChangedActors (IFF disabled)
+			if (SensorDetectionType == SCAN_AllPawnsAndChangedActors)
+				Instigator = EchelonGameInfo(Level.Game).pPlayer.ePawn;
+			else
+				Instigator = None;
+				
 			// momentum almost null to prevent flares and change object to be pushed ayway by turret firing
-			Other.TakeDamage(BulletDamage, None, HitLocation, HitNormal, Normal(HitLocation - BonePos) /** 300.f*/, None, PillTag);
+			Other.TakeDamage(BulletDamage, Instigator, HitLocation, HitNormal, Normal(HitLocation - BonePos) /** 300.f*/, None, PillTag);
 		}
     }
 	else
@@ -571,6 +578,13 @@ state s_Alert
 					{
 						AddOneVoice();
 						EchelonGameInfo(Level.Game).pPlayer.EPawn.PlaySound( BodySound, SLOT_Voice );
+						
+						// Joshua - Add to the BodyFound stat when a body is detected by a camera
+						if (EPawn(Target) != None && !EAIController(EPawn(Target).Controller).bWasFound && !EAIController(EPawn(Target).Controller).bNotInStats)
+						{
+							EAIController(EPawn(Target).Controller).bWasFound = true;
+							EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("BodyFound");
+						}
 					}
 				}
 

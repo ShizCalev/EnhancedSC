@@ -46,7 +46,10 @@ function InitPattern()
         if(P.name == 'EBaxter2')
             Characters[2] = P.controller;
         if(P.name == 'ECIASecurity14')
+        {
             Characters[3] = P.controller;
+            EAIController(Characters[3]).bAllowKnockout = true;
+        }
     }
 
     if( !bInit )

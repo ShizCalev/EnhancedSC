@@ -52,19 +52,54 @@ function InitPattern()
         if(P.name == 'ELambert0')
             Characters[2] = P.controller;
         if(P.name == 'EEliteForceCristavi1')
+        {
             Characters[3] = P.controller;
+            EAIController(Characters[3]).bAllowKnockout = true;
+            EAIController(Characters[3]).bBlockDetection = true;
+            EAIController(Characters[3]).bWasFound = true;
+        }
         if(P.name == 'EEliteForceCristavi4')
+        {
             Characters[4] = P.controller;
+            EAIController(Characters[4]).bAllowKnockout = true;
+            EAIController(Characters[4]).bBlockDetection = true;
+            EAIController(Characters[4]).bWasFound = true;
+        }
         if(P.name == 'EEliteForceCristavi2')
+        {
             Characters[5] = P.controller;
+            EAIController(Characters[5]).bAllowKnockout = true;
+            EAIController(Characters[5]).bBlockDetection = true;
+            EAIController(Characters[5]).bWasFound = true;
+        }
         if(P.name == 'EEliteForceCristavi7')
+        {
             Characters[6] = P.controller;
+            EAIController(Characters[6]).bAllowKnockout = true;
+            EAIController(Characters[6]).bBlockDetection = true;
+            EAIController(Characters[6]).bWasFound = true;
+        }
         if(P.name == 'EEliteForceCristavi3')
+        {
             Characters[7] = P.controller;
+            EAIController(Characters[7]).bAllowKnockout = true;
+            EAIController(Characters[7]).bBlockDetection = true;
+            EAIController(Characters[7]).bWasFound = true;
+        }
         if(P.name == 'EEliteForceCristavi14')
+        {
             Characters[8] = P.controller;
+            EAIController(Characters[8]).bAllowKnockout = true;
+            EAIController(Characters[8]).bBlockDetection = true;
+            EAIController(Characters[8]).bWasFound = true;
+        }
         if(P.name == 'EEliteForceCristavi13')
+        {
             Characters[9] = P.controller;
+            EAIController(Characters[9]).bAllowKnockout = true;
+            EAIController(Characters[9]).bBlockDetection = true;
+            EAIController(Characters[9]).bWasFound = true;
+        }
     }
 
     ForEach AllActors(class'Actor', A)
@@ -133,6 +168,7 @@ NikoHasBeenKilledOrKnocked:
     Log("NikoHasBeenKilledOrKnocked");
     CheckFlags(NikoIsTeleported,TRUE,'End');
     CheckFlags(GuysAreHere,TRUE,'makeplayerkillhere');
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     IgnoreAlarmStage(TRUE);
     PlayerMove(false);

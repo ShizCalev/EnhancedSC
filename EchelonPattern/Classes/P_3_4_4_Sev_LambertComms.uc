@@ -158,6 +158,7 @@ EitherWay:
     End();
 AlgoFail:
     Log("Sam failed to stop the algorithm from destroying Pickett Gap.");
+    SetProfileDeletion();
     Speech(Localize("P_3_4_4_Sev_LambertComms", "Speech_0070L", "Localization\\P_3_4_4Severonickel"), Sound'S3_4_3Voice.Play_34_56_01', 1, 0, TR_HEADQUARTER, 0, false);
     Sleep(0.1);
     Speech(Localize("P_3_4_4_Sev_LambertComms", "Speech_0020L", "Localization\\P_3_4_4Severonickel"), Sound'S3_4_3Voice.Play_34_56_02', 1, 0, TR_HEADQUARTER, 0, false);
@@ -173,6 +174,7 @@ TimerFailed:
     Sleep(0.1);
 Executed:
     Log("Sam killed Masse, game over.");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     Sleep(2);
     Speech(Localize("P_3_4_4_Sev_LambertComms", "Speech_0025L", "Localization\\P_3_4_4Severonickel"), Sound'S3_4_3Voice.Play_34_62_02', 1, 0, TR_HEADQUARTER, 0, false);

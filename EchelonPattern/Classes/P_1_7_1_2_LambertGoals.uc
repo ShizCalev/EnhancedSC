@@ -32,6 +32,7 @@ function InitPattern()
 {
     local Pawn P;
     local Actor A;
+    local ETimer Timer; // Joshua - Adjusting timer for Elite mode
 
     Super.InitPattern();
 
@@ -47,6 +48,16 @@ function InitPattern()
             SoundActors[0] = A;
         if(A.name == 'ESoundTrigger1')
             SoundActors[1] = A;
+    }
+
+    // Joshua - Adjusting timer for Elite mode
+    if(IsEliteMode())
+    {
+        ForEach AllActors(class'ETimer', Timer)
+        {
+            if(Timer.Name == 'ETimer0')
+                Timer.TimerDelay = 100.0; // 150.0
+        }
     }
 
     if( !bInit )
@@ -146,6 +157,7 @@ ClosingTorpedoLambertGoals:
     SendUnrealEvent('TorpedoCriticalHatch');
 MissedTorpedoLambertGoals:
     Log("MissedTorpedoLambertGoals");
+    SetProfileDeletion();
     GameOver(false, 6);
     End();
 CompleteLambertGoals:

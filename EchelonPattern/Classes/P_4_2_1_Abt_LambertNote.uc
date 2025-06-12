@@ -37,6 +37,21 @@ function InitPattern()
             Characters[1] = P.controller;
     }
 
+    // Joshua - Replace NPC skins for variety
+    if (!bInit)
+    {
+        ForEach DynamicActors(class'Pawn', P)
+        {
+            if(P.name == 'EGeorgianSoldier2' || P.name == 'EGeorgianSoldier3' || P.name == 'EGeorgianSoldier6'
+            || P.name == 'EGeorgianSoldier13' || P.name == 'EGeorgianSoldier14' || P.name == 'EGeorgianSoldier16'
+            || P.name == 'EGeorgianSoldier21' || P.name == 'EGeorgianSoldier31' || P.name == 'EGeorgianSoldier33'
+            || P.name == 'EGeorgianSoldier37')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.GESoldier.GESoldierA", class'Texture'));
+            }
+        }
+    }
+
     if( !bInit )
     {
     bInit=TRUE;

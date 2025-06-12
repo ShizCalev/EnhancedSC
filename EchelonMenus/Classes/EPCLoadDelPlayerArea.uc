@@ -75,8 +75,15 @@ function FillListBox()
             L.Caption = FileManager.m_pFileList[i];
             if( GetPlayerOwner().playerInfo.Difficulty == 0)
                 L.HelpText = Localize("HUD","Normal","Localization\\HUD");
-            else
+            else if (GetPlayerOwner().playerInfo.Difficulty == 1)
                 L.HelpText = Localize("HUD","Hard","Localization\\HUD");
+            // Joshua - Adding Elite difficulty and permadeath mode
+            else if (GetPlayerOwner().playerInfo.Difficulty == 2)
+                L.HelpText = Localize("Common","Elite","Localization\\Enhanced");
+            else if (GetPlayerOwner().playerInfo.Difficulty == 3)
+                L.HelpText = Localize("Common","HardPermadeath","Localization\\Enhanced");
+            else if (GetPlayerOwner().playerInfo.Difficulty == 4)
+                L.HelpText = Localize("Common","ElitePermadeath","Localization\\Enhanced");
         }        
         //else this is not a valid profile
         else
@@ -145,7 +152,7 @@ function MessageBoxDone(UWindowWindow W, MessageBoxResult Result)
             //                  DELETE A PROFILE
             /////////////////////////////////////////////////////////////////////////////////
     
-            FileManager = EPCMainMenuRootWindow(Root).m_FileManager;               
+            FileManager = EPCMainMenuRootWindow(Root).m_FileManager;             
 
             Path = "..\\Save\\"$EPCListBoxItem(m_ListBox.SelectedItem).Caption;
             FileManager.DeleteDirectory(Path, true);

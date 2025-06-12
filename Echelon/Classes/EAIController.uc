@@ -49,13 +49,13 @@ var		bool					bInFlashLightVolume;			// are we presently inside a volume that wa
 var     bool                    bRequestAwareState;
 var		bool					bTableChair;
 var     bool                    bMasterDeadSent;                // Have we sent the AI_MASTER_DEAD event yet?
-var	bool			        bIsAboutToLostThePlayer;
-var	bool                    bTimedOutAlready;               // Only send AI_PATROL_TIMEOUT once for WaitingForSig cases
-var	bool				    bIgnoreLocalPath;
-var	bool                    bTimedForceFire;
-var	   bool						bWalkReached;
-var    bool						bAccFire;
-var	   bool						bWaitForDoor;
+var		bool			        bIsAboutToLostThePlayer;
+var		bool                    bTimedOutAlready;               // Only send AI_PATROL_TIMEOUT once for WaitingForSig cases
+var		bool				    bIgnoreLocalPath;
+var		bool                    bTimedForceFire;
+var		bool					bWalkReached;
+var    	bool					bAccFire;
+var	   	bool					bWaitForDoor;
 
 var	   float					LastTryTime;
 var	   int						NumberOfTry;						
@@ -209,7 +209,16 @@ struct SNavPointTimeout
 
 var Array<SNavPointTimeout>      NavPointsTimedOut;
 
-var Array<EAIController>         aoCloseControllers;              
+var Array<EAIController>         aoCloseControllers;       
+
+var(Enhanced) bool	bWasKnockedOut; // Joshua - Tracks if this NPC was ever knocked out
+var(Enhanced) bool	bWasInjured; // Joshua - Tracks if this NPC has been injured
+var(Enhanced) bool 	bWasFound; // Joshua - Tracks if this NPC has been found as a body
+var(Enhanced) bool	bAllowKill;  // Joshua - Allows NPC to be killed without affecting the Stealth Rating
+var(Enhanced) bool	bAllowKnockout;  // Joshua - Allows NPC to be knocked out without affecting the Stealth Rating
+var(Enhanced) bool	bBlockDetection;  // Joshua - Allows NPC to detect the player without affecting the Stealth Rating
+var(Enhanced) bool 	bNotInStats; // Joshua - NPC should not be included in the Mission Statistics
+var(Enhanced) bool 	bBlockJumpDetection; // Joshua - Workaround so drop attacking NPC doesn't trigger a detection
 
 
 
@@ -4738,6 +4747,7 @@ function damageAttitudeTo(pawn Other, float Damage, class<DamageType> damageType
 	log("damageAttitudeTo: Other: "$Other$" Damage: "$Damage$" damageType: "$damageType$" PillTag: "$PillTag);
 
     //log("damageAttitudeTo");
+	
 	if( DamageType == class'EKnocked' && PillTag != 1 && Other.IsPlayerPawn() )
 	{
 		bShootTarget=true;
@@ -4783,8 +4793,6 @@ function damageAttitudeTo(pawn Other, float Damage, class<DamageType> damageType
 			}
 
 		}
-
-
 	}
 
 	// damage handled entirely by pawn
@@ -5260,6 +5268,73 @@ state s_Dead extends s_Inert
 
 		Super.BeginState();
 
+		bBlockJumpDetection = false;
+
+		if (EPawn.bKilledByPlayer && !EPawn.bIsPlayerPawn && !bNotInStats)
+		{
+			if (EPawn.bIsDog)
+			{
+				if (bAllowKill)
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKilledRequired");
+				else
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKilled");
+				
+				// If this dog was previously injured, subtract from injured stat
+				if (bWasInjured)
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyInjured", -1);
+					
+				// If this dog was previously knocked out, subtract from knockout stat
+				if (bWasKnockedOut)
+				{
+					if (bAllowKnockout)
+						EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKnockedOutRequired", -1);
+					else
+						EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKnockedOut", -1);
+				}
+			}
+			// Regular NPCs
+			else if (EPawn.bHostile)
+			{
+				if (bAllowKill)
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKilledRequired");
+				else
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKilled");
+
+				// If this NPC was previously injured, subtract from injured stat
+				if (bWasInjured)
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyInjured", -1);
+
+				// If this NPC was previously knocked out, subtract from knockout stat
+				if (bWasKnockedOut)
+				{
+					if (bAllowKnockout)
+						EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKnockedOutRequired", -1);
+					else
+						EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKnockedOut", -1);
+				}
+			}
+			else
+			{
+				if (bAllowKill)
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("CivilianKilledRequired");
+				else
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("CivilianKilled");
+
+				// If this NPC was previously injured, subtract from injured stat
+				if (bWasInjured)
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("CivilianInjured", -1);
+
+				// If this NPC was previously knocked out, subtract from knockout stat
+				if (bWasKnockedOut)
+				{
+					if (bAllowKnockout)
+						EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("CivilianKnockedOutRequired", -1);
+					else
+						EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("CivilianKnockedOut", -1);
+				}
+			}
+		}
+
 		if(m_LastStateName != 's_Carried' || (group != None && group.ScriptedPattern !=  None && group.bAlwaysKeepScriptedPattern))
 		{
 			AIEvent.Reset();
@@ -5301,6 +5376,60 @@ state s_Unconscious extends s_Inert
 	function BeginState()
 	{
 		Super.BeginState();
+
+		bBlockJumpDetection = false;
+
+		if (EPawn.bKnockedByPlayer && !EPawn.bIsPlayerPawn && !bWasKnockedOut && !bNotInStats)
+		{
+			// Special handling for dogs
+			if (EPawn.bIsDog)
+			{
+				// Count dogs as enemy knockouts regardless of hostility
+				if (bAllowKnockout)
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKnockedOutRequired");
+				else
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKnockedOut");
+				bWasKnockedOut = true;
+				
+				// If this dog was previously injured, subtract from injured stat
+				if (bWasInjured)
+				{
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyInjured", -1);
+					bWasInjured = false;
+				}
+			}
+			// Regular NPCs
+			else if (EPawn.bHostile)
+			{
+				if (bAllowKnockout)
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKnockedOutRequired");
+				else
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyKnockedOut");
+				bWasKnockedOut = true;
+
+				// If this NPC was previously injured, subtract from injured stat
+				if (bWasInjured)
+				{
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("EnemyInjured", -1);
+					bWasInjured = false;
+				}
+			}
+			else
+			{
+				if (bAllowKnockout)
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("CivilianKnockedOutRequired");
+				else
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("CivilianKnockedOut");
+				bWasKnockedOut = true;
+
+				// If this NPC was previously injured, subtract from injured stat
+				if (bWasInjured)
+				{
+					EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("CivilianInjured", -1);
+					bWasInjured = false;
+				}
+			}
+		}
 
 		// unlock any ladders or doors:
 		

@@ -236,6 +236,8 @@ state s_Picked
 		PlaySound(PLI.LockPick.OpenLock, SLOT_Interface);
 		PlayAnim('Open');
 
+		EchelonGameInfo(Level.Game).pPlayer.playerStats.AddStat("LockPicked");
+
 		// Unlock door as soon as picked
 		PLI.Interact(PickLocker);
 	}

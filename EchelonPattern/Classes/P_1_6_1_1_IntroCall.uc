@@ -33,9 +33,17 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'EMasse0')
+        {
             Characters[1] = P.controller;
+            EAIController(Characters[1]).bAllowKill = true;
+            EAIController(Characters[1]).bAllowKnockout = true;
+            EAIController(Characters[1]).bWasFound = true;
+        }
         if(P.name == 'EAleksee0')
+        {
             Characters[2] = P.controller;
+            EAIController(Characters[2]).bAllowKnockout = true;
+        }
     }
 
     // Joshua - Fixing collision on some pipes that were not set correctly

@@ -43,7 +43,10 @@ function InitPattern()
         if(P.name == 'EChineseSoldier2')
             Characters[1] = P.controller;
         if(P.name == 'EAzeriColonel0')
+        {
             Characters[2] = P.controller;
+            EAIController(Characters[2]).bAllowKnockout = true;
+        }
     }
 
     if( !bInit )

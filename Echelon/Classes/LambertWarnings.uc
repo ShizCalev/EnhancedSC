@@ -74,6 +74,7 @@ AlarmStageC:
     End();
 AlarmStageD:
     Log("Last Alarm Stage");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
 	PlayerMove(false);
     Speech(Localize("LambertWarnings", "Speech_0004L", "Localization\\Hint"), Sound'Lambert.Play_AlarmStage1Opt3', 1, 0, TR_MENUSPEECH, 0, true);

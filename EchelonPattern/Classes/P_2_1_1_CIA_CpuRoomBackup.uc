@@ -48,7 +48,10 @@ function InitPattern()
     ForEach DynamicActors(class'Pawn', P)
     {
         if(P.name == 'ECIASecurity14')
+        {
             Characters[1] = P.controller;
+            EAIController(Characters[1]).bAllowKnockout = true;
+        }
         if(P.name == 'ECIASecurity15')
             Characters[2] = P.controller;
     }

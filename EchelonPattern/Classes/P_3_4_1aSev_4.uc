@@ -96,6 +96,7 @@ ManDown:
 VasDown:
     Log("Vasilii is down, checking to see if its okay.");
     CheckFlags(V3_4_1Severonickel(Level.VarObject).OkToKOVasilii,TRUE,'ToLambert');
+    SetProfileDeletion();
     GameOver(false, 0);
     End();
 ToLambert:

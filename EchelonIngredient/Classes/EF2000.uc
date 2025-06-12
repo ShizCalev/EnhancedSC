@@ -93,6 +93,14 @@ function bool IsROFModeAvailable(ERateOfFireMode rof)
     }
 }
 
+// Joshua - Validate ROF if burst fire was disabled while in-game
+function ValidateROFMode()
+{
+    if(!EPlayerController(Controller).bBurstFire && eROFMode == ROF_Burst)
+    {
+        eROFMode = ROF_Auto;
+    }
+}
 
 defaultproperties
 {

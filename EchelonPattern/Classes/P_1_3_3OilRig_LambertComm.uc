@@ -38,6 +38,19 @@ function InitPattern()
             Characters[1] = P.controller;
     }
 
+    // Joshua - Replace NPC skins for variety
+    if (!bInit)
+    {
+        ForEach DynamicActors(class'Pawn', P)
+        {
+            if(P.name == 'EGeorgianSoldier0' || P.name == 'EGeorgianSoldier5' || P.name == 'EGeorgianSoldier16'
+            || P.name == 'EGeorgianSoldier10' || P.name == 'EGeorgianSoldier9' || P.name == 'EGeorgianSoldier6')
+            {
+                P.Skins[0] = Texture(DynamicLoadObject("ETexCharacter.GESoldier.GESoldierA", class'Texture'));
+            }
+        }
+    }
+
     if( !bInit )
     {
     bInit=TRUE;
@@ -96,6 +109,7 @@ TechniCase:
     End();
 Over:
     Log("This is the end.  My only friend, the end.  Strange scenes inside the goldmine..");
+    SetProfileDeletion();
     DisableMessages(TRUE, TRUE);
     Speech(Localize("P_1_3_3OilRig_LambertComm", "Speech_0014L", "Localization\\P_1_3_3CaspianOilRefinery"), Sound'S1_1_Voice.Play_11_95_01', 1, 0, TR_HEADQUARTER, 0, true);
     GameOver(false, 0);
@@ -106,6 +120,7 @@ LevelSwitch:
     End();
 TimeOut:
     Log("See you at the party Richter!");
+    SetProfileDeletion();
     Speech(Localize("P_1_3_3OilRig_LambertComm", "Speech_0017L", "Localization\\P_1_3_3CaspianOilRefinery"), Sound'S1_3_3Voice.Play_13_28_01', 1, 0, TR_HEADQUARTER, 0, true);
     GameOver(false, 0);
     End();

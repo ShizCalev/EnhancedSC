@@ -125,6 +125,7 @@ Murder:
     End();
 SecondKilled:
     Log("");
+    SetProfileDeletion();
     SetExclusivity(TRUE);
     DisableMessages(TRUE, TRUE);
     PlayerMove(false);
