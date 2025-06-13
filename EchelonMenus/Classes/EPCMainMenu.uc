@@ -46,7 +46,7 @@ function Created()
     // Joshua - Replaced website with Enhanced
     //m_GoOnline.SetButtonText(Localize("HUD","WEBSITE","Localization\\HUD") ,TXT_CENTER);
     m_GoOnline.SetButtonText(Localize("Common","Website","Localization\\Enhanced") ,TXT_CENTER);
-    m_VersionLabel.SetLabelText("Enhanced v1.2", TXT_CENTER); // Joshua - Enhanced version label
+    m_VersionLabel.SetLabelText("Enhanced v1.2a", TXT_CENTER); // Joshua - Enhanced version label
     
     m_StarGame.Font = F_Large;
     m_Settings.Font = F_Large;
