@@ -57,7 +57,10 @@ function InitPattern()
         if(P.name == 'EMafiaMuscle7')
             Characters[3] = P.controller;
         if(P.name == 'EMafiaMuscle8')
+        {
             Characters[4] = P.controller;
+            EAIController(Characters[4]).bAllowKnockout = true;
+        }
     }
 
     if( !bInit )
