@@ -60,3 +60,34 @@ This patch also includes [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2), [
 
 #### Xidi
 - Delete `dinput8.dll` and `Xidi.ini`.
+
+## Mission Statistics
+Mission Statistics can be viewed while playing a mission by pressing `Tab` on keyboard or upon completing a mission.
+
+The Mission Statistics key can be rebound in the Controls tab in Settings. Controllers use the `Back` button to view Mission Statistics.
+
+| Statistic                     | Penalty     |
+|-------------------------------|-------------|
+| Times Identified as Intruder  | -15%        |
+| Bodies Found                  | -15%        |
+| Alarms Triggered              | -20%        |
+| Enemies Knocked Out           | -5%         |
+| Enemies Killed                | -10%        |
+| Civilians Knocked Out         | -5%         |
+| Civilians Killed              | -30%        |
+| Locks Destroyed               | -2%         |
+
+### Notes
+- All missions can be completed with a 100% Stealth Rating.
+- NPCs involved in a forced action sequence do not penalize you for being seen, knocked out, or found.
+- If an NPC must be taken out and can be done stealthily, you must remain undetected and hide the body.
+- NPCs who carry required data such as door codes in their satchel will not penalize you for knocking them out. You are not expected to remember codes from previous playthroughs.
+
+## PlayStation 3 HD Textures for Enhanced SC
+Enhanced SC includes an improved character texture package that replaces the original PS3 `ETexCharacter.utx`. It also uses the `System\Enhanced\Textures` directory to override the original texture packages without overwriting them. This download has been specifically made to be used with Enhanced SC.
+
+- Download [Enhanced SC PS3 Textures](https://drive.usercontent.google.com/uc?id=1_3h-L5dKsHgrB8rt8pZ3SVajxRQYtjG8)
+- After downloading the textures, extract the contents to your Splinter Cell directory and overwrite all existing files when prompted.
+
+> [!NOTE]
+> The PlayStation 3 HD textures originally caused issues with shadows not rendering properly through alpha textures. I’ve recently rebuilt them to fix this problem. However, some of Ubisoft's replacement textures deviate from the original design instead of just increasing resolution.
