@@ -59,7 +59,7 @@
 - Includes experimental versions of Nuclear Power Plant and Severonickel that can be played. Both cancelled levels currently lack level-specific audio due to incompatible Xbox sound files.
 - Includes newly recreated loading screens by [cazzhmir](https://www.youtube.com/@cazzhmir) to improve the accuracy of the story.
 - Includes updated cutscene that improve the storytelling for Kalinatek, along with two new cutscenes for Nuclear Power Plant and Severonickel.
-- [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2) is included to restore Shadow Buffer rendering and set a [60 FPS cap](https://youtu.be/X3tuerrwhnw).
+- [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2) is included to restore Shadow Buffer rendering and set a 60 FPS cap. The 60 FPS cap is necessary to prevent [issues](https://youtu.be/X3tuerrwhnw) with AI pathing and SoftBody physics that can occur at higher frame rates. 
 - [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack) is included for widescreen support.
 - [Xidi](https://github.com/samuelgr/Xidi) is included to improve compatibility for XInput-based controllers.
 - Thanks to [iLL_Pazzo](https://www.twitch.tv/ill_pazzo) (French), [NoSleepCoffee](https://www.twitch.tv/nosleepcoffee), [Andry66power](https://www.twitch.tv/andry66power) (Italian), [Distro](https://www.twitch.tv/distrotv) (German), and [MatthewDoomer](https://www.twitch.tv/matthewdoomer) (Spanish) for translating Enhanced localization.
