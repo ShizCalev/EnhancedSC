@@ -12,6 +12,9 @@ The latest version of Enhanced SC can be found in the [Releases](https://github.
 - After downloading Enhanced SC, extract the contents to your Splinter Cell directory and overwrite all existing files when prompted.
 - You can adjust additional settings in the Enhanced tab within the in-game settings.
 
+### Mouse Polling Rate
+Many mice now offer polling rates of 1000 Hz or higher. However, in Splinter Cell, higher polling rates may cause issues with your mouse aim. If your mouse allows it, try setting the polling rate to 125 Hz through software.
+
 > [!NOTE]
 > Your original saves will not be deleted, but they will appear as missing. Enhanced intentionally hides them because they aren't compatible with this version.
 
