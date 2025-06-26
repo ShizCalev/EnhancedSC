@@ -7,6 +7,7 @@
 #include <optional>
 #include <subauth.h>
 #include "safetyhook.hpp"
+#include "Hooking.Patterns.h"
 
 class CallbackHandler
 {

@@ -137,36 +137,6 @@ void Init_CalculateScreenSize()
 
 
 
-using SC1_ViewportWndProc = void(__fastcall*)(void*, int, int);
-SC1_ViewportWndProc SC1_ViewportWndProc = nullptr;
-void __fastcall SC1_ViewportWndProc_Hook(void* thisptr, int lang, int sku)
-{
-    spdlog::info("SC1_ViewportWndProc: lang {} -> {}, sku {} -> {}", sku, iLauncherConfigRegion, lang, iLauncherConfigLanguage);
-    SC1_ViewportWndProc(thisptr, iLauncherConfigLanguage, iLauncherConfigRegion);
-}
-
-
-HMODULE WndDrvDLL = GetModuleHandleA("WinDrv.dll");
-if (!WndDrvDLL)
-{
-    spdlog::error("Failed to get WndDrv.dll module handle");
-    return;
-}
-
-
-SC1_ViewportWndProc = decltype(SC1_ViewportWndProc)(GetProcAddress(WndDrvDLL, "?ViewportWndProc@UWindowsViewport@@QAEJIIJ@Z"));
-if (SC1_ViewportWndProc)
-{
-    if (Memory::HookIAT(baseModule, "WinDrv.dll", SC1_ViewportWndProc, SC1_ViewportWndProc_Hook))
-    {
-        spdlog::info("SC1_ViewportWndProc hooked");
-    }
-    else
-    {
-        spdlog::error("Failed to apply SC1_ViewportWndProc IAT hook");
-    }
-}
-
 /*
 bool bAspectFix;
 bool bHUDFix;

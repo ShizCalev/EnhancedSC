@@ -7,3 +7,9 @@
 [submodule "external/dxsdk"]
 	path = external/dxsdk
 	url = ../../apitrace/dxsdk
+[submodule "external/minhook"]
+	path = external/minhook
+	url = ../../TsudaKageyu/minhook
+[submodule "external/hooking"]
+	path = external/hooking
+	url = ../../ThirteenAG/Hooking.Patterns

@@ -1,5 +1,5 @@
 #include "hook_dlls.hpp"
-
+#include "callbacks.h"
 #include <spdlog/spdlog.h>
 
 void GameDLLs::Initialize()
@@ -28,26 +28,26 @@ void GameDLLs::Initialize()
     WinDrv = GetModuleHandleA("WinDrv.dll");
 
     // Log loaded modules
-    if (Engine) spdlog::info("GameDLLs: Engine.dll loaded at 0x{:x}", (uintptr_t)Engine);
-    if (Core) spdlog::info("GameDLLs: Core.dll loaded at 0x{:x}", (uintptr_t)Core);
-    if (GeometricEvent) spdlog::info("GameDLLs: GeometricEvent.dll loaded at 0x{:x}", (uintptr_t)GeometricEvent);
-    if (Window) spdlog::info("GameDLLs: Window.dll loaded at 0x{:x}", (uintptr_t)Window);
+    if (!Engine) spdlog::error("GameDLLs: Engine.dll failed to load.");
+    if (!Core) spdlog::error("GameDLLs: Core.dll failed to load.");
+    if (!GeometricEvent) spdlog::error("GameDLLs: GeometricEvent.dll failed to load.");
+    if (!Window) spdlog::error("GameDLLs: Window.dll failed to load.");
 
 
-    if (binkw32) spdlog::info("GameDLLs: binkw32.dll loaded at 0x{:x}", (uintptr_t)binkw32);
-    if (D3DDrv) spdlog::info("GameDLLs: D3DDrv.dll loaded at 0x{:x}", (uintptr_t)D3DDrv);
-    if (DareAudio) spdlog::info("GameDLLs: DareAudio.dll loaded at 0x{:x}", (uintptr_t)DareAudio);
-    if (eax) spdlog::info("GameDLLs: eax.dll loaded at 0x{:x}", (uintptr_t)eax);
-    if (Echelon) spdlog::info("GameDLLs: Echelon.dll loaded at 0x{:x}", (uintptr_t)Echelon);
-    if (EchelonHUD) spdlog::info("GameDLLs: EchelonHUD.dll loaded at 0x{:x}", (uintptr_t)EchelonHUD);
-    if (EchelonIngredient) spdlog::info("GameDLLs: EchelonIngredient.dll loaded at 0x{:x}", (uintptr_t)EchelonIngredient);
-    if (EchelonMenus) spdlog::info("GameDLLs: EchelonMenus.dll loaded at 0x{:x}", (uintptr_t)EchelonMenus);
-    if (Editor) spdlog::info("GameDLLs: Editor.dll loaded at 0x{:x}", (uintptr_t)Editor);
-    if (SNDdbgV) spdlog::info("GameDLLs: SNDdbgV.dll loaded at 0x{:x}", (uintptr_t)SNDdbgV);
-    if (SNDDSound3DDLL_VBR) spdlog::info("GameDLLs: SNDDSound3DDLL_VBR.dll loaded at 0x{:x}", (uintptr_t)SNDDSound3DDLL_VBR);
-    if (SNDext_VBR) spdlog::info("GameDLLs: SNDext_VBR.dll loaded at 0x{:x}", (uintptr_t)SNDext_VBR);
-    if (UWindow) spdlog::info("GameDLLs: UWindow.dll loaded at 0x{:x}", (uintptr_t)UWindow);
-    if (WinDrv) spdlog::info("GameDLLs: WinDrv.dll loaded at 0x{:x}", (uintptr_t)WinDrv);
+    if (!binkw32) spdlog::error("GameDLLs: binkw32.dll failed to load.");
+    if (!D3DDrv) spdlog::error("GameDLLs: D3DDrv.dll failed to load.");
+    if (!DareAudio) spdlog::error("GameDLLs: DareAudio.dll failed to load.");
+    if (!eax) spdlog::error("GameDLLs: eax.dll failed to load.");
+    if (!Echelon) spdlog::error("GameDLLs: Echelon.dll failed to load.");
+    if (!EchelonHUD) spdlog::error("GameDLLs: EchelonHUD.dll failed to load.");
+    if (!EchelonIngredient) spdlog::error("GameDLLs: EchelonIngredient.dll failed to load.");
+    if (!EchelonMenus) spdlog::error("GameDLLs: EchelonMenus.dll failed to load.");
+    if (!Editor) spdlog::error("GameDLLs: Editor.dll failed to load.");
+    if (!SNDdbgV) spdlog::error("GameDLLs: SNDdbgV.dll failed to load.");
+    if (!SNDDSound3DDLL_VBR) spdlog::error("GameDLLs: SNDDSound3DDLL_VBR.dll failed to load.");
+    if (!SNDext_VBR) spdlog::error("GameDLLs: SNDext_VBR.dll failed to load.");
+    if (!UWindow) spdlog::error("GameDLLs: UWindow.dll failed to load.");
+    if (!WinDrv) spdlog::error("GameDLLs: WinDrv.dll failed to load.");
 
 
 }
