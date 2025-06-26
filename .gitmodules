@@ -1,0 +1,9 @@
+[submodule "external/inipp"]
+	path = external/inipp
+	url = ../../mcmtroffaes/inipp
+[submodule "external/spdlog"]
+	path = external/spdlog
+	url = ../../gabime/spdlog
+[submodule "external/dxsdk"]
+	path = external/dxsdk
+	url = ../../apitrace/dxsdk
