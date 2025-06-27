@@ -48,11 +48,6 @@ jobs:
         copy .\_staging\dinput8.dll .\_staging\system\msacm32.dll
         move .\_staging\dinput8.dll .\_staging\system\msvfw32.dll
 
-    - name: Download dgVoodoo2 (D3D8.dll)
-      run: |
-        curl -L -o dgVoodoo2.zip https://dege.freeweb.hu/dgVoodoo2/bin/dgVoodoo2_86_1.zip
-        7z e dgVoodoo2.zip "MS\x86\D3D8.dll" -o"./_staging/system" -y
-        
     - name: Download 13AG Widescreen Fix
       run: |
         curl -L -o WidescreenFix.zip https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/sc/SplinterCell.WidescreenFix.zip
@@ -86,13 +81,26 @@ jobs:
         Move-Item .\README.md .\_staging\${{ github.event.repository.name }}_README.md
         Copy-Item .\_staging\${{ github.event.repository.name }}_README.md .\_staging\system\logs\${{ github.event.repository.name }}.log
 
-        # Create Windows zip
+    - name: Download dgVoodoo2 (Windows - 2.86.1)
+      run: |
+        curl -L -o dgVoodoo2.zip https://dege.freeweb.hu/dgVoodoo2/bin/dgVoodoo2_86_1.zip
+        7z e dgVoodoo2.zip "MS\x86\D3D8.dll" -o"./_staging/system" -y
+
+    - name: Create Windows zip
+      run: |
         7z a -tzip "${{ github.event.repository.name }}_${{ github.event.inputs.version }}.zip" .\_staging\*
 
-        # Overwrite system files with Configs/linux for Linux build
+    - name: Overwrite Configs for Linux
+      run: |
         Copy-Item -Path "Configs/linux/*" -Destination "_staging/system" -Recurse -Force
 
-        # Create Linux zip
+    - name: Download dgVoodoo2 (Linux - 2.79.3)
+      run: |
+        curl -L -o dgVoodoo2_linux.zip https://archive.org/download/dgVoodoo2_79_3/dgVoodoo2_79_3.zip
+        7z e dgVoodoo2_linux.zip "D3D8.dll" -o"./_staging/system" -y
+
+    - name: Create Linux zip
+      run: |
         7z a -tzip "${{ github.event.repository.name }}_${{ github.event.inputs.version }}_linux.zip" .\_staging\*
 
     - name: Upload Release
