@@ -4,8 +4,6 @@
 #include <spdlog/sinks/base_sink.h>
 #include <spdlog/spdlog.h>
 
-std::shared_ptr<spdlog::logger> logger;
-std::filesystem::path sLogFile = sFixName + ".log";
 std::filesystem::path sFixPath;
 
 
@@ -76,13 +74,15 @@ void Logging::Initialize()
     {
         try
         {
+            std::filesystem::path sLogFile = sFixName + ".log";
+
             bool logDirExists = std::filesystem::is_directory(sExePath / "logs");
             if (!logDirExists)
             {
                 std::filesystem::create_directory(sExePath / "logs"); //create a "logs" subdirectory in the game folder to keep the main directory tidy.
             }
             // Create 10MB truncated logger
-            logger = std::make_shared<spdlog::logger>(sLogFile.string(), std::make_shared<size_limited_sink<std::mutex>>((sExePath / "logs" / sLogFile).string(), 10 * 1024 * 1024));
+            std::shared_ptr<spdlog::logger> logger = std::make_shared<spdlog::logger>(sLogFile.string(), std::make_shared<size_limited_sink<std::mutex>>((sExePath / "logs" / sLogFile).string(), 10 * 1024 * 1024));
             spdlog::set_default_logger(logger);
 
             spdlog::flush_on(spdlog::level::debug);

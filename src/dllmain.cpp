@@ -41,7 +41,7 @@ std::string sGameVersion;
 
 // Ini
 inipp::Ini<char> ini;
-std::filesystem::path sConfigFile = "EnhancedSC.ini";
+std::filesystem::path sConfigFile = "Enhanced.ini";
 std::pair DesktopDimensions = { 0,0 };
 
 // Ini Variables
@@ -351,7 +351,7 @@ void Init_ReadConfig()
     }
 
     int loadedConfigVersion;
-    inipp::get_value(ini.sections["Config Version"], "Version", loadedConfigVersion);
+    inipp::get_value(ini.sections["Config.Internal"], "ConfigVersion", loadedConfigVersion);
     if (loadedConfigVersion != iConfigVersion)
     {
         spdlog::error("Config version mismatch: expected {}, got {}", iConfigVersion, loadedConfigVersion);
@@ -370,16 +370,16 @@ void Init_ReadConfig()
 
 
     // Read ini file
-    inipp::get_value(ini.sections["Fix LOD Models"], "Enabled", g_DistanceCulling.isEnabled);
+    inipp::get_value(ini.sections["SCEnhanced.asi"], "FixLODModels", g_DistanceCulling.isEnabled);
     spdlog::info("Config Parse: Fix LOD Models: {}", g_DistanceCulling.isEnabled);
 
-    inipp::get_value(ini.sections["Skip Intro Logos"], "Enabled", g_IntroSkip.isEnabled);
+    inipp::get_value(ini.sections["SCEnhanced.asi"], "SkipIntroVideos", g_IntroSkip.isEnabled);
     spdlog::info("Config Parse: Skip Intro Videos: {}", g_IntroSkip.isEnabled);
 
-    inipp::get_value(ini.sections["Pause on Focus Loss"], "ShouldPause", g_PauseOnFocusLoss.shouldPause);
+    inipp::get_value(ini.sections["SCEnhanced.asi"], "PauseOnFocusLoss", g_PauseOnFocusLoss.shouldPause);
     spdlog::info("Config Parse: Pause on Focus Loss: {}", g_PauseOnFocusLoss.shouldPause);
 
-    inipp::get_value(ini.sections["Verbose Logging"], "Enabled", bVerboseLogging);
+    inipp::get_value(ini.sections["Config.Internal"], "VerboseLogging", bVerboseLogging);
     spdlog::info("Config Parse: Verbose Logging: {}", bVerboseLogging);
 
 }
@@ -393,42 +393,48 @@ static bool iequals(const std::string& a, const std::string& b) {
 }
 
 
-std::string lastLoaded;
 
-#define INITIALIZE(func) \
-    do { \
-        std::chrono::time_point<std::chrono::high_resolution_clock> currentInitPhaseStartTime;\
-        if(strcmp(#func,"InitializeSubsystems()") == 0) \
-        {\
-            spdlog::info("---------- Subsystem initialization started ----------", #func); \
-            currentInitPhaseStartTime = g_Logging.initStartTime;\
-        }\
-        else if(!lastLoaded.empty())\
-        {\
-            spdlog::info("---------- {}\tNow loading: {} ----------", lastLoaded, #func); \
-            currentInitPhaseStartTime = std::chrono::high_resolution_clock::now();\
-        }\
-        else\
-        {\
-            spdlog::info("---------- Loading: {} ----------", #func); \
-            currentInitPhaseStartTime = std::chrono::high_resolution_clock::now();\
-        }\
-        (func); \
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - currentInitPhaseStartTime).count();\
-        if(strcmp(#func,"InitializeSubsystems()") == 0) \
-        {\
-            if(!lastLoaded.empty())\
-            {\
-                spdlog::info("---------- {} ----------", lastLoaded); \
-            }\
-            spdlog::info("---------- All systems completed loading in: {} ms. ----------", duration); \
-        }\
-        else\
-        {\
-            lastLoaded = std::string(#func) + " loaded in: " + std::to_string(duration) + " ms."; \
-        }\
-    } while (0)
-
+void Initbinw32() //g_GameDLLs.binkw32
+{
+}
+void InitD3DDrv() //g_GameDLLs.D3DDrv
+{
+}
+void InitDareAudio() //g_GameDLLs.DareAudio
+{
+}
+void Initeax() //g_GameDLLs.eax
+{
+}
+void InitEchelon() //g_GameDLLs.Echelon
+{
+}
+void InitEchelonHUD() //g_GameDLLs.EchelonHUD
+{
+}
+void InitEchelonIngredient() //g_GameDLLs.EchelonIngredient
+{
+}
+void InitEchelonMenus() //g_GameDLLs.EchelonMenus
+{
+}
+void InitEditor() //g_GameDLLs.Editor
+{
+}
+void InitSNDdbgV() //g_GameDLLs.SNDdbgV
+{
+}
+void InitSNDDSound3DDLL_VBR() //g_GameDLLs.SNDDSound3DDLL_VBR
+{
+}
+void InitSNDext_VBR() //g_GameDLLs.SNDext_VBR
+{
+}
+void InitUWindow() //g_GameDLLs.UWindow
+{
+}
+void InitWinDrv() //g_GameDLLs.WinDrv
+{}
 
 void InitializeSubsystems()
 {
@@ -439,7 +445,7 @@ void InitializeSubsystems()
         INITIALIZE(g_GameDLLs.Initialize());
         /* At this point Core, Engine, GeometricEvent, and Window dll's are hooked.
         Things reliant on binkw32, D3DDrv, DareAudio, eax, Echelon, EchelonHUD, EchelonIngredient, EchelonMenus, Editor, SNDdbgV, SNDDSound3DDLL_VBR, SNDext_VBR, UWindow, and WinDrv
-        need to be hooked via their respective callback functions outside of InitializeSubsystems(), as they're loaded after ASI loader. */
+        need to be hooked via the above Init functions, as they're loaded after ASI loader finishes everything. */
 
         INITIALIZE(g_GameVars.Initialize());
         INITIALIZE(Init_ReadConfig()); 

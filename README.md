@@ -48,9 +48,8 @@ For more detailed instructions on how to override a DLL, refer to this [guide](h
 
 ## Uninstallation
 To manually remove Enhanced SC from your game installation:
-- Navigate to the `System` folder, delete the `Enhanced` folder, `Engine.dll`, `EchelonHUD.dll`, and `Enhanced.ini`.
-- Rename `Engine.dll.bak` to `Engine.dll` to restore the original file.
-- Rename `EchelonHUD.dll.bak` to `EchelonHUD.dll` to restore the original file.
+- Navigate to the `System` folder, delete the `Enhanced` folder, and `Enhanced.ini`.
+- Navigate to the `System/scripts` folder and delete `EnhancedSC.asi`.
 
 This patch also includes [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2), [ThirteenAG Widescreen Fix](https://github.com/ThirteenAG/WidescreenFixesPack), and [Xidi](https://github.com/samuelgr/Xidi).
 
@@ -58,8 +57,9 @@ This patch also includes [dgVoodoo2](https://github.com/dege-diosg/dgVoodoo2), [
 - Delete `D3D8.dll` and `dgVoodoo.conf`.
 
 #### ThirteenAG Widescreen Fix
-- Delete the `scripts` folder, `msacm32.dll`, and `msvfw32.dll`.
-- Both Enhanced SC and ThirteenAG Widescreen Fix depend on `msacm32.dll` and `msvfw32.dll`. So, if you want Enhanced SC without ThirteenAG Widescreen Fix, just delete the `scripts` folder.
+- Delete `SplinterCell.WidescreenFix.asi` from the `System/scripts` folder.
+- Both Enhanced SC and ThirteenAG Widescreen Fix depend on `msacm32.dll` and `msvfw32.dll`.
+  - If removing both mods, these `.dll` files can also be deleted.
 
 #### Xidi
 - Delete `dinput8.dll` and `Xidi.ini`.
