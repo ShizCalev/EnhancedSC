@@ -1,0 +1,109 @@
+name: create-release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version number'
+        required: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+
+    - name: Setup Folders
+      run: |
+        mkdir .\_staging
+        mkdir .\_staging\system
+        mkdir .\_staging\system\logs
+        mkdir .\_staging\system\scripts
+
+    - name: Setup and Compile .asi File
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Compile .asi File
+      run: |
+        msbuild ${{ github.event.repository.name }}.sln -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x86
+        mv Release\${{ github.event.repository.name }}.asi .\_staging\system\scripts\${{ github.event.repository.name }}.asi
+
+    - name: Download ASI Loader
+      uses: robinraju/release-downloader@v1.8
+      with:
+        repository: "ThirteenAG/Ultimate-ASI-Loader"
+        latest: true
+        fileName: "Ultimate-ASI-Loader.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Extract ASI Loader
+      run: |
+        unzip Ultimate-ASI-Loader.zip -d .\_staging\
+        curl -o .\_staging\system\UltimateASILoader_LICENSE.md https://raw.githubusercontent.com/ThirteenAG/Ultimate-ASI-Loader/master/license
+        copy .\_staging\dinput8.dll .\_staging\system\msacm32.dll
+        move .\_staging\dinput8.dll .\_staging\system\msvfw32.dll
+
+    - name: Download dgVoodoo2 (D3D8.dll)
+      run: |
+        curl -L -o dgVoodoo2.zip https://dege.freeweb.hu/dgVoodoo2/bin/dgVoodoo2_86_1.zip
+        7z e dgVoodoo2.zip "MS\x86\D3D8.dll" -o"./_staging/system" -y
+        
+    - name: Download 13AG Widescreen Fix
+      run: |
+        curl -L -o WidescreenFix.zip https://github.com/ThirteenAG/WidescreenFixesPack/releases/download/sc/SplinterCell.WidescreenFix.zip
+        7z e WidescreenFix.zip -i!system\scripts\* -o"./_staging/system/scripts" -y
+
+    - name: Download Xidi (dinput8.dll)
+      shell: pwsh
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        $headers = @{ Authorization = "token $env:GH_TOKEN" }
+        $response = Invoke-RestMethod -Uri "https://api.github.com/repos/samuelgr/Xidi/releases/latest" -Headers $headers
+        $asset = $response.assets | Where-Object { $_.name -like "*.zip" }
+        Invoke-WebRequest -Uri $asset.browser_download_url -OutFile "Xidi.zip"
+        7z x Xidi.zip -o"xidi_extracted" -y
+        $subfolder = Get-ChildItem -Directory "xidi_extracted" | Where-Object { $_.Name -like "Xidi-v*" } | Select-Object -First 1
+        $dllPath = Join-Path $subfolder.FullName "Win32\dinput8.dll"
+        Move-Item $dllPath "_staging/system/dinput8.dll"
+
+    - name: Copy Top-Level Config Files to System Folder
+      shell: pwsh
+      run: |
+        Get-ChildItem -Path "Configs" -File | ForEach-Object {
+          Copy-Item $_.FullName -Destination "_staging/system"
+        }
+
+    - name: Package Release (Windows and Linux)
+      shell: pwsh
+      run: |
+        # Move and log README
+        Move-Item .\README.md .\_staging\${{ github.event.repository.name }}_README.md
+        Copy-Item .\_staging\${{ github.event.repository.name }}_README.md .\_staging\system\logs\${{ github.event.repository.name }}.log
+
+        # Create Windows zip
+        7z a -tzip "${{ github.event.repository.name }}_${{ github.event.inputs.version }}.zip" .\_staging\*
+
+        # Overwrite system files with Configs/linux for Linux build
+        Copy-Item -Path "Configs/linux/*" -Destination "_staging/system" -Recurse -Force
+
+        # Create Linux zip
+        7z a -tzip "${{ github.event.repository.name }}_${{ github.event.inputs.version }}_linux.zip" .\_staging\*
+
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: |
+          ${{ github.event.repository.name }}_${{ github.event.inputs.version }}.zip
+          ${{ github.event.repository.name }}_${{ github.event.inputs.version }}_linux.zip
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.event.inputs.version }}
+        name: "${{ github.event.inputs.version }}"
+        draft: true
+        generateReleaseNotes: true
+        artifactErrorsFailBuild: true
