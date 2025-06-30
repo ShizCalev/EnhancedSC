@@ -44,9 +44,6 @@ inipp::Ini<char> ini;
 std::filesystem::path sConfigFile = "Enhanced.ini";
 std::pair DesktopDimensions = { 0,0 };
 
-// Ini Variables
-bool bVerboseLogging = true;
-
 #pragma region deadcode
 /*      Deadcode, not used anymore, just kept for reference / future ideas.
 
@@ -335,52 +332,24 @@ void Init_ReadConfig()
     std::ifstream iniFile((sExePath / sConfigFile).string());
     if (!iniFile)
     {
-        spdlog::error("Config file not found: {}", (sExePath / sConfigFile).string());
-        AllocConsole();
-        FILE* dummy;
-        freopen_s(&dummy, "CONOUT$", "w", stdout);
-        std::cout << "" << sFixName << " v" << VERSION_STRING << " loaded." << std::endl;
-        std::cout << "ERROR: Could not locate config file." << std::endl;
-        std::cout << "ERROR: Make sure " << sConfigFile << " is located in " << sExePath << std::endl;
         return FreeLibraryAndExitThread(baseModule, 1);
     }
-    else
-    {
-        spdlog::info("Config file: {}", (sExePath / sConfigFile).string());
-        ini.parse(iniFile);
-    }
-
-    int loadedConfigVersion;
-    inipp::get_value(ini.sections["Config.Internal"], "ConfigVersion", loadedConfigVersion);
-    if (loadedConfigVersion != iConfigVersion)
-    {
-        spdlog::error("Config version mismatch: expected {}, got {}", iConfigVersion, loadedConfigVersion);
-
-        AllocConsole();
-        FILE* dummy;
-        freopen_s(&dummy, "CONOUT$", "w", stdout);
-        std::cout << "" << sFixName << " v" << VERSION_STRING << " loaded." << std::endl;
-        std::cout << "EnhancedSC CONFIG ERROR: Outdated config file!" << std::endl;
-        std::cout << "EnhancedSC CONFIG ERROR: Please install -all- the files from the latest release!" << std::endl;
-        return FreeLibraryAndExitThread(baseModule, 1);
-    }
+    spdlog::info("Config file: {}", (sExePath / sConfigFile).string());
+    ini.parse(iniFile);
 
     // Grab desktop resolution
     DesktopDimensions = Util::GetPhysicalDesktopDimensions();
 
 
     // Read ini file
-    inipp::get_value(ini.sections["SCEnhanced.asi"], "FixLODModels", g_DistanceCulling.isEnabled);
-    spdlog::info("Config Parse: Fix LOD Models: {}", g_DistanceCulling.isEnabled);
+    g_DistanceCulling.isEnabled = Util::stringToBool(ini.sections["Echelon.EchelonGameInfo"]["bLODDistance"]);
+    spdlog::info("Config Parse: Fix LOD Distance: {}", g_DistanceCulling.isEnabled);
 
-    inipp::get_value(ini.sections["SCEnhanced.asi"], "SkipIntroVideos", g_IntroSkip.isEnabled);
+    g_IntroSkip.isEnabled = Util::stringToBool(ini.sections["Echelon.EchelonGameInfo"]["bSkipIntroVideos"]);
     spdlog::info("Config Parse: Skip Intro Videos: {}", g_IntroSkip.isEnabled);
 
-    inipp::get_value(ini.sections["SCEnhanced.asi"], "PauseOnFocusLoss", g_PauseOnFocusLoss.shouldPause);
+    g_PauseOnFocusLoss.shouldPause = Util::stringToBool(ini.sections["Echelon.EchelonGameInfo"]["bPauseOnFocusLoss"]);
     spdlog::info("Config Parse: Pause on Focus Loss: {}", g_PauseOnFocusLoss.shouldPause);
-
-    inipp::get_value(ini.sections["Config.Internal"], "VerboseLogging", bVerboseLogging);
-    spdlog::info("Config Parse: Verbose Logging: {}", bVerboseLogging);
 
 }
 

@@ -95,19 +95,17 @@ namespace Memory
         std::uint8_t* foundPattern = PatternScanSilent(module, signature);
         if (foundPattern)
         {
-            if (bVerboseLogging)
+#ifdef SC_DEBUG
+            if (successMessage)
             {
-                if (successMessage)
-                {
-                    spdlog::info("{} Address: {:s}+{:x}", successMessage, sExeName.c_str(), (uintptr_t)foundPattern - (uintptr_t)baseModule);
+                spdlog::info("{} Address: {:s}+{:x}", successMessage, sExeName.c_str(), (uintptr_t)foundPattern - (uintptr_t)baseModule);
 
-                }
-                else
-                {
-                
-                    spdlog::info("{}: Pattern scan found. Address: {:s}+{:x}", prefix, sExeName.c_str(), (uintptr_t)foundPattern - (uintptr_t)baseModule);
-                }
             }
+            else
+            {
+                spdlog::info("{}: Pattern scan found. Address: {:s}+{:x}", prefix, sExeName.c_str(), (uintptr_t)foundPattern - (uintptr_t)baseModule);
+            }
+#endif
         }
         else
         {
@@ -287,5 +285,27 @@ namespace Util
         return FALSE;
     }
 
-    
+    bool stringToBool(const std::string& str)
+    {
+        std::string lowerStr = str;
+        std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(),
+            [](unsigned char c)
+            {
+                return std::tolower(c);
+            });
+
+        if (lowerStr == "true" || lowerStr == "1")
+        {
+            return true;
+        }
+        else if (lowerStr == "false" || lowerStr == "0")
+        {
+            return false;
+        }
+        // Handle cases where the string is not a recognized boolean representation
+        // For example, throw an exception, return a default value, or log an error.
+        // For simplicity, this example returns false for unrecognized strings.
+        return false;
+    }
+
 }
