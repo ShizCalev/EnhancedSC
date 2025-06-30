@@ -3,8 +3,6 @@
 #include "stdafx.h"
 #include "safetyhook.hpp"
 
-extern bool bVerboseLogging;
-
 namespace Memory
 {
     template<typename T>
@@ -46,24 +44,23 @@ namespace Util
 
     bool CheckForASIFiles(std::string fileName, bool checkForDuplicates, bool setFixPath, const char* checkCreationDate);
 
+    bool stringToBool(const std::string& str);
 }
 
 
 ///Input: SafetyHookMid, const char* Prefix, const char* successMessage (or NULL), const char* errorMessage (or NULL)
+#ifdef SC_DEBUG
 #define LOG_HOOK(hook, prefix, successMessage, errorMessage)\
 {\
     if (hook)\
     {\
-        if (bVerboseLogging)\
+        if (successMessage)\
         {\
-            if (successMessage)\
-            {\
-                spdlog::info("{}", successMessage);\
-            }\
-            else\
-            {\
-                spdlog::info("{}: Hook installed.", prefix);\
-            }\
+            spdlog::info("{}", successMessage);\
+        }\
+        else\
+        {\
+            spdlog::info("{}: Hook installed.", prefix);\
         }\
     }\
     else if (errorMessage)\
@@ -74,4 +71,20 @@ namespace Util
     {\
         spdlog::error("{}: Hook failed.", prefix);\
     }\
-}\
+}
+#else
+#define LOG_HOOK(hook, prefix, successMessage, errorMessage)\
+{\
+    if (hook)\
+    {\
+    }\
+    else if (errorMessage)\
+    {\
+        spdlog::error("{}", errorMessage);\
+    }\
+    else\
+    {\
+        spdlog::error("{}: Hook failed.", prefix);\
+    }\
+}
+#endif
