@@ -1,5 +1,8 @@
 name: Create Release
 
+env:
+  CI: true
+
 on:
   workflow_dispatch:
 
@@ -40,9 +43,25 @@ jobs:
     - name: Setup and Compile .asi File
       uses: microsoft/setup-msbuild@v1.1
 
+    # Zydis cache setup
+    - name: Get Zydis submodule hash
+      id: zydishash
+      run: |
+        cd external/zydis
+        $hash = git rev-parse HEAD
+        "hash=$hash" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+    - name: Cache Zydis
+      uses: actions/cache@v4
+      with:
+        path: |
+          external/zydis/msvc/bin/ReleaseX64
+          external/zydis/msvc/bin/ReleaseX86
+        key: zydis-${{ runner.os }}-${{ steps.zydishash.outputs.hash }}
+
     - name: Compile .asi File
       run: |
-        msbuild ${{ github.event.repository.name }}.sln -t:rebuild -verbosity:diag -property:Configuration=Release -property:Platform=x86
+        msbuild ${{ github.event.repository.name }}.sln /m -t:rebuild -verbosity:minimal -property:Configuration=Release -property:Platform=x86
         mv Release\${{ github.event.repository.name }}.asi .\_staging\system\scripts\${{ github.event.repository.name }}.asi
 
     - name: Download ASI Loader

@@ -1,7 +1,7 @@
 #include "shadow_resolution.hpp"
-#include <spdlog/spdlog.h>
 #include "common.hpp"
 #include "hook_dlls.hpp"
+#include "logging.hpp"
 
 
 void ShadowResolution::Initialize() const

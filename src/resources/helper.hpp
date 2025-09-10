@@ -38,10 +38,19 @@ namespace Memory
 
 namespace Util
 {
-    extern int findStringInVector(std::string& str, const std::initializer_list<std::string>& search);
+#if !defined(RELEASE_BUILD)
+    void DumpContext(const safetyhook::Context& ctx);
 
-    // Convert an UTF8 string to a wide Unicode String
-    std::wstring utf8_decode(const std::string& str);
+    void DumpBytes(uint64_t address);
+#endif
+
+    bool IsProcessRunning(const std::filesystem::path& fullPath);
+
+    int findStringInVector(const std::string& str, const std::initializer_list<std::string>& search);
+
+    std::wstring UTF8toWide(const std::string& str);
+
+    std::string WideToUTF8(const std::wstring& wstr);
 
     std::pair<int, int> GetPhysicalDesktopDimensions();
 
@@ -49,11 +58,18 @@ namespace Util
 
     bool CheckForASIFiles(std::string fileName, bool checkForDuplicates, bool setFixPath, const char* checkCreationDate);
 
-    bool stringToBool(const std::string& str);
+    std::string GetNameAtIndex(const std::initializer_list<std::string>& list, int index);
 
     std::string GetUppercaseNameAtIndex(const std::initializer_list<std::string>& list, int index);
 
     bool IsSteamOS();
+
+    std::string StripQuotes(const std::string& value);
+
+    std::string GetParentProcessName();
+
+    bool IsProcessParent(const std::string& exeName);
+
 }
 
 
@@ -62,13 +78,16 @@ namespace Util
 {\
     if (hook)\
     {\
-        spdlog::info("{}: Hook installed.", prefix);\
+        if (g_Logging.bVerboseLogging)\
+        {\
+            spdlog::info("{}: Hook installed.", prefix);\
+        }\
     }\
     else\
     {\
         spdlog::error("{}: Hook failed.", prefix);\
     }\
-}\
+}
 
 #define CONCAT_IMPL(x, y) x##y
 #define CONCAT(x, y) CONCAT_IMPL(x, y)
@@ -146,3 +165,15 @@ namespace Util
 #define MAKE_HOOK_TRAMPOLINE(module, pattern, name, retType, body)                 \
     MAKE_HOOK_TRAMPOLINE_IMPL(module, pattern, name, retType, body, UNIQUE_NAME(_unique))
 
+struct HookGuard
+{
+    bool& flag;
+    HookGuard(bool& f) : flag(f)
+    {
+        flag = true;
+    }
+    ~HookGuard()
+    {
+        flag = false;
+    }
+};

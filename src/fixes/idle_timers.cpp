@@ -1,8 +1,8 @@
 #include "idle_timers.hpp"
 
-#include <spdlog/spdlog.h>
 #include "helper.hpp"
 #include "hook_dlls.hpp"
+#include "logging.hpp"
 
 
 void IdleTimers::Initialize()

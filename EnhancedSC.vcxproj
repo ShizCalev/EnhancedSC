@@ -28,6 +28,8 @@
     <ClCompile Include="external\safetyhook\src\utility.cpp" />
     <ClCompile Include="external\safetyhook\src\vmt_hook.cpp" />
     <ClCompile Include="src\fixes\mouse_xbuttons_support.cpp" />
+    <ClCompile Include="src\fixes\restore_eax.cpp" />
+    <ClCompile Include="src\resources\config.cpp" />
     <ClCompile Include="src\resources\logging.cpp" />
     <ClCompile Include="src\features\custom_saves.cpp" />
     <ClCompile Include="src\fixes\idle_timers.cpp" />
@@ -47,6 +49,9 @@
   <ItemGroup>
     <ClInclude Include="external\safetyhook\include\safetyhook.hpp" />
     <ClInclude Include="src\fixes\mouse_xbuttons_support.hpp" />
+    <ClInclude Include="src\fixes\restore_eax.hpp" />
+    <ClInclude Include="src\resources\config.hpp" />
+    <ClInclude Include="src\resources\config_keys.hpp" />
     <ClInclude Include="src\resources\logging.hpp" />
     <ClInclude Include="src\features\custom_saves.hpp" />
     <ClInclude Include="src\fixes\idle_timers.hpp" />
@@ -56,7 +61,6 @@
     <ClInclude Include="src\features\msaa.hpp" />
     <ClInclude Include="src\features\distance_culling.hpp" />
     <ClInclude Include="external\safetyhook\safetyhook.hpp" />
-    <ClInclude Include="external\safetyhook\Zydis.h" />
     <ClInclude Include="src\resources\RegStateHelpers.hpp" />
     <ClInclude Include="src\resources\submodule_initiailization.hpp" />
     <ClInclude Include="src\resources\version_checker.hpp" />
@@ -174,6 +178,13 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(SolutionDir)external\zydis\msvc\bin\ReleaseX86</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);Zydis.lib</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>call "$(ProjectDir)build_zydis.cmd" $(Platform)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -201,6 +212,13 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(SolutionDir)external\zydis\msvc\bin\ReleaseX86</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);Zydis.lib</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>call "$(ProjectDir)build_zydis.cmd" $(Platform)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

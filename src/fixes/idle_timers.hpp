@@ -1,6 +1,6 @@
 #pragma once
 
-class IdleTimers
+class IdleTimers final
 {
 public:
     void Initialize();
